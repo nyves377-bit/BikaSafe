@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: bikasafe-backend
+    env: node
+    buildCommand: cd backend && npm install && npm run build
+    startCommand: cd backend && npm run start
+    envVars:
+      - key: DATABASE_URL
+        value: file:/data/sqlite.db
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: NODE_ENV
+        value: production
+    disk:
+      name: sqlite-data
+      mountPath: /data
+      sizeGB: 1

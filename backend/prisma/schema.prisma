@@ -1,0 +1,140 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Group {
+  id              String         @id @default(uuid())
+  name            String
+  registrationId  String         @unique // Real world registration ID
+  contributionAmt Float
+  frequency       String         // e.g., "Weekly", "Monthly"
+  penaltyRules    String         // JSON string for configurable penalty rules
+  savingsGoal     Float          @default(5000000)
+  startDate       DateTime
+  members         User[]
+  contributions   Contribution[]
+  loans           Loan[]
+  payouts         Payout[]
+  auditLogs       AuditLog[]
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+}
+
+model User {
+  id            String         @id @default(uuid())
+  phone         String         @unique
+  nationalId    String?        @unique
+  name          String
+  password      String         // Hashed password
+  role          String         // ADMIN, TREASURER, MEMBER, AUDITOR
+  groupId       String
+  group         Group          @relation(fields: [groupId], references: [id])
+  agreedToRules      Boolean        @default(false)
+  agreedAt           DateTime?
+  lastPasswordChange DateTime?
+  contributions Contribution[]
+  loans         Loan[]
+  payouts       Payout[]       @relation("RequestedPayouts")
+  payoutApprovals PayoutApproval[] @relation("PayoutApprovals")
+  auditLogs     AuditLog[]
+  penalties     Penalty[]
+  createdAt     DateTime       @default(now())
+}
+
+model Contribution {
+  id          String   @id @default(uuid())
+  amount      Float
+  status      String   // PAID, LATE, MISSED
+  timestamp   DateTime @default(now())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  groupId     String
+  group       Group    @relation(fields: [groupId], references: [id])
+  isLocked    Boolean  @default(true) // Locked after submission
+}
+
+model Loan {
+  id           String    @id @default(uuid())
+  amount       Float
+  interestRate Float
+  deadline     DateTime
+  status       String    // ACTIVE, REPAID, OVERDUE
+  userId       String
+  user         User      @relation(fields: [userId], references: [id])
+  groupId      String
+  group        Group     @relation(fields: [groupId], references: [id])
+  repayments   Repayment[]
+  payouts      Payout[]
+  createdAt    DateTime       @default(now())
+}
+
+model Repayment {
+  id        String   @id @default(uuid())
+  amount    Float
+  timestamp DateTime @default(now())
+  loanId    String
+  loan      Loan     @relation(fields: [loanId], references: [id])
+}
+
+model Payout {
+  id            String   @id @default(uuid())
+  amount        Float
+  description   String
+  status        String   // PENDING, APPROVED, REJECTED
+  approvals     PayoutApproval[]
+  requestedById String
+  requestedBy   User     @relation("RequestedPayouts", fields: [requestedById], references: [id])
+  groupId       String
+  group         Group    @relation(fields: [groupId], references: [id])
+  loanId        String?
+  loan          Loan?    @relation(fields: [loanId], references: [id])
+  createdAt     DateTime @default(now())
+}
+
+model PayoutApproval {
+  id        String   @id @default(uuid())
+  payoutId  String
+  payout    Payout   @relation(fields: [payoutId], references: [id])
+  adminId   String
+  admin     User     @relation("PayoutApprovals", fields: [adminId], references: [id])
+  timestamp DateTime @default(now())
+  @@unique([payoutId, adminId])
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  action    String
+  details   String   // JSON string
+  timestamp DateTime @default(now())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  groupId   String
+  group     Group    @relation(fields: [groupId], references: [id])
+}
+
+model Penalty {
+  id        String   @id @default(uuid())
+  amount    Float
+  reason    String
+  status    String   // UNPAID, PAID
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  timestamp DateTime @default(now())
+}
+
+model VerificationCode {
+  id        String   @id @default(uuid())
+  phone     String
+  code      String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
