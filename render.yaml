@@ -4,13 +4,13 @@ services:
     name: bikasafe-backend
     env: node
     plan: free
-    buildCommand: cd backend && npm install && npm run build && npx prisma db push --accept-data-loss
+    buildCommand: cd backend && npm install && npm run build && npx prisma db push
     startCommand: cd backend && npm run start
     envVars:
       - key: DATABASE_URL
-        value: file:/data/sqlite.db
-      - key: PORT
-        value: 10000
+        fromDatabase:
+          name: bikasafe-db
+          property: connectionString
       - key: JWT_SECRET
         generateValue: true
       - key: NODE_ENV
@@ -20,10 +20,6 @@ services:
           type: static
           name: bikasafe-frontend
           property: url
-    disk:
-      name: sqlite-data
-      mountPath: /data
-      sizeGB: 1
 
   # Frontend Service
   - type: static
@@ -37,3 +33,7 @@ services:
           type: web
           name: bikasafe-backend
           property: url
+
+databases:
+  - name: bikasafe-db
+    plan: free
