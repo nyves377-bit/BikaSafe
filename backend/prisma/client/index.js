@@ -221,7 +221,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\User\\.gemini\\antigravity\\scratch\\bikasafe\\backend\\prisma\\client",
+      "value": "C:\\Users\\User\\.gemini\\antigravity\\scratch\\BikaSafe\\backend\\prisma\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -235,7 +235,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\User\\.gemini\\antigravity\\scratch\\bikasafe\\backend\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\User\\.gemini\\antigravity\\scratch\\BikaSafe\\backend\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

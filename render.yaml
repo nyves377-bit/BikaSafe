@@ -1,8 +1,10 @@
 services:
+  # Backend Service
   - type: web
     name: bikasafe-backend
     env: node
-    buildCommand: cd backend && npm install && npm run build
+    plan: free
+    buildCommand: cd backend && npm install && npm run build && npx prisma db push --accept-data-loss
     startCommand: cd backend && npm run start
     envVars:
       - key: DATABASE_URL
@@ -13,7 +15,25 @@ services:
         generateValue: true
       - key: NODE_ENV
         value: production
+      - key: FRONTEND_URL
+        fromService:
+          type: static
+          name: bikasafe-frontend
+          property: url
     disk:
       name: sqlite-data
       mountPath: /data
       sizeGB: 1
+
+  # Frontend Service
+  - type: static
+    name: bikasafe-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    publishPath: frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: bikasafe-backend
+          property: url
