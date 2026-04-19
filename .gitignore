@@ -1,0 +1,41 @@
+# Dependencies
+**/node_modules/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Database
+*.db
+*.db-journal
+
+# Build output
+**/dist/
+**/dev-dist/
+build/
+
+# Prisma generated client
+backend/prisma/client/
+backend/prisma/generated-client/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Uploads (user-generated content)
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# TypeScript cache
+*.tsbuildinfo

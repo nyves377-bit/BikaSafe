@@ -49,66 +49,100 @@ export const exportToExcel = (data: any[], fileName: string) => {
 export const generateAgreementPDF = (userName: string, groupName: string, date: string) => {
     const doc = new jsPDF() as any;
 
-    // Border
-    doc.setDrawColor(30, 58, 138);
-    doc.setLineWidth(1);
-    doc.rect(10, 10, 190, 277);
+    // 1. Background Fill
+    doc.setFillColor(248, 250, 252);
+    doc.rect(0, 0, 210, 297, 'F');
 
-    // Header
+    // 2. Watermark (Drawn BEFORE text so it's behind)
+    doc.setTextColor(235, 239, 245);
+    doc.setFontSize(60);
+    doc.setFont('helvetica', 'bold');
+    doc.text('BIKASAFE VERIFIED', 105, 150, { align: 'center', angle: 45 });
+
+    // 3. Main Content Border
+    doc.setDrawColor(30, 58, 138);
+    doc.setLineWidth(1.5);
+    doc.rect(15, 15, 180, 267);
+
+    // Decorative corners
+    doc.setLineWidth(0.5);
+    doc.line(15, 40, 30, 40);
+    doc.line(40, 15, 40, 30);
+    doc.line(180, 15, 180, 30);
+    doc.line(195, 40, 180, 40);
+
+    // Group Logo/Name Header
     doc.setFontSize(30);
     doc.setTextColor(30, 58, 138);
-    doc.text('CERTIFICATE', 105, 50, { align: 'center' });
-    doc.setFontSize(22);
-    doc.text('OF MEMBERSHIP', 105, 62, { align: 'center' });
+    doc.setFont('helvetica', 'bold');
+    const headerTitle = groupName.length > 20 ? groupName.substring(0, 20) + '...' : groupName;
+    doc.text(headerTitle.toUpperCase(), 105, 50, { align: 'center' });
 
     doc.setFontSize(14);
     doc.setTextColor(100);
-    doc.text('BikaSafe - Rwandan Savings Network', 105, 75, { align: 'center' });
-
-    // Body
-    doc.setFontSize(16);
-    doc.setTextColor(0);
-    doc.text('This is to certify that', 105, 100, { align: 'center' });
-
-    doc.setFontSize(24);
-    doc.setFont('helvetica', 'bold');
-    doc.text(userName, 105, 120, { align: 'center' });
-
-    doc.setFontSize(16);
     doc.setFont('helvetica', 'normal');
-    doc.text('is a verified member of', 105, 140, { align: 'center' });
+    doc.text('OFFICIAL MEMBERSHIP AGREEMENT', 105, 62, { align: 'center' });
 
-    doc.setFontSize(22);
+    doc.setDrawColor(226, 232, 240);
+    doc.line(40, 70, 170, 70);
+
+    // Body Content
+    doc.setFontSize(14);
+    doc.setTextColor(51, 65, 85);
+    doc.text('This formal agreement confirms that', 105, 90, { align: 'center' });
+
+    doc.setFontSize(36);
+    doc.setTextColor(15, 23, 42);
     doc.setFont('helvetica', 'bold');
-    doc.text(groupName, 105, 160, { align: 'center' });
+    doc.text(userName, 105, 110, { align: 'center' });
 
-    // Declaration
+    doc.setFontSize(14);
+    doc.setTextColor(51, 65, 85);
+    doc.setFont('helvetica', 'normal');
+    const introText = `is a registered member of ${groupName}, subject to the terms and conditions outlined below.`;
+    const splitIntro = doc.splitTextToSize(introText, 140);
+    doc.text(splitIntro, 105, 125, { align: 'center' });
+
+    // Terms Selection
+    doc.setFillColor(255, 255, 255);
+    doc.setDrawColor(30, 58, 138);
+    doc.rect(35, 155, 140, 75, 'FD');
+
     doc.setFontSize(12);
+    doc.setTextColor(30, 58, 138);
+    doc.setFont('helvetica', 'bold');
+    doc.text('LEGALLY BINDING TERMS:', 45, 170);
+
     doc.setFont('helvetica', 'normal');
-    doc.setTextColor(80);
-    const rules = [
-        '1. I agree to contribute weekly as per group rules.',
-        '2. I acknowledge that late payments may attract penalties.',
-        '3. I will maintain transparency and trust within the group.',
-        '4. I agree to the BikaSafe terms of service.'
+    doc.setTextColor(71, 85, 105);
+    const terms = [
+        '• Regular contributions as per group rules.',
+        '• Absolute adherence to bylaws and penalties.',
+        '• Full commitment to transparency.',
+        '• Truthful information at all times.',
+        '• Authorization of BikaSafe data processing.'
     ];
-    doc.text('Agreement Terms:', 40, 190);
-    rules.forEach((rule, i) => {
-        doc.text(rule, 45, 200 + (i * 10));
+    terms.forEach((term, i) => {
+        doc.text(term, 45, 182 + (i * 8));
     });
 
-    // Signature
-    doc.setFontSize(14);
-    doc.setTextColor(0);
-    doc.text('Digital Signature:', 40, 250);
+    // Signatures Section
+    doc.setFontSize(12);
+    doc.setTextColor(15, 23, 42);
+    doc.setFont('helvetica', 'bold');
+    doc.text('MEMBER SIGNATURE', 45, 250);
+    doc.text('GROUP SEAL', 135, 250);
+
     doc.setFont('helvetica', 'italic');
-    doc.text(userName, 120, 250);
-    doc.setLineWidth(0.5);
-    doc.line(115, 252, 175, 252);
+    doc.setFontSize(14);
+    doc.text(userName, 45, 260);
+    doc.line(45, 262, 95, 262);
 
-    doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
-    doc.text(`Signed on: ${date}`, 120, 258);
+    doc.setFontSize(10);
+    doc.setTextColor(148, 163, 184);
+    doc.text(`Digital Verification ID: BKS-${Math.random().toString(36).substring(7).toUpperCase()}`, 45, 268);
+    doc.text(`Signed on: ${date}`, 45, 273);
 
-    doc.save(`Agreement_${userName.replace(' ', '_')}.pdf`);
+    doc.save(`Agreement_${userName.replace(/ /g, '_')}.pdf`);
 };

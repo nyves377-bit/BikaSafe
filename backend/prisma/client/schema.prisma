@@ -20,11 +20,18 @@ model Group {
   penaltyRules    String // JSON string for configurable penalty rules
   savingsGoal     Float          @default(5000000)
   startDate       DateTime
+  tier            String         @default("FREE") // FREE, ELITE, ENTERPRISE
+  maxMembers      Int            @default(25)
   members         User[]
+  announcements   Announcement[]
   contributions   Contribution[]
   loans           Loan[]
   payouts         Payout[]
   auditLogs       AuditLog[]
+  penalties       Penalty[]
+  meetings        Meeting[]
+  attendances     Attendance[]
+  polls           Poll[]
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
 }
@@ -32,38 +39,54 @@ model Group {
 model User {
   id                 String           @id @default(uuid())
   phone              String           @unique
+  email              String?          @unique
   nationalId         String?          @unique
   name               String
   password           String // Hashed password
   role               String // ADMIN, TREASURER, MEMBER, AUDITOR
+  mustChangePassword Boolean          @default(false) // Force password change on first login
+  isActive           Boolean          @default(true) // Soft-delete / deactivation flag
   groupId            String
   group              Group            @relation(fields: [groupId], references: [id])
   agreedToRules      Boolean          @default(false)
   agreedAt           DateTime?
+  agreementUrl       String? // URL or path to uploaded agreement
   lastPasswordChange DateTime?
   contributions      Contribution[]
+  announcements      Announcement[]   @relation("AnnouncementAuthor")
   loans              Loan[]
   payouts            Payout[]         @relation("RequestedPayouts")
   payoutApprovals    PayoutApproval[] @relation("PayoutApprovals")
   auditLogs          AuditLog[]
   penalties          Penalty[]
+  attendances        Attendance[]
+  votes              Vote[]           @relation("UserVotes")
+  guaranteedLoans    Loan[]           @relation("GuaranteedLoans")
   createdAt          DateTime         @default(now())
 }
 
 model Contribution {
-  id        String   @id @default(uuid())
-  amount    Float
-  status    String // PAID, LATE, MISSED
-  timestamp DateTime @default(now())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  groupId   String
-  group     Group    @relation(fields: [groupId], references: [id])
-  isLocked  Boolean  @default(true) // Locked after submission
+  id            String   @id @default(uuid())
+  refNo         String?  @unique
+  amount        Float
+  status        String // PAID, LATE, MISSED
+  timestamp     DateTime @default(now())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  groupId       String
+  group         Group    @relation(fields: [groupId], references: [id])
+  isLocked      Boolean  @default(true) // Locked after submission
+  fundType      String   @default("SAVINGS") // SAVINGS, SOCIAL
+  paymentStatus String?  @default("PENDING") // PENDING, SUCCESS, FAILED
+  providerRef   String?  @unique // External reference from MoMo/Airtel
+
+  @@index([groupId])
+  @@index([userId])
 }
 
 model Loan {
   id           String      @id @default(uuid())
+  refNo        String?     @unique
   amount       Float
   interestRate Float
   deadline     DateTime
@@ -72,9 +95,14 @@ model Loan {
   user         User        @relation(fields: [userId], references: [id])
   groupId      String
   group        Group       @relation(fields: [groupId], references: [id])
+  guarantorId  String?
+  guarantor    User?       @relation("GuaranteedLoans", fields: [guarantorId], references: [id])
   repayments   Repayment[]
   payouts      Payout[]
   createdAt    DateTime    @default(now())
+
+  @@index([groupId])
+  @@index([userId])
 }
 
 model Repayment {
@@ -87,6 +115,7 @@ model Repayment {
 
 model Payout {
   id            String           @id @default(uuid())
+  refNo         String?          @unique
   amount        Float
   description   String
   status        String // PENDING, APPROVED, REJECTED
@@ -97,6 +126,9 @@ model Payout {
   group         Group            @relation(fields: [groupId], references: [id])
   loanId        String?
   loan          Loan?            @relation(fields: [loanId], references: [id])
+  fundType      String           @default("SAVINGS") // SAVINGS, SOCIAL
+  paymentStatus String?          @default("PENDING") // PENDING, SUCCESS, FAILED
+  providerRef   String?          @unique // External reference from MoMo/Airtel
   createdAt     DateTime         @default(now())
 }
 
@@ -120,16 +152,24 @@ model AuditLog {
   user      User?    @relation(fields: [userId], references: [id])
   groupId   String
   group     Group    @relation(fields: [groupId], references: [id])
+
+  @@index([groupId])
+  @@index([userId])
 }
 
 model Penalty {
   id        String   @id @default(uuid())
   amount    Float
   reason    String
-  status    String // UNPAID, PAID
+  status    String // UNPAID, PAID, WAIVED
   userId    String
   user      User     @relation(fields: [userId], references: [id])
+  groupId   String
+  group     Group    @relation(fields: [groupId], references: [id])
   timestamp DateTime @default(now())
+
+  @@index([groupId])
+  @@index([userId])
 }
 
 model VerificationCode {
@@ -138,4 +178,60 @@ model VerificationCode {
   code      String
   expiresAt DateTime
   createdAt DateTime @default(now())
+}
+
+model Announcement {
+  id        String    @id @default(uuid())
+  title     String
+  body      String
+  type      String    @default("GENERAL") // GENERAL | MEETING | URGENT | REMINDER
+  eventDate DateTime?
+  groupId   String
+  group     Group     @relation(fields: [groupId], references: [id])
+  createdBy String
+  author    User      @relation("AnnouncementAuthor", fields: [createdBy], references: [id])
+  createdAt DateTime  @default(now())
+}
+
+model Meeting {
+  id          String       @id @default(uuid())
+  date        DateTime
+  title       String
+  groupId     String
+  group       Group        @relation(fields: [groupId], references: [id])
+  attendances Attendance[]
+  createdAt   DateTime     @default(now())
+}
+
+model Attendance {
+  id        String  @id @default(uuid())
+  meetingId String
+  meeting   Meeting @relation(fields: [meetingId], references: [id])
+  userId    String
+  user      User    @relation(fields: [userId], references: [id])
+  status    String // PRESENT, ABSENT, LATE
+  groupId   String
+  group     Group   @relation(fields: [groupId], references: [id])
+}
+
+model Poll {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  status      String   @default("OPEN") // OPEN, CLOSED
+  groupId     String
+  group       Group    @relation(fields: [groupId], references: [id])
+  voices      Vote[]
+  createdAt   DateTime @default(now())
+}
+
+model Vote {
+  id     String @id @default(uuid())
+  pollId String
+  poll   Poll   @relation(fields: [pollId], references: [id])
+  userId String
+  user   User   @relation("UserVotes", fields: [userId], references: [id])
+  choice String // YES, NO
+
+  @@unique([pollId, userId])
 }

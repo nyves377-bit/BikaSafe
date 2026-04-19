@@ -63,6 +63,31 @@ export type Penalty = $Result.DefaultSelection<Prisma.$PenaltyPayload>
  * 
  */
 export type VerificationCode = $Result.DefaultSelection<Prisma.$VerificationCodePayload>
+/**
+ * Model Announcement
+ * 
+ */
+export type Announcement = $Result.DefaultSelection<Prisma.$AnnouncementPayload>
+/**
+ * Model Meeting
+ * 
+ */
+export type Meeting = $Result.DefaultSelection<Prisma.$MeetingPayload>
+/**
+ * Model Attendance
+ * 
+ */
+export type Attendance = $Result.DefaultSelection<Prisma.$AttendancePayload>
+/**
+ * Model Poll
+ * 
+ */
+export type Poll = $Result.DefaultSelection<Prisma.$PollPayload>
+/**
+ * Model Vote
+ * 
+ */
+export type Vote = $Result.DefaultSelection<Prisma.$VotePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -286,6 +311,56 @@ export class PrismaClient<
     * ```
     */
   get verificationCode(): Prisma.VerificationCodeDelegate<ExtArgs>;
+
+  /**
+   * `prisma.announcement`: Exposes CRUD operations for the **Announcement** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Announcements
+    * const announcements = await prisma.announcement.findMany()
+    * ```
+    */
+  get announcement(): Prisma.AnnouncementDelegate<ExtArgs>;
+
+  /**
+   * `prisma.meeting`: Exposes CRUD operations for the **Meeting** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Meetings
+    * const meetings = await prisma.meeting.findMany()
+    * ```
+    */
+  get meeting(): Prisma.MeetingDelegate<ExtArgs>;
+
+  /**
+   * `prisma.attendance`: Exposes CRUD operations for the **Attendance** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Attendances
+    * const attendances = await prisma.attendance.findMany()
+    * ```
+    */
+  get attendance(): Prisma.AttendanceDelegate<ExtArgs>;
+
+  /**
+   * `prisma.poll`: Exposes CRUD operations for the **Poll** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Polls
+    * const polls = await prisma.poll.findMany()
+    * ```
+    */
+  get poll(): Prisma.PollDelegate<ExtArgs>;
+
+  /**
+   * `prisma.vote`: Exposes CRUD operations for the **Vote** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Votes
+    * const votes = await prisma.vote.findMany()
+    * ```
+    */
+  get vote(): Prisma.VoteDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -736,7 +811,12 @@ export namespace Prisma {
     PayoutApproval: 'PayoutApproval',
     AuditLog: 'AuditLog',
     Penalty: 'Penalty',
-    VerificationCode: 'VerificationCode'
+    VerificationCode: 'VerificationCode',
+    Announcement: 'Announcement',
+    Meeting: 'Meeting',
+    Attendance: 'Attendance',
+    Poll: 'Poll',
+    Vote: 'Vote'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -752,7 +832,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "group" | "user" | "contribution" | "loan" | "repayment" | "payout" | "payoutApproval" | "auditLog" | "penalty" | "verificationCode"
+      modelProps: "group" | "user" | "contribution" | "loan" | "repayment" | "payout" | "payoutApproval" | "auditLog" | "penalty" | "verificationCode" | "announcement" | "meeting" | "attendance" | "poll" | "vote"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1456,6 +1536,356 @@ export namespace Prisma {
           }
         }
       }
+      Announcement: {
+        payload: Prisma.$AnnouncementPayload<ExtArgs>
+        fields: Prisma.AnnouncementFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AnnouncementFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnnouncementPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AnnouncementFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnnouncementPayload>
+          }
+          findFirst: {
+            args: Prisma.AnnouncementFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnnouncementPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AnnouncementFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnnouncementPayload>
+          }
+          findMany: {
+            args: Prisma.AnnouncementFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnnouncementPayload>[]
+          }
+          create: {
+            args: Prisma.AnnouncementCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnnouncementPayload>
+          }
+          createMany: {
+            args: Prisma.AnnouncementCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AnnouncementCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnnouncementPayload>[]
+          }
+          delete: {
+            args: Prisma.AnnouncementDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnnouncementPayload>
+          }
+          update: {
+            args: Prisma.AnnouncementUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnnouncementPayload>
+          }
+          deleteMany: {
+            args: Prisma.AnnouncementDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AnnouncementUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.AnnouncementUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnnouncementPayload>
+          }
+          aggregate: {
+            args: Prisma.AnnouncementAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAnnouncement>
+          }
+          groupBy: {
+            args: Prisma.AnnouncementGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AnnouncementGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AnnouncementCountArgs<ExtArgs>
+            result: $Utils.Optional<AnnouncementCountAggregateOutputType> | number
+          }
+        }
+      }
+      Meeting: {
+        payload: Prisma.$MeetingPayload<ExtArgs>
+        fields: Prisma.MeetingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MeetingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeetingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MeetingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeetingPayload>
+          }
+          findFirst: {
+            args: Prisma.MeetingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeetingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MeetingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeetingPayload>
+          }
+          findMany: {
+            args: Prisma.MeetingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeetingPayload>[]
+          }
+          create: {
+            args: Prisma.MeetingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeetingPayload>
+          }
+          createMany: {
+            args: Prisma.MeetingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MeetingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeetingPayload>[]
+          }
+          delete: {
+            args: Prisma.MeetingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeetingPayload>
+          }
+          update: {
+            args: Prisma.MeetingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeetingPayload>
+          }
+          deleteMany: {
+            args: Prisma.MeetingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MeetingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.MeetingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MeetingPayload>
+          }
+          aggregate: {
+            args: Prisma.MeetingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMeeting>
+          }
+          groupBy: {
+            args: Prisma.MeetingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MeetingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MeetingCountArgs<ExtArgs>
+            result: $Utils.Optional<MeetingCountAggregateOutputType> | number
+          }
+        }
+      }
+      Attendance: {
+        payload: Prisma.$AttendancePayload<ExtArgs>
+        fields: Prisma.AttendanceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AttendanceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendancePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AttendanceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendancePayload>
+          }
+          findFirst: {
+            args: Prisma.AttendanceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendancePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AttendanceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendancePayload>
+          }
+          findMany: {
+            args: Prisma.AttendanceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendancePayload>[]
+          }
+          create: {
+            args: Prisma.AttendanceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendancePayload>
+          }
+          createMany: {
+            args: Prisma.AttendanceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AttendanceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendancePayload>[]
+          }
+          delete: {
+            args: Prisma.AttendanceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendancePayload>
+          }
+          update: {
+            args: Prisma.AttendanceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendancePayload>
+          }
+          deleteMany: {
+            args: Prisma.AttendanceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AttendanceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.AttendanceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttendancePayload>
+          }
+          aggregate: {
+            args: Prisma.AttendanceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAttendance>
+          }
+          groupBy: {
+            args: Prisma.AttendanceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AttendanceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AttendanceCountArgs<ExtArgs>
+            result: $Utils.Optional<AttendanceCountAggregateOutputType> | number
+          }
+        }
+      }
+      Poll: {
+        payload: Prisma.$PollPayload<ExtArgs>
+        fields: Prisma.PollFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PollFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PollPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PollFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PollPayload>
+          }
+          findFirst: {
+            args: Prisma.PollFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PollPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PollFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PollPayload>
+          }
+          findMany: {
+            args: Prisma.PollFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PollPayload>[]
+          }
+          create: {
+            args: Prisma.PollCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PollPayload>
+          }
+          createMany: {
+            args: Prisma.PollCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PollCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PollPayload>[]
+          }
+          delete: {
+            args: Prisma.PollDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PollPayload>
+          }
+          update: {
+            args: Prisma.PollUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PollPayload>
+          }
+          deleteMany: {
+            args: Prisma.PollDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PollUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.PollUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PollPayload>
+          }
+          aggregate: {
+            args: Prisma.PollAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePoll>
+          }
+          groupBy: {
+            args: Prisma.PollGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PollGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PollCountArgs<ExtArgs>
+            result: $Utils.Optional<PollCountAggregateOutputType> | number
+          }
+        }
+      }
+      Vote: {
+        payload: Prisma.$VotePayload<ExtArgs>
+        fields: Prisma.VoteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VoteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VoteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload>
+          }
+          findFirst: {
+            args: Prisma.VoteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VoteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload>
+          }
+          findMany: {
+            args: Prisma.VoteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload>[]
+          }
+          create: {
+            args: Prisma.VoteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload>
+          }
+          createMany: {
+            args: Prisma.VoteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.VoteCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload>[]
+          }
+          delete: {
+            args: Prisma.VoteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload>
+          }
+          update: {
+            args: Prisma.VoteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload>
+          }
+          deleteMany: {
+            args: Prisma.VoteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VoteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.VoteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload>
+          }
+          aggregate: {
+            args: Prisma.VoteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVote>
+          }
+          groupBy: {
+            args: Prisma.VoteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<VoteGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VoteCountArgs<ExtArgs>
+            result: $Utils.Optional<VoteCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1618,18 +2048,28 @@ export namespace Prisma {
 
   export type GroupCountOutputType = {
     members: number
+    announcements: number
     contributions: number
     loans: number
     payouts: number
     auditLogs: number
+    penalties: number
+    meetings: number
+    attendances: number
+    polls: number
   }
 
   export type GroupCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     members?: boolean | GroupCountOutputTypeCountMembersArgs
+    announcements?: boolean | GroupCountOutputTypeCountAnnouncementsArgs
     contributions?: boolean | GroupCountOutputTypeCountContributionsArgs
     loans?: boolean | GroupCountOutputTypeCountLoansArgs
     payouts?: boolean | GroupCountOutputTypeCountPayoutsArgs
     auditLogs?: boolean | GroupCountOutputTypeCountAuditLogsArgs
+    penalties?: boolean | GroupCountOutputTypeCountPenaltiesArgs
+    meetings?: boolean | GroupCountOutputTypeCountMeetingsArgs
+    attendances?: boolean | GroupCountOutputTypeCountAttendancesArgs
+    polls?: boolean | GroupCountOutputTypeCountPollsArgs
   }
 
   // Custom InputTypes
@@ -1648,6 +2088,13 @@ export namespace Prisma {
    */
   export type GroupCountOutputTypeCountMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserWhereInput
+  }
+
+  /**
+   * GroupCountOutputType without action
+   */
+  export type GroupCountOutputTypeCountAnnouncementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AnnouncementWhereInput
   }
 
   /**
@@ -1678,6 +2125,34 @@ export namespace Prisma {
     where?: AuditLogWhereInput
   }
 
+  /**
+   * GroupCountOutputType without action
+   */
+  export type GroupCountOutputTypeCountPenaltiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PenaltyWhereInput
+  }
+
+  /**
+   * GroupCountOutputType without action
+   */
+  export type GroupCountOutputTypeCountMeetingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MeetingWhereInput
+  }
+
+  /**
+   * GroupCountOutputType without action
+   */
+  export type GroupCountOutputTypeCountAttendancesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AttendanceWhereInput
+  }
+
+  /**
+   * GroupCountOutputType without action
+   */
+  export type GroupCountOutputTypeCountPollsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PollWhereInput
+  }
+
 
   /**
    * Count Type UserCountOutputType
@@ -1685,20 +2160,28 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     contributions: number
+    announcements: number
     loans: number
     payouts: number
     payoutApprovals: number
     auditLogs: number
     penalties: number
+    attendances: number
+    votes: number
+    guaranteedLoans: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     contributions?: boolean | UserCountOutputTypeCountContributionsArgs
+    announcements?: boolean | UserCountOutputTypeCountAnnouncementsArgs
     loans?: boolean | UserCountOutputTypeCountLoansArgs
     payouts?: boolean | UserCountOutputTypeCountPayoutsArgs
     payoutApprovals?: boolean | UserCountOutputTypeCountPayoutApprovalsArgs
     auditLogs?: boolean | UserCountOutputTypeCountAuditLogsArgs
     penalties?: boolean | UserCountOutputTypeCountPenaltiesArgs
+    attendances?: boolean | UserCountOutputTypeCountAttendancesArgs
+    votes?: boolean | UserCountOutputTypeCountVotesArgs
+    guaranteedLoans?: boolean | UserCountOutputTypeCountGuaranteedLoansArgs
   }
 
   // Custom InputTypes
@@ -1717,6 +2200,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountContributionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ContributionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAnnouncementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AnnouncementWhereInput
   }
 
   /**
@@ -1752,6 +2242,27 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPenaltiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PenaltyWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAttendancesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AttendanceWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountVotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VoteWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountGuaranteedLoansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LoanWhereInput
   }
 
 
@@ -1827,6 +2338,68 @@ export namespace Prisma {
 
 
   /**
+   * Count Type MeetingCountOutputType
+   */
+
+  export type MeetingCountOutputType = {
+    attendances: number
+  }
+
+  export type MeetingCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    attendances?: boolean | MeetingCountOutputTypeCountAttendancesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MeetingCountOutputType without action
+   */
+  export type MeetingCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MeetingCountOutputType
+     */
+    select?: MeetingCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MeetingCountOutputType without action
+   */
+  export type MeetingCountOutputTypeCountAttendancesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AttendanceWhereInput
+  }
+
+
+  /**
+   * Count Type PollCountOutputType
+   */
+
+  export type PollCountOutputType = {
+    voices: number
+  }
+
+  export type PollCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    voices?: boolean | PollCountOutputTypeCountVoicesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PollCountOutputType without action
+   */
+  export type PollCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PollCountOutputType
+     */
+    select?: PollCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PollCountOutputType without action
+   */
+  export type PollCountOutputTypeCountVoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VoteWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -1845,11 +2418,13 @@ export namespace Prisma {
   export type GroupAvgAggregateOutputType = {
     contributionAmt: number | null
     savingsGoal: number | null
+    maxMembers: number | null
   }
 
   export type GroupSumAggregateOutputType = {
     contributionAmt: number | null
     savingsGoal: number | null
+    maxMembers: number | null
   }
 
   export type GroupMinAggregateOutputType = {
@@ -1861,6 +2436,8 @@ export namespace Prisma {
     penaltyRules: string | null
     savingsGoal: number | null
     startDate: Date | null
+    tier: string | null
+    maxMembers: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1874,6 +2451,8 @@ export namespace Prisma {
     penaltyRules: string | null
     savingsGoal: number | null
     startDate: Date | null
+    tier: string | null
+    maxMembers: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1887,6 +2466,8 @@ export namespace Prisma {
     penaltyRules: number
     savingsGoal: number
     startDate: number
+    tier: number
+    maxMembers: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1896,11 +2477,13 @@ export namespace Prisma {
   export type GroupAvgAggregateInputType = {
     contributionAmt?: true
     savingsGoal?: true
+    maxMembers?: true
   }
 
   export type GroupSumAggregateInputType = {
     contributionAmt?: true
     savingsGoal?: true
+    maxMembers?: true
   }
 
   export type GroupMinAggregateInputType = {
@@ -1912,6 +2495,8 @@ export namespace Prisma {
     penaltyRules?: true
     savingsGoal?: true
     startDate?: true
+    tier?: true
+    maxMembers?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1925,6 +2510,8 @@ export namespace Prisma {
     penaltyRules?: true
     savingsGoal?: true
     startDate?: true
+    tier?: true
+    maxMembers?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1938,6 +2525,8 @@ export namespace Prisma {
     penaltyRules?: true
     savingsGoal?: true
     startDate?: true
+    tier?: true
+    maxMembers?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -2038,6 +2627,8 @@ export namespace Prisma {
     penaltyRules: string
     savingsGoal: number
     startDate: Date
+    tier: string
+    maxMembers: number
     createdAt: Date
     updatedAt: Date
     _count: GroupCountAggregateOutputType | null
@@ -2070,13 +2661,20 @@ export namespace Prisma {
     penaltyRules?: boolean
     savingsGoal?: boolean
     startDate?: boolean
+    tier?: boolean
+    maxMembers?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     members?: boolean | Group$membersArgs<ExtArgs>
+    announcements?: boolean | Group$announcementsArgs<ExtArgs>
     contributions?: boolean | Group$contributionsArgs<ExtArgs>
     loans?: boolean | Group$loansArgs<ExtArgs>
     payouts?: boolean | Group$payoutsArgs<ExtArgs>
     auditLogs?: boolean | Group$auditLogsArgs<ExtArgs>
+    penalties?: boolean | Group$penaltiesArgs<ExtArgs>
+    meetings?: boolean | Group$meetingsArgs<ExtArgs>
+    attendances?: boolean | Group$attendancesArgs<ExtArgs>
+    polls?: boolean | Group$pollsArgs<ExtArgs>
     _count?: boolean | GroupCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["group"]>
 
@@ -2089,6 +2687,8 @@ export namespace Prisma {
     penaltyRules?: boolean
     savingsGoal?: boolean
     startDate?: boolean
+    tier?: boolean
+    maxMembers?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["group"]>
@@ -2102,16 +2702,23 @@ export namespace Prisma {
     penaltyRules?: boolean
     savingsGoal?: boolean
     startDate?: boolean
+    tier?: boolean
+    maxMembers?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
   export type GroupInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     members?: boolean | Group$membersArgs<ExtArgs>
+    announcements?: boolean | Group$announcementsArgs<ExtArgs>
     contributions?: boolean | Group$contributionsArgs<ExtArgs>
     loans?: boolean | Group$loansArgs<ExtArgs>
     payouts?: boolean | Group$payoutsArgs<ExtArgs>
     auditLogs?: boolean | Group$auditLogsArgs<ExtArgs>
+    penalties?: boolean | Group$penaltiesArgs<ExtArgs>
+    meetings?: boolean | Group$meetingsArgs<ExtArgs>
+    attendances?: boolean | Group$attendancesArgs<ExtArgs>
+    polls?: boolean | Group$pollsArgs<ExtArgs>
     _count?: boolean | GroupCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type GroupIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2120,10 +2727,15 @@ export namespace Prisma {
     name: "Group"
     objects: {
       members: Prisma.$UserPayload<ExtArgs>[]
+      announcements: Prisma.$AnnouncementPayload<ExtArgs>[]
       contributions: Prisma.$ContributionPayload<ExtArgs>[]
       loans: Prisma.$LoanPayload<ExtArgs>[]
       payouts: Prisma.$PayoutPayload<ExtArgs>[]
       auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
+      penalties: Prisma.$PenaltyPayload<ExtArgs>[]
+      meetings: Prisma.$MeetingPayload<ExtArgs>[]
+      attendances: Prisma.$AttendancePayload<ExtArgs>[]
+      polls: Prisma.$PollPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2134,6 +2746,8 @@ export namespace Prisma {
       penaltyRules: string
       savingsGoal: number
       startDate: Date
+      tier: string
+      maxMembers: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["group"]>
@@ -2501,10 +3115,15 @@ export namespace Prisma {
   export interface Prisma__GroupClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     members<T extends Group$membersArgs<ExtArgs> = {}>(args?: Subset<T, Group$membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany"> | Null>
+    announcements<T extends Group$announcementsArgs<ExtArgs> = {}>(args?: Subset<T, Group$announcementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findMany"> | Null>
     contributions<T extends Group$contributionsArgs<ExtArgs> = {}>(args?: Subset<T, Group$contributionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContributionPayload<ExtArgs>, T, "findMany"> | Null>
     loans<T extends Group$loansArgs<ExtArgs> = {}>(args?: Subset<T, Group$loansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LoanPayload<ExtArgs>, T, "findMany"> | Null>
     payouts<T extends Group$payoutsArgs<ExtArgs> = {}>(args?: Subset<T, Group$payoutsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PayoutPayload<ExtArgs>, T, "findMany"> | Null>
     auditLogs<T extends Group$auditLogsArgs<ExtArgs> = {}>(args?: Subset<T, Group$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany"> | Null>
+    penalties<T extends Group$penaltiesArgs<ExtArgs> = {}>(args?: Subset<T, Group$penaltiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PenaltyPayload<ExtArgs>, T, "findMany"> | Null>
+    meetings<T extends Group$meetingsArgs<ExtArgs> = {}>(args?: Subset<T, Group$meetingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MeetingPayload<ExtArgs>, T, "findMany"> | Null>
+    attendances<T extends Group$attendancesArgs<ExtArgs> = {}>(args?: Subset<T, Group$attendancesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany"> | Null>
+    polls<T extends Group$pollsArgs<ExtArgs> = {}>(args?: Subset<T, Group$pollsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PollPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2542,6 +3161,8 @@ export namespace Prisma {
     readonly penaltyRules: FieldRef<"Group", 'String'>
     readonly savingsGoal: FieldRef<"Group", 'Float'>
     readonly startDate: FieldRef<"Group", 'DateTime'>
+    readonly tier: FieldRef<"Group", 'String'>
+    readonly maxMembers: FieldRef<"Group", 'Int'>
     readonly createdAt: FieldRef<"Group", 'DateTime'>
     readonly updatedAt: FieldRef<"Group", 'DateTime'>
   }
@@ -2876,6 +3497,26 @@ export namespace Prisma {
   }
 
   /**
+   * Group.announcements
+   */
+  export type Group$announcementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Announcement
+     */
+    select?: AnnouncementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnnouncementInclude<ExtArgs> | null
+    where?: AnnouncementWhereInput
+    orderBy?: AnnouncementOrderByWithRelationInput | AnnouncementOrderByWithRelationInput[]
+    cursor?: AnnouncementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AnnouncementScalarFieldEnum | AnnouncementScalarFieldEnum[]
+  }
+
+  /**
    * Group.contributions
    */
   export type Group$contributionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2956,6 +3597,86 @@ export namespace Prisma {
   }
 
   /**
+   * Group.penalties
+   */
+  export type Group$penaltiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Penalty
+     */
+    select?: PenaltySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PenaltyInclude<ExtArgs> | null
+    where?: PenaltyWhereInput
+    orderBy?: PenaltyOrderByWithRelationInput | PenaltyOrderByWithRelationInput[]
+    cursor?: PenaltyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PenaltyScalarFieldEnum | PenaltyScalarFieldEnum[]
+  }
+
+  /**
+   * Group.meetings
+   */
+  export type Group$meetingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Meeting
+     */
+    select?: MeetingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingInclude<ExtArgs> | null
+    where?: MeetingWhereInput
+    orderBy?: MeetingOrderByWithRelationInput | MeetingOrderByWithRelationInput[]
+    cursor?: MeetingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MeetingScalarFieldEnum | MeetingScalarFieldEnum[]
+  }
+
+  /**
+   * Group.attendances
+   */
+  export type Group$attendancesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendance
+     */
+    select?: AttendanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendanceInclude<ExtArgs> | null
+    where?: AttendanceWhereInput
+    orderBy?: AttendanceOrderByWithRelationInput | AttendanceOrderByWithRelationInput[]
+    cursor?: AttendanceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AttendanceScalarFieldEnum | AttendanceScalarFieldEnum[]
+  }
+
+  /**
+   * Group.polls
+   */
+  export type Group$pollsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Poll
+     */
+    select?: PollSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PollInclude<ExtArgs> | null
+    where?: PollWhereInput
+    orderBy?: PollOrderByWithRelationInput | PollOrderByWithRelationInput[]
+    cursor?: PollWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PollScalarFieldEnum | PollScalarFieldEnum[]
+  }
+
+  /**
    * Group without action
    */
   export type GroupDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2983,13 +3704,17 @@ export namespace Prisma {
   export type UserMinAggregateOutputType = {
     id: string | null
     phone: string | null
+    email: string | null
     nationalId: string | null
     name: string | null
     password: string | null
     role: string | null
+    mustChangePassword: boolean | null
+    isActive: boolean | null
     groupId: string | null
     agreedToRules: boolean | null
     agreedAt: Date | null
+    agreementUrl: string | null
     lastPasswordChange: Date | null
     createdAt: Date | null
   }
@@ -2997,13 +3722,17 @@ export namespace Prisma {
   export type UserMaxAggregateOutputType = {
     id: string | null
     phone: string | null
+    email: string | null
     nationalId: string | null
     name: string | null
     password: string | null
     role: string | null
+    mustChangePassword: boolean | null
+    isActive: boolean | null
     groupId: string | null
     agreedToRules: boolean | null
     agreedAt: Date | null
+    agreementUrl: string | null
     lastPasswordChange: Date | null
     createdAt: Date | null
   }
@@ -3011,13 +3740,17 @@ export namespace Prisma {
   export type UserCountAggregateOutputType = {
     id: number
     phone: number
+    email: number
     nationalId: number
     name: number
     password: number
     role: number
+    mustChangePassword: number
+    isActive: number
     groupId: number
     agreedToRules: number
     agreedAt: number
+    agreementUrl: number
     lastPasswordChange: number
     createdAt: number
     _all: number
@@ -3027,13 +3760,17 @@ export namespace Prisma {
   export type UserMinAggregateInputType = {
     id?: true
     phone?: true
+    email?: true
     nationalId?: true
     name?: true
     password?: true
     role?: true
+    mustChangePassword?: true
+    isActive?: true
     groupId?: true
     agreedToRules?: true
     agreedAt?: true
+    agreementUrl?: true
     lastPasswordChange?: true
     createdAt?: true
   }
@@ -3041,13 +3778,17 @@ export namespace Prisma {
   export type UserMaxAggregateInputType = {
     id?: true
     phone?: true
+    email?: true
     nationalId?: true
     name?: true
     password?: true
     role?: true
+    mustChangePassword?: true
+    isActive?: true
     groupId?: true
     agreedToRules?: true
     agreedAt?: true
+    agreementUrl?: true
     lastPasswordChange?: true
     createdAt?: true
   }
@@ -3055,13 +3796,17 @@ export namespace Prisma {
   export type UserCountAggregateInputType = {
     id?: true
     phone?: true
+    email?: true
     nationalId?: true
     name?: true
     password?: true
     role?: true
+    mustChangePassword?: true
+    isActive?: true
     groupId?: true
     agreedToRules?: true
     agreedAt?: true
+    agreementUrl?: true
     lastPasswordChange?: true
     createdAt?: true
     _all?: true
@@ -3142,13 +3887,17 @@ export namespace Prisma {
   export type UserGroupByOutputType = {
     id: string
     phone: string
+    email: string | null
     nationalId: string | null
     name: string
     password: string
     role: string
+    mustChangePassword: boolean
+    isActive: boolean
     groupId: string
     agreedToRules: boolean
     agreedAt: Date | null
+    agreementUrl: string | null
     lastPasswordChange: Date | null
     createdAt: Date
     _count: UserCountAggregateOutputType | null
@@ -3173,35 +3922,47 @@ export namespace Prisma {
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     phone?: boolean
+    email?: boolean
     nationalId?: boolean
     name?: boolean
     password?: boolean
     role?: boolean
+    mustChangePassword?: boolean
+    isActive?: boolean
     groupId?: boolean
     agreedToRules?: boolean
     agreedAt?: boolean
+    agreementUrl?: boolean
     lastPasswordChange?: boolean
     createdAt?: boolean
     group?: boolean | GroupDefaultArgs<ExtArgs>
     contributions?: boolean | User$contributionsArgs<ExtArgs>
+    announcements?: boolean | User$announcementsArgs<ExtArgs>
     loans?: boolean | User$loansArgs<ExtArgs>
     payouts?: boolean | User$payoutsArgs<ExtArgs>
     payoutApprovals?: boolean | User$payoutApprovalsArgs<ExtArgs>
     auditLogs?: boolean | User$auditLogsArgs<ExtArgs>
     penalties?: boolean | User$penaltiesArgs<ExtArgs>
+    attendances?: boolean | User$attendancesArgs<ExtArgs>
+    votes?: boolean | User$votesArgs<ExtArgs>
+    guaranteedLoans?: boolean | User$guaranteedLoansArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     phone?: boolean
+    email?: boolean
     nationalId?: boolean
     name?: boolean
     password?: boolean
     role?: boolean
+    mustChangePassword?: boolean
+    isActive?: boolean
     groupId?: boolean
     agreedToRules?: boolean
     agreedAt?: boolean
+    agreementUrl?: boolean
     lastPasswordChange?: boolean
     createdAt?: boolean
     group?: boolean | GroupDefaultArgs<ExtArgs>
@@ -3210,13 +3971,17 @@ export namespace Prisma {
   export type UserSelectScalar = {
     id?: boolean
     phone?: boolean
+    email?: boolean
     nationalId?: boolean
     name?: boolean
     password?: boolean
     role?: boolean
+    mustChangePassword?: boolean
+    isActive?: boolean
     groupId?: boolean
     agreedToRules?: boolean
     agreedAt?: boolean
+    agreementUrl?: boolean
     lastPasswordChange?: boolean
     createdAt?: boolean
   }
@@ -3224,11 +3989,15 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     group?: boolean | GroupDefaultArgs<ExtArgs>
     contributions?: boolean | User$contributionsArgs<ExtArgs>
+    announcements?: boolean | User$announcementsArgs<ExtArgs>
     loans?: boolean | User$loansArgs<ExtArgs>
     payouts?: boolean | User$payoutsArgs<ExtArgs>
     payoutApprovals?: boolean | User$payoutApprovalsArgs<ExtArgs>
     auditLogs?: boolean | User$auditLogsArgs<ExtArgs>
     penalties?: boolean | User$penaltiesArgs<ExtArgs>
+    attendances?: boolean | User$attendancesArgs<ExtArgs>
+    votes?: boolean | User$votesArgs<ExtArgs>
+    guaranteedLoans?: boolean | User$guaranteedLoansArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3240,22 +4009,30 @@ export namespace Prisma {
     objects: {
       group: Prisma.$GroupPayload<ExtArgs>
       contributions: Prisma.$ContributionPayload<ExtArgs>[]
+      announcements: Prisma.$AnnouncementPayload<ExtArgs>[]
       loans: Prisma.$LoanPayload<ExtArgs>[]
       payouts: Prisma.$PayoutPayload<ExtArgs>[]
       payoutApprovals: Prisma.$PayoutApprovalPayload<ExtArgs>[]
       auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
       penalties: Prisma.$PenaltyPayload<ExtArgs>[]
+      attendances: Prisma.$AttendancePayload<ExtArgs>[]
+      votes: Prisma.$VotePayload<ExtArgs>[]
+      guaranteedLoans: Prisma.$LoanPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       phone: string
+      email: string | null
       nationalId: string | null
       name: string
       password: string
       role: string
+      mustChangePassword: boolean
+      isActive: boolean
       groupId: string
       agreedToRules: boolean
       agreedAt: Date | null
+      agreementUrl: string | null
       lastPasswordChange: Date | null
       createdAt: Date
     }, ExtArgs["result"]["user"]>
@@ -3624,11 +4401,15 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     group<T extends GroupDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GroupDefaultArgs<ExtArgs>>): Prisma__GroupClient<$Result.GetResult<Prisma.$GroupPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     contributions<T extends User$contributionsArgs<ExtArgs> = {}>(args?: Subset<T, User$contributionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContributionPayload<ExtArgs>, T, "findMany"> | Null>
+    announcements<T extends User$announcementsArgs<ExtArgs> = {}>(args?: Subset<T, User$announcementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findMany"> | Null>
     loans<T extends User$loansArgs<ExtArgs> = {}>(args?: Subset<T, User$loansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LoanPayload<ExtArgs>, T, "findMany"> | Null>
     payouts<T extends User$payoutsArgs<ExtArgs> = {}>(args?: Subset<T, User$payoutsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PayoutPayload<ExtArgs>, T, "findMany"> | Null>
     payoutApprovals<T extends User$payoutApprovalsArgs<ExtArgs> = {}>(args?: Subset<T, User$payoutApprovalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PayoutApprovalPayload<ExtArgs>, T, "findMany"> | Null>
     auditLogs<T extends User$auditLogsArgs<ExtArgs> = {}>(args?: Subset<T, User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany"> | Null>
     penalties<T extends User$penaltiesArgs<ExtArgs> = {}>(args?: Subset<T, User$penaltiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PenaltyPayload<ExtArgs>, T, "findMany"> | Null>
+    attendances<T extends User$attendancesArgs<ExtArgs> = {}>(args?: Subset<T, User$attendancesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany"> | Null>
+    votes<T extends User$votesArgs<ExtArgs> = {}>(args?: Subset<T, User$votesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findMany"> | Null>
+    guaranteedLoans<T extends User$guaranteedLoansArgs<ExtArgs> = {}>(args?: Subset<T, User$guaranteedLoansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LoanPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3660,13 +4441,17 @@ export namespace Prisma {
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'String'>
     readonly phone: FieldRef<"User", 'String'>
+    readonly email: FieldRef<"User", 'String'>
     readonly nationalId: FieldRef<"User", 'String'>
     readonly name: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'String'>
+    readonly mustChangePassword: FieldRef<"User", 'Boolean'>
+    readonly isActive: FieldRef<"User", 'Boolean'>
     readonly groupId: FieldRef<"User", 'String'>
     readonly agreedToRules: FieldRef<"User", 'Boolean'>
     readonly agreedAt: FieldRef<"User", 'DateTime'>
+    readonly agreementUrl: FieldRef<"User", 'String'>
     readonly lastPasswordChange: FieldRef<"User", 'DateTime'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
   }
@@ -4005,6 +4790,26 @@ export namespace Prisma {
   }
 
   /**
+   * User.announcements
+   */
+  export type User$announcementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Announcement
+     */
+    select?: AnnouncementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnnouncementInclude<ExtArgs> | null
+    where?: AnnouncementWhereInput
+    orderBy?: AnnouncementOrderByWithRelationInput | AnnouncementOrderByWithRelationInput[]
+    cursor?: AnnouncementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AnnouncementScalarFieldEnum | AnnouncementScalarFieldEnum[]
+  }
+
+  /**
    * User.loans
    */
   export type User$loansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4105,6 +4910,66 @@ export namespace Prisma {
   }
 
   /**
+   * User.attendances
+   */
+  export type User$attendancesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendance
+     */
+    select?: AttendanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendanceInclude<ExtArgs> | null
+    where?: AttendanceWhereInput
+    orderBy?: AttendanceOrderByWithRelationInput | AttendanceOrderByWithRelationInput[]
+    cursor?: AttendanceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AttendanceScalarFieldEnum | AttendanceScalarFieldEnum[]
+  }
+
+  /**
+   * User.votes
+   */
+  export type User$votesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    where?: VoteWhereInput
+    orderBy?: VoteOrderByWithRelationInput | VoteOrderByWithRelationInput[]
+    cursor?: VoteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VoteScalarFieldEnum | VoteScalarFieldEnum[]
+  }
+
+  /**
+   * User.guaranteedLoans
+   */
+  export type User$guaranteedLoansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Loan
+     */
+    select?: LoanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LoanInclude<ExtArgs> | null
+    where?: LoanWhereInput
+    orderBy?: LoanOrderByWithRelationInput | LoanOrderByWithRelationInput[]
+    cursor?: LoanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LoanScalarFieldEnum | LoanScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4141,32 +5006,44 @@ export namespace Prisma {
 
   export type ContributionMinAggregateOutputType = {
     id: string | null
+    refNo: string | null
     amount: number | null
     status: string | null
     timestamp: Date | null
     userId: string | null
     groupId: string | null
     isLocked: boolean | null
+    fundType: string | null
+    paymentStatus: string | null
+    providerRef: string | null
   }
 
   export type ContributionMaxAggregateOutputType = {
     id: string | null
+    refNo: string | null
     amount: number | null
     status: string | null
     timestamp: Date | null
     userId: string | null
     groupId: string | null
     isLocked: boolean | null
+    fundType: string | null
+    paymentStatus: string | null
+    providerRef: string | null
   }
 
   export type ContributionCountAggregateOutputType = {
     id: number
+    refNo: number
     amount: number
     status: number
     timestamp: number
     userId: number
     groupId: number
     isLocked: number
+    fundType: number
+    paymentStatus: number
+    providerRef: number
     _all: number
   }
 
@@ -4181,32 +5058,44 @@ export namespace Prisma {
 
   export type ContributionMinAggregateInputType = {
     id?: true
+    refNo?: true
     amount?: true
     status?: true
     timestamp?: true
     userId?: true
     groupId?: true
     isLocked?: true
+    fundType?: true
+    paymentStatus?: true
+    providerRef?: true
   }
 
   export type ContributionMaxAggregateInputType = {
     id?: true
+    refNo?: true
     amount?: true
     status?: true
     timestamp?: true
     userId?: true
     groupId?: true
     isLocked?: true
+    fundType?: true
+    paymentStatus?: true
+    providerRef?: true
   }
 
   export type ContributionCountAggregateInputType = {
     id?: true
+    refNo?: true
     amount?: true
     status?: true
     timestamp?: true
     userId?: true
     groupId?: true
     isLocked?: true
+    fundType?: true
+    paymentStatus?: true
+    providerRef?: true
     _all?: true
   }
 
@@ -4298,12 +5187,16 @@ export namespace Prisma {
 
   export type ContributionGroupByOutputType = {
     id: string
+    refNo: string | null
     amount: number
     status: string
     timestamp: Date
     userId: string
     groupId: string
     isLocked: boolean
+    fundType: string
+    paymentStatus: string | null
+    providerRef: string | null
     _count: ContributionCountAggregateOutputType | null
     _avg: ContributionAvgAggregateOutputType | null
     _sum: ContributionSumAggregateOutputType | null
@@ -4327,36 +5220,48 @@ export namespace Prisma {
 
   export type ContributionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    refNo?: boolean
     amount?: boolean
     status?: boolean
     timestamp?: boolean
     userId?: boolean
     groupId?: boolean
     isLocked?: boolean
+    fundType?: boolean
+    paymentStatus?: boolean
+    providerRef?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     group?: boolean | GroupDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contribution"]>
 
   export type ContributionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    refNo?: boolean
     amount?: boolean
     status?: boolean
     timestamp?: boolean
     userId?: boolean
     groupId?: boolean
     isLocked?: boolean
+    fundType?: boolean
+    paymentStatus?: boolean
+    providerRef?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     group?: boolean | GroupDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contribution"]>
 
   export type ContributionSelectScalar = {
     id?: boolean
+    refNo?: boolean
     amount?: boolean
     status?: boolean
     timestamp?: boolean
     userId?: boolean
     groupId?: boolean
     isLocked?: boolean
+    fundType?: boolean
+    paymentStatus?: boolean
+    providerRef?: boolean
   }
 
   export type ContributionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4376,12 +5281,16 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      refNo: string | null
       amount: number
       status: string
       timestamp: Date
       userId: string
       groupId: string
       isLocked: boolean
+      fundType: string
+      paymentStatus: string | null
+      providerRef: string | null
     }, ExtArgs["result"]["contribution"]>
     composites: {}
   }
@@ -4778,12 +5687,16 @@ export namespace Prisma {
    */ 
   interface ContributionFieldRefs {
     readonly id: FieldRef<"Contribution", 'String'>
+    readonly refNo: FieldRef<"Contribution", 'String'>
     readonly amount: FieldRef<"Contribution", 'Float'>
     readonly status: FieldRef<"Contribution", 'String'>
     readonly timestamp: FieldRef<"Contribution", 'DateTime'>
     readonly userId: FieldRef<"Contribution", 'String'>
     readonly groupId: FieldRef<"Contribution", 'String'>
     readonly isLocked: FieldRef<"Contribution", 'Boolean'>
+    readonly fundType: FieldRef<"Contribution", 'String'>
+    readonly paymentStatus: FieldRef<"Contribution", 'String'>
+    readonly providerRef: FieldRef<"Contribution", 'String'>
   }
     
 
@@ -5138,34 +6051,40 @@ export namespace Prisma {
 
   export type LoanMinAggregateOutputType = {
     id: string | null
+    refNo: string | null
     amount: number | null
     interestRate: number | null
     deadline: Date | null
     status: string | null
     userId: string | null
     groupId: string | null
+    guarantorId: string | null
     createdAt: Date | null
   }
 
   export type LoanMaxAggregateOutputType = {
     id: string | null
+    refNo: string | null
     amount: number | null
     interestRate: number | null
     deadline: Date | null
     status: string | null
     userId: string | null
     groupId: string | null
+    guarantorId: string | null
     createdAt: Date | null
   }
 
   export type LoanCountAggregateOutputType = {
     id: number
+    refNo: number
     amount: number
     interestRate: number
     deadline: number
     status: number
     userId: number
     groupId: number
+    guarantorId: number
     createdAt: number
     _all: number
   }
@@ -5183,34 +6102,40 @@ export namespace Prisma {
 
   export type LoanMinAggregateInputType = {
     id?: true
+    refNo?: true
     amount?: true
     interestRate?: true
     deadline?: true
     status?: true
     userId?: true
     groupId?: true
+    guarantorId?: true
     createdAt?: true
   }
 
   export type LoanMaxAggregateInputType = {
     id?: true
+    refNo?: true
     amount?: true
     interestRate?: true
     deadline?: true
     status?: true
     userId?: true
     groupId?: true
+    guarantorId?: true
     createdAt?: true
   }
 
   export type LoanCountAggregateInputType = {
     id?: true
+    refNo?: true
     amount?: true
     interestRate?: true
     deadline?: true
     status?: true
     userId?: true
     groupId?: true
+    guarantorId?: true
     createdAt?: true
     _all?: true
   }
@@ -5303,12 +6228,14 @@ export namespace Prisma {
 
   export type LoanGroupByOutputType = {
     id: string
+    refNo: string | null
     amount: number
     interestRate: number
     deadline: Date
     status: string
     userId: string
     groupId: string
+    guarantorId: string | null
     createdAt: Date
     _count: LoanCountAggregateOutputType | null
     _avg: LoanAvgAggregateOutputType | null
@@ -5333,15 +6260,18 @@ export namespace Prisma {
 
   export type LoanSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    refNo?: boolean
     amount?: boolean
     interestRate?: boolean
     deadline?: boolean
     status?: boolean
     userId?: boolean
     groupId?: boolean
+    guarantorId?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     group?: boolean | GroupDefaultArgs<ExtArgs>
+    guarantor?: boolean | Loan$guarantorArgs<ExtArgs>
     repayments?: boolean | Loan$repaymentsArgs<ExtArgs>
     payouts?: boolean | Loan$payoutsArgs<ExtArgs>
     _count?: boolean | LoanCountOutputTypeDefaultArgs<ExtArgs>
@@ -5349,31 +6279,37 @@ export namespace Prisma {
 
   export type LoanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    refNo?: boolean
     amount?: boolean
     interestRate?: boolean
     deadline?: boolean
     status?: boolean
     userId?: boolean
     groupId?: boolean
+    guarantorId?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     group?: boolean | GroupDefaultArgs<ExtArgs>
+    guarantor?: boolean | Loan$guarantorArgs<ExtArgs>
   }, ExtArgs["result"]["loan"]>
 
   export type LoanSelectScalar = {
     id?: boolean
+    refNo?: boolean
     amount?: boolean
     interestRate?: boolean
     deadline?: boolean
     status?: boolean
     userId?: boolean
     groupId?: boolean
+    guarantorId?: boolean
     createdAt?: boolean
   }
 
   export type LoanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     group?: boolean | GroupDefaultArgs<ExtArgs>
+    guarantor?: boolean | Loan$guarantorArgs<ExtArgs>
     repayments?: boolean | Loan$repaymentsArgs<ExtArgs>
     payouts?: boolean | Loan$payoutsArgs<ExtArgs>
     _count?: boolean | LoanCountOutputTypeDefaultArgs<ExtArgs>
@@ -5381,6 +6317,7 @@ export namespace Prisma {
   export type LoanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     group?: boolean | GroupDefaultArgs<ExtArgs>
+    guarantor?: boolean | Loan$guarantorArgs<ExtArgs>
   }
 
   export type $LoanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5388,17 +6325,20 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       group: Prisma.$GroupPayload<ExtArgs>
+      guarantor: Prisma.$UserPayload<ExtArgs> | null
       repayments: Prisma.$RepaymentPayload<ExtArgs>[]
       payouts: Prisma.$PayoutPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      refNo: string | null
       amount: number
       interestRate: number
       deadline: Date
       status: string
       userId: string
       groupId: string
+      guarantorId: string | null
       createdAt: Date
     }, ExtArgs["result"]["loan"]>
     composites: {}
@@ -5766,6 +6706,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     group<T extends GroupDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GroupDefaultArgs<ExtArgs>>): Prisma__GroupClient<$Result.GetResult<Prisma.$GroupPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    guarantor<T extends Loan$guarantorArgs<ExtArgs> = {}>(args?: Subset<T, Loan$guarantorArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     repayments<T extends Loan$repaymentsArgs<ExtArgs> = {}>(args?: Subset<T, Loan$repaymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RepaymentPayload<ExtArgs>, T, "findMany"> | Null>
     payouts<T extends Loan$payoutsArgs<ExtArgs> = {}>(args?: Subset<T, Loan$payoutsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PayoutPayload<ExtArgs>, T, "findMany"> | Null>
     /**
@@ -5798,12 +6739,14 @@ export namespace Prisma {
    */ 
   interface LoanFieldRefs {
     readonly id: FieldRef<"Loan", 'String'>
+    readonly refNo: FieldRef<"Loan", 'String'>
     readonly amount: FieldRef<"Loan", 'Float'>
     readonly interestRate: FieldRef<"Loan", 'Float'>
     readonly deadline: FieldRef<"Loan", 'DateTime'>
     readonly status: FieldRef<"Loan", 'String'>
     readonly userId: FieldRef<"Loan", 'String'>
     readonly groupId: FieldRef<"Loan", 'String'>
+    readonly guarantorId: FieldRef<"Loan", 'String'>
     readonly createdAt: FieldRef<"Loan", 'DateTime'>
   }
     
@@ -6118,6 +7061,21 @@ export namespace Prisma {
      * Filter which Loans to delete
      */
     where?: LoanWhereInput
+  }
+
+  /**
+   * Loan.guarantor
+   */
+  export type Loan$guarantorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -7150,34 +8108,46 @@ export namespace Prisma {
 
   export type PayoutMinAggregateOutputType = {
     id: string | null
+    refNo: string | null
     amount: number | null
     description: string | null
     status: string | null
     requestedById: string | null
     groupId: string | null
     loanId: string | null
+    fundType: string | null
+    paymentStatus: string | null
+    providerRef: string | null
     createdAt: Date | null
   }
 
   export type PayoutMaxAggregateOutputType = {
     id: string | null
+    refNo: string | null
     amount: number | null
     description: string | null
     status: string | null
     requestedById: string | null
     groupId: string | null
     loanId: string | null
+    fundType: string | null
+    paymentStatus: string | null
+    providerRef: string | null
     createdAt: Date | null
   }
 
   export type PayoutCountAggregateOutputType = {
     id: number
+    refNo: number
     amount: number
     description: number
     status: number
     requestedById: number
     groupId: number
     loanId: number
+    fundType: number
+    paymentStatus: number
+    providerRef: number
     createdAt: number
     _all: number
   }
@@ -7193,34 +8163,46 @@ export namespace Prisma {
 
   export type PayoutMinAggregateInputType = {
     id?: true
+    refNo?: true
     amount?: true
     description?: true
     status?: true
     requestedById?: true
     groupId?: true
     loanId?: true
+    fundType?: true
+    paymentStatus?: true
+    providerRef?: true
     createdAt?: true
   }
 
   export type PayoutMaxAggregateInputType = {
     id?: true
+    refNo?: true
     amount?: true
     description?: true
     status?: true
     requestedById?: true
     groupId?: true
     loanId?: true
+    fundType?: true
+    paymentStatus?: true
+    providerRef?: true
     createdAt?: true
   }
 
   export type PayoutCountAggregateInputType = {
     id?: true
+    refNo?: true
     amount?: true
     description?: true
     status?: true
     requestedById?: true
     groupId?: true
     loanId?: true
+    fundType?: true
+    paymentStatus?: true
+    providerRef?: true
     createdAt?: true
     _all?: true
   }
@@ -7313,12 +8295,16 @@ export namespace Prisma {
 
   export type PayoutGroupByOutputType = {
     id: string
+    refNo: string | null
     amount: number
     description: string
     status: string
     requestedById: string
     groupId: string
     loanId: string | null
+    fundType: string
+    paymentStatus: string | null
+    providerRef: string | null
     createdAt: Date
     _count: PayoutCountAggregateOutputType | null
     _avg: PayoutAvgAggregateOutputType | null
@@ -7343,12 +8329,16 @@ export namespace Prisma {
 
   export type PayoutSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    refNo?: boolean
     amount?: boolean
     description?: boolean
     status?: boolean
     requestedById?: boolean
     groupId?: boolean
     loanId?: boolean
+    fundType?: boolean
+    paymentStatus?: boolean
+    providerRef?: boolean
     createdAt?: boolean
     approvals?: boolean | Payout$approvalsArgs<ExtArgs>
     requestedBy?: boolean | UserDefaultArgs<ExtArgs>
@@ -7359,12 +8349,16 @@ export namespace Prisma {
 
   export type PayoutSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    refNo?: boolean
     amount?: boolean
     description?: boolean
     status?: boolean
     requestedById?: boolean
     groupId?: boolean
     loanId?: boolean
+    fundType?: boolean
+    paymentStatus?: boolean
+    providerRef?: boolean
     createdAt?: boolean
     requestedBy?: boolean | UserDefaultArgs<ExtArgs>
     group?: boolean | GroupDefaultArgs<ExtArgs>
@@ -7373,12 +8367,16 @@ export namespace Prisma {
 
   export type PayoutSelectScalar = {
     id?: boolean
+    refNo?: boolean
     amount?: boolean
     description?: boolean
     status?: boolean
     requestedById?: boolean
     groupId?: boolean
     loanId?: boolean
+    fundType?: boolean
+    paymentStatus?: boolean
+    providerRef?: boolean
     createdAt?: boolean
   }
 
@@ -7405,12 +8403,16 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      refNo: string | null
       amount: number
       description: string
       status: string
       requestedById: string
       groupId: string
       loanId: string | null
+      fundType: string
+      paymentStatus: string | null
+      providerRef: string | null
       createdAt: Date
     }, ExtArgs["result"]["payout"]>
     composites: {}
@@ -7810,12 +8812,16 @@ export namespace Prisma {
    */ 
   interface PayoutFieldRefs {
     readonly id: FieldRef<"Payout", 'String'>
+    readonly refNo: FieldRef<"Payout", 'String'>
     readonly amount: FieldRef<"Payout", 'Float'>
     readonly description: FieldRef<"Payout", 'String'>
     readonly status: FieldRef<"Payout", 'String'>
     readonly requestedById: FieldRef<"Payout", 'String'>
     readonly groupId: FieldRef<"Payout", 'String'>
     readonly loanId: FieldRef<"Payout", 'String'>
+    readonly fundType: FieldRef<"Payout", 'String'>
+    readonly paymentStatus: FieldRef<"Payout", 'String'>
+    readonly providerRef: FieldRef<"Payout", 'String'>
     readonly createdAt: FieldRef<"Payout", 'DateTime'>
   }
     
@@ -10097,6 +11103,7 @@ export namespace Prisma {
     reason: string | null
     status: string | null
     userId: string | null
+    groupId: string | null
     timestamp: Date | null
   }
 
@@ -10106,6 +11113,7 @@ export namespace Prisma {
     reason: string | null
     status: string | null
     userId: string | null
+    groupId: string | null
     timestamp: Date | null
   }
 
@@ -10115,6 +11123,7 @@ export namespace Prisma {
     reason: number
     status: number
     userId: number
+    groupId: number
     timestamp: number
     _all: number
   }
@@ -10134,6 +11143,7 @@ export namespace Prisma {
     reason?: true
     status?: true
     userId?: true
+    groupId?: true
     timestamp?: true
   }
 
@@ -10143,6 +11153,7 @@ export namespace Prisma {
     reason?: true
     status?: true
     userId?: true
+    groupId?: true
     timestamp?: true
   }
 
@@ -10152,6 +11163,7 @@ export namespace Prisma {
     reason?: true
     status?: true
     userId?: true
+    groupId?: true
     timestamp?: true
     _all?: true
   }
@@ -10248,6 +11260,7 @@ export namespace Prisma {
     reason: string
     status: string
     userId: string
+    groupId: string
     timestamp: Date
     _count: PenaltyCountAggregateOutputType | null
     _avg: PenaltyAvgAggregateOutputType | null
@@ -10276,8 +11289,10 @@ export namespace Prisma {
     reason?: boolean
     status?: boolean
     userId?: boolean
+    groupId?: boolean
     timestamp?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    group?: boolean | GroupDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["penalty"]>
 
   export type PenaltySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10286,8 +11301,10 @@ export namespace Prisma {
     reason?: boolean
     status?: boolean
     userId?: boolean
+    groupId?: boolean
     timestamp?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    group?: boolean | GroupDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["penalty"]>
 
   export type PenaltySelectScalar = {
@@ -10296,20 +11313,24 @@ export namespace Prisma {
     reason?: boolean
     status?: boolean
     userId?: boolean
+    groupId?: boolean
     timestamp?: boolean
   }
 
   export type PenaltyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    group?: boolean | GroupDefaultArgs<ExtArgs>
   }
   export type PenaltyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    group?: boolean | GroupDefaultArgs<ExtArgs>
   }
 
   export type $PenaltyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Penalty"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      group: Prisma.$GroupPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10317,6 +11338,7 @@ export namespace Prisma {
       reason: string
       status: string
       userId: string
+      groupId: string
       timestamp: Date
     }, ExtArgs["result"]["penalty"]>
     composites: {}
@@ -10683,6 +11705,7 @@ export namespace Prisma {
   export interface Prisma__PenaltyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    group<T extends GroupDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GroupDefaultArgs<ExtArgs>>): Prisma__GroupClient<$Result.GetResult<Prisma.$GroupPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10717,6 +11740,7 @@ export namespace Prisma {
     readonly reason: FieldRef<"Penalty", 'String'>
     readonly status: FieldRef<"Penalty", 'String'>
     readonly userId: FieldRef<"Penalty", 'String'>
+    readonly groupId: FieldRef<"Penalty", 'String'>
     readonly timestamp: FieldRef<"Penalty", 'DateTime'>
   }
     
@@ -11925,6 +12949,4773 @@ export namespace Prisma {
 
 
   /**
+   * Model Announcement
+   */
+
+  export type AggregateAnnouncement = {
+    _count: AnnouncementCountAggregateOutputType | null
+    _min: AnnouncementMinAggregateOutputType | null
+    _max: AnnouncementMaxAggregateOutputType | null
+  }
+
+  export type AnnouncementMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    body: string | null
+    type: string | null
+    eventDate: Date | null
+    groupId: string | null
+    createdBy: string | null
+    createdAt: Date | null
+  }
+
+  export type AnnouncementMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    body: string | null
+    type: string | null
+    eventDate: Date | null
+    groupId: string | null
+    createdBy: string | null
+    createdAt: Date | null
+  }
+
+  export type AnnouncementCountAggregateOutputType = {
+    id: number
+    title: number
+    body: number
+    type: number
+    eventDate: number
+    groupId: number
+    createdBy: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type AnnouncementMinAggregateInputType = {
+    id?: true
+    title?: true
+    body?: true
+    type?: true
+    eventDate?: true
+    groupId?: true
+    createdBy?: true
+    createdAt?: true
+  }
+
+  export type AnnouncementMaxAggregateInputType = {
+    id?: true
+    title?: true
+    body?: true
+    type?: true
+    eventDate?: true
+    groupId?: true
+    createdBy?: true
+    createdAt?: true
+  }
+
+  export type AnnouncementCountAggregateInputType = {
+    id?: true
+    title?: true
+    body?: true
+    type?: true
+    eventDate?: true
+    groupId?: true
+    createdBy?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type AnnouncementAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Announcement to aggregate.
+     */
+    where?: AnnouncementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Announcements to fetch.
+     */
+    orderBy?: AnnouncementOrderByWithRelationInput | AnnouncementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AnnouncementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Announcements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Announcements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Announcements
+    **/
+    _count?: true | AnnouncementCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AnnouncementMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AnnouncementMaxAggregateInputType
+  }
+
+  export type GetAnnouncementAggregateType<T extends AnnouncementAggregateArgs> = {
+        [P in keyof T & keyof AggregateAnnouncement]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAnnouncement[P]>
+      : GetScalarType<T[P], AggregateAnnouncement[P]>
+  }
+
+
+
+
+  export type AnnouncementGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AnnouncementWhereInput
+    orderBy?: AnnouncementOrderByWithAggregationInput | AnnouncementOrderByWithAggregationInput[]
+    by: AnnouncementScalarFieldEnum[] | AnnouncementScalarFieldEnum
+    having?: AnnouncementScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AnnouncementCountAggregateInputType | true
+    _min?: AnnouncementMinAggregateInputType
+    _max?: AnnouncementMaxAggregateInputType
+  }
+
+  export type AnnouncementGroupByOutputType = {
+    id: string
+    title: string
+    body: string
+    type: string
+    eventDate: Date | null
+    groupId: string
+    createdBy: string
+    createdAt: Date
+    _count: AnnouncementCountAggregateOutputType | null
+    _min: AnnouncementMinAggregateOutputType | null
+    _max: AnnouncementMaxAggregateOutputType | null
+  }
+
+  type GetAnnouncementGroupByPayload<T extends AnnouncementGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AnnouncementGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AnnouncementGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AnnouncementGroupByOutputType[P]>
+            : GetScalarType<T[P], AnnouncementGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AnnouncementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    body?: boolean
+    type?: boolean
+    eventDate?: boolean
+    groupId?: boolean
+    createdBy?: boolean
+    createdAt?: boolean
+    group?: boolean | GroupDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["announcement"]>
+
+  export type AnnouncementSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    body?: boolean
+    type?: boolean
+    eventDate?: boolean
+    groupId?: boolean
+    createdBy?: boolean
+    createdAt?: boolean
+    group?: boolean | GroupDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["announcement"]>
+
+  export type AnnouncementSelectScalar = {
+    id?: boolean
+    title?: boolean
+    body?: boolean
+    type?: boolean
+    eventDate?: boolean
+    groupId?: boolean
+    createdBy?: boolean
+    createdAt?: boolean
+  }
+
+  export type AnnouncementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    group?: boolean | GroupDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AnnouncementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    group?: boolean | GroupDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $AnnouncementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Announcement"
+    objects: {
+      group: Prisma.$GroupPayload<ExtArgs>
+      author: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      body: string
+      type: string
+      eventDate: Date | null
+      groupId: string
+      createdBy: string
+      createdAt: Date
+    }, ExtArgs["result"]["announcement"]>
+    composites: {}
+  }
+
+  type AnnouncementGetPayload<S extends boolean | null | undefined | AnnouncementDefaultArgs> = $Result.GetResult<Prisma.$AnnouncementPayload, S>
+
+  type AnnouncementCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<AnnouncementFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: AnnouncementCountAggregateInputType | true
+    }
+
+  export interface AnnouncementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Announcement'], meta: { name: 'Announcement' } }
+    /**
+     * Find zero or one Announcement that matches the filter.
+     * @param {AnnouncementFindUniqueArgs} args - Arguments to find a Announcement
+     * @example
+     * // Get one Announcement
+     * const announcement = await prisma.announcement.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AnnouncementFindUniqueArgs>(args: SelectSubset<T, AnnouncementFindUniqueArgs<ExtArgs>>): Prisma__AnnouncementClient<$Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Announcement that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {AnnouncementFindUniqueOrThrowArgs} args - Arguments to find a Announcement
+     * @example
+     * // Get one Announcement
+     * const announcement = await prisma.announcement.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AnnouncementFindUniqueOrThrowArgs>(args: SelectSubset<T, AnnouncementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AnnouncementClient<$Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Announcement that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnnouncementFindFirstArgs} args - Arguments to find a Announcement
+     * @example
+     * // Get one Announcement
+     * const announcement = await prisma.announcement.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AnnouncementFindFirstArgs>(args?: SelectSubset<T, AnnouncementFindFirstArgs<ExtArgs>>): Prisma__AnnouncementClient<$Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Announcement that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnnouncementFindFirstOrThrowArgs} args - Arguments to find a Announcement
+     * @example
+     * // Get one Announcement
+     * const announcement = await prisma.announcement.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AnnouncementFindFirstOrThrowArgs>(args?: SelectSubset<T, AnnouncementFindFirstOrThrowArgs<ExtArgs>>): Prisma__AnnouncementClient<$Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Announcements that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnnouncementFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Announcements
+     * const announcements = await prisma.announcement.findMany()
+     * 
+     * // Get first 10 Announcements
+     * const announcements = await prisma.announcement.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const announcementWithIdOnly = await prisma.announcement.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AnnouncementFindManyArgs>(args?: SelectSubset<T, AnnouncementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Announcement.
+     * @param {AnnouncementCreateArgs} args - Arguments to create a Announcement.
+     * @example
+     * // Create one Announcement
+     * const Announcement = await prisma.announcement.create({
+     *   data: {
+     *     // ... data to create a Announcement
+     *   }
+     * })
+     * 
+     */
+    create<T extends AnnouncementCreateArgs>(args: SelectSubset<T, AnnouncementCreateArgs<ExtArgs>>): Prisma__AnnouncementClient<$Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Announcements.
+     * @param {AnnouncementCreateManyArgs} args - Arguments to create many Announcements.
+     * @example
+     * // Create many Announcements
+     * const announcement = await prisma.announcement.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AnnouncementCreateManyArgs>(args?: SelectSubset<T, AnnouncementCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Announcements and returns the data saved in the database.
+     * @param {AnnouncementCreateManyAndReturnArgs} args - Arguments to create many Announcements.
+     * @example
+     * // Create many Announcements
+     * const announcement = await prisma.announcement.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Announcements and only return the `id`
+     * const announcementWithIdOnly = await prisma.announcement.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AnnouncementCreateManyAndReturnArgs>(args?: SelectSubset<T, AnnouncementCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Announcement.
+     * @param {AnnouncementDeleteArgs} args - Arguments to delete one Announcement.
+     * @example
+     * // Delete one Announcement
+     * const Announcement = await prisma.announcement.delete({
+     *   where: {
+     *     // ... filter to delete one Announcement
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AnnouncementDeleteArgs>(args: SelectSubset<T, AnnouncementDeleteArgs<ExtArgs>>): Prisma__AnnouncementClient<$Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Announcement.
+     * @param {AnnouncementUpdateArgs} args - Arguments to update one Announcement.
+     * @example
+     * // Update one Announcement
+     * const announcement = await prisma.announcement.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AnnouncementUpdateArgs>(args: SelectSubset<T, AnnouncementUpdateArgs<ExtArgs>>): Prisma__AnnouncementClient<$Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Announcements.
+     * @param {AnnouncementDeleteManyArgs} args - Arguments to filter Announcements to delete.
+     * @example
+     * // Delete a few Announcements
+     * const { count } = await prisma.announcement.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AnnouncementDeleteManyArgs>(args?: SelectSubset<T, AnnouncementDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Announcements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnnouncementUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Announcements
+     * const announcement = await prisma.announcement.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AnnouncementUpdateManyArgs>(args: SelectSubset<T, AnnouncementUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Announcement.
+     * @param {AnnouncementUpsertArgs} args - Arguments to update or create a Announcement.
+     * @example
+     * // Update or create a Announcement
+     * const announcement = await prisma.announcement.upsert({
+     *   create: {
+     *     // ... data to create a Announcement
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Announcement we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AnnouncementUpsertArgs>(args: SelectSubset<T, AnnouncementUpsertArgs<ExtArgs>>): Prisma__AnnouncementClient<$Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Announcements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnnouncementCountArgs} args - Arguments to filter Announcements to count.
+     * @example
+     * // Count the number of Announcements
+     * const count = await prisma.announcement.count({
+     *   where: {
+     *     // ... the filter for the Announcements we want to count
+     *   }
+     * })
+    **/
+    count<T extends AnnouncementCountArgs>(
+      args?: Subset<T, AnnouncementCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AnnouncementCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Announcement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnnouncementAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AnnouncementAggregateArgs>(args: Subset<T, AnnouncementAggregateArgs>): Prisma.PrismaPromise<GetAnnouncementAggregateType<T>>
+
+    /**
+     * Group by Announcement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnnouncementGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AnnouncementGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AnnouncementGroupByArgs['orderBy'] }
+        : { orderBy?: AnnouncementGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AnnouncementGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAnnouncementGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Announcement model
+   */
+  readonly fields: AnnouncementFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Announcement.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AnnouncementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    group<T extends GroupDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GroupDefaultArgs<ExtArgs>>): Prisma__GroupClient<$Result.GetResult<Prisma.$GroupPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Announcement model
+   */ 
+  interface AnnouncementFieldRefs {
+    readonly id: FieldRef<"Announcement", 'String'>
+    readonly title: FieldRef<"Announcement", 'String'>
+    readonly body: FieldRef<"Announcement", 'String'>
+    readonly type: FieldRef<"Announcement", 'String'>
+    readonly eventDate: FieldRef<"Announcement", 'DateTime'>
+    readonly groupId: FieldRef<"Announcement", 'String'>
+    readonly createdBy: FieldRef<"Announcement", 'String'>
+    readonly createdAt: FieldRef<"Announcement", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Announcement findUnique
+   */
+  export type AnnouncementFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Announcement
+     */
+    select?: AnnouncementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnnouncementInclude<ExtArgs> | null
+    /**
+     * Filter, which Announcement to fetch.
+     */
+    where: AnnouncementWhereUniqueInput
+  }
+
+  /**
+   * Announcement findUniqueOrThrow
+   */
+  export type AnnouncementFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Announcement
+     */
+    select?: AnnouncementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnnouncementInclude<ExtArgs> | null
+    /**
+     * Filter, which Announcement to fetch.
+     */
+    where: AnnouncementWhereUniqueInput
+  }
+
+  /**
+   * Announcement findFirst
+   */
+  export type AnnouncementFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Announcement
+     */
+    select?: AnnouncementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnnouncementInclude<ExtArgs> | null
+    /**
+     * Filter, which Announcement to fetch.
+     */
+    where?: AnnouncementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Announcements to fetch.
+     */
+    orderBy?: AnnouncementOrderByWithRelationInput | AnnouncementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Announcements.
+     */
+    cursor?: AnnouncementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Announcements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Announcements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Announcements.
+     */
+    distinct?: AnnouncementScalarFieldEnum | AnnouncementScalarFieldEnum[]
+  }
+
+  /**
+   * Announcement findFirstOrThrow
+   */
+  export type AnnouncementFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Announcement
+     */
+    select?: AnnouncementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnnouncementInclude<ExtArgs> | null
+    /**
+     * Filter, which Announcement to fetch.
+     */
+    where?: AnnouncementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Announcements to fetch.
+     */
+    orderBy?: AnnouncementOrderByWithRelationInput | AnnouncementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Announcements.
+     */
+    cursor?: AnnouncementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Announcements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Announcements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Announcements.
+     */
+    distinct?: AnnouncementScalarFieldEnum | AnnouncementScalarFieldEnum[]
+  }
+
+  /**
+   * Announcement findMany
+   */
+  export type AnnouncementFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Announcement
+     */
+    select?: AnnouncementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnnouncementInclude<ExtArgs> | null
+    /**
+     * Filter, which Announcements to fetch.
+     */
+    where?: AnnouncementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Announcements to fetch.
+     */
+    orderBy?: AnnouncementOrderByWithRelationInput | AnnouncementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Announcements.
+     */
+    cursor?: AnnouncementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Announcements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Announcements.
+     */
+    skip?: number
+    distinct?: AnnouncementScalarFieldEnum | AnnouncementScalarFieldEnum[]
+  }
+
+  /**
+   * Announcement create
+   */
+  export type AnnouncementCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Announcement
+     */
+    select?: AnnouncementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnnouncementInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Announcement.
+     */
+    data: XOR<AnnouncementCreateInput, AnnouncementUncheckedCreateInput>
+  }
+
+  /**
+   * Announcement createMany
+   */
+  export type AnnouncementCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Announcements.
+     */
+    data: AnnouncementCreateManyInput | AnnouncementCreateManyInput[]
+  }
+
+  /**
+   * Announcement createManyAndReturn
+   */
+  export type AnnouncementCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Announcement
+     */
+    select?: AnnouncementSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Announcements.
+     */
+    data: AnnouncementCreateManyInput | AnnouncementCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnnouncementIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Announcement update
+   */
+  export type AnnouncementUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Announcement
+     */
+    select?: AnnouncementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnnouncementInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Announcement.
+     */
+    data: XOR<AnnouncementUpdateInput, AnnouncementUncheckedUpdateInput>
+    /**
+     * Choose, which Announcement to update.
+     */
+    where: AnnouncementWhereUniqueInput
+  }
+
+  /**
+   * Announcement updateMany
+   */
+  export type AnnouncementUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Announcements.
+     */
+    data: XOR<AnnouncementUpdateManyMutationInput, AnnouncementUncheckedUpdateManyInput>
+    /**
+     * Filter which Announcements to update
+     */
+    where?: AnnouncementWhereInput
+  }
+
+  /**
+   * Announcement upsert
+   */
+  export type AnnouncementUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Announcement
+     */
+    select?: AnnouncementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnnouncementInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Announcement to update in case it exists.
+     */
+    where: AnnouncementWhereUniqueInput
+    /**
+     * In case the Announcement found by the `where` argument doesn't exist, create a new Announcement with this data.
+     */
+    create: XOR<AnnouncementCreateInput, AnnouncementUncheckedCreateInput>
+    /**
+     * In case the Announcement was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AnnouncementUpdateInput, AnnouncementUncheckedUpdateInput>
+  }
+
+  /**
+   * Announcement delete
+   */
+  export type AnnouncementDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Announcement
+     */
+    select?: AnnouncementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnnouncementInclude<ExtArgs> | null
+    /**
+     * Filter which Announcement to delete.
+     */
+    where: AnnouncementWhereUniqueInput
+  }
+
+  /**
+   * Announcement deleteMany
+   */
+  export type AnnouncementDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Announcements to delete
+     */
+    where?: AnnouncementWhereInput
+  }
+
+  /**
+   * Announcement without action
+   */
+  export type AnnouncementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Announcement
+     */
+    select?: AnnouncementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnnouncementInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Meeting
+   */
+
+  export type AggregateMeeting = {
+    _count: MeetingCountAggregateOutputType | null
+    _min: MeetingMinAggregateOutputType | null
+    _max: MeetingMaxAggregateOutputType | null
+  }
+
+  export type MeetingMinAggregateOutputType = {
+    id: string | null
+    date: Date | null
+    title: string | null
+    groupId: string | null
+    createdAt: Date | null
+  }
+
+  export type MeetingMaxAggregateOutputType = {
+    id: string | null
+    date: Date | null
+    title: string | null
+    groupId: string | null
+    createdAt: Date | null
+  }
+
+  export type MeetingCountAggregateOutputType = {
+    id: number
+    date: number
+    title: number
+    groupId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type MeetingMinAggregateInputType = {
+    id?: true
+    date?: true
+    title?: true
+    groupId?: true
+    createdAt?: true
+  }
+
+  export type MeetingMaxAggregateInputType = {
+    id?: true
+    date?: true
+    title?: true
+    groupId?: true
+    createdAt?: true
+  }
+
+  export type MeetingCountAggregateInputType = {
+    id?: true
+    date?: true
+    title?: true
+    groupId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type MeetingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Meeting to aggregate.
+     */
+    where?: MeetingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Meetings to fetch.
+     */
+    orderBy?: MeetingOrderByWithRelationInput | MeetingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MeetingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Meetings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Meetings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Meetings
+    **/
+    _count?: true | MeetingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MeetingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MeetingMaxAggregateInputType
+  }
+
+  export type GetMeetingAggregateType<T extends MeetingAggregateArgs> = {
+        [P in keyof T & keyof AggregateMeeting]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMeeting[P]>
+      : GetScalarType<T[P], AggregateMeeting[P]>
+  }
+
+
+
+
+  export type MeetingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MeetingWhereInput
+    orderBy?: MeetingOrderByWithAggregationInput | MeetingOrderByWithAggregationInput[]
+    by: MeetingScalarFieldEnum[] | MeetingScalarFieldEnum
+    having?: MeetingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MeetingCountAggregateInputType | true
+    _min?: MeetingMinAggregateInputType
+    _max?: MeetingMaxAggregateInputType
+  }
+
+  export type MeetingGroupByOutputType = {
+    id: string
+    date: Date
+    title: string
+    groupId: string
+    createdAt: Date
+    _count: MeetingCountAggregateOutputType | null
+    _min: MeetingMinAggregateOutputType | null
+    _max: MeetingMaxAggregateOutputType | null
+  }
+
+  type GetMeetingGroupByPayload<T extends MeetingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MeetingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MeetingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MeetingGroupByOutputType[P]>
+            : GetScalarType<T[P], MeetingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MeetingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    date?: boolean
+    title?: boolean
+    groupId?: boolean
+    createdAt?: boolean
+    group?: boolean | GroupDefaultArgs<ExtArgs>
+    attendances?: boolean | Meeting$attendancesArgs<ExtArgs>
+    _count?: boolean | MeetingCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["meeting"]>
+
+  export type MeetingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    date?: boolean
+    title?: boolean
+    groupId?: boolean
+    createdAt?: boolean
+    group?: boolean | GroupDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["meeting"]>
+
+  export type MeetingSelectScalar = {
+    id?: boolean
+    date?: boolean
+    title?: boolean
+    groupId?: boolean
+    createdAt?: boolean
+  }
+
+  export type MeetingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    group?: boolean | GroupDefaultArgs<ExtArgs>
+    attendances?: boolean | Meeting$attendancesArgs<ExtArgs>
+    _count?: boolean | MeetingCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type MeetingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    group?: boolean | GroupDefaultArgs<ExtArgs>
+  }
+
+  export type $MeetingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Meeting"
+    objects: {
+      group: Prisma.$GroupPayload<ExtArgs>
+      attendances: Prisma.$AttendancePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      date: Date
+      title: string
+      groupId: string
+      createdAt: Date
+    }, ExtArgs["result"]["meeting"]>
+    composites: {}
+  }
+
+  type MeetingGetPayload<S extends boolean | null | undefined | MeetingDefaultArgs> = $Result.GetResult<Prisma.$MeetingPayload, S>
+
+  type MeetingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<MeetingFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: MeetingCountAggregateInputType | true
+    }
+
+  export interface MeetingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Meeting'], meta: { name: 'Meeting' } }
+    /**
+     * Find zero or one Meeting that matches the filter.
+     * @param {MeetingFindUniqueArgs} args - Arguments to find a Meeting
+     * @example
+     * // Get one Meeting
+     * const meeting = await prisma.meeting.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MeetingFindUniqueArgs>(args: SelectSubset<T, MeetingFindUniqueArgs<ExtArgs>>): Prisma__MeetingClient<$Result.GetResult<Prisma.$MeetingPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Meeting that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {MeetingFindUniqueOrThrowArgs} args - Arguments to find a Meeting
+     * @example
+     * // Get one Meeting
+     * const meeting = await prisma.meeting.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MeetingFindUniqueOrThrowArgs>(args: SelectSubset<T, MeetingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MeetingClient<$Result.GetResult<Prisma.$MeetingPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Meeting that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeetingFindFirstArgs} args - Arguments to find a Meeting
+     * @example
+     * // Get one Meeting
+     * const meeting = await prisma.meeting.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MeetingFindFirstArgs>(args?: SelectSubset<T, MeetingFindFirstArgs<ExtArgs>>): Prisma__MeetingClient<$Result.GetResult<Prisma.$MeetingPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Meeting that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeetingFindFirstOrThrowArgs} args - Arguments to find a Meeting
+     * @example
+     * // Get one Meeting
+     * const meeting = await prisma.meeting.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MeetingFindFirstOrThrowArgs>(args?: SelectSubset<T, MeetingFindFirstOrThrowArgs<ExtArgs>>): Prisma__MeetingClient<$Result.GetResult<Prisma.$MeetingPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Meetings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeetingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Meetings
+     * const meetings = await prisma.meeting.findMany()
+     * 
+     * // Get first 10 Meetings
+     * const meetings = await prisma.meeting.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const meetingWithIdOnly = await prisma.meeting.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MeetingFindManyArgs>(args?: SelectSubset<T, MeetingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MeetingPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Meeting.
+     * @param {MeetingCreateArgs} args - Arguments to create a Meeting.
+     * @example
+     * // Create one Meeting
+     * const Meeting = await prisma.meeting.create({
+     *   data: {
+     *     // ... data to create a Meeting
+     *   }
+     * })
+     * 
+     */
+    create<T extends MeetingCreateArgs>(args: SelectSubset<T, MeetingCreateArgs<ExtArgs>>): Prisma__MeetingClient<$Result.GetResult<Prisma.$MeetingPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Meetings.
+     * @param {MeetingCreateManyArgs} args - Arguments to create many Meetings.
+     * @example
+     * // Create many Meetings
+     * const meeting = await prisma.meeting.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MeetingCreateManyArgs>(args?: SelectSubset<T, MeetingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Meetings and returns the data saved in the database.
+     * @param {MeetingCreateManyAndReturnArgs} args - Arguments to create many Meetings.
+     * @example
+     * // Create many Meetings
+     * const meeting = await prisma.meeting.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Meetings and only return the `id`
+     * const meetingWithIdOnly = await prisma.meeting.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MeetingCreateManyAndReturnArgs>(args?: SelectSubset<T, MeetingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MeetingPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Meeting.
+     * @param {MeetingDeleteArgs} args - Arguments to delete one Meeting.
+     * @example
+     * // Delete one Meeting
+     * const Meeting = await prisma.meeting.delete({
+     *   where: {
+     *     // ... filter to delete one Meeting
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MeetingDeleteArgs>(args: SelectSubset<T, MeetingDeleteArgs<ExtArgs>>): Prisma__MeetingClient<$Result.GetResult<Prisma.$MeetingPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Meeting.
+     * @param {MeetingUpdateArgs} args - Arguments to update one Meeting.
+     * @example
+     * // Update one Meeting
+     * const meeting = await prisma.meeting.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MeetingUpdateArgs>(args: SelectSubset<T, MeetingUpdateArgs<ExtArgs>>): Prisma__MeetingClient<$Result.GetResult<Prisma.$MeetingPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Meetings.
+     * @param {MeetingDeleteManyArgs} args - Arguments to filter Meetings to delete.
+     * @example
+     * // Delete a few Meetings
+     * const { count } = await prisma.meeting.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MeetingDeleteManyArgs>(args?: SelectSubset<T, MeetingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Meetings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeetingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Meetings
+     * const meeting = await prisma.meeting.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MeetingUpdateManyArgs>(args: SelectSubset<T, MeetingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Meeting.
+     * @param {MeetingUpsertArgs} args - Arguments to update or create a Meeting.
+     * @example
+     * // Update or create a Meeting
+     * const meeting = await prisma.meeting.upsert({
+     *   create: {
+     *     // ... data to create a Meeting
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Meeting we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MeetingUpsertArgs>(args: SelectSubset<T, MeetingUpsertArgs<ExtArgs>>): Prisma__MeetingClient<$Result.GetResult<Prisma.$MeetingPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Meetings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeetingCountArgs} args - Arguments to filter Meetings to count.
+     * @example
+     * // Count the number of Meetings
+     * const count = await prisma.meeting.count({
+     *   where: {
+     *     // ... the filter for the Meetings we want to count
+     *   }
+     * })
+    **/
+    count<T extends MeetingCountArgs>(
+      args?: Subset<T, MeetingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MeetingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Meeting.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeetingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MeetingAggregateArgs>(args: Subset<T, MeetingAggregateArgs>): Prisma.PrismaPromise<GetMeetingAggregateType<T>>
+
+    /**
+     * Group by Meeting.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeetingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MeetingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MeetingGroupByArgs['orderBy'] }
+        : { orderBy?: MeetingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MeetingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMeetingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Meeting model
+   */
+  readonly fields: MeetingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Meeting.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MeetingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    group<T extends GroupDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GroupDefaultArgs<ExtArgs>>): Prisma__GroupClient<$Result.GetResult<Prisma.$GroupPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    attendances<T extends Meeting$attendancesArgs<ExtArgs> = {}>(args?: Subset<T, Meeting$attendancesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Meeting model
+   */ 
+  interface MeetingFieldRefs {
+    readonly id: FieldRef<"Meeting", 'String'>
+    readonly date: FieldRef<"Meeting", 'DateTime'>
+    readonly title: FieldRef<"Meeting", 'String'>
+    readonly groupId: FieldRef<"Meeting", 'String'>
+    readonly createdAt: FieldRef<"Meeting", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Meeting findUnique
+   */
+  export type MeetingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Meeting
+     */
+    select?: MeetingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingInclude<ExtArgs> | null
+    /**
+     * Filter, which Meeting to fetch.
+     */
+    where: MeetingWhereUniqueInput
+  }
+
+  /**
+   * Meeting findUniqueOrThrow
+   */
+  export type MeetingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Meeting
+     */
+    select?: MeetingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingInclude<ExtArgs> | null
+    /**
+     * Filter, which Meeting to fetch.
+     */
+    where: MeetingWhereUniqueInput
+  }
+
+  /**
+   * Meeting findFirst
+   */
+  export type MeetingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Meeting
+     */
+    select?: MeetingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingInclude<ExtArgs> | null
+    /**
+     * Filter, which Meeting to fetch.
+     */
+    where?: MeetingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Meetings to fetch.
+     */
+    orderBy?: MeetingOrderByWithRelationInput | MeetingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Meetings.
+     */
+    cursor?: MeetingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Meetings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Meetings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Meetings.
+     */
+    distinct?: MeetingScalarFieldEnum | MeetingScalarFieldEnum[]
+  }
+
+  /**
+   * Meeting findFirstOrThrow
+   */
+  export type MeetingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Meeting
+     */
+    select?: MeetingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingInclude<ExtArgs> | null
+    /**
+     * Filter, which Meeting to fetch.
+     */
+    where?: MeetingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Meetings to fetch.
+     */
+    orderBy?: MeetingOrderByWithRelationInput | MeetingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Meetings.
+     */
+    cursor?: MeetingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Meetings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Meetings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Meetings.
+     */
+    distinct?: MeetingScalarFieldEnum | MeetingScalarFieldEnum[]
+  }
+
+  /**
+   * Meeting findMany
+   */
+  export type MeetingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Meeting
+     */
+    select?: MeetingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingInclude<ExtArgs> | null
+    /**
+     * Filter, which Meetings to fetch.
+     */
+    where?: MeetingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Meetings to fetch.
+     */
+    orderBy?: MeetingOrderByWithRelationInput | MeetingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Meetings.
+     */
+    cursor?: MeetingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Meetings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Meetings.
+     */
+    skip?: number
+    distinct?: MeetingScalarFieldEnum | MeetingScalarFieldEnum[]
+  }
+
+  /**
+   * Meeting create
+   */
+  export type MeetingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Meeting
+     */
+    select?: MeetingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Meeting.
+     */
+    data: XOR<MeetingCreateInput, MeetingUncheckedCreateInput>
+  }
+
+  /**
+   * Meeting createMany
+   */
+  export type MeetingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Meetings.
+     */
+    data: MeetingCreateManyInput | MeetingCreateManyInput[]
+  }
+
+  /**
+   * Meeting createManyAndReturn
+   */
+  export type MeetingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Meeting
+     */
+    select?: MeetingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Meetings.
+     */
+    data: MeetingCreateManyInput | MeetingCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Meeting update
+   */
+  export type MeetingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Meeting
+     */
+    select?: MeetingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Meeting.
+     */
+    data: XOR<MeetingUpdateInput, MeetingUncheckedUpdateInput>
+    /**
+     * Choose, which Meeting to update.
+     */
+    where: MeetingWhereUniqueInput
+  }
+
+  /**
+   * Meeting updateMany
+   */
+  export type MeetingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Meetings.
+     */
+    data: XOR<MeetingUpdateManyMutationInput, MeetingUncheckedUpdateManyInput>
+    /**
+     * Filter which Meetings to update
+     */
+    where?: MeetingWhereInput
+  }
+
+  /**
+   * Meeting upsert
+   */
+  export type MeetingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Meeting
+     */
+    select?: MeetingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Meeting to update in case it exists.
+     */
+    where: MeetingWhereUniqueInput
+    /**
+     * In case the Meeting found by the `where` argument doesn't exist, create a new Meeting with this data.
+     */
+    create: XOR<MeetingCreateInput, MeetingUncheckedCreateInput>
+    /**
+     * In case the Meeting was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MeetingUpdateInput, MeetingUncheckedUpdateInput>
+  }
+
+  /**
+   * Meeting delete
+   */
+  export type MeetingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Meeting
+     */
+    select?: MeetingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingInclude<ExtArgs> | null
+    /**
+     * Filter which Meeting to delete.
+     */
+    where: MeetingWhereUniqueInput
+  }
+
+  /**
+   * Meeting deleteMany
+   */
+  export type MeetingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Meetings to delete
+     */
+    where?: MeetingWhereInput
+  }
+
+  /**
+   * Meeting.attendances
+   */
+  export type Meeting$attendancesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendance
+     */
+    select?: AttendanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendanceInclude<ExtArgs> | null
+    where?: AttendanceWhereInput
+    orderBy?: AttendanceOrderByWithRelationInput | AttendanceOrderByWithRelationInput[]
+    cursor?: AttendanceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AttendanceScalarFieldEnum | AttendanceScalarFieldEnum[]
+  }
+
+  /**
+   * Meeting without action
+   */
+  export type MeetingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Meeting
+     */
+    select?: MeetingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Attendance
+   */
+
+  export type AggregateAttendance = {
+    _count: AttendanceCountAggregateOutputType | null
+    _min: AttendanceMinAggregateOutputType | null
+    _max: AttendanceMaxAggregateOutputType | null
+  }
+
+  export type AttendanceMinAggregateOutputType = {
+    id: string | null
+    meetingId: string | null
+    userId: string | null
+    status: string | null
+    groupId: string | null
+  }
+
+  export type AttendanceMaxAggregateOutputType = {
+    id: string | null
+    meetingId: string | null
+    userId: string | null
+    status: string | null
+    groupId: string | null
+  }
+
+  export type AttendanceCountAggregateOutputType = {
+    id: number
+    meetingId: number
+    userId: number
+    status: number
+    groupId: number
+    _all: number
+  }
+
+
+  export type AttendanceMinAggregateInputType = {
+    id?: true
+    meetingId?: true
+    userId?: true
+    status?: true
+    groupId?: true
+  }
+
+  export type AttendanceMaxAggregateInputType = {
+    id?: true
+    meetingId?: true
+    userId?: true
+    status?: true
+    groupId?: true
+  }
+
+  export type AttendanceCountAggregateInputType = {
+    id?: true
+    meetingId?: true
+    userId?: true
+    status?: true
+    groupId?: true
+    _all?: true
+  }
+
+  export type AttendanceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Attendance to aggregate.
+     */
+    where?: AttendanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Attendances to fetch.
+     */
+    orderBy?: AttendanceOrderByWithRelationInput | AttendanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AttendanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Attendances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Attendances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Attendances
+    **/
+    _count?: true | AttendanceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AttendanceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AttendanceMaxAggregateInputType
+  }
+
+  export type GetAttendanceAggregateType<T extends AttendanceAggregateArgs> = {
+        [P in keyof T & keyof AggregateAttendance]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAttendance[P]>
+      : GetScalarType<T[P], AggregateAttendance[P]>
+  }
+
+
+
+
+  export type AttendanceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AttendanceWhereInput
+    orderBy?: AttendanceOrderByWithAggregationInput | AttendanceOrderByWithAggregationInput[]
+    by: AttendanceScalarFieldEnum[] | AttendanceScalarFieldEnum
+    having?: AttendanceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AttendanceCountAggregateInputType | true
+    _min?: AttendanceMinAggregateInputType
+    _max?: AttendanceMaxAggregateInputType
+  }
+
+  export type AttendanceGroupByOutputType = {
+    id: string
+    meetingId: string
+    userId: string
+    status: string
+    groupId: string
+    _count: AttendanceCountAggregateOutputType | null
+    _min: AttendanceMinAggregateOutputType | null
+    _max: AttendanceMaxAggregateOutputType | null
+  }
+
+  type GetAttendanceGroupByPayload<T extends AttendanceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AttendanceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AttendanceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AttendanceGroupByOutputType[P]>
+            : GetScalarType<T[P], AttendanceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AttendanceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    meetingId?: boolean
+    userId?: boolean
+    status?: boolean
+    groupId?: boolean
+    meeting?: boolean | MeetingDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    group?: boolean | GroupDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["attendance"]>
+
+  export type AttendanceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    meetingId?: boolean
+    userId?: boolean
+    status?: boolean
+    groupId?: boolean
+    meeting?: boolean | MeetingDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    group?: boolean | GroupDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["attendance"]>
+
+  export type AttendanceSelectScalar = {
+    id?: boolean
+    meetingId?: boolean
+    userId?: boolean
+    status?: boolean
+    groupId?: boolean
+  }
+
+  export type AttendanceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    meeting?: boolean | MeetingDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    group?: boolean | GroupDefaultArgs<ExtArgs>
+  }
+  export type AttendanceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    meeting?: boolean | MeetingDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    group?: boolean | GroupDefaultArgs<ExtArgs>
+  }
+
+  export type $AttendancePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Attendance"
+    objects: {
+      meeting: Prisma.$MeetingPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+      group: Prisma.$GroupPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      meetingId: string
+      userId: string
+      status: string
+      groupId: string
+    }, ExtArgs["result"]["attendance"]>
+    composites: {}
+  }
+
+  type AttendanceGetPayload<S extends boolean | null | undefined | AttendanceDefaultArgs> = $Result.GetResult<Prisma.$AttendancePayload, S>
+
+  type AttendanceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<AttendanceFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: AttendanceCountAggregateInputType | true
+    }
+
+  export interface AttendanceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Attendance'], meta: { name: 'Attendance' } }
+    /**
+     * Find zero or one Attendance that matches the filter.
+     * @param {AttendanceFindUniqueArgs} args - Arguments to find a Attendance
+     * @example
+     * // Get one Attendance
+     * const attendance = await prisma.attendance.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AttendanceFindUniqueArgs>(args: SelectSubset<T, AttendanceFindUniqueArgs<ExtArgs>>): Prisma__AttendanceClient<$Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Attendance that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {AttendanceFindUniqueOrThrowArgs} args - Arguments to find a Attendance
+     * @example
+     * // Get one Attendance
+     * const attendance = await prisma.attendance.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AttendanceFindUniqueOrThrowArgs>(args: SelectSubset<T, AttendanceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AttendanceClient<$Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Attendance that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttendanceFindFirstArgs} args - Arguments to find a Attendance
+     * @example
+     * // Get one Attendance
+     * const attendance = await prisma.attendance.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AttendanceFindFirstArgs>(args?: SelectSubset<T, AttendanceFindFirstArgs<ExtArgs>>): Prisma__AttendanceClient<$Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Attendance that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttendanceFindFirstOrThrowArgs} args - Arguments to find a Attendance
+     * @example
+     * // Get one Attendance
+     * const attendance = await prisma.attendance.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AttendanceFindFirstOrThrowArgs>(args?: SelectSubset<T, AttendanceFindFirstOrThrowArgs<ExtArgs>>): Prisma__AttendanceClient<$Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Attendances that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttendanceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Attendances
+     * const attendances = await prisma.attendance.findMany()
+     * 
+     * // Get first 10 Attendances
+     * const attendances = await prisma.attendance.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const attendanceWithIdOnly = await prisma.attendance.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AttendanceFindManyArgs>(args?: SelectSubset<T, AttendanceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Attendance.
+     * @param {AttendanceCreateArgs} args - Arguments to create a Attendance.
+     * @example
+     * // Create one Attendance
+     * const Attendance = await prisma.attendance.create({
+     *   data: {
+     *     // ... data to create a Attendance
+     *   }
+     * })
+     * 
+     */
+    create<T extends AttendanceCreateArgs>(args: SelectSubset<T, AttendanceCreateArgs<ExtArgs>>): Prisma__AttendanceClient<$Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Attendances.
+     * @param {AttendanceCreateManyArgs} args - Arguments to create many Attendances.
+     * @example
+     * // Create many Attendances
+     * const attendance = await prisma.attendance.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AttendanceCreateManyArgs>(args?: SelectSubset<T, AttendanceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Attendances and returns the data saved in the database.
+     * @param {AttendanceCreateManyAndReturnArgs} args - Arguments to create many Attendances.
+     * @example
+     * // Create many Attendances
+     * const attendance = await prisma.attendance.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Attendances and only return the `id`
+     * const attendanceWithIdOnly = await prisma.attendance.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AttendanceCreateManyAndReturnArgs>(args?: SelectSubset<T, AttendanceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Attendance.
+     * @param {AttendanceDeleteArgs} args - Arguments to delete one Attendance.
+     * @example
+     * // Delete one Attendance
+     * const Attendance = await prisma.attendance.delete({
+     *   where: {
+     *     // ... filter to delete one Attendance
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AttendanceDeleteArgs>(args: SelectSubset<T, AttendanceDeleteArgs<ExtArgs>>): Prisma__AttendanceClient<$Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Attendance.
+     * @param {AttendanceUpdateArgs} args - Arguments to update one Attendance.
+     * @example
+     * // Update one Attendance
+     * const attendance = await prisma.attendance.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AttendanceUpdateArgs>(args: SelectSubset<T, AttendanceUpdateArgs<ExtArgs>>): Prisma__AttendanceClient<$Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Attendances.
+     * @param {AttendanceDeleteManyArgs} args - Arguments to filter Attendances to delete.
+     * @example
+     * // Delete a few Attendances
+     * const { count } = await prisma.attendance.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AttendanceDeleteManyArgs>(args?: SelectSubset<T, AttendanceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Attendances.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttendanceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Attendances
+     * const attendance = await prisma.attendance.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AttendanceUpdateManyArgs>(args: SelectSubset<T, AttendanceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Attendance.
+     * @param {AttendanceUpsertArgs} args - Arguments to update or create a Attendance.
+     * @example
+     * // Update or create a Attendance
+     * const attendance = await prisma.attendance.upsert({
+     *   create: {
+     *     // ... data to create a Attendance
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Attendance we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AttendanceUpsertArgs>(args: SelectSubset<T, AttendanceUpsertArgs<ExtArgs>>): Prisma__AttendanceClient<$Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Attendances.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttendanceCountArgs} args - Arguments to filter Attendances to count.
+     * @example
+     * // Count the number of Attendances
+     * const count = await prisma.attendance.count({
+     *   where: {
+     *     // ... the filter for the Attendances we want to count
+     *   }
+     * })
+    **/
+    count<T extends AttendanceCountArgs>(
+      args?: Subset<T, AttendanceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AttendanceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Attendance.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttendanceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AttendanceAggregateArgs>(args: Subset<T, AttendanceAggregateArgs>): Prisma.PrismaPromise<GetAttendanceAggregateType<T>>
+
+    /**
+     * Group by Attendance.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttendanceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AttendanceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AttendanceGroupByArgs['orderBy'] }
+        : { orderBy?: AttendanceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AttendanceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAttendanceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Attendance model
+   */
+  readonly fields: AttendanceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Attendance.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AttendanceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    meeting<T extends MeetingDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MeetingDefaultArgs<ExtArgs>>): Prisma__MeetingClient<$Result.GetResult<Prisma.$MeetingPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    group<T extends GroupDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GroupDefaultArgs<ExtArgs>>): Prisma__GroupClient<$Result.GetResult<Prisma.$GroupPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Attendance model
+   */ 
+  interface AttendanceFieldRefs {
+    readonly id: FieldRef<"Attendance", 'String'>
+    readonly meetingId: FieldRef<"Attendance", 'String'>
+    readonly userId: FieldRef<"Attendance", 'String'>
+    readonly status: FieldRef<"Attendance", 'String'>
+    readonly groupId: FieldRef<"Attendance", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Attendance findUnique
+   */
+  export type AttendanceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendance
+     */
+    select?: AttendanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Attendance to fetch.
+     */
+    where: AttendanceWhereUniqueInput
+  }
+
+  /**
+   * Attendance findUniqueOrThrow
+   */
+  export type AttendanceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendance
+     */
+    select?: AttendanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Attendance to fetch.
+     */
+    where: AttendanceWhereUniqueInput
+  }
+
+  /**
+   * Attendance findFirst
+   */
+  export type AttendanceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendance
+     */
+    select?: AttendanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Attendance to fetch.
+     */
+    where?: AttendanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Attendances to fetch.
+     */
+    orderBy?: AttendanceOrderByWithRelationInput | AttendanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Attendances.
+     */
+    cursor?: AttendanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Attendances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Attendances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Attendances.
+     */
+    distinct?: AttendanceScalarFieldEnum | AttendanceScalarFieldEnum[]
+  }
+
+  /**
+   * Attendance findFirstOrThrow
+   */
+  export type AttendanceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendance
+     */
+    select?: AttendanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Attendance to fetch.
+     */
+    where?: AttendanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Attendances to fetch.
+     */
+    orderBy?: AttendanceOrderByWithRelationInput | AttendanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Attendances.
+     */
+    cursor?: AttendanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Attendances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Attendances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Attendances.
+     */
+    distinct?: AttendanceScalarFieldEnum | AttendanceScalarFieldEnum[]
+  }
+
+  /**
+   * Attendance findMany
+   */
+  export type AttendanceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendance
+     */
+    select?: AttendanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Attendances to fetch.
+     */
+    where?: AttendanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Attendances to fetch.
+     */
+    orderBy?: AttendanceOrderByWithRelationInput | AttendanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Attendances.
+     */
+    cursor?: AttendanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Attendances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Attendances.
+     */
+    skip?: number
+    distinct?: AttendanceScalarFieldEnum | AttendanceScalarFieldEnum[]
+  }
+
+  /**
+   * Attendance create
+   */
+  export type AttendanceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendance
+     */
+    select?: AttendanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendanceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Attendance.
+     */
+    data: XOR<AttendanceCreateInput, AttendanceUncheckedCreateInput>
+  }
+
+  /**
+   * Attendance createMany
+   */
+  export type AttendanceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Attendances.
+     */
+    data: AttendanceCreateManyInput | AttendanceCreateManyInput[]
+  }
+
+  /**
+   * Attendance createManyAndReturn
+   */
+  export type AttendanceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendance
+     */
+    select?: AttendanceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Attendances.
+     */
+    data: AttendanceCreateManyInput | AttendanceCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendanceIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Attendance update
+   */
+  export type AttendanceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendance
+     */
+    select?: AttendanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendanceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Attendance.
+     */
+    data: XOR<AttendanceUpdateInput, AttendanceUncheckedUpdateInput>
+    /**
+     * Choose, which Attendance to update.
+     */
+    where: AttendanceWhereUniqueInput
+  }
+
+  /**
+   * Attendance updateMany
+   */
+  export type AttendanceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Attendances.
+     */
+    data: XOR<AttendanceUpdateManyMutationInput, AttendanceUncheckedUpdateManyInput>
+    /**
+     * Filter which Attendances to update
+     */
+    where?: AttendanceWhereInput
+  }
+
+  /**
+   * Attendance upsert
+   */
+  export type AttendanceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendance
+     */
+    select?: AttendanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendanceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Attendance to update in case it exists.
+     */
+    where: AttendanceWhereUniqueInput
+    /**
+     * In case the Attendance found by the `where` argument doesn't exist, create a new Attendance with this data.
+     */
+    create: XOR<AttendanceCreateInput, AttendanceUncheckedCreateInput>
+    /**
+     * In case the Attendance was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AttendanceUpdateInput, AttendanceUncheckedUpdateInput>
+  }
+
+  /**
+   * Attendance delete
+   */
+  export type AttendanceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendance
+     */
+    select?: AttendanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendanceInclude<ExtArgs> | null
+    /**
+     * Filter which Attendance to delete.
+     */
+    where: AttendanceWhereUniqueInput
+  }
+
+  /**
+   * Attendance deleteMany
+   */
+  export type AttendanceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Attendances to delete
+     */
+    where?: AttendanceWhereInput
+  }
+
+  /**
+   * Attendance without action
+   */
+  export type AttendanceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendance
+     */
+    select?: AttendanceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendanceInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Poll
+   */
+
+  export type AggregatePoll = {
+    _count: PollCountAggregateOutputType | null
+    _min: PollMinAggregateOutputType | null
+    _max: PollMaxAggregateOutputType | null
+  }
+
+  export type PollMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    status: string | null
+    groupId: string | null
+    createdAt: Date | null
+  }
+
+  export type PollMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    status: string | null
+    groupId: string | null
+    createdAt: Date | null
+  }
+
+  export type PollCountAggregateOutputType = {
+    id: number
+    title: number
+    description: number
+    status: number
+    groupId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type PollMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    status?: true
+    groupId?: true
+    createdAt?: true
+  }
+
+  export type PollMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    status?: true
+    groupId?: true
+    createdAt?: true
+  }
+
+  export type PollCountAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    status?: true
+    groupId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type PollAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Poll to aggregate.
+     */
+    where?: PollWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Polls to fetch.
+     */
+    orderBy?: PollOrderByWithRelationInput | PollOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PollWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Polls from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Polls.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Polls
+    **/
+    _count?: true | PollCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PollMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PollMaxAggregateInputType
+  }
+
+  export type GetPollAggregateType<T extends PollAggregateArgs> = {
+        [P in keyof T & keyof AggregatePoll]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePoll[P]>
+      : GetScalarType<T[P], AggregatePoll[P]>
+  }
+
+
+
+
+  export type PollGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PollWhereInput
+    orderBy?: PollOrderByWithAggregationInput | PollOrderByWithAggregationInput[]
+    by: PollScalarFieldEnum[] | PollScalarFieldEnum
+    having?: PollScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PollCountAggregateInputType | true
+    _min?: PollMinAggregateInputType
+    _max?: PollMaxAggregateInputType
+  }
+
+  export type PollGroupByOutputType = {
+    id: string
+    title: string
+    description: string
+    status: string
+    groupId: string
+    createdAt: Date
+    _count: PollCountAggregateOutputType | null
+    _min: PollMinAggregateOutputType | null
+    _max: PollMaxAggregateOutputType | null
+  }
+
+  type GetPollGroupByPayload<T extends PollGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PollGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PollGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PollGroupByOutputType[P]>
+            : GetScalarType<T[P], PollGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PollSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    status?: boolean
+    groupId?: boolean
+    createdAt?: boolean
+    group?: boolean | GroupDefaultArgs<ExtArgs>
+    voices?: boolean | Poll$voicesArgs<ExtArgs>
+    _count?: boolean | PollCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["poll"]>
+
+  export type PollSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    status?: boolean
+    groupId?: boolean
+    createdAt?: boolean
+    group?: boolean | GroupDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["poll"]>
+
+  export type PollSelectScalar = {
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    status?: boolean
+    groupId?: boolean
+    createdAt?: boolean
+  }
+
+  export type PollInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    group?: boolean | GroupDefaultArgs<ExtArgs>
+    voices?: boolean | Poll$voicesArgs<ExtArgs>
+    _count?: boolean | PollCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PollIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    group?: boolean | GroupDefaultArgs<ExtArgs>
+  }
+
+  export type $PollPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Poll"
+    objects: {
+      group: Prisma.$GroupPayload<ExtArgs>
+      voices: Prisma.$VotePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      description: string
+      status: string
+      groupId: string
+      createdAt: Date
+    }, ExtArgs["result"]["poll"]>
+    composites: {}
+  }
+
+  type PollGetPayload<S extends boolean | null | undefined | PollDefaultArgs> = $Result.GetResult<Prisma.$PollPayload, S>
+
+  type PollCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<PollFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: PollCountAggregateInputType | true
+    }
+
+  export interface PollDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Poll'], meta: { name: 'Poll' } }
+    /**
+     * Find zero or one Poll that matches the filter.
+     * @param {PollFindUniqueArgs} args - Arguments to find a Poll
+     * @example
+     * // Get one Poll
+     * const poll = await prisma.poll.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PollFindUniqueArgs>(args: SelectSubset<T, PollFindUniqueArgs<ExtArgs>>): Prisma__PollClient<$Result.GetResult<Prisma.$PollPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Poll that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {PollFindUniqueOrThrowArgs} args - Arguments to find a Poll
+     * @example
+     * // Get one Poll
+     * const poll = await prisma.poll.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PollFindUniqueOrThrowArgs>(args: SelectSubset<T, PollFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PollClient<$Result.GetResult<Prisma.$PollPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Poll that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PollFindFirstArgs} args - Arguments to find a Poll
+     * @example
+     * // Get one Poll
+     * const poll = await prisma.poll.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PollFindFirstArgs>(args?: SelectSubset<T, PollFindFirstArgs<ExtArgs>>): Prisma__PollClient<$Result.GetResult<Prisma.$PollPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Poll that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PollFindFirstOrThrowArgs} args - Arguments to find a Poll
+     * @example
+     * // Get one Poll
+     * const poll = await prisma.poll.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PollFindFirstOrThrowArgs>(args?: SelectSubset<T, PollFindFirstOrThrowArgs<ExtArgs>>): Prisma__PollClient<$Result.GetResult<Prisma.$PollPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Polls that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PollFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Polls
+     * const polls = await prisma.poll.findMany()
+     * 
+     * // Get first 10 Polls
+     * const polls = await prisma.poll.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pollWithIdOnly = await prisma.poll.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PollFindManyArgs>(args?: SelectSubset<T, PollFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PollPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Poll.
+     * @param {PollCreateArgs} args - Arguments to create a Poll.
+     * @example
+     * // Create one Poll
+     * const Poll = await prisma.poll.create({
+     *   data: {
+     *     // ... data to create a Poll
+     *   }
+     * })
+     * 
+     */
+    create<T extends PollCreateArgs>(args: SelectSubset<T, PollCreateArgs<ExtArgs>>): Prisma__PollClient<$Result.GetResult<Prisma.$PollPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Polls.
+     * @param {PollCreateManyArgs} args - Arguments to create many Polls.
+     * @example
+     * // Create many Polls
+     * const poll = await prisma.poll.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PollCreateManyArgs>(args?: SelectSubset<T, PollCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Polls and returns the data saved in the database.
+     * @param {PollCreateManyAndReturnArgs} args - Arguments to create many Polls.
+     * @example
+     * // Create many Polls
+     * const poll = await prisma.poll.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Polls and only return the `id`
+     * const pollWithIdOnly = await prisma.poll.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PollCreateManyAndReturnArgs>(args?: SelectSubset<T, PollCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PollPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Poll.
+     * @param {PollDeleteArgs} args - Arguments to delete one Poll.
+     * @example
+     * // Delete one Poll
+     * const Poll = await prisma.poll.delete({
+     *   where: {
+     *     // ... filter to delete one Poll
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PollDeleteArgs>(args: SelectSubset<T, PollDeleteArgs<ExtArgs>>): Prisma__PollClient<$Result.GetResult<Prisma.$PollPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Poll.
+     * @param {PollUpdateArgs} args - Arguments to update one Poll.
+     * @example
+     * // Update one Poll
+     * const poll = await prisma.poll.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PollUpdateArgs>(args: SelectSubset<T, PollUpdateArgs<ExtArgs>>): Prisma__PollClient<$Result.GetResult<Prisma.$PollPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Polls.
+     * @param {PollDeleteManyArgs} args - Arguments to filter Polls to delete.
+     * @example
+     * // Delete a few Polls
+     * const { count } = await prisma.poll.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PollDeleteManyArgs>(args?: SelectSubset<T, PollDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Polls.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PollUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Polls
+     * const poll = await prisma.poll.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PollUpdateManyArgs>(args: SelectSubset<T, PollUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Poll.
+     * @param {PollUpsertArgs} args - Arguments to update or create a Poll.
+     * @example
+     * // Update or create a Poll
+     * const poll = await prisma.poll.upsert({
+     *   create: {
+     *     // ... data to create a Poll
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Poll we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PollUpsertArgs>(args: SelectSubset<T, PollUpsertArgs<ExtArgs>>): Prisma__PollClient<$Result.GetResult<Prisma.$PollPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Polls.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PollCountArgs} args - Arguments to filter Polls to count.
+     * @example
+     * // Count the number of Polls
+     * const count = await prisma.poll.count({
+     *   where: {
+     *     // ... the filter for the Polls we want to count
+     *   }
+     * })
+    **/
+    count<T extends PollCountArgs>(
+      args?: Subset<T, PollCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PollCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Poll.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PollAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PollAggregateArgs>(args: Subset<T, PollAggregateArgs>): Prisma.PrismaPromise<GetPollAggregateType<T>>
+
+    /**
+     * Group by Poll.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PollGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PollGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PollGroupByArgs['orderBy'] }
+        : { orderBy?: PollGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PollGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPollGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Poll model
+   */
+  readonly fields: PollFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Poll.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PollClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    group<T extends GroupDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GroupDefaultArgs<ExtArgs>>): Prisma__GroupClient<$Result.GetResult<Prisma.$GroupPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    voices<T extends Poll$voicesArgs<ExtArgs> = {}>(args?: Subset<T, Poll$voicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Poll model
+   */ 
+  interface PollFieldRefs {
+    readonly id: FieldRef<"Poll", 'String'>
+    readonly title: FieldRef<"Poll", 'String'>
+    readonly description: FieldRef<"Poll", 'String'>
+    readonly status: FieldRef<"Poll", 'String'>
+    readonly groupId: FieldRef<"Poll", 'String'>
+    readonly createdAt: FieldRef<"Poll", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Poll findUnique
+   */
+  export type PollFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Poll
+     */
+    select?: PollSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PollInclude<ExtArgs> | null
+    /**
+     * Filter, which Poll to fetch.
+     */
+    where: PollWhereUniqueInput
+  }
+
+  /**
+   * Poll findUniqueOrThrow
+   */
+  export type PollFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Poll
+     */
+    select?: PollSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PollInclude<ExtArgs> | null
+    /**
+     * Filter, which Poll to fetch.
+     */
+    where: PollWhereUniqueInput
+  }
+
+  /**
+   * Poll findFirst
+   */
+  export type PollFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Poll
+     */
+    select?: PollSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PollInclude<ExtArgs> | null
+    /**
+     * Filter, which Poll to fetch.
+     */
+    where?: PollWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Polls to fetch.
+     */
+    orderBy?: PollOrderByWithRelationInput | PollOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Polls.
+     */
+    cursor?: PollWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Polls from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Polls.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Polls.
+     */
+    distinct?: PollScalarFieldEnum | PollScalarFieldEnum[]
+  }
+
+  /**
+   * Poll findFirstOrThrow
+   */
+  export type PollFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Poll
+     */
+    select?: PollSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PollInclude<ExtArgs> | null
+    /**
+     * Filter, which Poll to fetch.
+     */
+    where?: PollWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Polls to fetch.
+     */
+    orderBy?: PollOrderByWithRelationInput | PollOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Polls.
+     */
+    cursor?: PollWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Polls from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Polls.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Polls.
+     */
+    distinct?: PollScalarFieldEnum | PollScalarFieldEnum[]
+  }
+
+  /**
+   * Poll findMany
+   */
+  export type PollFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Poll
+     */
+    select?: PollSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PollInclude<ExtArgs> | null
+    /**
+     * Filter, which Polls to fetch.
+     */
+    where?: PollWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Polls to fetch.
+     */
+    orderBy?: PollOrderByWithRelationInput | PollOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Polls.
+     */
+    cursor?: PollWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Polls from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Polls.
+     */
+    skip?: number
+    distinct?: PollScalarFieldEnum | PollScalarFieldEnum[]
+  }
+
+  /**
+   * Poll create
+   */
+  export type PollCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Poll
+     */
+    select?: PollSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PollInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Poll.
+     */
+    data: XOR<PollCreateInput, PollUncheckedCreateInput>
+  }
+
+  /**
+   * Poll createMany
+   */
+  export type PollCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Polls.
+     */
+    data: PollCreateManyInput | PollCreateManyInput[]
+  }
+
+  /**
+   * Poll createManyAndReturn
+   */
+  export type PollCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Poll
+     */
+    select?: PollSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Polls.
+     */
+    data: PollCreateManyInput | PollCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PollIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Poll update
+   */
+  export type PollUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Poll
+     */
+    select?: PollSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PollInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Poll.
+     */
+    data: XOR<PollUpdateInput, PollUncheckedUpdateInput>
+    /**
+     * Choose, which Poll to update.
+     */
+    where: PollWhereUniqueInput
+  }
+
+  /**
+   * Poll updateMany
+   */
+  export type PollUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Polls.
+     */
+    data: XOR<PollUpdateManyMutationInput, PollUncheckedUpdateManyInput>
+    /**
+     * Filter which Polls to update
+     */
+    where?: PollWhereInput
+  }
+
+  /**
+   * Poll upsert
+   */
+  export type PollUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Poll
+     */
+    select?: PollSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PollInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Poll to update in case it exists.
+     */
+    where: PollWhereUniqueInput
+    /**
+     * In case the Poll found by the `where` argument doesn't exist, create a new Poll with this data.
+     */
+    create: XOR<PollCreateInput, PollUncheckedCreateInput>
+    /**
+     * In case the Poll was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PollUpdateInput, PollUncheckedUpdateInput>
+  }
+
+  /**
+   * Poll delete
+   */
+  export type PollDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Poll
+     */
+    select?: PollSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PollInclude<ExtArgs> | null
+    /**
+     * Filter which Poll to delete.
+     */
+    where: PollWhereUniqueInput
+  }
+
+  /**
+   * Poll deleteMany
+   */
+  export type PollDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Polls to delete
+     */
+    where?: PollWhereInput
+  }
+
+  /**
+   * Poll.voices
+   */
+  export type Poll$voicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    where?: VoteWhereInput
+    orderBy?: VoteOrderByWithRelationInput | VoteOrderByWithRelationInput[]
+    cursor?: VoteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VoteScalarFieldEnum | VoteScalarFieldEnum[]
+  }
+
+  /**
+   * Poll without action
+   */
+  export type PollDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Poll
+     */
+    select?: PollSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PollInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Vote
+   */
+
+  export type AggregateVote = {
+    _count: VoteCountAggregateOutputType | null
+    _min: VoteMinAggregateOutputType | null
+    _max: VoteMaxAggregateOutputType | null
+  }
+
+  export type VoteMinAggregateOutputType = {
+    id: string | null
+    pollId: string | null
+    userId: string | null
+    choice: string | null
+  }
+
+  export type VoteMaxAggregateOutputType = {
+    id: string | null
+    pollId: string | null
+    userId: string | null
+    choice: string | null
+  }
+
+  export type VoteCountAggregateOutputType = {
+    id: number
+    pollId: number
+    userId: number
+    choice: number
+    _all: number
+  }
+
+
+  export type VoteMinAggregateInputType = {
+    id?: true
+    pollId?: true
+    userId?: true
+    choice?: true
+  }
+
+  export type VoteMaxAggregateInputType = {
+    id?: true
+    pollId?: true
+    userId?: true
+    choice?: true
+  }
+
+  export type VoteCountAggregateInputType = {
+    id?: true
+    pollId?: true
+    userId?: true
+    choice?: true
+    _all?: true
+  }
+
+  export type VoteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Vote to aggregate.
+     */
+    where?: VoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Votes to fetch.
+     */
+    orderBy?: VoteOrderByWithRelationInput | VoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Votes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Votes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Votes
+    **/
+    _count?: true | VoteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VoteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VoteMaxAggregateInputType
+  }
+
+  export type GetVoteAggregateType<T extends VoteAggregateArgs> = {
+        [P in keyof T & keyof AggregateVote]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVote[P]>
+      : GetScalarType<T[P], AggregateVote[P]>
+  }
+
+
+
+
+  export type VoteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VoteWhereInput
+    orderBy?: VoteOrderByWithAggregationInput | VoteOrderByWithAggregationInput[]
+    by: VoteScalarFieldEnum[] | VoteScalarFieldEnum
+    having?: VoteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VoteCountAggregateInputType | true
+    _min?: VoteMinAggregateInputType
+    _max?: VoteMaxAggregateInputType
+  }
+
+  export type VoteGroupByOutputType = {
+    id: string
+    pollId: string
+    userId: string
+    choice: string
+    _count: VoteCountAggregateOutputType | null
+    _min: VoteMinAggregateOutputType | null
+    _max: VoteMaxAggregateOutputType | null
+  }
+
+  type GetVoteGroupByPayload<T extends VoteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VoteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VoteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VoteGroupByOutputType[P]>
+            : GetScalarType<T[P], VoteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VoteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    pollId?: boolean
+    userId?: boolean
+    choice?: boolean
+    poll?: boolean | PollDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["vote"]>
+
+  export type VoteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    pollId?: boolean
+    userId?: boolean
+    choice?: boolean
+    poll?: boolean | PollDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["vote"]>
+
+  export type VoteSelectScalar = {
+    id?: boolean
+    pollId?: boolean
+    userId?: boolean
+    choice?: boolean
+  }
+
+  export type VoteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    poll?: boolean | PollDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type VoteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    poll?: boolean | PollDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $VotePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Vote"
+    objects: {
+      poll: Prisma.$PollPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      pollId: string
+      userId: string
+      choice: string
+    }, ExtArgs["result"]["vote"]>
+    composites: {}
+  }
+
+  type VoteGetPayload<S extends boolean | null | undefined | VoteDefaultArgs> = $Result.GetResult<Prisma.$VotePayload, S>
+
+  type VoteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<VoteFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: VoteCountAggregateInputType | true
+    }
+
+  export interface VoteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Vote'], meta: { name: 'Vote' } }
+    /**
+     * Find zero or one Vote that matches the filter.
+     * @param {VoteFindUniqueArgs} args - Arguments to find a Vote
+     * @example
+     * // Get one Vote
+     * const vote = await prisma.vote.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends VoteFindUniqueArgs>(args: SelectSubset<T, VoteFindUniqueArgs<ExtArgs>>): Prisma__VoteClient<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Vote that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {VoteFindUniqueOrThrowArgs} args - Arguments to find a Vote
+     * @example
+     * // Get one Vote
+     * const vote = await prisma.vote.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends VoteFindUniqueOrThrowArgs>(args: SelectSubset<T, VoteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VoteClient<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Vote that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VoteFindFirstArgs} args - Arguments to find a Vote
+     * @example
+     * // Get one Vote
+     * const vote = await prisma.vote.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends VoteFindFirstArgs>(args?: SelectSubset<T, VoteFindFirstArgs<ExtArgs>>): Prisma__VoteClient<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Vote that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VoteFindFirstOrThrowArgs} args - Arguments to find a Vote
+     * @example
+     * // Get one Vote
+     * const vote = await prisma.vote.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends VoteFindFirstOrThrowArgs>(args?: SelectSubset<T, VoteFindFirstOrThrowArgs<ExtArgs>>): Prisma__VoteClient<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Votes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VoteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Votes
+     * const votes = await prisma.vote.findMany()
+     * 
+     * // Get first 10 Votes
+     * const votes = await prisma.vote.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const voteWithIdOnly = await prisma.vote.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends VoteFindManyArgs>(args?: SelectSubset<T, VoteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Vote.
+     * @param {VoteCreateArgs} args - Arguments to create a Vote.
+     * @example
+     * // Create one Vote
+     * const Vote = await prisma.vote.create({
+     *   data: {
+     *     // ... data to create a Vote
+     *   }
+     * })
+     * 
+     */
+    create<T extends VoteCreateArgs>(args: SelectSubset<T, VoteCreateArgs<ExtArgs>>): Prisma__VoteClient<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Votes.
+     * @param {VoteCreateManyArgs} args - Arguments to create many Votes.
+     * @example
+     * // Create many Votes
+     * const vote = await prisma.vote.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends VoteCreateManyArgs>(args?: SelectSubset<T, VoteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Votes and returns the data saved in the database.
+     * @param {VoteCreateManyAndReturnArgs} args - Arguments to create many Votes.
+     * @example
+     * // Create many Votes
+     * const vote = await prisma.vote.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Votes and only return the `id`
+     * const voteWithIdOnly = await prisma.vote.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends VoteCreateManyAndReturnArgs>(args?: SelectSubset<T, VoteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Vote.
+     * @param {VoteDeleteArgs} args - Arguments to delete one Vote.
+     * @example
+     * // Delete one Vote
+     * const Vote = await prisma.vote.delete({
+     *   where: {
+     *     // ... filter to delete one Vote
+     *   }
+     * })
+     * 
+     */
+    delete<T extends VoteDeleteArgs>(args: SelectSubset<T, VoteDeleteArgs<ExtArgs>>): Prisma__VoteClient<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Vote.
+     * @param {VoteUpdateArgs} args - Arguments to update one Vote.
+     * @example
+     * // Update one Vote
+     * const vote = await prisma.vote.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends VoteUpdateArgs>(args: SelectSubset<T, VoteUpdateArgs<ExtArgs>>): Prisma__VoteClient<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Votes.
+     * @param {VoteDeleteManyArgs} args - Arguments to filter Votes to delete.
+     * @example
+     * // Delete a few Votes
+     * const { count } = await prisma.vote.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends VoteDeleteManyArgs>(args?: SelectSubset<T, VoteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Votes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VoteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Votes
+     * const vote = await prisma.vote.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends VoteUpdateManyArgs>(args: SelectSubset<T, VoteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Vote.
+     * @param {VoteUpsertArgs} args - Arguments to update or create a Vote.
+     * @example
+     * // Update or create a Vote
+     * const vote = await prisma.vote.upsert({
+     *   create: {
+     *     // ... data to create a Vote
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Vote we want to update
+     *   }
+     * })
+     */
+    upsert<T extends VoteUpsertArgs>(args: SelectSubset<T, VoteUpsertArgs<ExtArgs>>): Prisma__VoteClient<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Votes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VoteCountArgs} args - Arguments to filter Votes to count.
+     * @example
+     * // Count the number of Votes
+     * const count = await prisma.vote.count({
+     *   where: {
+     *     // ... the filter for the Votes we want to count
+     *   }
+     * })
+    **/
+    count<T extends VoteCountArgs>(
+      args?: Subset<T, VoteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VoteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Vote.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VoteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VoteAggregateArgs>(args: Subset<T, VoteAggregateArgs>): Prisma.PrismaPromise<GetVoteAggregateType<T>>
+
+    /**
+     * Group by Vote.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VoteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VoteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VoteGroupByArgs['orderBy'] }
+        : { orderBy?: VoteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VoteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVoteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Vote model
+   */
+  readonly fields: VoteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Vote.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VoteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    poll<T extends PollDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PollDefaultArgs<ExtArgs>>): Prisma__PollClient<$Result.GetResult<Prisma.$PollPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Vote model
+   */ 
+  interface VoteFieldRefs {
+    readonly id: FieldRef<"Vote", 'String'>
+    readonly pollId: FieldRef<"Vote", 'String'>
+    readonly userId: FieldRef<"Vote", 'String'>
+    readonly choice: FieldRef<"Vote", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Vote findUnique
+   */
+  export type VoteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Vote to fetch.
+     */
+    where: VoteWhereUniqueInput
+  }
+
+  /**
+   * Vote findUniqueOrThrow
+   */
+  export type VoteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Vote to fetch.
+     */
+    where: VoteWhereUniqueInput
+  }
+
+  /**
+   * Vote findFirst
+   */
+  export type VoteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Vote to fetch.
+     */
+    where?: VoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Votes to fetch.
+     */
+    orderBy?: VoteOrderByWithRelationInput | VoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Votes.
+     */
+    cursor?: VoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Votes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Votes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Votes.
+     */
+    distinct?: VoteScalarFieldEnum | VoteScalarFieldEnum[]
+  }
+
+  /**
+   * Vote findFirstOrThrow
+   */
+  export type VoteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Vote to fetch.
+     */
+    where?: VoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Votes to fetch.
+     */
+    orderBy?: VoteOrderByWithRelationInput | VoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Votes.
+     */
+    cursor?: VoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Votes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Votes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Votes.
+     */
+    distinct?: VoteScalarFieldEnum | VoteScalarFieldEnum[]
+  }
+
+  /**
+   * Vote findMany
+   */
+  export type VoteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Votes to fetch.
+     */
+    where?: VoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Votes to fetch.
+     */
+    orderBy?: VoteOrderByWithRelationInput | VoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Votes.
+     */
+    cursor?: VoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Votes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Votes.
+     */
+    skip?: number
+    distinct?: VoteScalarFieldEnum | VoteScalarFieldEnum[]
+  }
+
+  /**
+   * Vote create
+   */
+  export type VoteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Vote.
+     */
+    data: XOR<VoteCreateInput, VoteUncheckedCreateInput>
+  }
+
+  /**
+   * Vote createMany
+   */
+  export type VoteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Votes.
+     */
+    data: VoteCreateManyInput | VoteCreateManyInput[]
+  }
+
+  /**
+   * Vote createManyAndReturn
+   */
+  export type VoteCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Votes.
+     */
+    data: VoteCreateManyInput | VoteCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Vote update
+   */
+  export type VoteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Vote.
+     */
+    data: XOR<VoteUpdateInput, VoteUncheckedUpdateInput>
+    /**
+     * Choose, which Vote to update.
+     */
+    where: VoteWhereUniqueInput
+  }
+
+  /**
+   * Vote updateMany
+   */
+  export type VoteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Votes.
+     */
+    data: XOR<VoteUpdateManyMutationInput, VoteUncheckedUpdateManyInput>
+    /**
+     * Filter which Votes to update
+     */
+    where?: VoteWhereInput
+  }
+
+  /**
+   * Vote upsert
+   */
+  export type VoteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Vote to update in case it exists.
+     */
+    where: VoteWhereUniqueInput
+    /**
+     * In case the Vote found by the `where` argument doesn't exist, create a new Vote with this data.
+     */
+    create: XOR<VoteCreateInput, VoteUncheckedCreateInput>
+    /**
+     * In case the Vote was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VoteUpdateInput, VoteUncheckedUpdateInput>
+  }
+
+  /**
+   * Vote delete
+   */
+  export type VoteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    /**
+     * Filter which Vote to delete.
+     */
+    where: VoteWhereUniqueInput
+  }
+
+  /**
+   * Vote deleteMany
+   */
+  export type VoteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Votes to delete
+     */
+    where?: VoteWhereInput
+  }
+
+  /**
+   * Vote without action
+   */
+  export type VoteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -11944,6 +17735,8 @@ export namespace Prisma {
     penaltyRules: 'penaltyRules',
     savingsGoal: 'savingsGoal',
     startDate: 'startDate',
+    tier: 'tier',
+    maxMembers: 'maxMembers',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -11954,13 +17747,17 @@ export namespace Prisma {
   export const UserScalarFieldEnum: {
     id: 'id',
     phone: 'phone',
+    email: 'email',
     nationalId: 'nationalId',
     name: 'name',
     password: 'password',
     role: 'role',
+    mustChangePassword: 'mustChangePassword',
+    isActive: 'isActive',
     groupId: 'groupId',
     agreedToRules: 'agreedToRules',
     agreedAt: 'agreedAt',
+    agreementUrl: 'agreementUrl',
     lastPasswordChange: 'lastPasswordChange',
     createdAt: 'createdAt'
   };
@@ -11970,12 +17767,16 @@ export namespace Prisma {
 
   export const ContributionScalarFieldEnum: {
     id: 'id',
+    refNo: 'refNo',
     amount: 'amount',
     status: 'status',
     timestamp: 'timestamp',
     userId: 'userId',
     groupId: 'groupId',
-    isLocked: 'isLocked'
+    isLocked: 'isLocked',
+    fundType: 'fundType',
+    paymentStatus: 'paymentStatus',
+    providerRef: 'providerRef'
   };
 
   export type ContributionScalarFieldEnum = (typeof ContributionScalarFieldEnum)[keyof typeof ContributionScalarFieldEnum]
@@ -11983,12 +17784,14 @@ export namespace Prisma {
 
   export const LoanScalarFieldEnum: {
     id: 'id',
+    refNo: 'refNo',
     amount: 'amount',
     interestRate: 'interestRate',
     deadline: 'deadline',
     status: 'status',
     userId: 'userId',
     groupId: 'groupId',
+    guarantorId: 'guarantorId',
     createdAt: 'createdAt'
   };
 
@@ -12007,12 +17810,16 @@ export namespace Prisma {
 
   export const PayoutScalarFieldEnum: {
     id: 'id',
+    refNo: 'refNo',
     amount: 'amount',
     description: 'description',
     status: 'status',
     requestedById: 'requestedById',
     groupId: 'groupId',
     loanId: 'loanId',
+    fundType: 'fundType',
+    paymentStatus: 'paymentStatus',
+    providerRef: 'providerRef',
     createdAt: 'createdAt'
   };
 
@@ -12047,6 +17854,7 @@ export namespace Prisma {
     reason: 'reason',
     status: 'status',
     userId: 'userId',
+    groupId: 'groupId',
     timestamp: 'timestamp'
   };
 
@@ -12062,6 +17870,64 @@ export namespace Prisma {
   };
 
   export type VerificationCodeScalarFieldEnum = (typeof VerificationCodeScalarFieldEnum)[keyof typeof VerificationCodeScalarFieldEnum]
+
+
+  export const AnnouncementScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    body: 'body',
+    type: 'type',
+    eventDate: 'eventDate',
+    groupId: 'groupId',
+    createdBy: 'createdBy',
+    createdAt: 'createdAt'
+  };
+
+  export type AnnouncementScalarFieldEnum = (typeof AnnouncementScalarFieldEnum)[keyof typeof AnnouncementScalarFieldEnum]
+
+
+  export const MeetingScalarFieldEnum: {
+    id: 'id',
+    date: 'date',
+    title: 'title',
+    groupId: 'groupId',
+    createdAt: 'createdAt'
+  };
+
+  export type MeetingScalarFieldEnum = (typeof MeetingScalarFieldEnum)[keyof typeof MeetingScalarFieldEnum]
+
+
+  export const AttendanceScalarFieldEnum: {
+    id: 'id',
+    meetingId: 'meetingId',
+    userId: 'userId',
+    status: 'status',
+    groupId: 'groupId'
+  };
+
+  export type AttendanceScalarFieldEnum = (typeof AttendanceScalarFieldEnum)[keyof typeof AttendanceScalarFieldEnum]
+
+
+  export const PollScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    status: 'status',
+    groupId: 'groupId',
+    createdAt: 'createdAt'
+  };
+
+  export type PollScalarFieldEnum = (typeof PollScalarFieldEnum)[keyof typeof PollScalarFieldEnum]
+
+
+  export const VoteScalarFieldEnum: {
+    id: 'id',
+    pollId: 'pollId',
+    userId: 'userId',
+    choice: 'choice'
+  };
+
+  export type VoteScalarFieldEnum = (typeof VoteScalarFieldEnum)[keyof typeof VoteScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -12107,16 +17973,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
+   * Reference to a field of type 'Int'
    */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'Boolean'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
   /**
    * Deep Input Types
@@ -12135,13 +18001,20 @@ export namespace Prisma {
     penaltyRules?: StringFilter<"Group"> | string
     savingsGoal?: FloatFilter<"Group"> | number
     startDate?: DateTimeFilter<"Group"> | Date | string
+    tier?: StringFilter<"Group"> | string
+    maxMembers?: IntFilter<"Group"> | number
     createdAt?: DateTimeFilter<"Group"> | Date | string
     updatedAt?: DateTimeFilter<"Group"> | Date | string
     members?: UserListRelationFilter
+    announcements?: AnnouncementListRelationFilter
     contributions?: ContributionListRelationFilter
     loans?: LoanListRelationFilter
     payouts?: PayoutListRelationFilter
     auditLogs?: AuditLogListRelationFilter
+    penalties?: PenaltyListRelationFilter
+    meetings?: MeetingListRelationFilter
+    attendances?: AttendanceListRelationFilter
+    polls?: PollListRelationFilter
   }
 
   export type GroupOrderByWithRelationInput = {
@@ -12153,13 +18026,20 @@ export namespace Prisma {
     penaltyRules?: SortOrder
     savingsGoal?: SortOrder
     startDate?: SortOrder
+    tier?: SortOrder
+    maxMembers?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     members?: UserOrderByRelationAggregateInput
+    announcements?: AnnouncementOrderByRelationAggregateInput
     contributions?: ContributionOrderByRelationAggregateInput
     loans?: LoanOrderByRelationAggregateInput
     payouts?: PayoutOrderByRelationAggregateInput
     auditLogs?: AuditLogOrderByRelationAggregateInput
+    penalties?: PenaltyOrderByRelationAggregateInput
+    meetings?: MeetingOrderByRelationAggregateInput
+    attendances?: AttendanceOrderByRelationAggregateInput
+    polls?: PollOrderByRelationAggregateInput
   }
 
   export type GroupWhereUniqueInput = Prisma.AtLeast<{
@@ -12174,13 +18054,20 @@ export namespace Prisma {
     penaltyRules?: StringFilter<"Group"> | string
     savingsGoal?: FloatFilter<"Group"> | number
     startDate?: DateTimeFilter<"Group"> | Date | string
+    tier?: StringFilter<"Group"> | string
+    maxMembers?: IntFilter<"Group"> | number
     createdAt?: DateTimeFilter<"Group"> | Date | string
     updatedAt?: DateTimeFilter<"Group"> | Date | string
     members?: UserListRelationFilter
+    announcements?: AnnouncementListRelationFilter
     contributions?: ContributionListRelationFilter
     loans?: LoanListRelationFilter
     payouts?: PayoutListRelationFilter
     auditLogs?: AuditLogListRelationFilter
+    penalties?: PenaltyListRelationFilter
+    meetings?: MeetingListRelationFilter
+    attendances?: AttendanceListRelationFilter
+    polls?: PollListRelationFilter
   }, "id" | "registrationId">
 
   export type GroupOrderByWithAggregationInput = {
@@ -12192,6 +18079,8 @@ export namespace Prisma {
     penaltyRules?: SortOrder
     savingsGoal?: SortOrder
     startDate?: SortOrder
+    tier?: SortOrder
+    maxMembers?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: GroupCountOrderByAggregateInput
@@ -12213,6 +18102,8 @@ export namespace Prisma {
     penaltyRules?: StringWithAggregatesFilter<"Group"> | string
     savingsGoal?: FloatWithAggregatesFilter<"Group"> | number
     startDate?: DateTimeWithAggregatesFilter<"Group"> | Date | string
+    tier?: StringWithAggregatesFilter<"Group"> | string
+    maxMembers?: IntWithAggregatesFilter<"Group"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Group"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Group"> | Date | string
   }
@@ -12223,48 +18114,65 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
     phone?: StringFilter<"User"> | string
+    email?: StringNullableFilter<"User"> | string | null
     nationalId?: StringNullableFilter<"User"> | string | null
     name?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     role?: StringFilter<"User"> | string
+    mustChangePassword?: BoolFilter<"User"> | boolean
+    isActive?: BoolFilter<"User"> | boolean
     groupId?: StringFilter<"User"> | string
     agreedToRules?: BoolFilter<"User"> | boolean
     agreedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    agreementUrl?: StringNullableFilter<"User"> | string | null
     lastPasswordChange?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     group?: XOR<GroupRelationFilter, GroupWhereInput>
     contributions?: ContributionListRelationFilter
+    announcements?: AnnouncementListRelationFilter
     loans?: LoanListRelationFilter
     payouts?: PayoutListRelationFilter
     payoutApprovals?: PayoutApprovalListRelationFilter
     auditLogs?: AuditLogListRelationFilter
     penalties?: PenaltyListRelationFilter
+    attendances?: AttendanceListRelationFilter
+    votes?: VoteListRelationFilter
+    guaranteedLoans?: LoanListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     phone?: SortOrder
+    email?: SortOrderInput | SortOrder
     nationalId?: SortOrderInput | SortOrder
     name?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    mustChangePassword?: SortOrder
+    isActive?: SortOrder
     groupId?: SortOrder
     agreedToRules?: SortOrder
     agreedAt?: SortOrderInput | SortOrder
+    agreementUrl?: SortOrderInput | SortOrder
     lastPasswordChange?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     group?: GroupOrderByWithRelationInput
     contributions?: ContributionOrderByRelationAggregateInput
+    announcements?: AnnouncementOrderByRelationAggregateInput
     loans?: LoanOrderByRelationAggregateInput
     payouts?: PayoutOrderByRelationAggregateInput
     payoutApprovals?: PayoutApprovalOrderByRelationAggregateInput
     auditLogs?: AuditLogOrderByRelationAggregateInput
     penalties?: PenaltyOrderByRelationAggregateInput
+    attendances?: AttendanceOrderByRelationAggregateInput
+    votes?: VoteOrderByRelationAggregateInput
+    guaranteedLoans?: LoanOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     phone?: string
+    email?: string
     nationalId?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -12272,30 +18180,41 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     role?: StringFilter<"User"> | string
+    mustChangePassword?: BoolFilter<"User"> | boolean
+    isActive?: BoolFilter<"User"> | boolean
     groupId?: StringFilter<"User"> | string
     agreedToRules?: BoolFilter<"User"> | boolean
     agreedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    agreementUrl?: StringNullableFilter<"User"> | string | null
     lastPasswordChange?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     group?: XOR<GroupRelationFilter, GroupWhereInput>
     contributions?: ContributionListRelationFilter
+    announcements?: AnnouncementListRelationFilter
     loans?: LoanListRelationFilter
     payouts?: PayoutListRelationFilter
     payoutApprovals?: PayoutApprovalListRelationFilter
     auditLogs?: AuditLogListRelationFilter
     penalties?: PenaltyListRelationFilter
-  }, "id" | "phone" | "nationalId">
+    attendances?: AttendanceListRelationFilter
+    votes?: VoteListRelationFilter
+    guaranteedLoans?: LoanListRelationFilter
+  }, "id" | "phone" | "email" | "nationalId">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     phone?: SortOrder
+    email?: SortOrderInput | SortOrder
     nationalId?: SortOrderInput | SortOrder
     name?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    mustChangePassword?: SortOrder
+    isActive?: SortOrder
     groupId?: SortOrder
     agreedToRules?: SortOrder
     agreedAt?: SortOrderInput | SortOrder
+    agreementUrl?: SortOrderInput | SortOrder
     lastPasswordChange?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -12309,13 +18228,17 @@ export namespace Prisma {
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
     phone?: StringWithAggregatesFilter<"User"> | string
+    email?: StringNullableWithAggregatesFilter<"User"> | string | null
     nationalId?: StringNullableWithAggregatesFilter<"User"> | string | null
     name?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
     role?: StringWithAggregatesFilter<"User"> | string
+    mustChangePassword?: BoolWithAggregatesFilter<"User"> | boolean
+    isActive?: BoolWithAggregatesFilter<"User"> | boolean
     groupId?: StringWithAggregatesFilter<"User"> | string
     agreedToRules?: BoolWithAggregatesFilter<"User"> | boolean
     agreedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    agreementUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
     lastPasswordChange?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -12325,30 +18248,40 @@ export namespace Prisma {
     OR?: ContributionWhereInput[]
     NOT?: ContributionWhereInput | ContributionWhereInput[]
     id?: StringFilter<"Contribution"> | string
+    refNo?: StringNullableFilter<"Contribution"> | string | null
     amount?: FloatFilter<"Contribution"> | number
     status?: StringFilter<"Contribution"> | string
     timestamp?: DateTimeFilter<"Contribution"> | Date | string
     userId?: StringFilter<"Contribution"> | string
     groupId?: StringFilter<"Contribution"> | string
     isLocked?: BoolFilter<"Contribution"> | boolean
+    fundType?: StringFilter<"Contribution"> | string
+    paymentStatus?: StringNullableFilter<"Contribution"> | string | null
+    providerRef?: StringNullableFilter<"Contribution"> | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
     group?: XOR<GroupRelationFilter, GroupWhereInput>
   }
 
   export type ContributionOrderByWithRelationInput = {
     id?: SortOrder
+    refNo?: SortOrderInput | SortOrder
     amount?: SortOrder
     status?: SortOrder
     timestamp?: SortOrder
     userId?: SortOrder
     groupId?: SortOrder
     isLocked?: SortOrder
+    fundType?: SortOrder
+    paymentStatus?: SortOrderInput | SortOrder
+    providerRef?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     group?: GroupOrderByWithRelationInput
   }
 
   export type ContributionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    refNo?: string
+    providerRef?: string
     AND?: ContributionWhereInput | ContributionWhereInput[]
     OR?: ContributionWhereInput[]
     NOT?: ContributionWhereInput | ContributionWhereInput[]
@@ -12358,18 +18291,24 @@ export namespace Prisma {
     userId?: StringFilter<"Contribution"> | string
     groupId?: StringFilter<"Contribution"> | string
     isLocked?: BoolFilter<"Contribution"> | boolean
+    fundType?: StringFilter<"Contribution"> | string
+    paymentStatus?: StringNullableFilter<"Contribution"> | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
     group?: XOR<GroupRelationFilter, GroupWhereInput>
-  }, "id">
+  }, "id" | "refNo" | "providerRef">
 
   export type ContributionOrderByWithAggregationInput = {
     id?: SortOrder
+    refNo?: SortOrderInput | SortOrder
     amount?: SortOrder
     status?: SortOrder
     timestamp?: SortOrder
     userId?: SortOrder
     groupId?: SortOrder
     isLocked?: SortOrder
+    fundType?: SortOrder
+    paymentStatus?: SortOrderInput | SortOrder
+    providerRef?: SortOrderInput | SortOrder
     _count?: ContributionCountOrderByAggregateInput
     _avg?: ContributionAvgOrderByAggregateInput
     _max?: ContributionMaxOrderByAggregateInput
@@ -12382,12 +18321,16 @@ export namespace Prisma {
     OR?: ContributionScalarWhereWithAggregatesInput[]
     NOT?: ContributionScalarWhereWithAggregatesInput | ContributionScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Contribution"> | string
+    refNo?: StringNullableWithAggregatesFilter<"Contribution"> | string | null
     amount?: FloatWithAggregatesFilter<"Contribution"> | number
     status?: StringWithAggregatesFilter<"Contribution"> | string
     timestamp?: DateTimeWithAggregatesFilter<"Contribution"> | Date | string
     userId?: StringWithAggregatesFilter<"Contribution"> | string
     groupId?: StringWithAggregatesFilter<"Contribution"> | string
     isLocked?: BoolWithAggregatesFilter<"Contribution"> | boolean
+    fundType?: StringWithAggregatesFilter<"Contribution"> | string
+    paymentStatus?: StringNullableWithAggregatesFilter<"Contribution"> | string | null
+    providerRef?: StringNullableWithAggregatesFilter<"Contribution"> | string | null
   }
 
   export type LoanWhereInput = {
@@ -12395,36 +18338,43 @@ export namespace Prisma {
     OR?: LoanWhereInput[]
     NOT?: LoanWhereInput | LoanWhereInput[]
     id?: StringFilter<"Loan"> | string
+    refNo?: StringNullableFilter<"Loan"> | string | null
     amount?: FloatFilter<"Loan"> | number
     interestRate?: FloatFilter<"Loan"> | number
     deadline?: DateTimeFilter<"Loan"> | Date | string
     status?: StringFilter<"Loan"> | string
     userId?: StringFilter<"Loan"> | string
     groupId?: StringFilter<"Loan"> | string
+    guarantorId?: StringNullableFilter<"Loan"> | string | null
     createdAt?: DateTimeFilter<"Loan"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
     group?: XOR<GroupRelationFilter, GroupWhereInput>
+    guarantor?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     repayments?: RepaymentListRelationFilter
     payouts?: PayoutListRelationFilter
   }
 
   export type LoanOrderByWithRelationInput = {
     id?: SortOrder
+    refNo?: SortOrderInput | SortOrder
     amount?: SortOrder
     interestRate?: SortOrder
     deadline?: SortOrder
     status?: SortOrder
     userId?: SortOrder
     groupId?: SortOrder
+    guarantorId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     user?: UserOrderByWithRelationInput
     group?: GroupOrderByWithRelationInput
+    guarantor?: UserOrderByWithRelationInput
     repayments?: RepaymentOrderByRelationAggregateInput
     payouts?: PayoutOrderByRelationAggregateInput
   }
 
   export type LoanWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    refNo?: string
     AND?: LoanWhereInput | LoanWhereInput[]
     OR?: LoanWhereInput[]
     NOT?: LoanWhereInput | LoanWhereInput[]
@@ -12434,21 +18384,25 @@ export namespace Prisma {
     status?: StringFilter<"Loan"> | string
     userId?: StringFilter<"Loan"> | string
     groupId?: StringFilter<"Loan"> | string
+    guarantorId?: StringNullableFilter<"Loan"> | string | null
     createdAt?: DateTimeFilter<"Loan"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
     group?: XOR<GroupRelationFilter, GroupWhereInput>
+    guarantor?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     repayments?: RepaymentListRelationFilter
     payouts?: PayoutListRelationFilter
-  }, "id">
+  }, "id" | "refNo">
 
   export type LoanOrderByWithAggregationInput = {
     id?: SortOrder
+    refNo?: SortOrderInput | SortOrder
     amount?: SortOrder
     interestRate?: SortOrder
     deadline?: SortOrder
     status?: SortOrder
     userId?: SortOrder
     groupId?: SortOrder
+    guarantorId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: LoanCountOrderByAggregateInput
     _avg?: LoanAvgOrderByAggregateInput
@@ -12462,12 +18416,14 @@ export namespace Prisma {
     OR?: LoanScalarWhereWithAggregatesInput[]
     NOT?: LoanScalarWhereWithAggregatesInput | LoanScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Loan"> | string
+    refNo?: StringNullableWithAggregatesFilter<"Loan"> | string | null
     amount?: FloatWithAggregatesFilter<"Loan"> | number
     interestRate?: FloatWithAggregatesFilter<"Loan"> | number
     deadline?: DateTimeWithAggregatesFilter<"Loan"> | Date | string
     status?: StringWithAggregatesFilter<"Loan"> | string
     userId?: StringWithAggregatesFilter<"Loan"> | string
     groupId?: StringWithAggregatesFilter<"Loan"> | string
+    guarantorId?: StringNullableWithAggregatesFilter<"Loan"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Loan"> | Date | string
   }
 
@@ -12528,12 +18484,16 @@ export namespace Prisma {
     OR?: PayoutWhereInput[]
     NOT?: PayoutWhereInput | PayoutWhereInput[]
     id?: StringFilter<"Payout"> | string
+    refNo?: StringNullableFilter<"Payout"> | string | null
     amount?: FloatFilter<"Payout"> | number
     description?: StringFilter<"Payout"> | string
     status?: StringFilter<"Payout"> | string
     requestedById?: StringFilter<"Payout"> | string
     groupId?: StringFilter<"Payout"> | string
     loanId?: StringNullableFilter<"Payout"> | string | null
+    fundType?: StringFilter<"Payout"> | string
+    paymentStatus?: StringNullableFilter<"Payout"> | string | null
+    providerRef?: StringNullableFilter<"Payout"> | string | null
     createdAt?: DateTimeFilter<"Payout"> | Date | string
     approvals?: PayoutApprovalListRelationFilter
     requestedBy?: XOR<UserRelationFilter, UserWhereInput>
@@ -12543,12 +18503,16 @@ export namespace Prisma {
 
   export type PayoutOrderByWithRelationInput = {
     id?: SortOrder
+    refNo?: SortOrderInput | SortOrder
     amount?: SortOrder
     description?: SortOrder
     status?: SortOrder
     requestedById?: SortOrder
     groupId?: SortOrder
     loanId?: SortOrderInput | SortOrder
+    fundType?: SortOrder
+    paymentStatus?: SortOrderInput | SortOrder
+    providerRef?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     approvals?: PayoutApprovalOrderByRelationAggregateInput
     requestedBy?: UserOrderByWithRelationInput
@@ -12558,6 +18522,8 @@ export namespace Prisma {
 
   export type PayoutWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    refNo?: string
+    providerRef?: string
     AND?: PayoutWhereInput | PayoutWhereInput[]
     OR?: PayoutWhereInput[]
     NOT?: PayoutWhereInput | PayoutWhereInput[]
@@ -12567,21 +18533,27 @@ export namespace Prisma {
     requestedById?: StringFilter<"Payout"> | string
     groupId?: StringFilter<"Payout"> | string
     loanId?: StringNullableFilter<"Payout"> | string | null
+    fundType?: StringFilter<"Payout"> | string
+    paymentStatus?: StringNullableFilter<"Payout"> | string | null
     createdAt?: DateTimeFilter<"Payout"> | Date | string
     approvals?: PayoutApprovalListRelationFilter
     requestedBy?: XOR<UserRelationFilter, UserWhereInput>
     group?: XOR<GroupRelationFilter, GroupWhereInput>
     loan?: XOR<LoanNullableRelationFilter, LoanWhereInput> | null
-  }, "id">
+  }, "id" | "refNo" | "providerRef">
 
   export type PayoutOrderByWithAggregationInput = {
     id?: SortOrder
+    refNo?: SortOrderInput | SortOrder
     amount?: SortOrder
     description?: SortOrder
     status?: SortOrder
     requestedById?: SortOrder
     groupId?: SortOrder
     loanId?: SortOrderInput | SortOrder
+    fundType?: SortOrder
+    paymentStatus?: SortOrderInput | SortOrder
+    providerRef?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: PayoutCountOrderByAggregateInput
     _avg?: PayoutAvgOrderByAggregateInput
@@ -12595,12 +18567,16 @@ export namespace Prisma {
     OR?: PayoutScalarWhereWithAggregatesInput[]
     NOT?: PayoutScalarWhereWithAggregatesInput | PayoutScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Payout"> | string
+    refNo?: StringNullableWithAggregatesFilter<"Payout"> | string | null
     amount?: FloatWithAggregatesFilter<"Payout"> | number
     description?: StringWithAggregatesFilter<"Payout"> | string
     status?: StringWithAggregatesFilter<"Payout"> | string
     requestedById?: StringWithAggregatesFilter<"Payout"> | string
     groupId?: StringWithAggregatesFilter<"Payout"> | string
     loanId?: StringNullableWithAggregatesFilter<"Payout"> | string | null
+    fundType?: StringWithAggregatesFilter<"Payout"> | string
+    paymentStatus?: StringNullableWithAggregatesFilter<"Payout"> | string | null
+    providerRef?: StringNullableWithAggregatesFilter<"Payout"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Payout"> | Date | string
   }
 
@@ -12730,8 +18706,10 @@ export namespace Prisma {
     reason?: StringFilter<"Penalty"> | string
     status?: StringFilter<"Penalty"> | string
     userId?: StringFilter<"Penalty"> | string
+    groupId?: StringFilter<"Penalty"> | string
     timestamp?: DateTimeFilter<"Penalty"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
+    group?: XOR<GroupRelationFilter, GroupWhereInput>
   }
 
   export type PenaltyOrderByWithRelationInput = {
@@ -12740,8 +18718,10 @@ export namespace Prisma {
     reason?: SortOrder
     status?: SortOrder
     userId?: SortOrder
+    groupId?: SortOrder
     timestamp?: SortOrder
     user?: UserOrderByWithRelationInput
+    group?: GroupOrderByWithRelationInput
   }
 
   export type PenaltyWhereUniqueInput = Prisma.AtLeast<{
@@ -12753,8 +18733,10 @@ export namespace Prisma {
     reason?: StringFilter<"Penalty"> | string
     status?: StringFilter<"Penalty"> | string
     userId?: StringFilter<"Penalty"> | string
+    groupId?: StringFilter<"Penalty"> | string
     timestamp?: DateTimeFilter<"Penalty"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
+    group?: XOR<GroupRelationFilter, GroupWhereInput>
   }, "id">
 
   export type PenaltyOrderByWithAggregationInput = {
@@ -12763,6 +18745,7 @@ export namespace Prisma {
     reason?: SortOrder
     status?: SortOrder
     userId?: SortOrder
+    groupId?: SortOrder
     timestamp?: SortOrder
     _count?: PenaltyCountOrderByAggregateInput
     _avg?: PenaltyAvgOrderByAggregateInput
@@ -12780,6 +18763,7 @@ export namespace Prisma {
     reason?: StringWithAggregatesFilter<"Penalty"> | string
     status?: StringWithAggregatesFilter<"Penalty"> | string
     userId?: StringWithAggregatesFilter<"Penalty"> | string
+    groupId?: StringWithAggregatesFilter<"Penalty"> | string
     timestamp?: DateTimeWithAggregatesFilter<"Penalty"> | Date | string
   }
 
@@ -12835,6 +18819,315 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"VerificationCode"> | Date | string
   }
 
+  export type AnnouncementWhereInput = {
+    AND?: AnnouncementWhereInput | AnnouncementWhereInput[]
+    OR?: AnnouncementWhereInput[]
+    NOT?: AnnouncementWhereInput | AnnouncementWhereInput[]
+    id?: StringFilter<"Announcement"> | string
+    title?: StringFilter<"Announcement"> | string
+    body?: StringFilter<"Announcement"> | string
+    type?: StringFilter<"Announcement"> | string
+    eventDate?: DateTimeNullableFilter<"Announcement"> | Date | string | null
+    groupId?: StringFilter<"Announcement"> | string
+    createdBy?: StringFilter<"Announcement"> | string
+    createdAt?: DateTimeFilter<"Announcement"> | Date | string
+    group?: XOR<GroupRelationFilter, GroupWhereInput>
+    author?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type AnnouncementOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    body?: SortOrder
+    type?: SortOrder
+    eventDate?: SortOrderInput | SortOrder
+    groupId?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    group?: GroupOrderByWithRelationInput
+    author?: UserOrderByWithRelationInput
+  }
+
+  export type AnnouncementWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AnnouncementWhereInput | AnnouncementWhereInput[]
+    OR?: AnnouncementWhereInput[]
+    NOT?: AnnouncementWhereInput | AnnouncementWhereInput[]
+    title?: StringFilter<"Announcement"> | string
+    body?: StringFilter<"Announcement"> | string
+    type?: StringFilter<"Announcement"> | string
+    eventDate?: DateTimeNullableFilter<"Announcement"> | Date | string | null
+    groupId?: StringFilter<"Announcement"> | string
+    createdBy?: StringFilter<"Announcement"> | string
+    createdAt?: DateTimeFilter<"Announcement"> | Date | string
+    group?: XOR<GroupRelationFilter, GroupWhereInput>
+    author?: XOR<UserRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type AnnouncementOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    body?: SortOrder
+    type?: SortOrder
+    eventDate?: SortOrderInput | SortOrder
+    groupId?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    _count?: AnnouncementCountOrderByAggregateInput
+    _max?: AnnouncementMaxOrderByAggregateInput
+    _min?: AnnouncementMinOrderByAggregateInput
+  }
+
+  export type AnnouncementScalarWhereWithAggregatesInput = {
+    AND?: AnnouncementScalarWhereWithAggregatesInput | AnnouncementScalarWhereWithAggregatesInput[]
+    OR?: AnnouncementScalarWhereWithAggregatesInput[]
+    NOT?: AnnouncementScalarWhereWithAggregatesInput | AnnouncementScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Announcement"> | string
+    title?: StringWithAggregatesFilter<"Announcement"> | string
+    body?: StringWithAggregatesFilter<"Announcement"> | string
+    type?: StringWithAggregatesFilter<"Announcement"> | string
+    eventDate?: DateTimeNullableWithAggregatesFilter<"Announcement"> | Date | string | null
+    groupId?: StringWithAggregatesFilter<"Announcement"> | string
+    createdBy?: StringWithAggregatesFilter<"Announcement"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Announcement"> | Date | string
+  }
+
+  export type MeetingWhereInput = {
+    AND?: MeetingWhereInput | MeetingWhereInput[]
+    OR?: MeetingWhereInput[]
+    NOT?: MeetingWhereInput | MeetingWhereInput[]
+    id?: StringFilter<"Meeting"> | string
+    date?: DateTimeFilter<"Meeting"> | Date | string
+    title?: StringFilter<"Meeting"> | string
+    groupId?: StringFilter<"Meeting"> | string
+    createdAt?: DateTimeFilter<"Meeting"> | Date | string
+    group?: XOR<GroupRelationFilter, GroupWhereInput>
+    attendances?: AttendanceListRelationFilter
+  }
+
+  export type MeetingOrderByWithRelationInput = {
+    id?: SortOrder
+    date?: SortOrder
+    title?: SortOrder
+    groupId?: SortOrder
+    createdAt?: SortOrder
+    group?: GroupOrderByWithRelationInput
+    attendances?: AttendanceOrderByRelationAggregateInput
+  }
+
+  export type MeetingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MeetingWhereInput | MeetingWhereInput[]
+    OR?: MeetingWhereInput[]
+    NOT?: MeetingWhereInput | MeetingWhereInput[]
+    date?: DateTimeFilter<"Meeting"> | Date | string
+    title?: StringFilter<"Meeting"> | string
+    groupId?: StringFilter<"Meeting"> | string
+    createdAt?: DateTimeFilter<"Meeting"> | Date | string
+    group?: XOR<GroupRelationFilter, GroupWhereInput>
+    attendances?: AttendanceListRelationFilter
+  }, "id">
+
+  export type MeetingOrderByWithAggregationInput = {
+    id?: SortOrder
+    date?: SortOrder
+    title?: SortOrder
+    groupId?: SortOrder
+    createdAt?: SortOrder
+    _count?: MeetingCountOrderByAggregateInput
+    _max?: MeetingMaxOrderByAggregateInput
+    _min?: MeetingMinOrderByAggregateInput
+  }
+
+  export type MeetingScalarWhereWithAggregatesInput = {
+    AND?: MeetingScalarWhereWithAggregatesInput | MeetingScalarWhereWithAggregatesInput[]
+    OR?: MeetingScalarWhereWithAggregatesInput[]
+    NOT?: MeetingScalarWhereWithAggregatesInput | MeetingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Meeting"> | string
+    date?: DateTimeWithAggregatesFilter<"Meeting"> | Date | string
+    title?: StringWithAggregatesFilter<"Meeting"> | string
+    groupId?: StringWithAggregatesFilter<"Meeting"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Meeting"> | Date | string
+  }
+
+  export type AttendanceWhereInput = {
+    AND?: AttendanceWhereInput | AttendanceWhereInput[]
+    OR?: AttendanceWhereInput[]
+    NOT?: AttendanceWhereInput | AttendanceWhereInput[]
+    id?: StringFilter<"Attendance"> | string
+    meetingId?: StringFilter<"Attendance"> | string
+    userId?: StringFilter<"Attendance"> | string
+    status?: StringFilter<"Attendance"> | string
+    groupId?: StringFilter<"Attendance"> | string
+    meeting?: XOR<MeetingRelationFilter, MeetingWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    group?: XOR<GroupRelationFilter, GroupWhereInput>
+  }
+
+  export type AttendanceOrderByWithRelationInput = {
+    id?: SortOrder
+    meetingId?: SortOrder
+    userId?: SortOrder
+    status?: SortOrder
+    groupId?: SortOrder
+    meeting?: MeetingOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+    group?: GroupOrderByWithRelationInput
+  }
+
+  export type AttendanceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AttendanceWhereInput | AttendanceWhereInput[]
+    OR?: AttendanceWhereInput[]
+    NOT?: AttendanceWhereInput | AttendanceWhereInput[]
+    meetingId?: StringFilter<"Attendance"> | string
+    userId?: StringFilter<"Attendance"> | string
+    status?: StringFilter<"Attendance"> | string
+    groupId?: StringFilter<"Attendance"> | string
+    meeting?: XOR<MeetingRelationFilter, MeetingWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    group?: XOR<GroupRelationFilter, GroupWhereInput>
+  }, "id">
+
+  export type AttendanceOrderByWithAggregationInput = {
+    id?: SortOrder
+    meetingId?: SortOrder
+    userId?: SortOrder
+    status?: SortOrder
+    groupId?: SortOrder
+    _count?: AttendanceCountOrderByAggregateInput
+    _max?: AttendanceMaxOrderByAggregateInput
+    _min?: AttendanceMinOrderByAggregateInput
+  }
+
+  export type AttendanceScalarWhereWithAggregatesInput = {
+    AND?: AttendanceScalarWhereWithAggregatesInput | AttendanceScalarWhereWithAggregatesInput[]
+    OR?: AttendanceScalarWhereWithAggregatesInput[]
+    NOT?: AttendanceScalarWhereWithAggregatesInput | AttendanceScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Attendance"> | string
+    meetingId?: StringWithAggregatesFilter<"Attendance"> | string
+    userId?: StringWithAggregatesFilter<"Attendance"> | string
+    status?: StringWithAggregatesFilter<"Attendance"> | string
+    groupId?: StringWithAggregatesFilter<"Attendance"> | string
+  }
+
+  export type PollWhereInput = {
+    AND?: PollWhereInput | PollWhereInput[]
+    OR?: PollWhereInput[]
+    NOT?: PollWhereInput | PollWhereInput[]
+    id?: StringFilter<"Poll"> | string
+    title?: StringFilter<"Poll"> | string
+    description?: StringFilter<"Poll"> | string
+    status?: StringFilter<"Poll"> | string
+    groupId?: StringFilter<"Poll"> | string
+    createdAt?: DateTimeFilter<"Poll"> | Date | string
+    group?: XOR<GroupRelationFilter, GroupWhereInput>
+    voices?: VoteListRelationFilter
+  }
+
+  export type PollOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    groupId?: SortOrder
+    createdAt?: SortOrder
+    group?: GroupOrderByWithRelationInput
+    voices?: VoteOrderByRelationAggregateInput
+  }
+
+  export type PollWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PollWhereInput | PollWhereInput[]
+    OR?: PollWhereInput[]
+    NOT?: PollWhereInput | PollWhereInput[]
+    title?: StringFilter<"Poll"> | string
+    description?: StringFilter<"Poll"> | string
+    status?: StringFilter<"Poll"> | string
+    groupId?: StringFilter<"Poll"> | string
+    createdAt?: DateTimeFilter<"Poll"> | Date | string
+    group?: XOR<GroupRelationFilter, GroupWhereInput>
+    voices?: VoteListRelationFilter
+  }, "id">
+
+  export type PollOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    groupId?: SortOrder
+    createdAt?: SortOrder
+    _count?: PollCountOrderByAggregateInput
+    _max?: PollMaxOrderByAggregateInput
+    _min?: PollMinOrderByAggregateInput
+  }
+
+  export type PollScalarWhereWithAggregatesInput = {
+    AND?: PollScalarWhereWithAggregatesInput | PollScalarWhereWithAggregatesInput[]
+    OR?: PollScalarWhereWithAggregatesInput[]
+    NOT?: PollScalarWhereWithAggregatesInput | PollScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Poll"> | string
+    title?: StringWithAggregatesFilter<"Poll"> | string
+    description?: StringWithAggregatesFilter<"Poll"> | string
+    status?: StringWithAggregatesFilter<"Poll"> | string
+    groupId?: StringWithAggregatesFilter<"Poll"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Poll"> | Date | string
+  }
+
+  export type VoteWhereInput = {
+    AND?: VoteWhereInput | VoteWhereInput[]
+    OR?: VoteWhereInput[]
+    NOT?: VoteWhereInput | VoteWhereInput[]
+    id?: StringFilter<"Vote"> | string
+    pollId?: StringFilter<"Vote"> | string
+    userId?: StringFilter<"Vote"> | string
+    choice?: StringFilter<"Vote"> | string
+    poll?: XOR<PollRelationFilter, PollWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type VoteOrderByWithRelationInput = {
+    id?: SortOrder
+    pollId?: SortOrder
+    userId?: SortOrder
+    choice?: SortOrder
+    poll?: PollOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type VoteWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    pollId_userId?: VotePollIdUserIdCompoundUniqueInput
+    AND?: VoteWhereInput | VoteWhereInput[]
+    OR?: VoteWhereInput[]
+    NOT?: VoteWhereInput | VoteWhereInput[]
+    pollId?: StringFilter<"Vote"> | string
+    userId?: StringFilter<"Vote"> | string
+    choice?: StringFilter<"Vote"> | string
+    poll?: XOR<PollRelationFilter, PollWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }, "id" | "pollId_userId">
+
+  export type VoteOrderByWithAggregationInput = {
+    id?: SortOrder
+    pollId?: SortOrder
+    userId?: SortOrder
+    choice?: SortOrder
+    _count?: VoteCountOrderByAggregateInput
+    _max?: VoteMaxOrderByAggregateInput
+    _min?: VoteMinOrderByAggregateInput
+  }
+
+  export type VoteScalarWhereWithAggregatesInput = {
+    AND?: VoteScalarWhereWithAggregatesInput | VoteScalarWhereWithAggregatesInput[]
+    OR?: VoteScalarWhereWithAggregatesInput[]
+    NOT?: VoteScalarWhereWithAggregatesInput | VoteScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Vote"> | string
+    pollId?: StringWithAggregatesFilter<"Vote"> | string
+    userId?: StringWithAggregatesFilter<"Vote"> | string
+    choice?: StringWithAggregatesFilter<"Vote"> | string
+  }
+
   export type GroupCreateInput = {
     id?: string
     name: string
@@ -12844,13 +19137,20 @@ export namespace Prisma {
     penaltyRules: string
     savingsGoal?: number
     startDate: Date | string
+    tier?: string
+    maxMembers?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     members?: UserCreateNestedManyWithoutGroupInput
+    announcements?: AnnouncementCreateNestedManyWithoutGroupInput
     contributions?: ContributionCreateNestedManyWithoutGroupInput
     loans?: LoanCreateNestedManyWithoutGroupInput
     payouts?: PayoutCreateNestedManyWithoutGroupInput
     auditLogs?: AuditLogCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyCreateNestedManyWithoutGroupInput
+    meetings?: MeetingCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceCreateNestedManyWithoutGroupInput
+    polls?: PollCreateNestedManyWithoutGroupInput
   }
 
   export type GroupUncheckedCreateInput = {
@@ -12862,13 +19162,20 @@ export namespace Prisma {
     penaltyRules: string
     savingsGoal?: number
     startDate: Date | string
+    tier?: string
+    maxMembers?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     members?: UserUncheckedCreateNestedManyWithoutGroupInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutGroupInput
     contributions?: ContributionUncheckedCreateNestedManyWithoutGroupInput
     loans?: LoanUncheckedCreateNestedManyWithoutGroupInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutGroupInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyUncheckedCreateNestedManyWithoutGroupInput
+    meetings?: MeetingUncheckedCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutGroupInput
+    polls?: PollUncheckedCreateNestedManyWithoutGroupInput
   }
 
   export type GroupUpdateInput = {
@@ -12880,13 +19187,20 @@ export namespace Prisma {
     penaltyRules?: StringFieldUpdateOperationsInput | string
     savingsGoal?: FloatFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: UserUpdateManyWithoutGroupNestedInput
+    announcements?: AnnouncementUpdateManyWithoutGroupNestedInput
     contributions?: ContributionUpdateManyWithoutGroupNestedInput
     loans?: LoanUpdateManyWithoutGroupNestedInput
     payouts?: PayoutUpdateManyWithoutGroupNestedInput
     auditLogs?: AuditLogUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUpdateManyWithoutGroupNestedInput
+    polls?: PollUpdateManyWithoutGroupNestedInput
   }
 
   export type GroupUncheckedUpdateInput = {
@@ -12898,13 +19212,20 @@ export namespace Prisma {
     penaltyRules?: StringFieldUpdateOperationsInput | string
     savingsGoal?: FloatFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: UserUncheckedUpdateManyWithoutGroupNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutGroupNestedInput
     contributions?: ContributionUncheckedUpdateManyWithoutGroupNestedInput
     loans?: LoanUncheckedUpdateManyWithoutGroupNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutGroupNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUncheckedUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUncheckedUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutGroupNestedInput
+    polls?: PollUncheckedUpdateManyWithoutGroupNestedInput
   }
 
   export type GroupCreateManyInput = {
@@ -12916,6 +19237,8 @@ export namespace Prisma {
     penaltyRules: string
     savingsGoal?: number
     startDate: Date | string
+    tier?: string
+    maxMembers?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12929,6 +19252,8 @@ export namespace Prisma {
     penaltyRules?: StringFieldUpdateOperationsInput | string
     savingsGoal?: FloatFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12942,6 +19267,8 @@ export namespace Prisma {
     penaltyRules?: StringFieldUpdateOperationsInput | string
     savingsGoal?: FloatFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12949,93 +19276,129 @@ export namespace Prisma {
   export type UserCreateInput = {
     id?: string
     phone: string
+    email?: string | null
     nationalId?: string | null
     name: string
     password: string
     role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
     agreedToRules?: boolean
     agreedAt?: Date | string | null
+    agreementUrl?: string | null
     lastPasswordChange?: Date | string | null
     createdAt?: Date | string
     group: GroupCreateNestedOneWithoutMembersInput
     contributions?: ContributionCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementCreateNestedManyWithoutAuthorInput
     loans?: LoanCreateNestedManyWithoutUserInput
     payouts?: PayoutCreateNestedManyWithoutRequestedByInput
     payoutApprovals?: PayoutApprovalCreateNestedManyWithoutAdminInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
     penalties?: PenaltyCreateNestedManyWithoutUserInput
+    attendances?: AttendanceCreateNestedManyWithoutUserInput
+    votes?: VoteCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanCreateNestedManyWithoutGuarantorInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: string
     phone: string
+    email?: string | null
     nationalId?: string | null
     name: string
     password: string
     role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
     groupId: string
     agreedToRules?: boolean
     agreedAt?: Date | string | null
+    agreementUrl?: string | null
     lastPasswordChange?: Date | string | null
     createdAt?: Date | string
     contributions?: ContributionUncheckedCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutAuthorInput
     loans?: LoanUncheckedCreateNestedManyWithoutUserInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutRequestedByInput
     payoutApprovals?: PayoutApprovalUncheckedCreateNestedManyWithoutAdminInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
     penalties?: PenaltyUncheckedCreateNestedManyWithoutUserInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutUserInput
+    votes?: VoteUncheckedCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanUncheckedCreateNestedManyWithoutGuarantorInput
   }
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     group?: GroupUpdateOneRequiredWithoutMembersNestedInput
     contributions?: ContributionUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUpdateManyWithoutAuthorNestedInput
     loans?: LoanUpdateManyWithoutUserNestedInput
     payouts?: PayoutUpdateManyWithoutRequestedByNestedInput
     payoutApprovals?: PayoutApprovalUpdateManyWithoutAdminNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
     penalties?: PenaltyUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUpdateManyWithoutUserNestedInput
+    votes?: VoteUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUpdateManyWithoutGuarantorNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     groupId?: StringFieldUpdateOperationsInput | string
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contributions?: ContributionUncheckedUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutAuthorNestedInput
     loans?: LoanUncheckedUpdateManyWithoutUserNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutRequestedByNestedInput
     payoutApprovals?: PayoutApprovalUncheckedUpdateManyWithoutAdminNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
     penalties?: PenaltyUncheckedUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutUserNestedInput
+    votes?: VoteUncheckedUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUncheckedUpdateManyWithoutGuarantorNestedInput
   }
 
   export type UserCreateManyInput = {
     id?: string
     phone: string
+    email?: string | null
     nationalId?: string | null
     name: string
     password: string
     role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
     groupId: string
     agreedToRules?: boolean
     agreedAt?: Date | string | null
+    agreementUrl?: string | null
     lastPasswordChange?: Date | string | null
     createdAt?: Date | string
   }
@@ -13043,12 +19406,16 @@ export namespace Prisma {
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13056,87 +19423,120 @@ export namespace Prisma {
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     groupId?: StringFieldUpdateOperationsInput | string
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ContributionCreateInput = {
     id?: string
+    refNo?: string | null
     amount: number
     status: string
     timestamp?: Date | string
     isLocked?: boolean
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
     user: UserCreateNestedOneWithoutContributionsInput
     group: GroupCreateNestedOneWithoutContributionsInput
   }
 
   export type ContributionUncheckedCreateInput = {
     id?: string
+    refNo?: string | null
     amount: number
     status: string
     timestamp?: Date | string
     userId: string
     groupId: string
     isLocked?: boolean
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
   }
 
   export type ContributionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     isLocked?: BoolFieldUpdateOperationsInput | boolean
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutContributionsNestedInput
     group?: GroupUpdateOneRequiredWithoutContributionsNestedInput
   }
 
   export type ContributionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
     groupId?: StringFieldUpdateOperationsInput | string
     isLocked?: BoolFieldUpdateOperationsInput | boolean
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ContributionCreateManyInput = {
     id?: string
+    refNo?: string | null
     amount: number
     status: string
     timestamp?: Date | string
     userId: string
     groupId: string
     isLocked?: boolean
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
   }
 
   export type ContributionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     isLocked?: BoolFieldUpdateOperationsInput | boolean
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ContributionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
     groupId?: StringFieldUpdateOperationsInput | string
     isLocked?: BoolFieldUpdateOperationsInput | boolean
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LoanCreateInput = {
     id?: string
+    refNo?: string | null
     amount: number
     interestRate: number
     deadline: Date | string
@@ -13144,18 +19544,21 @@ export namespace Prisma {
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutLoansInput
     group: GroupCreateNestedOneWithoutLoansInput
+    guarantor?: UserCreateNestedOneWithoutGuaranteedLoansInput
     repayments?: RepaymentCreateNestedManyWithoutLoanInput
     payouts?: PayoutCreateNestedManyWithoutLoanInput
   }
 
   export type LoanUncheckedCreateInput = {
     id?: string
+    refNo?: string | null
     amount: number
     interestRate: number
     deadline: Date | string
     status: string
     userId: string
     groupId: string
+    guarantorId?: string | null
     createdAt?: Date | string
     repayments?: RepaymentUncheckedCreateNestedManyWithoutLoanInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutLoanInput
@@ -13163,6 +19566,7 @@ export namespace Prisma {
 
   export type LoanUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     interestRate?: FloatFieldUpdateOperationsInput | number
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13170,18 +19574,21 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutLoansNestedInput
     group?: GroupUpdateOneRequiredWithoutLoansNestedInput
+    guarantor?: UserUpdateOneWithoutGuaranteedLoansNestedInput
     repayments?: RepaymentUpdateManyWithoutLoanNestedInput
     payouts?: PayoutUpdateManyWithoutLoanNestedInput
   }
 
   export type LoanUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     interestRate?: FloatFieldUpdateOperationsInput | number
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     groupId?: StringFieldUpdateOperationsInput | string
+    guarantorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     repayments?: RepaymentUncheckedUpdateManyWithoutLoanNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutLoanNestedInput
@@ -13189,17 +19596,20 @@ export namespace Prisma {
 
   export type LoanCreateManyInput = {
     id?: string
+    refNo?: string | null
     amount: number
     interestRate: number
     deadline: Date | string
     status: string
     userId: string
     groupId: string
+    guarantorId?: string | null
     createdAt?: Date | string
   }
 
   export type LoanUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     interestRate?: FloatFieldUpdateOperationsInput | number
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13209,12 +19619,14 @@ export namespace Prisma {
 
   export type LoanUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     interestRate?: FloatFieldUpdateOperationsInput | number
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     groupId?: StringFieldUpdateOperationsInput | string
+    guarantorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13268,9 +19680,13 @@ export namespace Prisma {
 
   export type PayoutCreateInput = {
     id?: string
+    refNo?: string | null
     amount: number
     description: string
     status: string
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
     createdAt?: Date | string
     approvals?: PayoutApprovalCreateNestedManyWithoutPayoutInput
     requestedBy: UserCreateNestedOneWithoutPayoutsInput
@@ -13280,21 +19696,29 @@ export namespace Prisma {
 
   export type PayoutUncheckedCreateInput = {
     id?: string
+    refNo?: string | null
     amount: number
     description: string
     status: string
     requestedById: string
     groupId: string
     loanId?: string | null
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
     createdAt?: Date | string
     approvals?: PayoutApprovalUncheckedCreateNestedManyWithoutPayoutInput
   }
 
   export type PayoutUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     approvals?: PayoutApprovalUpdateManyWithoutPayoutNestedInput
     requestedBy?: UserUpdateOneRequiredWithoutPayoutsNestedInput
@@ -13304,43 +19728,59 @@ export namespace Prisma {
 
   export type PayoutUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     requestedById?: StringFieldUpdateOperationsInput | string
     groupId?: StringFieldUpdateOperationsInput | string
     loanId?: NullableStringFieldUpdateOperationsInput | string | null
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     approvals?: PayoutApprovalUncheckedUpdateManyWithoutPayoutNestedInput
   }
 
   export type PayoutCreateManyInput = {
     id?: string
+    refNo?: string | null
     amount: number
     description: string
     status: string
     requestedById: string
     groupId: string
     loanId?: string | null
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
     createdAt?: Date | string
   }
 
   export type PayoutUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PayoutUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     requestedById?: StringFieldUpdateOperationsInput | string
     groupId?: StringFieldUpdateOperationsInput | string
     loanId?: NullableStringFieldUpdateOperationsInput | string | null
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13459,6 +19899,7 @@ export namespace Prisma {
     status: string
     timestamp?: Date | string
     user: UserCreateNestedOneWithoutPenaltiesInput
+    group: GroupCreateNestedOneWithoutPenaltiesInput
   }
 
   export type PenaltyUncheckedCreateInput = {
@@ -13467,6 +19908,7 @@ export namespace Prisma {
     reason: string
     status: string
     userId: string
+    groupId: string
     timestamp?: Date | string
   }
 
@@ -13477,6 +19919,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPenaltiesNestedInput
+    group?: GroupUpdateOneRequiredWithoutPenaltiesNestedInput
   }
 
   export type PenaltyUncheckedUpdateInput = {
@@ -13485,6 +19928,7 @@ export namespace Prisma {
     reason?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13494,6 +19938,7 @@ export namespace Prisma {
     reason: string
     status: string
     userId: string
+    groupId: string
     timestamp?: Date | string
   }
 
@@ -13511,6 +19956,7 @@ export namespace Prisma {
     reason?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13570,6 +20016,306 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type AnnouncementCreateInput = {
+    id?: string
+    title: string
+    body: string
+    type?: string
+    eventDate?: Date | string | null
+    createdAt?: Date | string
+    group: GroupCreateNestedOneWithoutAnnouncementsInput
+    author: UserCreateNestedOneWithoutAnnouncementsInput
+  }
+
+  export type AnnouncementUncheckedCreateInput = {
+    id?: string
+    title: string
+    body: string
+    type?: string
+    eventDate?: Date | string | null
+    groupId: string
+    createdBy: string
+    createdAt?: Date | string
+  }
+
+  export type AnnouncementUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    group?: GroupUpdateOneRequiredWithoutAnnouncementsNestedInput
+    author?: UserUpdateOneRequiredWithoutAnnouncementsNestedInput
+  }
+
+  export type AnnouncementUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    groupId?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnnouncementCreateManyInput = {
+    id?: string
+    title: string
+    body: string
+    type?: string
+    eventDate?: Date | string | null
+    groupId: string
+    createdBy: string
+    createdAt?: Date | string
+  }
+
+  export type AnnouncementUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnnouncementUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    groupId?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MeetingCreateInput = {
+    id?: string
+    date: Date | string
+    title: string
+    createdAt?: Date | string
+    group: GroupCreateNestedOneWithoutMeetingsInput
+    attendances?: AttendanceCreateNestedManyWithoutMeetingInput
+  }
+
+  export type MeetingUncheckedCreateInput = {
+    id?: string
+    date: Date | string
+    title: string
+    groupId: string
+    createdAt?: Date | string
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutMeetingInput
+  }
+
+  export type MeetingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    group?: GroupUpdateOneRequiredWithoutMeetingsNestedInput
+    attendances?: AttendanceUpdateManyWithoutMeetingNestedInput
+  }
+
+  export type MeetingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attendances?: AttendanceUncheckedUpdateManyWithoutMeetingNestedInput
+  }
+
+  export type MeetingCreateManyInput = {
+    id?: string
+    date: Date | string
+    title: string
+    groupId: string
+    createdAt?: Date | string
+  }
+
+  export type MeetingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MeetingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AttendanceCreateInput = {
+    id?: string
+    status: string
+    meeting: MeetingCreateNestedOneWithoutAttendancesInput
+    user: UserCreateNestedOneWithoutAttendancesInput
+    group: GroupCreateNestedOneWithoutAttendancesInput
+  }
+
+  export type AttendanceUncheckedCreateInput = {
+    id?: string
+    meetingId: string
+    userId: string
+    status: string
+    groupId: string
+  }
+
+  export type AttendanceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    meeting?: MeetingUpdateOneRequiredWithoutAttendancesNestedInput
+    user?: UserUpdateOneRequiredWithoutAttendancesNestedInput
+    group?: GroupUpdateOneRequiredWithoutAttendancesNestedInput
+  }
+
+  export type AttendanceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meetingId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AttendanceCreateManyInput = {
+    id?: string
+    meetingId: string
+    userId: string
+    status: string
+    groupId: string
+  }
+
+  export type AttendanceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AttendanceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meetingId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PollCreateInput = {
+    id?: string
+    title: string
+    description: string
+    status?: string
+    createdAt?: Date | string
+    group: GroupCreateNestedOneWithoutPollsInput
+    voices?: VoteCreateNestedManyWithoutPollInput
+  }
+
+  export type PollUncheckedCreateInput = {
+    id?: string
+    title: string
+    description: string
+    status?: string
+    groupId: string
+    createdAt?: Date | string
+    voices?: VoteUncheckedCreateNestedManyWithoutPollInput
+  }
+
+  export type PollUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    group?: GroupUpdateOneRequiredWithoutPollsNestedInput
+    voices?: VoteUpdateManyWithoutPollNestedInput
+  }
+
+  export type PollUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voices?: VoteUncheckedUpdateManyWithoutPollNestedInput
+  }
+
+  export type PollCreateManyInput = {
+    id?: string
+    title: string
+    description: string
+    status?: string
+    groupId: string
+    createdAt?: Date | string
+  }
+
+  export type PollUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PollUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VoteCreateInput = {
+    id?: string
+    choice: string
+    poll: PollCreateNestedOneWithoutVoicesInput
+    user: UserCreateNestedOneWithoutVotesInput
+  }
+
+  export type VoteUncheckedCreateInput = {
+    id?: string
+    pollId: string
+    userId: string
+    choice: string
+  }
+
+  export type VoteUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    choice?: StringFieldUpdateOperationsInput | string
+    poll?: PollUpdateOneRequiredWithoutVoicesNestedInput
+    user?: UserUpdateOneRequiredWithoutVotesNestedInput
+  }
+
+  export type VoteUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    pollId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    choice?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type VoteCreateManyInput = {
+    id?: string
+    pollId: string
+    userId: string
+    choice: string
+  }
+
+  export type VoteUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    choice?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type VoteUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    pollId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    choice?: StringFieldUpdateOperationsInput | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -13606,10 +20352,27 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type UserListRelationFilter = {
     every?: UserWhereInput
     some?: UserWhereInput
     none?: UserWhereInput
+  }
+
+  export type AnnouncementListRelationFilter = {
+    every?: AnnouncementWhereInput
+    some?: AnnouncementWhereInput
+    none?: AnnouncementWhereInput
   }
 
   export type ContributionListRelationFilter = {
@@ -13636,7 +20399,35 @@ export namespace Prisma {
     none?: AuditLogWhereInput
   }
 
+  export type PenaltyListRelationFilter = {
+    every?: PenaltyWhereInput
+    some?: PenaltyWhereInput
+    none?: PenaltyWhereInput
+  }
+
+  export type MeetingListRelationFilter = {
+    every?: MeetingWhereInput
+    some?: MeetingWhereInput
+    none?: MeetingWhereInput
+  }
+
+  export type AttendanceListRelationFilter = {
+    every?: AttendanceWhereInput
+    some?: AttendanceWhereInput
+    none?: AttendanceWhereInput
+  }
+
+  export type PollListRelationFilter = {
+    every?: PollWhereInput
+    some?: PollWhereInput
+    none?: PollWhereInput
+  }
+
   export type UserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AnnouncementOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13656,6 +20447,22 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type PenaltyOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MeetingOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AttendanceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PollOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type GroupCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -13665,6 +20472,8 @@ export namespace Prisma {
     penaltyRules?: SortOrder
     savingsGoal?: SortOrder
     startDate?: SortOrder
+    tier?: SortOrder
+    maxMembers?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13672,6 +20481,7 @@ export namespace Prisma {
   export type GroupAvgOrderByAggregateInput = {
     contributionAmt?: SortOrder
     savingsGoal?: SortOrder
+    maxMembers?: SortOrder
   }
 
   export type GroupMaxOrderByAggregateInput = {
@@ -13683,6 +20493,8 @@ export namespace Prisma {
     penaltyRules?: SortOrder
     savingsGoal?: SortOrder
     startDate?: SortOrder
+    tier?: SortOrder
+    maxMembers?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13696,6 +20508,8 @@ export namespace Prisma {
     penaltyRules?: SortOrder
     savingsGoal?: SortOrder
     startDate?: SortOrder
+    tier?: SortOrder
+    maxMembers?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13703,6 +20517,7 @@ export namespace Prisma {
   export type GroupSumOrderByAggregateInput = {
     contributionAmt?: SortOrder
     savingsGoal?: SortOrder
+    maxMembers?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -13752,6 +20567,22 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -13793,10 +20624,10 @@ export namespace Prisma {
     none?: PayoutApprovalWhereInput
   }
 
-  export type PenaltyListRelationFilter = {
-    every?: PenaltyWhereInput
-    some?: PenaltyWhereInput
-    none?: PenaltyWhereInput
+  export type VoteListRelationFilter = {
+    every?: VoteWhereInput
+    some?: VoteWhereInput
+    none?: VoteWhereInput
   }
 
   export type SortOrderInput = {
@@ -13808,20 +20639,24 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type PenaltyOrderByRelationAggregateInput = {
+  export type VoteOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     phone?: SortOrder
+    email?: SortOrder
     nationalId?: SortOrder
     name?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    mustChangePassword?: SortOrder
+    isActive?: SortOrder
     groupId?: SortOrder
     agreedToRules?: SortOrder
     agreedAt?: SortOrder
+    agreementUrl?: SortOrder
     lastPasswordChange?: SortOrder
     createdAt?: SortOrder
   }
@@ -13829,13 +20664,17 @@ export namespace Prisma {
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     phone?: SortOrder
+    email?: SortOrder
     nationalId?: SortOrder
     name?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    mustChangePassword?: SortOrder
+    isActive?: SortOrder
     groupId?: SortOrder
     agreedToRules?: SortOrder
     agreedAt?: SortOrder
+    agreementUrl?: SortOrder
     lastPasswordChange?: SortOrder
     createdAt?: SortOrder
   }
@@ -13843,13 +20682,17 @@ export namespace Prisma {
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     phone?: SortOrder
+    email?: SortOrder
     nationalId?: SortOrder
     name?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    mustChangePassword?: SortOrder
+    isActive?: SortOrder
     groupId?: SortOrder
     agreedToRules?: SortOrder
     agreedAt?: SortOrder
+    agreementUrl?: SortOrder
     lastPasswordChange?: SortOrder
     createdAt?: SortOrder
   }
@@ -13900,12 +20743,16 @@ export namespace Prisma {
 
   export type ContributionCountOrderByAggregateInput = {
     id?: SortOrder
+    refNo?: SortOrder
     amount?: SortOrder
     status?: SortOrder
     timestamp?: SortOrder
     userId?: SortOrder
     groupId?: SortOrder
     isLocked?: SortOrder
+    fundType?: SortOrder
+    paymentStatus?: SortOrder
+    providerRef?: SortOrder
   }
 
   export type ContributionAvgOrderByAggregateInput = {
@@ -13914,26 +20761,39 @@ export namespace Prisma {
 
   export type ContributionMaxOrderByAggregateInput = {
     id?: SortOrder
+    refNo?: SortOrder
     amount?: SortOrder
     status?: SortOrder
     timestamp?: SortOrder
     userId?: SortOrder
     groupId?: SortOrder
     isLocked?: SortOrder
+    fundType?: SortOrder
+    paymentStatus?: SortOrder
+    providerRef?: SortOrder
   }
 
   export type ContributionMinOrderByAggregateInput = {
     id?: SortOrder
+    refNo?: SortOrder
     amount?: SortOrder
     status?: SortOrder
     timestamp?: SortOrder
     userId?: SortOrder
     groupId?: SortOrder
     isLocked?: SortOrder
+    fundType?: SortOrder
+    paymentStatus?: SortOrder
+    providerRef?: SortOrder
   }
 
   export type ContributionSumOrderByAggregateInput = {
     amount?: SortOrder
+  }
+
+  export type UserNullableRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
   }
 
   export type RepaymentListRelationFilter = {
@@ -13948,12 +20808,14 @@ export namespace Prisma {
 
   export type LoanCountOrderByAggregateInput = {
     id?: SortOrder
+    refNo?: SortOrder
     amount?: SortOrder
     interestRate?: SortOrder
     deadline?: SortOrder
     status?: SortOrder
     userId?: SortOrder
     groupId?: SortOrder
+    guarantorId?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -13964,23 +20826,27 @@ export namespace Prisma {
 
   export type LoanMaxOrderByAggregateInput = {
     id?: SortOrder
+    refNo?: SortOrder
     amount?: SortOrder
     interestRate?: SortOrder
     deadline?: SortOrder
     status?: SortOrder
     userId?: SortOrder
     groupId?: SortOrder
+    guarantorId?: SortOrder
     createdAt?: SortOrder
   }
 
   export type LoanMinOrderByAggregateInput = {
     id?: SortOrder
+    refNo?: SortOrder
     amount?: SortOrder
     interestRate?: SortOrder
     deadline?: SortOrder
     status?: SortOrder
     userId?: SortOrder
     groupId?: SortOrder
+    guarantorId?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -14030,12 +20896,16 @@ export namespace Prisma {
 
   export type PayoutCountOrderByAggregateInput = {
     id?: SortOrder
+    refNo?: SortOrder
     amount?: SortOrder
     description?: SortOrder
     status?: SortOrder
     requestedById?: SortOrder
     groupId?: SortOrder
     loanId?: SortOrder
+    fundType?: SortOrder
+    paymentStatus?: SortOrder
+    providerRef?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -14045,23 +20915,31 @@ export namespace Prisma {
 
   export type PayoutMaxOrderByAggregateInput = {
     id?: SortOrder
+    refNo?: SortOrder
     amount?: SortOrder
     description?: SortOrder
     status?: SortOrder
     requestedById?: SortOrder
     groupId?: SortOrder
     loanId?: SortOrder
+    fundType?: SortOrder
+    paymentStatus?: SortOrder
+    providerRef?: SortOrder
     createdAt?: SortOrder
   }
 
   export type PayoutMinOrderByAggregateInput = {
     id?: SortOrder
+    refNo?: SortOrder
     amount?: SortOrder
     description?: SortOrder
     status?: SortOrder
     requestedById?: SortOrder
     groupId?: SortOrder
     loanId?: SortOrder
+    fundType?: SortOrder
+    paymentStatus?: SortOrder
+    providerRef?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -14100,11 +20978,6 @@ export namespace Prisma {
     timestamp?: SortOrder
   }
 
-  export type UserNullableRelationFilter = {
-    is?: UserWhereInput | null
-    isNot?: UserWhereInput | null
-  }
-
   export type AuditLogCountOrderByAggregateInput = {
     id?: SortOrder
     action?: SortOrder
@@ -14138,6 +21011,7 @@ export namespace Prisma {
     reason?: SortOrder
     status?: SortOrder
     userId?: SortOrder
+    groupId?: SortOrder
     timestamp?: SortOrder
   }
 
@@ -14151,6 +21025,7 @@ export namespace Prisma {
     reason?: SortOrder
     status?: SortOrder
     userId?: SortOrder
+    groupId?: SortOrder
     timestamp?: SortOrder
   }
 
@@ -14160,6 +21035,7 @@ export namespace Prisma {
     reason?: SortOrder
     status?: SortOrder
     userId?: SortOrder
+    groupId?: SortOrder
     timestamp?: SortOrder
   }
 
@@ -14191,11 +21067,162 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type AnnouncementCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    body?: SortOrder
+    type?: SortOrder
+    eventDate?: SortOrder
+    groupId?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AnnouncementMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    body?: SortOrder
+    type?: SortOrder
+    eventDate?: SortOrder
+    groupId?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AnnouncementMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    body?: SortOrder
+    type?: SortOrder
+    eventDate?: SortOrder
+    groupId?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MeetingCountOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    title?: SortOrder
+    groupId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MeetingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    title?: SortOrder
+    groupId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MeetingMinOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    title?: SortOrder
+    groupId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MeetingRelationFilter = {
+    is?: MeetingWhereInput
+    isNot?: MeetingWhereInput
+  }
+
+  export type AttendanceCountOrderByAggregateInput = {
+    id?: SortOrder
+    meetingId?: SortOrder
+    userId?: SortOrder
+    status?: SortOrder
+    groupId?: SortOrder
+  }
+
+  export type AttendanceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    meetingId?: SortOrder
+    userId?: SortOrder
+    status?: SortOrder
+    groupId?: SortOrder
+  }
+
+  export type AttendanceMinOrderByAggregateInput = {
+    id?: SortOrder
+    meetingId?: SortOrder
+    userId?: SortOrder
+    status?: SortOrder
+    groupId?: SortOrder
+  }
+
+  export type PollCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    groupId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PollMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    groupId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PollMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    groupId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PollRelationFilter = {
+    is?: PollWhereInput
+    isNot?: PollWhereInput
+  }
+
+  export type VotePollIdUserIdCompoundUniqueInput = {
+    pollId: string
+    userId: string
+  }
+
+  export type VoteCountOrderByAggregateInput = {
+    id?: SortOrder
+    pollId?: SortOrder
+    userId?: SortOrder
+    choice?: SortOrder
+  }
+
+  export type VoteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    pollId?: SortOrder
+    userId?: SortOrder
+    choice?: SortOrder
+  }
+
+  export type VoteMinOrderByAggregateInput = {
+    id?: SortOrder
+    pollId?: SortOrder
+    userId?: SortOrder
+    choice?: SortOrder
+  }
+
   export type UserCreateNestedManyWithoutGroupInput = {
     create?: XOR<UserCreateWithoutGroupInput, UserUncheckedCreateWithoutGroupInput> | UserCreateWithoutGroupInput[] | UserUncheckedCreateWithoutGroupInput[]
     connectOrCreate?: UserCreateOrConnectWithoutGroupInput | UserCreateOrConnectWithoutGroupInput[]
     createMany?: UserCreateManyGroupInputEnvelope
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type AnnouncementCreateNestedManyWithoutGroupInput = {
+    create?: XOR<AnnouncementCreateWithoutGroupInput, AnnouncementUncheckedCreateWithoutGroupInput> | AnnouncementCreateWithoutGroupInput[] | AnnouncementUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: AnnouncementCreateOrConnectWithoutGroupInput | AnnouncementCreateOrConnectWithoutGroupInput[]
+    createMany?: AnnouncementCreateManyGroupInputEnvelope
+    connect?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
   }
 
   export type ContributionCreateNestedManyWithoutGroupInput = {
@@ -14226,11 +21253,46 @@ export namespace Prisma {
     connect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[]
   }
 
+  export type PenaltyCreateNestedManyWithoutGroupInput = {
+    create?: XOR<PenaltyCreateWithoutGroupInput, PenaltyUncheckedCreateWithoutGroupInput> | PenaltyCreateWithoutGroupInput[] | PenaltyUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: PenaltyCreateOrConnectWithoutGroupInput | PenaltyCreateOrConnectWithoutGroupInput[]
+    createMany?: PenaltyCreateManyGroupInputEnvelope
+    connect?: PenaltyWhereUniqueInput | PenaltyWhereUniqueInput[]
+  }
+
+  export type MeetingCreateNestedManyWithoutGroupInput = {
+    create?: XOR<MeetingCreateWithoutGroupInput, MeetingUncheckedCreateWithoutGroupInput> | MeetingCreateWithoutGroupInput[] | MeetingUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: MeetingCreateOrConnectWithoutGroupInput | MeetingCreateOrConnectWithoutGroupInput[]
+    createMany?: MeetingCreateManyGroupInputEnvelope
+    connect?: MeetingWhereUniqueInput | MeetingWhereUniqueInput[]
+  }
+
+  export type AttendanceCreateNestedManyWithoutGroupInput = {
+    create?: XOR<AttendanceCreateWithoutGroupInput, AttendanceUncheckedCreateWithoutGroupInput> | AttendanceCreateWithoutGroupInput[] | AttendanceUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: AttendanceCreateOrConnectWithoutGroupInput | AttendanceCreateOrConnectWithoutGroupInput[]
+    createMany?: AttendanceCreateManyGroupInputEnvelope
+    connect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+  }
+
+  export type PollCreateNestedManyWithoutGroupInput = {
+    create?: XOR<PollCreateWithoutGroupInput, PollUncheckedCreateWithoutGroupInput> | PollCreateWithoutGroupInput[] | PollUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: PollCreateOrConnectWithoutGroupInput | PollCreateOrConnectWithoutGroupInput[]
+    createMany?: PollCreateManyGroupInputEnvelope
+    connect?: PollWhereUniqueInput | PollWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutGroupInput = {
     create?: XOR<UserCreateWithoutGroupInput, UserUncheckedCreateWithoutGroupInput> | UserCreateWithoutGroupInput[] | UserUncheckedCreateWithoutGroupInput[]
     connectOrCreate?: UserCreateOrConnectWithoutGroupInput | UserCreateOrConnectWithoutGroupInput[]
     createMany?: UserCreateManyGroupInputEnvelope
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type AnnouncementUncheckedCreateNestedManyWithoutGroupInput = {
+    create?: XOR<AnnouncementCreateWithoutGroupInput, AnnouncementUncheckedCreateWithoutGroupInput> | AnnouncementCreateWithoutGroupInput[] | AnnouncementUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: AnnouncementCreateOrConnectWithoutGroupInput | AnnouncementCreateOrConnectWithoutGroupInput[]
+    createMany?: AnnouncementCreateManyGroupInputEnvelope
+    connect?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
   }
 
   export type ContributionUncheckedCreateNestedManyWithoutGroupInput = {
@@ -14261,6 +21323,34 @@ export namespace Prisma {
     connect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[]
   }
 
+  export type PenaltyUncheckedCreateNestedManyWithoutGroupInput = {
+    create?: XOR<PenaltyCreateWithoutGroupInput, PenaltyUncheckedCreateWithoutGroupInput> | PenaltyCreateWithoutGroupInput[] | PenaltyUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: PenaltyCreateOrConnectWithoutGroupInput | PenaltyCreateOrConnectWithoutGroupInput[]
+    createMany?: PenaltyCreateManyGroupInputEnvelope
+    connect?: PenaltyWhereUniqueInput | PenaltyWhereUniqueInput[]
+  }
+
+  export type MeetingUncheckedCreateNestedManyWithoutGroupInput = {
+    create?: XOR<MeetingCreateWithoutGroupInput, MeetingUncheckedCreateWithoutGroupInput> | MeetingCreateWithoutGroupInput[] | MeetingUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: MeetingCreateOrConnectWithoutGroupInput | MeetingCreateOrConnectWithoutGroupInput[]
+    createMany?: MeetingCreateManyGroupInputEnvelope
+    connect?: MeetingWhereUniqueInput | MeetingWhereUniqueInput[]
+  }
+
+  export type AttendanceUncheckedCreateNestedManyWithoutGroupInput = {
+    create?: XOR<AttendanceCreateWithoutGroupInput, AttendanceUncheckedCreateWithoutGroupInput> | AttendanceCreateWithoutGroupInput[] | AttendanceUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: AttendanceCreateOrConnectWithoutGroupInput | AttendanceCreateOrConnectWithoutGroupInput[]
+    createMany?: AttendanceCreateManyGroupInputEnvelope
+    connect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+  }
+
+  export type PollUncheckedCreateNestedManyWithoutGroupInput = {
+    create?: XOR<PollCreateWithoutGroupInput, PollUncheckedCreateWithoutGroupInput> | PollCreateWithoutGroupInput[] | PollUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: PollCreateOrConnectWithoutGroupInput | PollCreateOrConnectWithoutGroupInput[]
+    createMany?: PollCreateManyGroupInputEnvelope
+    connect?: PollWhereUniqueInput | PollWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -14277,6 +21367,14 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type UserUpdateManyWithoutGroupNestedInput = {
     create?: XOR<UserCreateWithoutGroupInput, UserUncheckedCreateWithoutGroupInput> | UserCreateWithoutGroupInput[] | UserUncheckedCreateWithoutGroupInput[]
     connectOrCreate?: UserCreateOrConnectWithoutGroupInput | UserCreateOrConnectWithoutGroupInput[]
@@ -14289,6 +21387,20 @@ export namespace Prisma {
     update?: UserUpdateWithWhereUniqueWithoutGroupInput | UserUpdateWithWhereUniqueWithoutGroupInput[]
     updateMany?: UserUpdateManyWithWhereWithoutGroupInput | UserUpdateManyWithWhereWithoutGroupInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type AnnouncementUpdateManyWithoutGroupNestedInput = {
+    create?: XOR<AnnouncementCreateWithoutGroupInput, AnnouncementUncheckedCreateWithoutGroupInput> | AnnouncementCreateWithoutGroupInput[] | AnnouncementUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: AnnouncementCreateOrConnectWithoutGroupInput | AnnouncementCreateOrConnectWithoutGroupInput[]
+    upsert?: AnnouncementUpsertWithWhereUniqueWithoutGroupInput | AnnouncementUpsertWithWhereUniqueWithoutGroupInput[]
+    createMany?: AnnouncementCreateManyGroupInputEnvelope
+    set?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
+    disconnect?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
+    delete?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
+    connect?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
+    update?: AnnouncementUpdateWithWhereUniqueWithoutGroupInput | AnnouncementUpdateWithWhereUniqueWithoutGroupInput[]
+    updateMany?: AnnouncementUpdateManyWithWhereWithoutGroupInput | AnnouncementUpdateManyWithWhereWithoutGroupInput[]
+    deleteMany?: AnnouncementScalarWhereInput | AnnouncementScalarWhereInput[]
   }
 
   export type ContributionUpdateManyWithoutGroupNestedInput = {
@@ -14347,6 +21459,62 @@ export namespace Prisma {
     deleteMany?: AuditLogScalarWhereInput | AuditLogScalarWhereInput[]
   }
 
+  export type PenaltyUpdateManyWithoutGroupNestedInput = {
+    create?: XOR<PenaltyCreateWithoutGroupInput, PenaltyUncheckedCreateWithoutGroupInput> | PenaltyCreateWithoutGroupInput[] | PenaltyUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: PenaltyCreateOrConnectWithoutGroupInput | PenaltyCreateOrConnectWithoutGroupInput[]
+    upsert?: PenaltyUpsertWithWhereUniqueWithoutGroupInput | PenaltyUpsertWithWhereUniqueWithoutGroupInput[]
+    createMany?: PenaltyCreateManyGroupInputEnvelope
+    set?: PenaltyWhereUniqueInput | PenaltyWhereUniqueInput[]
+    disconnect?: PenaltyWhereUniqueInput | PenaltyWhereUniqueInput[]
+    delete?: PenaltyWhereUniqueInput | PenaltyWhereUniqueInput[]
+    connect?: PenaltyWhereUniqueInput | PenaltyWhereUniqueInput[]
+    update?: PenaltyUpdateWithWhereUniqueWithoutGroupInput | PenaltyUpdateWithWhereUniqueWithoutGroupInput[]
+    updateMany?: PenaltyUpdateManyWithWhereWithoutGroupInput | PenaltyUpdateManyWithWhereWithoutGroupInput[]
+    deleteMany?: PenaltyScalarWhereInput | PenaltyScalarWhereInput[]
+  }
+
+  export type MeetingUpdateManyWithoutGroupNestedInput = {
+    create?: XOR<MeetingCreateWithoutGroupInput, MeetingUncheckedCreateWithoutGroupInput> | MeetingCreateWithoutGroupInput[] | MeetingUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: MeetingCreateOrConnectWithoutGroupInput | MeetingCreateOrConnectWithoutGroupInput[]
+    upsert?: MeetingUpsertWithWhereUniqueWithoutGroupInput | MeetingUpsertWithWhereUniqueWithoutGroupInput[]
+    createMany?: MeetingCreateManyGroupInputEnvelope
+    set?: MeetingWhereUniqueInput | MeetingWhereUniqueInput[]
+    disconnect?: MeetingWhereUniqueInput | MeetingWhereUniqueInput[]
+    delete?: MeetingWhereUniqueInput | MeetingWhereUniqueInput[]
+    connect?: MeetingWhereUniqueInput | MeetingWhereUniqueInput[]
+    update?: MeetingUpdateWithWhereUniqueWithoutGroupInput | MeetingUpdateWithWhereUniqueWithoutGroupInput[]
+    updateMany?: MeetingUpdateManyWithWhereWithoutGroupInput | MeetingUpdateManyWithWhereWithoutGroupInput[]
+    deleteMany?: MeetingScalarWhereInput | MeetingScalarWhereInput[]
+  }
+
+  export type AttendanceUpdateManyWithoutGroupNestedInput = {
+    create?: XOR<AttendanceCreateWithoutGroupInput, AttendanceUncheckedCreateWithoutGroupInput> | AttendanceCreateWithoutGroupInput[] | AttendanceUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: AttendanceCreateOrConnectWithoutGroupInput | AttendanceCreateOrConnectWithoutGroupInput[]
+    upsert?: AttendanceUpsertWithWhereUniqueWithoutGroupInput | AttendanceUpsertWithWhereUniqueWithoutGroupInput[]
+    createMany?: AttendanceCreateManyGroupInputEnvelope
+    set?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    disconnect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    delete?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    connect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    update?: AttendanceUpdateWithWhereUniqueWithoutGroupInput | AttendanceUpdateWithWhereUniqueWithoutGroupInput[]
+    updateMany?: AttendanceUpdateManyWithWhereWithoutGroupInput | AttendanceUpdateManyWithWhereWithoutGroupInput[]
+    deleteMany?: AttendanceScalarWhereInput | AttendanceScalarWhereInput[]
+  }
+
+  export type PollUpdateManyWithoutGroupNestedInput = {
+    create?: XOR<PollCreateWithoutGroupInput, PollUncheckedCreateWithoutGroupInput> | PollCreateWithoutGroupInput[] | PollUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: PollCreateOrConnectWithoutGroupInput | PollCreateOrConnectWithoutGroupInput[]
+    upsert?: PollUpsertWithWhereUniqueWithoutGroupInput | PollUpsertWithWhereUniqueWithoutGroupInput[]
+    createMany?: PollCreateManyGroupInputEnvelope
+    set?: PollWhereUniqueInput | PollWhereUniqueInput[]
+    disconnect?: PollWhereUniqueInput | PollWhereUniqueInput[]
+    delete?: PollWhereUniqueInput | PollWhereUniqueInput[]
+    connect?: PollWhereUniqueInput | PollWhereUniqueInput[]
+    update?: PollUpdateWithWhereUniqueWithoutGroupInput | PollUpdateWithWhereUniqueWithoutGroupInput[]
+    updateMany?: PollUpdateManyWithWhereWithoutGroupInput | PollUpdateManyWithWhereWithoutGroupInput[]
+    deleteMany?: PollScalarWhereInput | PollScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutGroupNestedInput = {
     create?: XOR<UserCreateWithoutGroupInput, UserUncheckedCreateWithoutGroupInput> | UserCreateWithoutGroupInput[] | UserUncheckedCreateWithoutGroupInput[]
     connectOrCreate?: UserCreateOrConnectWithoutGroupInput | UserCreateOrConnectWithoutGroupInput[]
@@ -14359,6 +21527,20 @@ export namespace Prisma {
     update?: UserUpdateWithWhereUniqueWithoutGroupInput | UserUpdateWithWhereUniqueWithoutGroupInput[]
     updateMany?: UserUpdateManyWithWhereWithoutGroupInput | UserUpdateManyWithWhereWithoutGroupInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type AnnouncementUncheckedUpdateManyWithoutGroupNestedInput = {
+    create?: XOR<AnnouncementCreateWithoutGroupInput, AnnouncementUncheckedCreateWithoutGroupInput> | AnnouncementCreateWithoutGroupInput[] | AnnouncementUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: AnnouncementCreateOrConnectWithoutGroupInput | AnnouncementCreateOrConnectWithoutGroupInput[]
+    upsert?: AnnouncementUpsertWithWhereUniqueWithoutGroupInput | AnnouncementUpsertWithWhereUniqueWithoutGroupInput[]
+    createMany?: AnnouncementCreateManyGroupInputEnvelope
+    set?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
+    disconnect?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
+    delete?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
+    connect?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
+    update?: AnnouncementUpdateWithWhereUniqueWithoutGroupInput | AnnouncementUpdateWithWhereUniqueWithoutGroupInput[]
+    updateMany?: AnnouncementUpdateManyWithWhereWithoutGroupInput | AnnouncementUpdateManyWithWhereWithoutGroupInput[]
+    deleteMany?: AnnouncementScalarWhereInput | AnnouncementScalarWhereInput[]
   }
 
   export type ContributionUncheckedUpdateManyWithoutGroupNestedInput = {
@@ -14417,6 +21599,62 @@ export namespace Prisma {
     deleteMany?: AuditLogScalarWhereInput | AuditLogScalarWhereInput[]
   }
 
+  export type PenaltyUncheckedUpdateManyWithoutGroupNestedInput = {
+    create?: XOR<PenaltyCreateWithoutGroupInput, PenaltyUncheckedCreateWithoutGroupInput> | PenaltyCreateWithoutGroupInput[] | PenaltyUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: PenaltyCreateOrConnectWithoutGroupInput | PenaltyCreateOrConnectWithoutGroupInput[]
+    upsert?: PenaltyUpsertWithWhereUniqueWithoutGroupInput | PenaltyUpsertWithWhereUniqueWithoutGroupInput[]
+    createMany?: PenaltyCreateManyGroupInputEnvelope
+    set?: PenaltyWhereUniqueInput | PenaltyWhereUniqueInput[]
+    disconnect?: PenaltyWhereUniqueInput | PenaltyWhereUniqueInput[]
+    delete?: PenaltyWhereUniqueInput | PenaltyWhereUniqueInput[]
+    connect?: PenaltyWhereUniqueInput | PenaltyWhereUniqueInput[]
+    update?: PenaltyUpdateWithWhereUniqueWithoutGroupInput | PenaltyUpdateWithWhereUniqueWithoutGroupInput[]
+    updateMany?: PenaltyUpdateManyWithWhereWithoutGroupInput | PenaltyUpdateManyWithWhereWithoutGroupInput[]
+    deleteMany?: PenaltyScalarWhereInput | PenaltyScalarWhereInput[]
+  }
+
+  export type MeetingUncheckedUpdateManyWithoutGroupNestedInput = {
+    create?: XOR<MeetingCreateWithoutGroupInput, MeetingUncheckedCreateWithoutGroupInput> | MeetingCreateWithoutGroupInput[] | MeetingUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: MeetingCreateOrConnectWithoutGroupInput | MeetingCreateOrConnectWithoutGroupInput[]
+    upsert?: MeetingUpsertWithWhereUniqueWithoutGroupInput | MeetingUpsertWithWhereUniqueWithoutGroupInput[]
+    createMany?: MeetingCreateManyGroupInputEnvelope
+    set?: MeetingWhereUniqueInput | MeetingWhereUniqueInput[]
+    disconnect?: MeetingWhereUniqueInput | MeetingWhereUniqueInput[]
+    delete?: MeetingWhereUniqueInput | MeetingWhereUniqueInput[]
+    connect?: MeetingWhereUniqueInput | MeetingWhereUniqueInput[]
+    update?: MeetingUpdateWithWhereUniqueWithoutGroupInput | MeetingUpdateWithWhereUniqueWithoutGroupInput[]
+    updateMany?: MeetingUpdateManyWithWhereWithoutGroupInput | MeetingUpdateManyWithWhereWithoutGroupInput[]
+    deleteMany?: MeetingScalarWhereInput | MeetingScalarWhereInput[]
+  }
+
+  export type AttendanceUncheckedUpdateManyWithoutGroupNestedInput = {
+    create?: XOR<AttendanceCreateWithoutGroupInput, AttendanceUncheckedCreateWithoutGroupInput> | AttendanceCreateWithoutGroupInput[] | AttendanceUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: AttendanceCreateOrConnectWithoutGroupInput | AttendanceCreateOrConnectWithoutGroupInput[]
+    upsert?: AttendanceUpsertWithWhereUniqueWithoutGroupInput | AttendanceUpsertWithWhereUniqueWithoutGroupInput[]
+    createMany?: AttendanceCreateManyGroupInputEnvelope
+    set?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    disconnect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    delete?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    connect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    update?: AttendanceUpdateWithWhereUniqueWithoutGroupInput | AttendanceUpdateWithWhereUniqueWithoutGroupInput[]
+    updateMany?: AttendanceUpdateManyWithWhereWithoutGroupInput | AttendanceUpdateManyWithWhereWithoutGroupInput[]
+    deleteMany?: AttendanceScalarWhereInput | AttendanceScalarWhereInput[]
+  }
+
+  export type PollUncheckedUpdateManyWithoutGroupNestedInput = {
+    create?: XOR<PollCreateWithoutGroupInput, PollUncheckedCreateWithoutGroupInput> | PollCreateWithoutGroupInput[] | PollUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: PollCreateOrConnectWithoutGroupInput | PollCreateOrConnectWithoutGroupInput[]
+    upsert?: PollUpsertWithWhereUniqueWithoutGroupInput | PollUpsertWithWhereUniqueWithoutGroupInput[]
+    createMany?: PollCreateManyGroupInputEnvelope
+    set?: PollWhereUniqueInput | PollWhereUniqueInput[]
+    disconnect?: PollWhereUniqueInput | PollWhereUniqueInput[]
+    delete?: PollWhereUniqueInput | PollWhereUniqueInput[]
+    connect?: PollWhereUniqueInput | PollWhereUniqueInput[]
+    update?: PollUpdateWithWhereUniqueWithoutGroupInput | PollUpdateWithWhereUniqueWithoutGroupInput[]
+    updateMany?: PollUpdateManyWithWhereWithoutGroupInput | PollUpdateManyWithWhereWithoutGroupInput[]
+    deleteMany?: PollScalarWhereInput | PollScalarWhereInput[]
+  }
+
   export type GroupCreateNestedOneWithoutMembersInput = {
     create?: XOR<GroupCreateWithoutMembersInput, GroupUncheckedCreateWithoutMembersInput>
     connectOrCreate?: GroupCreateOrConnectWithoutMembersInput
@@ -14428,6 +21666,13 @@ export namespace Prisma {
     connectOrCreate?: ContributionCreateOrConnectWithoutUserInput | ContributionCreateOrConnectWithoutUserInput[]
     createMany?: ContributionCreateManyUserInputEnvelope
     connect?: ContributionWhereUniqueInput | ContributionWhereUniqueInput[]
+  }
+
+  export type AnnouncementCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<AnnouncementCreateWithoutAuthorInput, AnnouncementUncheckedCreateWithoutAuthorInput> | AnnouncementCreateWithoutAuthorInput[] | AnnouncementUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: AnnouncementCreateOrConnectWithoutAuthorInput | AnnouncementCreateOrConnectWithoutAuthorInput[]
+    createMany?: AnnouncementCreateManyAuthorInputEnvelope
+    connect?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
   }
 
   export type LoanCreateNestedManyWithoutUserInput = {
@@ -14465,11 +21710,39 @@ export namespace Prisma {
     connect?: PenaltyWhereUniqueInput | PenaltyWhereUniqueInput[]
   }
 
+  export type AttendanceCreateNestedManyWithoutUserInput = {
+    create?: XOR<AttendanceCreateWithoutUserInput, AttendanceUncheckedCreateWithoutUserInput> | AttendanceCreateWithoutUserInput[] | AttendanceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AttendanceCreateOrConnectWithoutUserInput | AttendanceCreateOrConnectWithoutUserInput[]
+    createMany?: AttendanceCreateManyUserInputEnvelope
+    connect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+  }
+
+  export type VoteCreateNestedManyWithoutUserInput = {
+    create?: XOR<VoteCreateWithoutUserInput, VoteUncheckedCreateWithoutUserInput> | VoteCreateWithoutUserInput[] | VoteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutUserInput | VoteCreateOrConnectWithoutUserInput[]
+    createMany?: VoteCreateManyUserInputEnvelope
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+  }
+
+  export type LoanCreateNestedManyWithoutGuarantorInput = {
+    create?: XOR<LoanCreateWithoutGuarantorInput, LoanUncheckedCreateWithoutGuarantorInput> | LoanCreateWithoutGuarantorInput[] | LoanUncheckedCreateWithoutGuarantorInput[]
+    connectOrCreate?: LoanCreateOrConnectWithoutGuarantorInput | LoanCreateOrConnectWithoutGuarantorInput[]
+    createMany?: LoanCreateManyGuarantorInputEnvelope
+    connect?: LoanWhereUniqueInput | LoanWhereUniqueInput[]
+  }
+
   export type ContributionUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ContributionCreateWithoutUserInput, ContributionUncheckedCreateWithoutUserInput> | ContributionCreateWithoutUserInput[] | ContributionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ContributionCreateOrConnectWithoutUserInput | ContributionCreateOrConnectWithoutUserInput[]
     createMany?: ContributionCreateManyUserInputEnvelope
     connect?: ContributionWhereUniqueInput | ContributionWhereUniqueInput[]
+  }
+
+  export type AnnouncementUncheckedCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<AnnouncementCreateWithoutAuthorInput, AnnouncementUncheckedCreateWithoutAuthorInput> | AnnouncementCreateWithoutAuthorInput[] | AnnouncementUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: AnnouncementCreateOrConnectWithoutAuthorInput | AnnouncementCreateOrConnectWithoutAuthorInput[]
+    createMany?: AnnouncementCreateManyAuthorInputEnvelope
+    connect?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
   }
 
   export type LoanUncheckedCreateNestedManyWithoutUserInput = {
@@ -14507,6 +21780,27 @@ export namespace Prisma {
     connect?: PenaltyWhereUniqueInput | PenaltyWhereUniqueInput[]
   }
 
+  export type AttendanceUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AttendanceCreateWithoutUserInput, AttendanceUncheckedCreateWithoutUserInput> | AttendanceCreateWithoutUserInput[] | AttendanceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AttendanceCreateOrConnectWithoutUserInput | AttendanceCreateOrConnectWithoutUserInput[]
+    createMany?: AttendanceCreateManyUserInputEnvelope
+    connect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+  }
+
+  export type VoteUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<VoteCreateWithoutUserInput, VoteUncheckedCreateWithoutUserInput> | VoteCreateWithoutUserInput[] | VoteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutUserInput | VoteCreateOrConnectWithoutUserInput[]
+    createMany?: VoteCreateManyUserInputEnvelope
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+  }
+
+  export type LoanUncheckedCreateNestedManyWithoutGuarantorInput = {
+    create?: XOR<LoanCreateWithoutGuarantorInput, LoanUncheckedCreateWithoutGuarantorInput> | LoanCreateWithoutGuarantorInput[] | LoanUncheckedCreateWithoutGuarantorInput[]
+    connectOrCreate?: LoanCreateOrConnectWithoutGuarantorInput | LoanCreateOrConnectWithoutGuarantorInput[]
+    createMany?: LoanCreateManyGuarantorInputEnvelope
+    connect?: LoanWhereUniqueInput | LoanWhereUniqueInput[]
+  }
+
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
   }
@@ -14539,6 +21833,20 @@ export namespace Prisma {
     update?: ContributionUpdateWithWhereUniqueWithoutUserInput | ContributionUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ContributionUpdateManyWithWhereWithoutUserInput | ContributionUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ContributionScalarWhereInput | ContributionScalarWhereInput[]
+  }
+
+  export type AnnouncementUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<AnnouncementCreateWithoutAuthorInput, AnnouncementUncheckedCreateWithoutAuthorInput> | AnnouncementCreateWithoutAuthorInput[] | AnnouncementUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: AnnouncementCreateOrConnectWithoutAuthorInput | AnnouncementCreateOrConnectWithoutAuthorInput[]
+    upsert?: AnnouncementUpsertWithWhereUniqueWithoutAuthorInput | AnnouncementUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: AnnouncementCreateManyAuthorInputEnvelope
+    set?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
+    disconnect?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
+    delete?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
+    connect?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
+    update?: AnnouncementUpdateWithWhereUniqueWithoutAuthorInput | AnnouncementUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: AnnouncementUpdateManyWithWhereWithoutAuthorInput | AnnouncementUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: AnnouncementScalarWhereInput | AnnouncementScalarWhereInput[]
   }
 
   export type LoanUpdateManyWithoutUserNestedInput = {
@@ -14611,6 +21919,48 @@ export namespace Prisma {
     deleteMany?: PenaltyScalarWhereInput | PenaltyScalarWhereInput[]
   }
 
+  export type AttendanceUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AttendanceCreateWithoutUserInput, AttendanceUncheckedCreateWithoutUserInput> | AttendanceCreateWithoutUserInput[] | AttendanceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AttendanceCreateOrConnectWithoutUserInput | AttendanceCreateOrConnectWithoutUserInput[]
+    upsert?: AttendanceUpsertWithWhereUniqueWithoutUserInput | AttendanceUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AttendanceCreateManyUserInputEnvelope
+    set?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    disconnect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    delete?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    connect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    update?: AttendanceUpdateWithWhereUniqueWithoutUserInput | AttendanceUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AttendanceUpdateManyWithWhereWithoutUserInput | AttendanceUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AttendanceScalarWhereInput | AttendanceScalarWhereInput[]
+  }
+
+  export type VoteUpdateManyWithoutUserNestedInput = {
+    create?: XOR<VoteCreateWithoutUserInput, VoteUncheckedCreateWithoutUserInput> | VoteCreateWithoutUserInput[] | VoteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutUserInput | VoteCreateOrConnectWithoutUserInput[]
+    upsert?: VoteUpsertWithWhereUniqueWithoutUserInput | VoteUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: VoteCreateManyUserInputEnvelope
+    set?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    disconnect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    delete?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    update?: VoteUpdateWithWhereUniqueWithoutUserInput | VoteUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: VoteUpdateManyWithWhereWithoutUserInput | VoteUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: VoteScalarWhereInput | VoteScalarWhereInput[]
+  }
+
+  export type LoanUpdateManyWithoutGuarantorNestedInput = {
+    create?: XOR<LoanCreateWithoutGuarantorInput, LoanUncheckedCreateWithoutGuarantorInput> | LoanCreateWithoutGuarantorInput[] | LoanUncheckedCreateWithoutGuarantorInput[]
+    connectOrCreate?: LoanCreateOrConnectWithoutGuarantorInput | LoanCreateOrConnectWithoutGuarantorInput[]
+    upsert?: LoanUpsertWithWhereUniqueWithoutGuarantorInput | LoanUpsertWithWhereUniqueWithoutGuarantorInput[]
+    createMany?: LoanCreateManyGuarantorInputEnvelope
+    set?: LoanWhereUniqueInput | LoanWhereUniqueInput[]
+    disconnect?: LoanWhereUniqueInput | LoanWhereUniqueInput[]
+    delete?: LoanWhereUniqueInput | LoanWhereUniqueInput[]
+    connect?: LoanWhereUniqueInput | LoanWhereUniqueInput[]
+    update?: LoanUpdateWithWhereUniqueWithoutGuarantorInput | LoanUpdateWithWhereUniqueWithoutGuarantorInput[]
+    updateMany?: LoanUpdateManyWithWhereWithoutGuarantorInput | LoanUpdateManyWithWhereWithoutGuarantorInput[]
+    deleteMany?: LoanScalarWhereInput | LoanScalarWhereInput[]
+  }
+
   export type ContributionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ContributionCreateWithoutUserInput, ContributionUncheckedCreateWithoutUserInput> | ContributionCreateWithoutUserInput[] | ContributionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ContributionCreateOrConnectWithoutUserInput | ContributionCreateOrConnectWithoutUserInput[]
@@ -14623,6 +21973,20 @@ export namespace Prisma {
     update?: ContributionUpdateWithWhereUniqueWithoutUserInput | ContributionUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ContributionUpdateManyWithWhereWithoutUserInput | ContributionUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ContributionScalarWhereInput | ContributionScalarWhereInput[]
+  }
+
+  export type AnnouncementUncheckedUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<AnnouncementCreateWithoutAuthorInput, AnnouncementUncheckedCreateWithoutAuthorInput> | AnnouncementCreateWithoutAuthorInput[] | AnnouncementUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: AnnouncementCreateOrConnectWithoutAuthorInput | AnnouncementCreateOrConnectWithoutAuthorInput[]
+    upsert?: AnnouncementUpsertWithWhereUniqueWithoutAuthorInput | AnnouncementUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: AnnouncementCreateManyAuthorInputEnvelope
+    set?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
+    disconnect?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
+    delete?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
+    connect?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
+    update?: AnnouncementUpdateWithWhereUniqueWithoutAuthorInput | AnnouncementUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: AnnouncementUpdateManyWithWhereWithoutAuthorInput | AnnouncementUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: AnnouncementScalarWhereInput | AnnouncementScalarWhereInput[]
   }
 
   export type LoanUncheckedUpdateManyWithoutUserNestedInput = {
@@ -14695,6 +22059,48 @@ export namespace Prisma {
     deleteMany?: PenaltyScalarWhereInput | PenaltyScalarWhereInput[]
   }
 
+  export type AttendanceUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AttendanceCreateWithoutUserInput, AttendanceUncheckedCreateWithoutUserInput> | AttendanceCreateWithoutUserInput[] | AttendanceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AttendanceCreateOrConnectWithoutUserInput | AttendanceCreateOrConnectWithoutUserInput[]
+    upsert?: AttendanceUpsertWithWhereUniqueWithoutUserInput | AttendanceUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AttendanceCreateManyUserInputEnvelope
+    set?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    disconnect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    delete?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    connect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    update?: AttendanceUpdateWithWhereUniqueWithoutUserInput | AttendanceUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AttendanceUpdateManyWithWhereWithoutUserInput | AttendanceUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AttendanceScalarWhereInput | AttendanceScalarWhereInput[]
+  }
+
+  export type VoteUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<VoteCreateWithoutUserInput, VoteUncheckedCreateWithoutUserInput> | VoteCreateWithoutUserInput[] | VoteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutUserInput | VoteCreateOrConnectWithoutUserInput[]
+    upsert?: VoteUpsertWithWhereUniqueWithoutUserInput | VoteUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: VoteCreateManyUserInputEnvelope
+    set?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    disconnect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    delete?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    update?: VoteUpdateWithWhereUniqueWithoutUserInput | VoteUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: VoteUpdateManyWithWhereWithoutUserInput | VoteUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: VoteScalarWhereInput | VoteScalarWhereInput[]
+  }
+
+  export type LoanUncheckedUpdateManyWithoutGuarantorNestedInput = {
+    create?: XOR<LoanCreateWithoutGuarantorInput, LoanUncheckedCreateWithoutGuarantorInput> | LoanCreateWithoutGuarantorInput[] | LoanUncheckedCreateWithoutGuarantorInput[]
+    connectOrCreate?: LoanCreateOrConnectWithoutGuarantorInput | LoanCreateOrConnectWithoutGuarantorInput[]
+    upsert?: LoanUpsertWithWhereUniqueWithoutGuarantorInput | LoanUpsertWithWhereUniqueWithoutGuarantorInput[]
+    createMany?: LoanCreateManyGuarantorInputEnvelope
+    set?: LoanWhereUniqueInput | LoanWhereUniqueInput[]
+    disconnect?: LoanWhereUniqueInput | LoanWhereUniqueInput[]
+    delete?: LoanWhereUniqueInput | LoanWhereUniqueInput[]
+    connect?: LoanWhereUniqueInput | LoanWhereUniqueInput[]
+    update?: LoanUpdateWithWhereUniqueWithoutGuarantorInput | LoanUpdateWithWhereUniqueWithoutGuarantorInput[]
+    updateMany?: LoanUpdateManyWithWhereWithoutGuarantorInput | LoanUpdateManyWithWhereWithoutGuarantorInput[]
+    deleteMany?: LoanScalarWhereInput | LoanScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutContributionsInput = {
     create?: XOR<UserCreateWithoutContributionsInput, UserUncheckedCreateWithoutContributionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutContributionsInput
@@ -14733,6 +22139,12 @@ export namespace Prisma {
     create?: XOR<GroupCreateWithoutLoansInput, GroupUncheckedCreateWithoutLoansInput>
     connectOrCreate?: GroupCreateOrConnectWithoutLoansInput
     connect?: GroupWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutGuaranteedLoansInput = {
+    create?: XOR<UserCreateWithoutGuaranteedLoansInput, UserUncheckedCreateWithoutGuaranteedLoansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGuaranteedLoansInput
+    connect?: UserWhereUniqueInput
   }
 
   export type RepaymentCreateNestedManyWithoutLoanInput = {
@@ -14777,6 +22189,16 @@ export namespace Prisma {
     upsert?: GroupUpsertWithoutLoansInput
     connect?: GroupWhereUniqueInput
     update?: XOR<XOR<GroupUpdateToOneWithWhereWithoutLoansInput, GroupUpdateWithoutLoansInput>, GroupUncheckedUpdateWithoutLoansInput>
+  }
+
+  export type UserUpdateOneWithoutGuaranteedLoansNestedInput = {
+    create?: XOR<UserCreateWithoutGuaranteedLoansInput, UserUncheckedCreateWithoutGuaranteedLoansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGuaranteedLoansInput
+    upsert?: UserUpsertWithoutGuaranteedLoansInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutGuaranteedLoansInput, UserUpdateWithoutGuaranteedLoansInput>, UserUncheckedUpdateWithoutGuaranteedLoansInput>
   }
 
   export type RepaymentUpdateManyWithoutLoanNestedInput = {
@@ -14999,12 +22421,236 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type GroupCreateNestedOneWithoutPenaltiesInput = {
+    create?: XOR<GroupCreateWithoutPenaltiesInput, GroupUncheckedCreateWithoutPenaltiesInput>
+    connectOrCreate?: GroupCreateOrConnectWithoutPenaltiesInput
+    connect?: GroupWhereUniqueInput
+  }
+
   export type UserUpdateOneRequiredWithoutPenaltiesNestedInput = {
     create?: XOR<UserCreateWithoutPenaltiesInput, UserUncheckedCreateWithoutPenaltiesInput>
     connectOrCreate?: UserCreateOrConnectWithoutPenaltiesInput
     upsert?: UserUpsertWithoutPenaltiesInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPenaltiesInput, UserUpdateWithoutPenaltiesInput>, UserUncheckedUpdateWithoutPenaltiesInput>
+  }
+
+  export type GroupUpdateOneRequiredWithoutPenaltiesNestedInput = {
+    create?: XOR<GroupCreateWithoutPenaltiesInput, GroupUncheckedCreateWithoutPenaltiesInput>
+    connectOrCreate?: GroupCreateOrConnectWithoutPenaltiesInput
+    upsert?: GroupUpsertWithoutPenaltiesInput
+    connect?: GroupWhereUniqueInput
+    update?: XOR<XOR<GroupUpdateToOneWithWhereWithoutPenaltiesInput, GroupUpdateWithoutPenaltiesInput>, GroupUncheckedUpdateWithoutPenaltiesInput>
+  }
+
+  export type GroupCreateNestedOneWithoutAnnouncementsInput = {
+    create?: XOR<GroupCreateWithoutAnnouncementsInput, GroupUncheckedCreateWithoutAnnouncementsInput>
+    connectOrCreate?: GroupCreateOrConnectWithoutAnnouncementsInput
+    connect?: GroupWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutAnnouncementsInput = {
+    create?: XOR<UserCreateWithoutAnnouncementsInput, UserUncheckedCreateWithoutAnnouncementsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAnnouncementsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type GroupUpdateOneRequiredWithoutAnnouncementsNestedInput = {
+    create?: XOR<GroupCreateWithoutAnnouncementsInput, GroupUncheckedCreateWithoutAnnouncementsInput>
+    connectOrCreate?: GroupCreateOrConnectWithoutAnnouncementsInput
+    upsert?: GroupUpsertWithoutAnnouncementsInput
+    connect?: GroupWhereUniqueInput
+    update?: XOR<XOR<GroupUpdateToOneWithWhereWithoutAnnouncementsInput, GroupUpdateWithoutAnnouncementsInput>, GroupUncheckedUpdateWithoutAnnouncementsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutAnnouncementsNestedInput = {
+    create?: XOR<UserCreateWithoutAnnouncementsInput, UserUncheckedCreateWithoutAnnouncementsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAnnouncementsInput
+    upsert?: UserUpsertWithoutAnnouncementsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAnnouncementsInput, UserUpdateWithoutAnnouncementsInput>, UserUncheckedUpdateWithoutAnnouncementsInput>
+  }
+
+  export type GroupCreateNestedOneWithoutMeetingsInput = {
+    create?: XOR<GroupCreateWithoutMeetingsInput, GroupUncheckedCreateWithoutMeetingsInput>
+    connectOrCreate?: GroupCreateOrConnectWithoutMeetingsInput
+    connect?: GroupWhereUniqueInput
+  }
+
+  export type AttendanceCreateNestedManyWithoutMeetingInput = {
+    create?: XOR<AttendanceCreateWithoutMeetingInput, AttendanceUncheckedCreateWithoutMeetingInput> | AttendanceCreateWithoutMeetingInput[] | AttendanceUncheckedCreateWithoutMeetingInput[]
+    connectOrCreate?: AttendanceCreateOrConnectWithoutMeetingInput | AttendanceCreateOrConnectWithoutMeetingInput[]
+    createMany?: AttendanceCreateManyMeetingInputEnvelope
+    connect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+  }
+
+  export type AttendanceUncheckedCreateNestedManyWithoutMeetingInput = {
+    create?: XOR<AttendanceCreateWithoutMeetingInput, AttendanceUncheckedCreateWithoutMeetingInput> | AttendanceCreateWithoutMeetingInput[] | AttendanceUncheckedCreateWithoutMeetingInput[]
+    connectOrCreate?: AttendanceCreateOrConnectWithoutMeetingInput | AttendanceCreateOrConnectWithoutMeetingInput[]
+    createMany?: AttendanceCreateManyMeetingInputEnvelope
+    connect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+  }
+
+  export type GroupUpdateOneRequiredWithoutMeetingsNestedInput = {
+    create?: XOR<GroupCreateWithoutMeetingsInput, GroupUncheckedCreateWithoutMeetingsInput>
+    connectOrCreate?: GroupCreateOrConnectWithoutMeetingsInput
+    upsert?: GroupUpsertWithoutMeetingsInput
+    connect?: GroupWhereUniqueInput
+    update?: XOR<XOR<GroupUpdateToOneWithWhereWithoutMeetingsInput, GroupUpdateWithoutMeetingsInput>, GroupUncheckedUpdateWithoutMeetingsInput>
+  }
+
+  export type AttendanceUpdateManyWithoutMeetingNestedInput = {
+    create?: XOR<AttendanceCreateWithoutMeetingInput, AttendanceUncheckedCreateWithoutMeetingInput> | AttendanceCreateWithoutMeetingInput[] | AttendanceUncheckedCreateWithoutMeetingInput[]
+    connectOrCreate?: AttendanceCreateOrConnectWithoutMeetingInput | AttendanceCreateOrConnectWithoutMeetingInput[]
+    upsert?: AttendanceUpsertWithWhereUniqueWithoutMeetingInput | AttendanceUpsertWithWhereUniqueWithoutMeetingInput[]
+    createMany?: AttendanceCreateManyMeetingInputEnvelope
+    set?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    disconnect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    delete?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    connect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    update?: AttendanceUpdateWithWhereUniqueWithoutMeetingInput | AttendanceUpdateWithWhereUniqueWithoutMeetingInput[]
+    updateMany?: AttendanceUpdateManyWithWhereWithoutMeetingInput | AttendanceUpdateManyWithWhereWithoutMeetingInput[]
+    deleteMany?: AttendanceScalarWhereInput | AttendanceScalarWhereInput[]
+  }
+
+  export type AttendanceUncheckedUpdateManyWithoutMeetingNestedInput = {
+    create?: XOR<AttendanceCreateWithoutMeetingInput, AttendanceUncheckedCreateWithoutMeetingInput> | AttendanceCreateWithoutMeetingInput[] | AttendanceUncheckedCreateWithoutMeetingInput[]
+    connectOrCreate?: AttendanceCreateOrConnectWithoutMeetingInput | AttendanceCreateOrConnectWithoutMeetingInput[]
+    upsert?: AttendanceUpsertWithWhereUniqueWithoutMeetingInput | AttendanceUpsertWithWhereUniqueWithoutMeetingInput[]
+    createMany?: AttendanceCreateManyMeetingInputEnvelope
+    set?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    disconnect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    delete?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    connect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+    update?: AttendanceUpdateWithWhereUniqueWithoutMeetingInput | AttendanceUpdateWithWhereUniqueWithoutMeetingInput[]
+    updateMany?: AttendanceUpdateManyWithWhereWithoutMeetingInput | AttendanceUpdateManyWithWhereWithoutMeetingInput[]
+    deleteMany?: AttendanceScalarWhereInput | AttendanceScalarWhereInput[]
+  }
+
+  export type MeetingCreateNestedOneWithoutAttendancesInput = {
+    create?: XOR<MeetingCreateWithoutAttendancesInput, MeetingUncheckedCreateWithoutAttendancesInput>
+    connectOrCreate?: MeetingCreateOrConnectWithoutAttendancesInput
+    connect?: MeetingWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutAttendancesInput = {
+    create?: XOR<UserCreateWithoutAttendancesInput, UserUncheckedCreateWithoutAttendancesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAttendancesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type GroupCreateNestedOneWithoutAttendancesInput = {
+    create?: XOR<GroupCreateWithoutAttendancesInput, GroupUncheckedCreateWithoutAttendancesInput>
+    connectOrCreate?: GroupCreateOrConnectWithoutAttendancesInput
+    connect?: GroupWhereUniqueInput
+  }
+
+  export type MeetingUpdateOneRequiredWithoutAttendancesNestedInput = {
+    create?: XOR<MeetingCreateWithoutAttendancesInput, MeetingUncheckedCreateWithoutAttendancesInput>
+    connectOrCreate?: MeetingCreateOrConnectWithoutAttendancesInput
+    upsert?: MeetingUpsertWithoutAttendancesInput
+    connect?: MeetingWhereUniqueInput
+    update?: XOR<XOR<MeetingUpdateToOneWithWhereWithoutAttendancesInput, MeetingUpdateWithoutAttendancesInput>, MeetingUncheckedUpdateWithoutAttendancesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutAttendancesNestedInput = {
+    create?: XOR<UserCreateWithoutAttendancesInput, UserUncheckedCreateWithoutAttendancesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAttendancesInput
+    upsert?: UserUpsertWithoutAttendancesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAttendancesInput, UserUpdateWithoutAttendancesInput>, UserUncheckedUpdateWithoutAttendancesInput>
+  }
+
+  export type GroupUpdateOneRequiredWithoutAttendancesNestedInput = {
+    create?: XOR<GroupCreateWithoutAttendancesInput, GroupUncheckedCreateWithoutAttendancesInput>
+    connectOrCreate?: GroupCreateOrConnectWithoutAttendancesInput
+    upsert?: GroupUpsertWithoutAttendancesInput
+    connect?: GroupWhereUniqueInput
+    update?: XOR<XOR<GroupUpdateToOneWithWhereWithoutAttendancesInput, GroupUpdateWithoutAttendancesInput>, GroupUncheckedUpdateWithoutAttendancesInput>
+  }
+
+  export type GroupCreateNestedOneWithoutPollsInput = {
+    create?: XOR<GroupCreateWithoutPollsInput, GroupUncheckedCreateWithoutPollsInput>
+    connectOrCreate?: GroupCreateOrConnectWithoutPollsInput
+    connect?: GroupWhereUniqueInput
+  }
+
+  export type VoteCreateNestedManyWithoutPollInput = {
+    create?: XOR<VoteCreateWithoutPollInput, VoteUncheckedCreateWithoutPollInput> | VoteCreateWithoutPollInput[] | VoteUncheckedCreateWithoutPollInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutPollInput | VoteCreateOrConnectWithoutPollInput[]
+    createMany?: VoteCreateManyPollInputEnvelope
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+  }
+
+  export type VoteUncheckedCreateNestedManyWithoutPollInput = {
+    create?: XOR<VoteCreateWithoutPollInput, VoteUncheckedCreateWithoutPollInput> | VoteCreateWithoutPollInput[] | VoteUncheckedCreateWithoutPollInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutPollInput | VoteCreateOrConnectWithoutPollInput[]
+    createMany?: VoteCreateManyPollInputEnvelope
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+  }
+
+  export type GroupUpdateOneRequiredWithoutPollsNestedInput = {
+    create?: XOR<GroupCreateWithoutPollsInput, GroupUncheckedCreateWithoutPollsInput>
+    connectOrCreate?: GroupCreateOrConnectWithoutPollsInput
+    upsert?: GroupUpsertWithoutPollsInput
+    connect?: GroupWhereUniqueInput
+    update?: XOR<XOR<GroupUpdateToOneWithWhereWithoutPollsInput, GroupUpdateWithoutPollsInput>, GroupUncheckedUpdateWithoutPollsInput>
+  }
+
+  export type VoteUpdateManyWithoutPollNestedInput = {
+    create?: XOR<VoteCreateWithoutPollInput, VoteUncheckedCreateWithoutPollInput> | VoteCreateWithoutPollInput[] | VoteUncheckedCreateWithoutPollInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutPollInput | VoteCreateOrConnectWithoutPollInput[]
+    upsert?: VoteUpsertWithWhereUniqueWithoutPollInput | VoteUpsertWithWhereUniqueWithoutPollInput[]
+    createMany?: VoteCreateManyPollInputEnvelope
+    set?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    disconnect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    delete?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    update?: VoteUpdateWithWhereUniqueWithoutPollInput | VoteUpdateWithWhereUniqueWithoutPollInput[]
+    updateMany?: VoteUpdateManyWithWhereWithoutPollInput | VoteUpdateManyWithWhereWithoutPollInput[]
+    deleteMany?: VoteScalarWhereInput | VoteScalarWhereInput[]
+  }
+
+  export type VoteUncheckedUpdateManyWithoutPollNestedInput = {
+    create?: XOR<VoteCreateWithoutPollInput, VoteUncheckedCreateWithoutPollInput> | VoteCreateWithoutPollInput[] | VoteUncheckedCreateWithoutPollInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutPollInput | VoteCreateOrConnectWithoutPollInput[]
+    upsert?: VoteUpsertWithWhereUniqueWithoutPollInput | VoteUpsertWithWhereUniqueWithoutPollInput[]
+    createMany?: VoteCreateManyPollInputEnvelope
+    set?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    disconnect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    delete?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    update?: VoteUpdateWithWhereUniqueWithoutPollInput | VoteUpdateWithWhereUniqueWithoutPollInput[]
+    updateMany?: VoteUpdateManyWithWhereWithoutPollInput | VoteUpdateManyWithWhereWithoutPollInput[]
+    deleteMany?: VoteScalarWhereInput | VoteScalarWhereInput[]
+  }
+
+  export type PollCreateNestedOneWithoutVoicesInput = {
+    create?: XOR<PollCreateWithoutVoicesInput, PollUncheckedCreateWithoutVoicesInput>
+    connectOrCreate?: PollCreateOrConnectWithoutVoicesInput
+    connect?: PollWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutVotesInput = {
+    create?: XOR<UserCreateWithoutVotesInput, UserUncheckedCreateWithoutVotesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVotesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type PollUpdateOneRequiredWithoutVoicesNestedInput = {
+    create?: XOR<PollCreateWithoutVoicesInput, PollUncheckedCreateWithoutVoicesInput>
+    connectOrCreate?: PollCreateOrConnectWithoutVoicesInput
+    upsert?: PollUpsertWithoutVoicesInput
+    connect?: PollWhereUniqueInput
+    update?: XOR<XOR<PollUpdateToOneWithWhereWithoutVoicesInput, PollUpdateWithoutVoicesInput>, PollUncheckedUpdateWithoutVoicesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutVotesNestedInput = {
+    create?: XOR<UserCreateWithoutVotesInput, UserUncheckedCreateWithoutVotesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVotesInput
+    upsert?: UserUpsertWithoutVotesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVotesInput, UserUpdateWithoutVotesInput>, UserUncheckedUpdateWithoutVotesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -15043,6 +22689,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -15058,17 +22715,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -15099,6 +22745,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
@@ -15184,39 +22846,55 @@ export namespace Prisma {
   export type UserCreateWithoutGroupInput = {
     id?: string
     phone: string
+    email?: string | null
     nationalId?: string | null
     name: string
     password: string
     role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
     agreedToRules?: boolean
     agreedAt?: Date | string | null
+    agreementUrl?: string | null
     lastPasswordChange?: Date | string | null
     createdAt?: Date | string
     contributions?: ContributionCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementCreateNestedManyWithoutAuthorInput
     loans?: LoanCreateNestedManyWithoutUserInput
     payouts?: PayoutCreateNestedManyWithoutRequestedByInput
     payoutApprovals?: PayoutApprovalCreateNestedManyWithoutAdminInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
     penalties?: PenaltyCreateNestedManyWithoutUserInput
+    attendances?: AttendanceCreateNestedManyWithoutUserInput
+    votes?: VoteCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanCreateNestedManyWithoutGuarantorInput
   }
 
   export type UserUncheckedCreateWithoutGroupInput = {
     id?: string
     phone: string
+    email?: string | null
     nationalId?: string | null
     name: string
     password: string
     role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
     agreedToRules?: boolean
     agreedAt?: Date | string | null
+    agreementUrl?: string | null
     lastPasswordChange?: Date | string | null
     createdAt?: Date | string
     contributions?: ContributionUncheckedCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutAuthorInput
     loans?: LoanUncheckedCreateNestedManyWithoutUserInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutRequestedByInput
     payoutApprovals?: PayoutApprovalUncheckedCreateNestedManyWithoutAdminInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
     penalties?: PenaltyUncheckedCreateNestedManyWithoutUserInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutUserInput
+    votes?: VoteUncheckedCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanUncheckedCreateNestedManyWithoutGuarantorInput
   }
 
   export type UserCreateOrConnectWithoutGroupInput = {
@@ -15228,22 +22906,59 @@ export namespace Prisma {
     data: UserCreateManyGroupInput | UserCreateManyGroupInput[]
   }
 
+  export type AnnouncementCreateWithoutGroupInput = {
+    id?: string
+    title: string
+    body: string
+    type?: string
+    eventDate?: Date | string | null
+    createdAt?: Date | string
+    author: UserCreateNestedOneWithoutAnnouncementsInput
+  }
+
+  export type AnnouncementUncheckedCreateWithoutGroupInput = {
+    id?: string
+    title: string
+    body: string
+    type?: string
+    eventDate?: Date | string | null
+    createdBy: string
+    createdAt?: Date | string
+  }
+
+  export type AnnouncementCreateOrConnectWithoutGroupInput = {
+    where: AnnouncementWhereUniqueInput
+    create: XOR<AnnouncementCreateWithoutGroupInput, AnnouncementUncheckedCreateWithoutGroupInput>
+  }
+
+  export type AnnouncementCreateManyGroupInputEnvelope = {
+    data: AnnouncementCreateManyGroupInput | AnnouncementCreateManyGroupInput[]
+  }
+
   export type ContributionCreateWithoutGroupInput = {
     id?: string
+    refNo?: string | null
     amount: number
     status: string
     timestamp?: Date | string
     isLocked?: boolean
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
     user: UserCreateNestedOneWithoutContributionsInput
   }
 
   export type ContributionUncheckedCreateWithoutGroupInput = {
     id?: string
+    refNo?: string | null
     amount: number
     status: string
     timestamp?: Date | string
     userId: string
     isLocked?: boolean
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
   }
 
   export type ContributionCreateOrConnectWithoutGroupInput = {
@@ -15257,23 +22972,27 @@ export namespace Prisma {
 
   export type LoanCreateWithoutGroupInput = {
     id?: string
+    refNo?: string | null
     amount: number
     interestRate: number
     deadline: Date | string
     status: string
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutLoansInput
+    guarantor?: UserCreateNestedOneWithoutGuaranteedLoansInput
     repayments?: RepaymentCreateNestedManyWithoutLoanInput
     payouts?: PayoutCreateNestedManyWithoutLoanInput
   }
 
   export type LoanUncheckedCreateWithoutGroupInput = {
     id?: string
+    refNo?: string | null
     amount: number
     interestRate: number
     deadline: Date | string
     status: string
     userId: string
+    guarantorId?: string | null
     createdAt?: Date | string
     repayments?: RepaymentUncheckedCreateNestedManyWithoutLoanInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutLoanInput
@@ -15290,9 +23009,13 @@ export namespace Prisma {
 
   export type PayoutCreateWithoutGroupInput = {
     id?: string
+    refNo?: string | null
     amount: number
     description: string
     status: string
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
     createdAt?: Date | string
     approvals?: PayoutApprovalCreateNestedManyWithoutPayoutInput
     requestedBy: UserCreateNestedOneWithoutPayoutsInput
@@ -15301,11 +23024,15 @@ export namespace Prisma {
 
   export type PayoutUncheckedCreateWithoutGroupInput = {
     id?: string
+    refNo?: string | null
     amount: number
     description: string
     status: string
     requestedById: string
     loanId?: string | null
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
     createdAt?: Date | string
     approvals?: PayoutApprovalUncheckedCreateNestedManyWithoutPayoutInput
   }
@@ -15344,6 +23071,108 @@ export namespace Prisma {
     data: AuditLogCreateManyGroupInput | AuditLogCreateManyGroupInput[]
   }
 
+  export type PenaltyCreateWithoutGroupInput = {
+    id?: string
+    amount: number
+    reason: string
+    status: string
+    timestamp?: Date | string
+    user: UserCreateNestedOneWithoutPenaltiesInput
+  }
+
+  export type PenaltyUncheckedCreateWithoutGroupInput = {
+    id?: string
+    amount: number
+    reason: string
+    status: string
+    userId: string
+    timestamp?: Date | string
+  }
+
+  export type PenaltyCreateOrConnectWithoutGroupInput = {
+    where: PenaltyWhereUniqueInput
+    create: XOR<PenaltyCreateWithoutGroupInput, PenaltyUncheckedCreateWithoutGroupInput>
+  }
+
+  export type PenaltyCreateManyGroupInputEnvelope = {
+    data: PenaltyCreateManyGroupInput | PenaltyCreateManyGroupInput[]
+  }
+
+  export type MeetingCreateWithoutGroupInput = {
+    id?: string
+    date: Date | string
+    title: string
+    createdAt?: Date | string
+    attendances?: AttendanceCreateNestedManyWithoutMeetingInput
+  }
+
+  export type MeetingUncheckedCreateWithoutGroupInput = {
+    id?: string
+    date: Date | string
+    title: string
+    createdAt?: Date | string
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutMeetingInput
+  }
+
+  export type MeetingCreateOrConnectWithoutGroupInput = {
+    where: MeetingWhereUniqueInput
+    create: XOR<MeetingCreateWithoutGroupInput, MeetingUncheckedCreateWithoutGroupInput>
+  }
+
+  export type MeetingCreateManyGroupInputEnvelope = {
+    data: MeetingCreateManyGroupInput | MeetingCreateManyGroupInput[]
+  }
+
+  export type AttendanceCreateWithoutGroupInput = {
+    id?: string
+    status: string
+    meeting: MeetingCreateNestedOneWithoutAttendancesInput
+    user: UserCreateNestedOneWithoutAttendancesInput
+  }
+
+  export type AttendanceUncheckedCreateWithoutGroupInput = {
+    id?: string
+    meetingId: string
+    userId: string
+    status: string
+  }
+
+  export type AttendanceCreateOrConnectWithoutGroupInput = {
+    where: AttendanceWhereUniqueInput
+    create: XOR<AttendanceCreateWithoutGroupInput, AttendanceUncheckedCreateWithoutGroupInput>
+  }
+
+  export type AttendanceCreateManyGroupInputEnvelope = {
+    data: AttendanceCreateManyGroupInput | AttendanceCreateManyGroupInput[]
+  }
+
+  export type PollCreateWithoutGroupInput = {
+    id?: string
+    title: string
+    description: string
+    status?: string
+    createdAt?: Date | string
+    voices?: VoteCreateNestedManyWithoutPollInput
+  }
+
+  export type PollUncheckedCreateWithoutGroupInput = {
+    id?: string
+    title: string
+    description: string
+    status?: string
+    createdAt?: Date | string
+    voices?: VoteUncheckedCreateNestedManyWithoutPollInput
+  }
+
+  export type PollCreateOrConnectWithoutGroupInput = {
+    where: PollWhereUniqueInput
+    create: XOR<PollCreateWithoutGroupInput, PollUncheckedCreateWithoutGroupInput>
+  }
+
+  export type PollCreateManyGroupInputEnvelope = {
+    data: PollCreateManyGroupInput | PollCreateManyGroupInput[]
+  }
+
   export type UserUpsertWithWhereUniqueWithoutGroupInput = {
     where: UserWhereUniqueInput
     update: XOR<UserUpdateWithoutGroupInput, UserUncheckedUpdateWithoutGroupInput>
@@ -15366,15 +23195,49 @@ export namespace Prisma {
     NOT?: UserScalarWhereInput | UserScalarWhereInput[]
     id?: StringFilter<"User"> | string
     phone?: StringFilter<"User"> | string
+    email?: StringNullableFilter<"User"> | string | null
     nationalId?: StringNullableFilter<"User"> | string | null
     name?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     role?: StringFilter<"User"> | string
+    mustChangePassword?: BoolFilter<"User"> | boolean
+    isActive?: BoolFilter<"User"> | boolean
     groupId?: StringFilter<"User"> | string
     agreedToRules?: BoolFilter<"User"> | boolean
     agreedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    agreementUrl?: StringNullableFilter<"User"> | string | null
     lastPasswordChange?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
+  }
+
+  export type AnnouncementUpsertWithWhereUniqueWithoutGroupInput = {
+    where: AnnouncementWhereUniqueInput
+    update: XOR<AnnouncementUpdateWithoutGroupInput, AnnouncementUncheckedUpdateWithoutGroupInput>
+    create: XOR<AnnouncementCreateWithoutGroupInput, AnnouncementUncheckedCreateWithoutGroupInput>
+  }
+
+  export type AnnouncementUpdateWithWhereUniqueWithoutGroupInput = {
+    where: AnnouncementWhereUniqueInput
+    data: XOR<AnnouncementUpdateWithoutGroupInput, AnnouncementUncheckedUpdateWithoutGroupInput>
+  }
+
+  export type AnnouncementUpdateManyWithWhereWithoutGroupInput = {
+    where: AnnouncementScalarWhereInput
+    data: XOR<AnnouncementUpdateManyMutationInput, AnnouncementUncheckedUpdateManyWithoutGroupInput>
+  }
+
+  export type AnnouncementScalarWhereInput = {
+    AND?: AnnouncementScalarWhereInput | AnnouncementScalarWhereInput[]
+    OR?: AnnouncementScalarWhereInput[]
+    NOT?: AnnouncementScalarWhereInput | AnnouncementScalarWhereInput[]
+    id?: StringFilter<"Announcement"> | string
+    title?: StringFilter<"Announcement"> | string
+    body?: StringFilter<"Announcement"> | string
+    type?: StringFilter<"Announcement"> | string
+    eventDate?: DateTimeNullableFilter<"Announcement"> | Date | string | null
+    groupId?: StringFilter<"Announcement"> | string
+    createdBy?: StringFilter<"Announcement"> | string
+    createdAt?: DateTimeFilter<"Announcement"> | Date | string
   }
 
   export type ContributionUpsertWithWhereUniqueWithoutGroupInput = {
@@ -15398,12 +23261,16 @@ export namespace Prisma {
     OR?: ContributionScalarWhereInput[]
     NOT?: ContributionScalarWhereInput | ContributionScalarWhereInput[]
     id?: StringFilter<"Contribution"> | string
+    refNo?: StringNullableFilter<"Contribution"> | string | null
     amount?: FloatFilter<"Contribution"> | number
     status?: StringFilter<"Contribution"> | string
     timestamp?: DateTimeFilter<"Contribution"> | Date | string
     userId?: StringFilter<"Contribution"> | string
     groupId?: StringFilter<"Contribution"> | string
     isLocked?: BoolFilter<"Contribution"> | boolean
+    fundType?: StringFilter<"Contribution"> | string
+    paymentStatus?: StringNullableFilter<"Contribution"> | string | null
+    providerRef?: StringNullableFilter<"Contribution"> | string | null
   }
 
   export type LoanUpsertWithWhereUniqueWithoutGroupInput = {
@@ -15427,12 +23294,14 @@ export namespace Prisma {
     OR?: LoanScalarWhereInput[]
     NOT?: LoanScalarWhereInput | LoanScalarWhereInput[]
     id?: StringFilter<"Loan"> | string
+    refNo?: StringNullableFilter<"Loan"> | string | null
     amount?: FloatFilter<"Loan"> | number
     interestRate?: FloatFilter<"Loan"> | number
     deadline?: DateTimeFilter<"Loan"> | Date | string
     status?: StringFilter<"Loan"> | string
     userId?: StringFilter<"Loan"> | string
     groupId?: StringFilter<"Loan"> | string
+    guarantorId?: StringNullableFilter<"Loan"> | string | null
     createdAt?: DateTimeFilter<"Loan"> | Date | string
   }
 
@@ -15457,12 +23326,16 @@ export namespace Prisma {
     OR?: PayoutScalarWhereInput[]
     NOT?: PayoutScalarWhereInput | PayoutScalarWhereInput[]
     id?: StringFilter<"Payout"> | string
+    refNo?: StringNullableFilter<"Payout"> | string | null
     amount?: FloatFilter<"Payout"> | number
     description?: StringFilter<"Payout"> | string
     status?: StringFilter<"Payout"> | string
     requestedById?: StringFilter<"Payout"> | string
     groupId?: StringFilter<"Payout"> | string
     loanId?: StringNullableFilter<"Payout"> | string | null
+    fundType?: StringFilter<"Payout"> | string
+    paymentStatus?: StringNullableFilter<"Payout"> | string | null
+    providerRef?: StringNullableFilter<"Payout"> | string | null
     createdAt?: DateTimeFilter<"Payout"> | Date | string
   }
 
@@ -15494,6 +23367,117 @@ export namespace Prisma {
     groupId?: StringFilter<"AuditLog"> | string
   }
 
+  export type PenaltyUpsertWithWhereUniqueWithoutGroupInput = {
+    where: PenaltyWhereUniqueInput
+    update: XOR<PenaltyUpdateWithoutGroupInput, PenaltyUncheckedUpdateWithoutGroupInput>
+    create: XOR<PenaltyCreateWithoutGroupInput, PenaltyUncheckedCreateWithoutGroupInput>
+  }
+
+  export type PenaltyUpdateWithWhereUniqueWithoutGroupInput = {
+    where: PenaltyWhereUniqueInput
+    data: XOR<PenaltyUpdateWithoutGroupInput, PenaltyUncheckedUpdateWithoutGroupInput>
+  }
+
+  export type PenaltyUpdateManyWithWhereWithoutGroupInput = {
+    where: PenaltyScalarWhereInput
+    data: XOR<PenaltyUpdateManyMutationInput, PenaltyUncheckedUpdateManyWithoutGroupInput>
+  }
+
+  export type PenaltyScalarWhereInput = {
+    AND?: PenaltyScalarWhereInput | PenaltyScalarWhereInput[]
+    OR?: PenaltyScalarWhereInput[]
+    NOT?: PenaltyScalarWhereInput | PenaltyScalarWhereInput[]
+    id?: StringFilter<"Penalty"> | string
+    amount?: FloatFilter<"Penalty"> | number
+    reason?: StringFilter<"Penalty"> | string
+    status?: StringFilter<"Penalty"> | string
+    userId?: StringFilter<"Penalty"> | string
+    groupId?: StringFilter<"Penalty"> | string
+    timestamp?: DateTimeFilter<"Penalty"> | Date | string
+  }
+
+  export type MeetingUpsertWithWhereUniqueWithoutGroupInput = {
+    where: MeetingWhereUniqueInput
+    update: XOR<MeetingUpdateWithoutGroupInput, MeetingUncheckedUpdateWithoutGroupInput>
+    create: XOR<MeetingCreateWithoutGroupInput, MeetingUncheckedCreateWithoutGroupInput>
+  }
+
+  export type MeetingUpdateWithWhereUniqueWithoutGroupInput = {
+    where: MeetingWhereUniqueInput
+    data: XOR<MeetingUpdateWithoutGroupInput, MeetingUncheckedUpdateWithoutGroupInput>
+  }
+
+  export type MeetingUpdateManyWithWhereWithoutGroupInput = {
+    where: MeetingScalarWhereInput
+    data: XOR<MeetingUpdateManyMutationInput, MeetingUncheckedUpdateManyWithoutGroupInput>
+  }
+
+  export type MeetingScalarWhereInput = {
+    AND?: MeetingScalarWhereInput | MeetingScalarWhereInput[]
+    OR?: MeetingScalarWhereInput[]
+    NOT?: MeetingScalarWhereInput | MeetingScalarWhereInput[]
+    id?: StringFilter<"Meeting"> | string
+    date?: DateTimeFilter<"Meeting"> | Date | string
+    title?: StringFilter<"Meeting"> | string
+    groupId?: StringFilter<"Meeting"> | string
+    createdAt?: DateTimeFilter<"Meeting"> | Date | string
+  }
+
+  export type AttendanceUpsertWithWhereUniqueWithoutGroupInput = {
+    where: AttendanceWhereUniqueInput
+    update: XOR<AttendanceUpdateWithoutGroupInput, AttendanceUncheckedUpdateWithoutGroupInput>
+    create: XOR<AttendanceCreateWithoutGroupInput, AttendanceUncheckedCreateWithoutGroupInput>
+  }
+
+  export type AttendanceUpdateWithWhereUniqueWithoutGroupInput = {
+    where: AttendanceWhereUniqueInput
+    data: XOR<AttendanceUpdateWithoutGroupInput, AttendanceUncheckedUpdateWithoutGroupInput>
+  }
+
+  export type AttendanceUpdateManyWithWhereWithoutGroupInput = {
+    where: AttendanceScalarWhereInput
+    data: XOR<AttendanceUpdateManyMutationInput, AttendanceUncheckedUpdateManyWithoutGroupInput>
+  }
+
+  export type AttendanceScalarWhereInput = {
+    AND?: AttendanceScalarWhereInput | AttendanceScalarWhereInput[]
+    OR?: AttendanceScalarWhereInput[]
+    NOT?: AttendanceScalarWhereInput | AttendanceScalarWhereInput[]
+    id?: StringFilter<"Attendance"> | string
+    meetingId?: StringFilter<"Attendance"> | string
+    userId?: StringFilter<"Attendance"> | string
+    status?: StringFilter<"Attendance"> | string
+    groupId?: StringFilter<"Attendance"> | string
+  }
+
+  export type PollUpsertWithWhereUniqueWithoutGroupInput = {
+    where: PollWhereUniqueInput
+    update: XOR<PollUpdateWithoutGroupInput, PollUncheckedUpdateWithoutGroupInput>
+    create: XOR<PollCreateWithoutGroupInput, PollUncheckedCreateWithoutGroupInput>
+  }
+
+  export type PollUpdateWithWhereUniqueWithoutGroupInput = {
+    where: PollWhereUniqueInput
+    data: XOR<PollUpdateWithoutGroupInput, PollUncheckedUpdateWithoutGroupInput>
+  }
+
+  export type PollUpdateManyWithWhereWithoutGroupInput = {
+    where: PollScalarWhereInput
+    data: XOR<PollUpdateManyMutationInput, PollUncheckedUpdateManyWithoutGroupInput>
+  }
+
+  export type PollScalarWhereInput = {
+    AND?: PollScalarWhereInput | PollScalarWhereInput[]
+    OR?: PollScalarWhereInput[]
+    NOT?: PollScalarWhereInput | PollScalarWhereInput[]
+    id?: StringFilter<"Poll"> | string
+    title?: StringFilter<"Poll"> | string
+    description?: StringFilter<"Poll"> | string
+    status?: StringFilter<"Poll"> | string
+    groupId?: StringFilter<"Poll"> | string
+    createdAt?: DateTimeFilter<"Poll"> | Date | string
+  }
+
   export type GroupCreateWithoutMembersInput = {
     id?: string
     name: string
@@ -15503,12 +23487,19 @@ export namespace Prisma {
     penaltyRules: string
     savingsGoal?: number
     startDate: Date | string
+    tier?: string
+    maxMembers?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    announcements?: AnnouncementCreateNestedManyWithoutGroupInput
     contributions?: ContributionCreateNestedManyWithoutGroupInput
     loans?: LoanCreateNestedManyWithoutGroupInput
     payouts?: PayoutCreateNestedManyWithoutGroupInput
     auditLogs?: AuditLogCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyCreateNestedManyWithoutGroupInput
+    meetings?: MeetingCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceCreateNestedManyWithoutGroupInput
+    polls?: PollCreateNestedManyWithoutGroupInput
   }
 
   export type GroupUncheckedCreateWithoutMembersInput = {
@@ -15520,12 +23511,19 @@ export namespace Prisma {
     penaltyRules: string
     savingsGoal?: number
     startDate: Date | string
+    tier?: string
+    maxMembers?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutGroupInput
     contributions?: ContributionUncheckedCreateNestedManyWithoutGroupInput
     loans?: LoanUncheckedCreateNestedManyWithoutGroupInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutGroupInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyUncheckedCreateNestedManyWithoutGroupInput
+    meetings?: MeetingUncheckedCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutGroupInput
+    polls?: PollUncheckedCreateNestedManyWithoutGroupInput
   }
 
   export type GroupCreateOrConnectWithoutMembersInput = {
@@ -15535,20 +23533,28 @@ export namespace Prisma {
 
   export type ContributionCreateWithoutUserInput = {
     id?: string
+    refNo?: string | null
     amount: number
     status: string
     timestamp?: Date | string
     isLocked?: boolean
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
     group: GroupCreateNestedOneWithoutContributionsInput
   }
 
   export type ContributionUncheckedCreateWithoutUserInput = {
     id?: string
+    refNo?: string | null
     amount: number
     status: string
     timestamp?: Date | string
     groupId: string
     isLocked?: boolean
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
   }
 
   export type ContributionCreateOrConnectWithoutUserInput = {
@@ -15560,25 +23566,58 @@ export namespace Prisma {
     data: ContributionCreateManyUserInput | ContributionCreateManyUserInput[]
   }
 
+  export type AnnouncementCreateWithoutAuthorInput = {
+    id?: string
+    title: string
+    body: string
+    type?: string
+    eventDate?: Date | string | null
+    createdAt?: Date | string
+    group: GroupCreateNestedOneWithoutAnnouncementsInput
+  }
+
+  export type AnnouncementUncheckedCreateWithoutAuthorInput = {
+    id?: string
+    title: string
+    body: string
+    type?: string
+    eventDate?: Date | string | null
+    groupId: string
+    createdAt?: Date | string
+  }
+
+  export type AnnouncementCreateOrConnectWithoutAuthorInput = {
+    where: AnnouncementWhereUniqueInput
+    create: XOR<AnnouncementCreateWithoutAuthorInput, AnnouncementUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type AnnouncementCreateManyAuthorInputEnvelope = {
+    data: AnnouncementCreateManyAuthorInput | AnnouncementCreateManyAuthorInput[]
+  }
+
   export type LoanCreateWithoutUserInput = {
     id?: string
+    refNo?: string | null
     amount: number
     interestRate: number
     deadline: Date | string
     status: string
     createdAt?: Date | string
     group: GroupCreateNestedOneWithoutLoansInput
+    guarantor?: UserCreateNestedOneWithoutGuaranteedLoansInput
     repayments?: RepaymentCreateNestedManyWithoutLoanInput
     payouts?: PayoutCreateNestedManyWithoutLoanInput
   }
 
   export type LoanUncheckedCreateWithoutUserInput = {
     id?: string
+    refNo?: string | null
     amount: number
     interestRate: number
     deadline: Date | string
     status: string
     groupId: string
+    guarantorId?: string | null
     createdAt?: Date | string
     repayments?: RepaymentUncheckedCreateNestedManyWithoutLoanInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutLoanInput
@@ -15595,9 +23634,13 @@ export namespace Prisma {
 
   export type PayoutCreateWithoutRequestedByInput = {
     id?: string
+    refNo?: string | null
     amount: number
     description: string
     status: string
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
     createdAt?: Date | string
     approvals?: PayoutApprovalCreateNestedManyWithoutPayoutInput
     group: GroupCreateNestedOneWithoutPayoutsInput
@@ -15606,11 +23649,15 @@ export namespace Prisma {
 
   export type PayoutUncheckedCreateWithoutRequestedByInput = {
     id?: string
+    refNo?: string | null
     amount: number
     description: string
     status: string
     groupId: string
     loanId?: string | null
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
     createdAt?: Date | string
     approvals?: PayoutApprovalUncheckedCreateNestedManyWithoutPayoutInput
   }
@@ -15676,6 +23723,7 @@ export namespace Prisma {
     reason: string
     status: string
     timestamp?: Date | string
+    group: GroupCreateNestedOneWithoutPenaltiesInput
   }
 
   export type PenaltyUncheckedCreateWithoutUserInput = {
@@ -15683,6 +23731,7 @@ export namespace Prisma {
     amount: number
     reason: string
     status: string
+    groupId: string
     timestamp?: Date | string
   }
 
@@ -15693,6 +23742,87 @@ export namespace Prisma {
 
   export type PenaltyCreateManyUserInputEnvelope = {
     data: PenaltyCreateManyUserInput | PenaltyCreateManyUserInput[]
+  }
+
+  export type AttendanceCreateWithoutUserInput = {
+    id?: string
+    status: string
+    meeting: MeetingCreateNestedOneWithoutAttendancesInput
+    group: GroupCreateNestedOneWithoutAttendancesInput
+  }
+
+  export type AttendanceUncheckedCreateWithoutUserInput = {
+    id?: string
+    meetingId: string
+    status: string
+    groupId: string
+  }
+
+  export type AttendanceCreateOrConnectWithoutUserInput = {
+    where: AttendanceWhereUniqueInput
+    create: XOR<AttendanceCreateWithoutUserInput, AttendanceUncheckedCreateWithoutUserInput>
+  }
+
+  export type AttendanceCreateManyUserInputEnvelope = {
+    data: AttendanceCreateManyUserInput | AttendanceCreateManyUserInput[]
+  }
+
+  export type VoteCreateWithoutUserInput = {
+    id?: string
+    choice: string
+    poll: PollCreateNestedOneWithoutVoicesInput
+  }
+
+  export type VoteUncheckedCreateWithoutUserInput = {
+    id?: string
+    pollId: string
+    choice: string
+  }
+
+  export type VoteCreateOrConnectWithoutUserInput = {
+    where: VoteWhereUniqueInput
+    create: XOR<VoteCreateWithoutUserInput, VoteUncheckedCreateWithoutUserInput>
+  }
+
+  export type VoteCreateManyUserInputEnvelope = {
+    data: VoteCreateManyUserInput | VoteCreateManyUserInput[]
+  }
+
+  export type LoanCreateWithoutGuarantorInput = {
+    id?: string
+    refNo?: string | null
+    amount: number
+    interestRate: number
+    deadline: Date | string
+    status: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutLoansInput
+    group: GroupCreateNestedOneWithoutLoansInput
+    repayments?: RepaymentCreateNestedManyWithoutLoanInput
+    payouts?: PayoutCreateNestedManyWithoutLoanInput
+  }
+
+  export type LoanUncheckedCreateWithoutGuarantorInput = {
+    id?: string
+    refNo?: string | null
+    amount: number
+    interestRate: number
+    deadline: Date | string
+    status: string
+    userId: string
+    groupId: string
+    createdAt?: Date | string
+    repayments?: RepaymentUncheckedCreateNestedManyWithoutLoanInput
+    payouts?: PayoutUncheckedCreateNestedManyWithoutLoanInput
+  }
+
+  export type LoanCreateOrConnectWithoutGuarantorInput = {
+    where: LoanWhereUniqueInput
+    create: XOR<LoanCreateWithoutGuarantorInput, LoanUncheckedCreateWithoutGuarantorInput>
+  }
+
+  export type LoanCreateManyGuarantorInputEnvelope = {
+    data: LoanCreateManyGuarantorInput | LoanCreateManyGuarantorInput[]
   }
 
   export type GroupUpsertWithoutMembersInput = {
@@ -15715,12 +23845,19 @@ export namespace Prisma {
     penaltyRules?: StringFieldUpdateOperationsInput | string
     savingsGoal?: FloatFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    announcements?: AnnouncementUpdateManyWithoutGroupNestedInput
     contributions?: ContributionUpdateManyWithoutGroupNestedInput
     loans?: LoanUpdateManyWithoutGroupNestedInput
     payouts?: PayoutUpdateManyWithoutGroupNestedInput
     auditLogs?: AuditLogUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUpdateManyWithoutGroupNestedInput
+    polls?: PollUpdateManyWithoutGroupNestedInput
   }
 
   export type GroupUncheckedUpdateWithoutMembersInput = {
@@ -15732,12 +23869,19 @@ export namespace Prisma {
     penaltyRules?: StringFieldUpdateOperationsInput | string
     savingsGoal?: FloatFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    announcements?: AnnouncementUncheckedUpdateManyWithoutGroupNestedInput
     contributions?: ContributionUncheckedUpdateManyWithoutGroupNestedInput
     loans?: LoanUncheckedUpdateManyWithoutGroupNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutGroupNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUncheckedUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUncheckedUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutGroupNestedInput
+    polls?: PollUncheckedUpdateManyWithoutGroupNestedInput
   }
 
   export type ContributionUpsertWithWhereUniqueWithoutUserInput = {
@@ -15754,6 +23898,22 @@ export namespace Prisma {
   export type ContributionUpdateManyWithWhereWithoutUserInput = {
     where: ContributionScalarWhereInput
     data: XOR<ContributionUpdateManyMutationInput, ContributionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type AnnouncementUpsertWithWhereUniqueWithoutAuthorInput = {
+    where: AnnouncementWhereUniqueInput
+    update: XOR<AnnouncementUpdateWithoutAuthorInput, AnnouncementUncheckedUpdateWithoutAuthorInput>
+    create: XOR<AnnouncementCreateWithoutAuthorInput, AnnouncementUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type AnnouncementUpdateWithWhereUniqueWithoutAuthorInput = {
+    where: AnnouncementWhereUniqueInput
+    data: XOR<AnnouncementUpdateWithoutAuthorInput, AnnouncementUncheckedUpdateWithoutAuthorInput>
+  }
+
+  export type AnnouncementUpdateManyWithWhereWithoutAuthorInput = {
+    where: AnnouncementScalarWhereInput
+    data: XOR<AnnouncementUpdateManyMutationInput, AnnouncementUncheckedUpdateManyWithoutAuthorInput>
   }
 
   export type LoanUpsertWithWhereUniqueWithoutUserInput = {
@@ -15846,54 +24006,116 @@ export namespace Prisma {
     data: XOR<PenaltyUpdateManyMutationInput, PenaltyUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type PenaltyScalarWhereInput = {
-    AND?: PenaltyScalarWhereInput | PenaltyScalarWhereInput[]
-    OR?: PenaltyScalarWhereInput[]
-    NOT?: PenaltyScalarWhereInput | PenaltyScalarWhereInput[]
-    id?: StringFilter<"Penalty"> | string
-    amount?: FloatFilter<"Penalty"> | number
-    reason?: StringFilter<"Penalty"> | string
-    status?: StringFilter<"Penalty"> | string
-    userId?: StringFilter<"Penalty"> | string
-    timestamp?: DateTimeFilter<"Penalty"> | Date | string
+  export type AttendanceUpsertWithWhereUniqueWithoutUserInput = {
+    where: AttendanceWhereUniqueInput
+    update: XOR<AttendanceUpdateWithoutUserInput, AttendanceUncheckedUpdateWithoutUserInput>
+    create: XOR<AttendanceCreateWithoutUserInput, AttendanceUncheckedCreateWithoutUserInput>
+  }
+
+  export type AttendanceUpdateWithWhereUniqueWithoutUserInput = {
+    where: AttendanceWhereUniqueInput
+    data: XOR<AttendanceUpdateWithoutUserInput, AttendanceUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AttendanceUpdateManyWithWhereWithoutUserInput = {
+    where: AttendanceScalarWhereInput
+    data: XOR<AttendanceUpdateManyMutationInput, AttendanceUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type VoteUpsertWithWhereUniqueWithoutUserInput = {
+    where: VoteWhereUniqueInput
+    update: XOR<VoteUpdateWithoutUserInput, VoteUncheckedUpdateWithoutUserInput>
+    create: XOR<VoteCreateWithoutUserInput, VoteUncheckedCreateWithoutUserInput>
+  }
+
+  export type VoteUpdateWithWhereUniqueWithoutUserInput = {
+    where: VoteWhereUniqueInput
+    data: XOR<VoteUpdateWithoutUserInput, VoteUncheckedUpdateWithoutUserInput>
+  }
+
+  export type VoteUpdateManyWithWhereWithoutUserInput = {
+    where: VoteScalarWhereInput
+    data: XOR<VoteUpdateManyMutationInput, VoteUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type VoteScalarWhereInput = {
+    AND?: VoteScalarWhereInput | VoteScalarWhereInput[]
+    OR?: VoteScalarWhereInput[]
+    NOT?: VoteScalarWhereInput | VoteScalarWhereInput[]
+    id?: StringFilter<"Vote"> | string
+    pollId?: StringFilter<"Vote"> | string
+    userId?: StringFilter<"Vote"> | string
+    choice?: StringFilter<"Vote"> | string
+  }
+
+  export type LoanUpsertWithWhereUniqueWithoutGuarantorInput = {
+    where: LoanWhereUniqueInput
+    update: XOR<LoanUpdateWithoutGuarantorInput, LoanUncheckedUpdateWithoutGuarantorInput>
+    create: XOR<LoanCreateWithoutGuarantorInput, LoanUncheckedCreateWithoutGuarantorInput>
+  }
+
+  export type LoanUpdateWithWhereUniqueWithoutGuarantorInput = {
+    where: LoanWhereUniqueInput
+    data: XOR<LoanUpdateWithoutGuarantorInput, LoanUncheckedUpdateWithoutGuarantorInput>
+  }
+
+  export type LoanUpdateManyWithWhereWithoutGuarantorInput = {
+    where: LoanScalarWhereInput
+    data: XOR<LoanUpdateManyMutationInput, LoanUncheckedUpdateManyWithoutGuarantorInput>
   }
 
   export type UserCreateWithoutContributionsInput = {
     id?: string
     phone: string
+    email?: string | null
     nationalId?: string | null
     name: string
     password: string
     role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
     agreedToRules?: boolean
     agreedAt?: Date | string | null
+    agreementUrl?: string | null
     lastPasswordChange?: Date | string | null
     createdAt?: Date | string
     group: GroupCreateNestedOneWithoutMembersInput
+    announcements?: AnnouncementCreateNestedManyWithoutAuthorInput
     loans?: LoanCreateNestedManyWithoutUserInput
     payouts?: PayoutCreateNestedManyWithoutRequestedByInput
     payoutApprovals?: PayoutApprovalCreateNestedManyWithoutAdminInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
     penalties?: PenaltyCreateNestedManyWithoutUserInput
+    attendances?: AttendanceCreateNestedManyWithoutUserInput
+    votes?: VoteCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanCreateNestedManyWithoutGuarantorInput
   }
 
   export type UserUncheckedCreateWithoutContributionsInput = {
     id?: string
     phone: string
+    email?: string | null
     nationalId?: string | null
     name: string
     password: string
     role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
     groupId: string
     agreedToRules?: boolean
     agreedAt?: Date | string | null
+    agreementUrl?: string | null
     lastPasswordChange?: Date | string | null
     createdAt?: Date | string
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutAuthorInput
     loans?: LoanUncheckedCreateNestedManyWithoutUserInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutRequestedByInput
     payoutApprovals?: PayoutApprovalUncheckedCreateNestedManyWithoutAdminInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
     penalties?: PenaltyUncheckedCreateNestedManyWithoutUserInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutUserInput
+    votes?: VoteUncheckedCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanUncheckedCreateNestedManyWithoutGuarantorInput
   }
 
   export type UserCreateOrConnectWithoutContributionsInput = {
@@ -15910,12 +24132,19 @@ export namespace Prisma {
     penaltyRules: string
     savingsGoal?: number
     startDate: Date | string
+    tier?: string
+    maxMembers?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     members?: UserCreateNestedManyWithoutGroupInput
+    announcements?: AnnouncementCreateNestedManyWithoutGroupInput
     loans?: LoanCreateNestedManyWithoutGroupInput
     payouts?: PayoutCreateNestedManyWithoutGroupInput
     auditLogs?: AuditLogCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyCreateNestedManyWithoutGroupInput
+    meetings?: MeetingCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceCreateNestedManyWithoutGroupInput
+    polls?: PollCreateNestedManyWithoutGroupInput
   }
 
   export type GroupUncheckedCreateWithoutContributionsInput = {
@@ -15927,12 +24156,19 @@ export namespace Prisma {
     penaltyRules: string
     savingsGoal?: number
     startDate: Date | string
+    tier?: string
+    maxMembers?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     members?: UserUncheckedCreateNestedManyWithoutGroupInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutGroupInput
     loans?: LoanUncheckedCreateNestedManyWithoutGroupInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutGroupInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyUncheckedCreateNestedManyWithoutGroupInput
+    meetings?: MeetingUncheckedCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutGroupInput
+    polls?: PollUncheckedCreateNestedManyWithoutGroupInput
   }
 
   export type GroupCreateOrConnectWithoutContributionsInput = {
@@ -15954,39 +24190,55 @@ export namespace Prisma {
   export type UserUpdateWithoutContributionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     group?: GroupUpdateOneRequiredWithoutMembersNestedInput
+    announcements?: AnnouncementUpdateManyWithoutAuthorNestedInput
     loans?: LoanUpdateManyWithoutUserNestedInput
     payouts?: PayoutUpdateManyWithoutRequestedByNestedInput
     payoutApprovals?: PayoutApprovalUpdateManyWithoutAdminNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
     penalties?: PenaltyUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUpdateManyWithoutUserNestedInput
+    votes?: VoteUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUpdateManyWithoutGuarantorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutContributionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     groupId?: StringFieldUpdateOperationsInput | string
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    announcements?: AnnouncementUncheckedUpdateManyWithoutAuthorNestedInput
     loans?: LoanUncheckedUpdateManyWithoutUserNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutRequestedByNestedInput
     payoutApprovals?: PayoutApprovalUncheckedUpdateManyWithoutAdminNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
     penalties?: PenaltyUncheckedUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutUserNestedInput
+    votes?: VoteUncheckedUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUncheckedUpdateManyWithoutGuarantorNestedInput
   }
 
   export type GroupUpsertWithoutContributionsInput = {
@@ -16009,12 +24261,19 @@ export namespace Prisma {
     penaltyRules?: StringFieldUpdateOperationsInput | string
     savingsGoal?: FloatFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: UserUpdateManyWithoutGroupNestedInput
+    announcements?: AnnouncementUpdateManyWithoutGroupNestedInput
     loans?: LoanUpdateManyWithoutGroupNestedInput
     payouts?: PayoutUpdateManyWithoutGroupNestedInput
     auditLogs?: AuditLogUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUpdateManyWithoutGroupNestedInput
+    polls?: PollUpdateManyWithoutGroupNestedInput
   }
 
   export type GroupUncheckedUpdateWithoutContributionsInput = {
@@ -16026,50 +24285,73 @@ export namespace Prisma {
     penaltyRules?: StringFieldUpdateOperationsInput | string
     savingsGoal?: FloatFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: UserUncheckedUpdateManyWithoutGroupNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutGroupNestedInput
     loans?: LoanUncheckedUpdateManyWithoutGroupNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutGroupNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUncheckedUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUncheckedUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutGroupNestedInput
+    polls?: PollUncheckedUpdateManyWithoutGroupNestedInput
   }
 
   export type UserCreateWithoutLoansInput = {
     id?: string
     phone: string
+    email?: string | null
     nationalId?: string | null
     name: string
     password: string
     role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
     agreedToRules?: boolean
     agreedAt?: Date | string | null
+    agreementUrl?: string | null
     lastPasswordChange?: Date | string | null
     createdAt?: Date | string
     group: GroupCreateNestedOneWithoutMembersInput
     contributions?: ContributionCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementCreateNestedManyWithoutAuthorInput
     payouts?: PayoutCreateNestedManyWithoutRequestedByInput
     payoutApprovals?: PayoutApprovalCreateNestedManyWithoutAdminInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
     penalties?: PenaltyCreateNestedManyWithoutUserInput
+    attendances?: AttendanceCreateNestedManyWithoutUserInput
+    votes?: VoteCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanCreateNestedManyWithoutGuarantorInput
   }
 
   export type UserUncheckedCreateWithoutLoansInput = {
     id?: string
     phone: string
+    email?: string | null
     nationalId?: string | null
     name: string
     password: string
     role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
     groupId: string
     agreedToRules?: boolean
     agreedAt?: Date | string | null
+    agreementUrl?: string | null
     lastPasswordChange?: Date | string | null
     createdAt?: Date | string
     contributions?: ContributionUncheckedCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutAuthorInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutRequestedByInput
     payoutApprovals?: PayoutApprovalUncheckedCreateNestedManyWithoutAdminInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
     penalties?: PenaltyUncheckedCreateNestedManyWithoutUserInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutUserInput
+    votes?: VoteUncheckedCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanUncheckedCreateNestedManyWithoutGuarantorInput
   }
 
   export type UserCreateOrConnectWithoutLoansInput = {
@@ -16086,12 +24368,19 @@ export namespace Prisma {
     penaltyRules: string
     savingsGoal?: number
     startDate: Date | string
+    tier?: string
+    maxMembers?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     members?: UserCreateNestedManyWithoutGroupInput
+    announcements?: AnnouncementCreateNestedManyWithoutGroupInput
     contributions?: ContributionCreateNestedManyWithoutGroupInput
     payouts?: PayoutCreateNestedManyWithoutGroupInput
     auditLogs?: AuditLogCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyCreateNestedManyWithoutGroupInput
+    meetings?: MeetingCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceCreateNestedManyWithoutGroupInput
+    polls?: PollCreateNestedManyWithoutGroupInput
   }
 
   export type GroupUncheckedCreateWithoutLoansInput = {
@@ -16103,17 +24392,83 @@ export namespace Prisma {
     penaltyRules: string
     savingsGoal?: number
     startDate: Date | string
+    tier?: string
+    maxMembers?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     members?: UserUncheckedCreateNestedManyWithoutGroupInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutGroupInput
     contributions?: ContributionUncheckedCreateNestedManyWithoutGroupInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutGroupInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyUncheckedCreateNestedManyWithoutGroupInput
+    meetings?: MeetingUncheckedCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutGroupInput
+    polls?: PollUncheckedCreateNestedManyWithoutGroupInput
   }
 
   export type GroupCreateOrConnectWithoutLoansInput = {
     where: GroupWhereUniqueInput
     create: XOR<GroupCreateWithoutLoansInput, GroupUncheckedCreateWithoutLoansInput>
+  }
+
+  export type UserCreateWithoutGuaranteedLoansInput = {
+    id?: string
+    phone: string
+    email?: string | null
+    nationalId?: string | null
+    name: string
+    password: string
+    role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
+    agreedToRules?: boolean
+    agreedAt?: Date | string | null
+    agreementUrl?: string | null
+    lastPasswordChange?: Date | string | null
+    createdAt?: Date | string
+    group: GroupCreateNestedOneWithoutMembersInput
+    contributions?: ContributionCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementCreateNestedManyWithoutAuthorInput
+    loans?: LoanCreateNestedManyWithoutUserInput
+    payouts?: PayoutCreateNestedManyWithoutRequestedByInput
+    payoutApprovals?: PayoutApprovalCreateNestedManyWithoutAdminInput
+    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    penalties?: PenaltyCreateNestedManyWithoutUserInput
+    attendances?: AttendanceCreateNestedManyWithoutUserInput
+    votes?: VoteCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutGuaranteedLoansInput = {
+    id?: string
+    phone: string
+    email?: string | null
+    nationalId?: string | null
+    name: string
+    password: string
+    role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
+    groupId: string
+    agreedToRules?: boolean
+    agreedAt?: Date | string | null
+    agreementUrl?: string | null
+    lastPasswordChange?: Date | string | null
+    createdAt?: Date | string
+    contributions?: ContributionUncheckedCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutAuthorInput
+    loans?: LoanUncheckedCreateNestedManyWithoutUserInput
+    payouts?: PayoutUncheckedCreateNestedManyWithoutRequestedByInput
+    payoutApprovals?: PayoutApprovalUncheckedCreateNestedManyWithoutAdminInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    penalties?: PenaltyUncheckedCreateNestedManyWithoutUserInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutUserInput
+    votes?: VoteUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutGuaranteedLoansInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutGuaranteedLoansInput, UserUncheckedCreateWithoutGuaranteedLoansInput>
   }
 
   export type RepaymentCreateWithoutLoanInput = {
@@ -16139,9 +24494,13 @@ export namespace Prisma {
 
   export type PayoutCreateWithoutLoanInput = {
     id?: string
+    refNo?: string | null
     amount: number
     description: string
     status: string
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
     createdAt?: Date | string
     approvals?: PayoutApprovalCreateNestedManyWithoutPayoutInput
     requestedBy: UserCreateNestedOneWithoutPayoutsInput
@@ -16150,11 +24509,15 @@ export namespace Prisma {
 
   export type PayoutUncheckedCreateWithoutLoanInput = {
     id?: string
+    refNo?: string | null
     amount: number
     description: string
     status: string
     requestedById: string
     groupId: string
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
     createdAt?: Date | string
     approvals?: PayoutApprovalUncheckedCreateNestedManyWithoutPayoutInput
   }
@@ -16182,39 +24545,55 @@ export namespace Prisma {
   export type UserUpdateWithoutLoansInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     group?: GroupUpdateOneRequiredWithoutMembersNestedInput
     contributions?: ContributionUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUpdateManyWithoutAuthorNestedInput
     payouts?: PayoutUpdateManyWithoutRequestedByNestedInput
     payoutApprovals?: PayoutApprovalUpdateManyWithoutAdminNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
     penalties?: PenaltyUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUpdateManyWithoutUserNestedInput
+    votes?: VoteUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUpdateManyWithoutGuarantorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLoansInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     groupId?: StringFieldUpdateOperationsInput | string
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contributions?: ContributionUncheckedUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutAuthorNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutRequestedByNestedInput
     payoutApprovals?: PayoutApprovalUncheckedUpdateManyWithoutAdminNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
     penalties?: PenaltyUncheckedUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutUserNestedInput
+    votes?: VoteUncheckedUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUncheckedUpdateManyWithoutGuarantorNestedInput
   }
 
   export type GroupUpsertWithoutLoansInput = {
@@ -16237,12 +24616,19 @@ export namespace Prisma {
     penaltyRules?: StringFieldUpdateOperationsInput | string
     savingsGoal?: FloatFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: UserUpdateManyWithoutGroupNestedInput
+    announcements?: AnnouncementUpdateManyWithoutGroupNestedInput
     contributions?: ContributionUpdateManyWithoutGroupNestedInput
     payouts?: PayoutUpdateManyWithoutGroupNestedInput
     auditLogs?: AuditLogUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUpdateManyWithoutGroupNestedInput
+    polls?: PollUpdateManyWithoutGroupNestedInput
   }
 
   export type GroupUncheckedUpdateWithoutLoansInput = {
@@ -16254,12 +24640,84 @@ export namespace Prisma {
     penaltyRules?: StringFieldUpdateOperationsInput | string
     savingsGoal?: FloatFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: UserUncheckedUpdateManyWithoutGroupNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutGroupNestedInput
     contributions?: ContributionUncheckedUpdateManyWithoutGroupNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutGroupNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUncheckedUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUncheckedUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutGroupNestedInput
+    polls?: PollUncheckedUpdateManyWithoutGroupNestedInput
+  }
+
+  export type UserUpsertWithoutGuaranteedLoansInput = {
+    update: XOR<UserUpdateWithoutGuaranteedLoansInput, UserUncheckedUpdateWithoutGuaranteedLoansInput>
+    create: XOR<UserCreateWithoutGuaranteedLoansInput, UserUncheckedCreateWithoutGuaranteedLoansInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutGuaranteedLoansInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutGuaranteedLoansInput, UserUncheckedUpdateWithoutGuaranteedLoansInput>
+  }
+
+  export type UserUpdateWithoutGuaranteedLoansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    agreedToRules?: BoolFieldUpdateOperationsInput | boolean
+    agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    group?: GroupUpdateOneRequiredWithoutMembersNestedInput
+    contributions?: ContributionUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUpdateManyWithoutAuthorNestedInput
+    loans?: LoanUpdateManyWithoutUserNestedInput
+    payouts?: PayoutUpdateManyWithoutRequestedByNestedInput
+    payoutApprovals?: PayoutApprovalUpdateManyWithoutAdminNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    penalties?: PenaltyUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUpdateManyWithoutUserNestedInput
+    votes?: VoteUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutGuaranteedLoansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    groupId?: StringFieldUpdateOperationsInput | string
+    agreedToRules?: BoolFieldUpdateOperationsInput | boolean
+    agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contributions?: ContributionUncheckedUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutAuthorNestedInput
+    loans?: LoanUncheckedUpdateManyWithoutUserNestedInput
+    payouts?: PayoutUncheckedUpdateManyWithoutRequestedByNestedInput
+    payoutApprovals?: PayoutApprovalUncheckedUpdateManyWithoutAdminNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    penalties?: PenaltyUncheckedUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutUserNestedInput
+    votes?: VoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RepaymentUpsertWithWhereUniqueWithoutLoanInput = {
@@ -16306,6 +24764,7 @@ export namespace Prisma {
 
   export type LoanCreateWithoutRepaymentsInput = {
     id?: string
+    refNo?: string | null
     amount: number
     interestRate: number
     deadline: Date | string
@@ -16313,17 +24772,20 @@ export namespace Prisma {
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutLoansInput
     group: GroupCreateNestedOneWithoutLoansInput
+    guarantor?: UserCreateNestedOneWithoutGuaranteedLoansInput
     payouts?: PayoutCreateNestedManyWithoutLoanInput
   }
 
   export type LoanUncheckedCreateWithoutRepaymentsInput = {
     id?: string
+    refNo?: string | null
     amount: number
     interestRate: number
     deadline: Date | string
     status: string
     userId: string
     groupId: string
+    guarantorId?: string | null
     createdAt?: Date | string
     payouts?: PayoutUncheckedCreateNestedManyWithoutLoanInput
   }
@@ -16346,6 +24808,7 @@ export namespace Prisma {
 
   export type LoanUpdateWithoutRepaymentsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     interestRate?: FloatFieldUpdateOperationsInput | number
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16353,17 +24816,20 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutLoansNestedInput
     group?: GroupUpdateOneRequiredWithoutLoansNestedInput
+    guarantor?: UserUpdateOneWithoutGuaranteedLoansNestedInput
     payouts?: PayoutUpdateManyWithoutLoanNestedInput
   }
 
   export type LoanUncheckedUpdateWithoutRepaymentsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     interestRate?: FloatFieldUpdateOperationsInput | number
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     groupId?: StringFieldUpdateOperationsInput | string
+    guarantorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     payouts?: PayoutUncheckedUpdateManyWithoutLoanNestedInput
   }
@@ -16392,39 +24858,55 @@ export namespace Prisma {
   export type UserCreateWithoutPayoutsInput = {
     id?: string
     phone: string
+    email?: string | null
     nationalId?: string | null
     name: string
     password: string
     role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
     agreedToRules?: boolean
     agreedAt?: Date | string | null
+    agreementUrl?: string | null
     lastPasswordChange?: Date | string | null
     createdAt?: Date | string
     group: GroupCreateNestedOneWithoutMembersInput
     contributions?: ContributionCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementCreateNestedManyWithoutAuthorInput
     loans?: LoanCreateNestedManyWithoutUserInput
     payoutApprovals?: PayoutApprovalCreateNestedManyWithoutAdminInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
     penalties?: PenaltyCreateNestedManyWithoutUserInput
+    attendances?: AttendanceCreateNestedManyWithoutUserInput
+    votes?: VoteCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanCreateNestedManyWithoutGuarantorInput
   }
 
   export type UserUncheckedCreateWithoutPayoutsInput = {
     id?: string
     phone: string
+    email?: string | null
     nationalId?: string | null
     name: string
     password: string
     role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
     groupId: string
     agreedToRules?: boolean
     agreedAt?: Date | string | null
+    agreementUrl?: string | null
     lastPasswordChange?: Date | string | null
     createdAt?: Date | string
     contributions?: ContributionUncheckedCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutAuthorInput
     loans?: LoanUncheckedCreateNestedManyWithoutUserInput
     payoutApprovals?: PayoutApprovalUncheckedCreateNestedManyWithoutAdminInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
     penalties?: PenaltyUncheckedCreateNestedManyWithoutUserInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutUserInput
+    votes?: VoteUncheckedCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanUncheckedCreateNestedManyWithoutGuarantorInput
   }
 
   export type UserCreateOrConnectWithoutPayoutsInput = {
@@ -16441,12 +24923,19 @@ export namespace Prisma {
     penaltyRules: string
     savingsGoal?: number
     startDate: Date | string
+    tier?: string
+    maxMembers?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     members?: UserCreateNestedManyWithoutGroupInput
+    announcements?: AnnouncementCreateNestedManyWithoutGroupInput
     contributions?: ContributionCreateNestedManyWithoutGroupInput
     loans?: LoanCreateNestedManyWithoutGroupInput
     auditLogs?: AuditLogCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyCreateNestedManyWithoutGroupInput
+    meetings?: MeetingCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceCreateNestedManyWithoutGroupInput
+    polls?: PollCreateNestedManyWithoutGroupInput
   }
 
   export type GroupUncheckedCreateWithoutPayoutsInput = {
@@ -16458,12 +24947,19 @@ export namespace Prisma {
     penaltyRules: string
     savingsGoal?: number
     startDate: Date | string
+    tier?: string
+    maxMembers?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     members?: UserUncheckedCreateNestedManyWithoutGroupInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutGroupInput
     contributions?: ContributionUncheckedCreateNestedManyWithoutGroupInput
     loans?: LoanUncheckedCreateNestedManyWithoutGroupInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyUncheckedCreateNestedManyWithoutGroupInput
+    meetings?: MeetingUncheckedCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutGroupInput
+    polls?: PollUncheckedCreateNestedManyWithoutGroupInput
   }
 
   export type GroupCreateOrConnectWithoutPayoutsInput = {
@@ -16473,6 +24969,7 @@ export namespace Prisma {
 
   export type LoanCreateWithoutPayoutsInput = {
     id?: string
+    refNo?: string | null
     amount: number
     interestRate: number
     deadline: Date | string
@@ -16480,17 +24977,20 @@ export namespace Prisma {
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutLoansInput
     group: GroupCreateNestedOneWithoutLoansInput
+    guarantor?: UserCreateNestedOneWithoutGuaranteedLoansInput
     repayments?: RepaymentCreateNestedManyWithoutLoanInput
   }
 
   export type LoanUncheckedCreateWithoutPayoutsInput = {
     id?: string
+    refNo?: string | null
     amount: number
     interestRate: number
     deadline: Date | string
     status: string
     userId: string
     groupId: string
+    guarantorId?: string | null
     createdAt?: Date | string
     repayments?: RepaymentUncheckedCreateNestedManyWithoutLoanInput
   }
@@ -16530,39 +25030,55 @@ export namespace Prisma {
   export type UserUpdateWithoutPayoutsInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     group?: GroupUpdateOneRequiredWithoutMembersNestedInput
     contributions?: ContributionUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUpdateManyWithoutAuthorNestedInput
     loans?: LoanUpdateManyWithoutUserNestedInput
     payoutApprovals?: PayoutApprovalUpdateManyWithoutAdminNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
     penalties?: PenaltyUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUpdateManyWithoutUserNestedInput
+    votes?: VoteUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUpdateManyWithoutGuarantorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPayoutsInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     groupId?: StringFieldUpdateOperationsInput | string
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contributions?: ContributionUncheckedUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutAuthorNestedInput
     loans?: LoanUncheckedUpdateManyWithoutUserNestedInput
     payoutApprovals?: PayoutApprovalUncheckedUpdateManyWithoutAdminNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
     penalties?: PenaltyUncheckedUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutUserNestedInput
+    votes?: VoteUncheckedUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUncheckedUpdateManyWithoutGuarantorNestedInput
   }
 
   export type GroupUpsertWithoutPayoutsInput = {
@@ -16585,12 +25101,19 @@ export namespace Prisma {
     penaltyRules?: StringFieldUpdateOperationsInput | string
     savingsGoal?: FloatFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: UserUpdateManyWithoutGroupNestedInput
+    announcements?: AnnouncementUpdateManyWithoutGroupNestedInput
     contributions?: ContributionUpdateManyWithoutGroupNestedInput
     loans?: LoanUpdateManyWithoutGroupNestedInput
     auditLogs?: AuditLogUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUpdateManyWithoutGroupNestedInput
+    polls?: PollUpdateManyWithoutGroupNestedInput
   }
 
   export type GroupUncheckedUpdateWithoutPayoutsInput = {
@@ -16602,12 +25125,19 @@ export namespace Prisma {
     penaltyRules?: StringFieldUpdateOperationsInput | string
     savingsGoal?: FloatFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: UserUncheckedUpdateManyWithoutGroupNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutGroupNestedInput
     contributions?: ContributionUncheckedUpdateManyWithoutGroupNestedInput
     loans?: LoanUncheckedUpdateManyWithoutGroupNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUncheckedUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUncheckedUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutGroupNestedInput
+    polls?: PollUncheckedUpdateManyWithoutGroupNestedInput
   }
 
   export type LoanUpsertWithoutPayoutsInput = {
@@ -16623,6 +25153,7 @@ export namespace Prisma {
 
   export type LoanUpdateWithoutPayoutsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     interestRate?: FloatFieldUpdateOperationsInput | number
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16630,26 +25161,33 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutLoansNestedInput
     group?: GroupUpdateOneRequiredWithoutLoansNestedInput
+    guarantor?: UserUpdateOneWithoutGuaranteedLoansNestedInput
     repayments?: RepaymentUpdateManyWithoutLoanNestedInput
   }
 
   export type LoanUncheckedUpdateWithoutPayoutsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     interestRate?: FloatFieldUpdateOperationsInput | number
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     groupId?: StringFieldUpdateOperationsInput | string
+    guarantorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     repayments?: RepaymentUncheckedUpdateManyWithoutLoanNestedInput
   }
 
   export type PayoutCreateWithoutApprovalsInput = {
     id?: string
+    refNo?: string | null
     amount: number
     description: string
     status: string
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
     createdAt?: Date | string
     requestedBy: UserCreateNestedOneWithoutPayoutsInput
     group: GroupCreateNestedOneWithoutPayoutsInput
@@ -16658,12 +25196,16 @@ export namespace Prisma {
 
   export type PayoutUncheckedCreateWithoutApprovalsInput = {
     id?: string
+    refNo?: string | null
     amount: number
     description: string
     status: string
     requestedById: string
     groupId: string
     loanId?: string | null
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
     createdAt?: Date | string
   }
 
@@ -16675,39 +25217,55 @@ export namespace Prisma {
   export type UserCreateWithoutPayoutApprovalsInput = {
     id?: string
     phone: string
+    email?: string | null
     nationalId?: string | null
     name: string
     password: string
     role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
     agreedToRules?: boolean
     agreedAt?: Date | string | null
+    agreementUrl?: string | null
     lastPasswordChange?: Date | string | null
     createdAt?: Date | string
     group: GroupCreateNestedOneWithoutMembersInput
     contributions?: ContributionCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementCreateNestedManyWithoutAuthorInput
     loans?: LoanCreateNestedManyWithoutUserInput
     payouts?: PayoutCreateNestedManyWithoutRequestedByInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
     penalties?: PenaltyCreateNestedManyWithoutUserInput
+    attendances?: AttendanceCreateNestedManyWithoutUserInput
+    votes?: VoteCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanCreateNestedManyWithoutGuarantorInput
   }
 
   export type UserUncheckedCreateWithoutPayoutApprovalsInput = {
     id?: string
     phone: string
+    email?: string | null
     nationalId?: string | null
     name: string
     password: string
     role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
     groupId: string
     agreedToRules?: boolean
     agreedAt?: Date | string | null
+    agreementUrl?: string | null
     lastPasswordChange?: Date | string | null
     createdAt?: Date | string
     contributions?: ContributionUncheckedCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutAuthorInput
     loans?: LoanUncheckedCreateNestedManyWithoutUserInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutRequestedByInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
     penalties?: PenaltyUncheckedCreateNestedManyWithoutUserInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutUserInput
+    votes?: VoteUncheckedCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanUncheckedCreateNestedManyWithoutGuarantorInput
   }
 
   export type UserCreateOrConnectWithoutPayoutApprovalsInput = {
@@ -16728,9 +25286,13 @@ export namespace Prisma {
 
   export type PayoutUpdateWithoutApprovalsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     requestedBy?: UserUpdateOneRequiredWithoutPayoutsNestedInput
     group?: GroupUpdateOneRequiredWithoutPayoutsNestedInput
@@ -16739,12 +25301,16 @@ export namespace Prisma {
 
   export type PayoutUncheckedUpdateWithoutApprovalsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     requestedById?: StringFieldUpdateOperationsInput | string
     groupId?: StringFieldUpdateOperationsInput | string
     loanId?: NullableStringFieldUpdateOperationsInput | string | null
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -16762,77 +25328,109 @@ export namespace Prisma {
   export type UserUpdateWithoutPayoutApprovalsInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     group?: GroupUpdateOneRequiredWithoutMembersNestedInput
     contributions?: ContributionUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUpdateManyWithoutAuthorNestedInput
     loans?: LoanUpdateManyWithoutUserNestedInput
     payouts?: PayoutUpdateManyWithoutRequestedByNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
     penalties?: PenaltyUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUpdateManyWithoutUserNestedInput
+    votes?: VoteUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUpdateManyWithoutGuarantorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPayoutApprovalsInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     groupId?: StringFieldUpdateOperationsInput | string
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contributions?: ContributionUncheckedUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutAuthorNestedInput
     loans?: LoanUncheckedUpdateManyWithoutUserNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutRequestedByNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
     penalties?: PenaltyUncheckedUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutUserNestedInput
+    votes?: VoteUncheckedUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUncheckedUpdateManyWithoutGuarantorNestedInput
   }
 
   export type UserCreateWithoutAuditLogsInput = {
     id?: string
     phone: string
+    email?: string | null
     nationalId?: string | null
     name: string
     password: string
     role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
     agreedToRules?: boolean
     agreedAt?: Date | string | null
+    agreementUrl?: string | null
     lastPasswordChange?: Date | string | null
     createdAt?: Date | string
     group: GroupCreateNestedOneWithoutMembersInput
     contributions?: ContributionCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementCreateNestedManyWithoutAuthorInput
     loans?: LoanCreateNestedManyWithoutUserInput
     payouts?: PayoutCreateNestedManyWithoutRequestedByInput
     payoutApprovals?: PayoutApprovalCreateNestedManyWithoutAdminInput
     penalties?: PenaltyCreateNestedManyWithoutUserInput
+    attendances?: AttendanceCreateNestedManyWithoutUserInput
+    votes?: VoteCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanCreateNestedManyWithoutGuarantorInput
   }
 
   export type UserUncheckedCreateWithoutAuditLogsInput = {
     id?: string
     phone: string
+    email?: string | null
     nationalId?: string | null
     name: string
     password: string
     role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
     groupId: string
     agreedToRules?: boolean
     agreedAt?: Date | string | null
+    agreementUrl?: string | null
     lastPasswordChange?: Date | string | null
     createdAt?: Date | string
     contributions?: ContributionUncheckedCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutAuthorInput
     loans?: LoanUncheckedCreateNestedManyWithoutUserInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutRequestedByInput
     payoutApprovals?: PayoutApprovalUncheckedCreateNestedManyWithoutAdminInput
     penalties?: PenaltyUncheckedCreateNestedManyWithoutUserInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutUserInput
+    votes?: VoteUncheckedCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanUncheckedCreateNestedManyWithoutGuarantorInput
   }
 
   export type UserCreateOrConnectWithoutAuditLogsInput = {
@@ -16849,12 +25447,19 @@ export namespace Prisma {
     penaltyRules: string
     savingsGoal?: number
     startDate: Date | string
+    tier?: string
+    maxMembers?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     members?: UserCreateNestedManyWithoutGroupInput
+    announcements?: AnnouncementCreateNestedManyWithoutGroupInput
     contributions?: ContributionCreateNestedManyWithoutGroupInput
     loans?: LoanCreateNestedManyWithoutGroupInput
     payouts?: PayoutCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyCreateNestedManyWithoutGroupInput
+    meetings?: MeetingCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceCreateNestedManyWithoutGroupInput
+    polls?: PollCreateNestedManyWithoutGroupInput
   }
 
   export type GroupUncheckedCreateWithoutAuditLogsInput = {
@@ -16866,12 +25471,19 @@ export namespace Prisma {
     penaltyRules: string
     savingsGoal?: number
     startDate: Date | string
+    tier?: string
+    maxMembers?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     members?: UserUncheckedCreateNestedManyWithoutGroupInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutGroupInput
     contributions?: ContributionUncheckedCreateNestedManyWithoutGroupInput
     loans?: LoanUncheckedCreateNestedManyWithoutGroupInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyUncheckedCreateNestedManyWithoutGroupInput
+    meetings?: MeetingUncheckedCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutGroupInput
+    polls?: PollUncheckedCreateNestedManyWithoutGroupInput
   }
 
   export type GroupCreateOrConnectWithoutAuditLogsInput = {
@@ -16893,39 +25505,55 @@ export namespace Prisma {
   export type UserUpdateWithoutAuditLogsInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     group?: GroupUpdateOneRequiredWithoutMembersNestedInput
     contributions?: ContributionUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUpdateManyWithoutAuthorNestedInput
     loans?: LoanUpdateManyWithoutUserNestedInput
     payouts?: PayoutUpdateManyWithoutRequestedByNestedInput
     payoutApprovals?: PayoutApprovalUpdateManyWithoutAdminNestedInput
     penalties?: PenaltyUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUpdateManyWithoutUserNestedInput
+    votes?: VoteUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUpdateManyWithoutGuarantorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAuditLogsInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     groupId?: StringFieldUpdateOperationsInput | string
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contributions?: ContributionUncheckedUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutAuthorNestedInput
     loans?: LoanUncheckedUpdateManyWithoutUserNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutRequestedByNestedInput
     payoutApprovals?: PayoutApprovalUncheckedUpdateManyWithoutAdminNestedInput
     penalties?: PenaltyUncheckedUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutUserNestedInput
+    votes?: VoteUncheckedUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUncheckedUpdateManyWithoutGuarantorNestedInput
   }
 
   export type GroupUpsertWithoutAuditLogsInput = {
@@ -16948,12 +25576,19 @@ export namespace Prisma {
     penaltyRules?: StringFieldUpdateOperationsInput | string
     savingsGoal?: FloatFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: UserUpdateManyWithoutGroupNestedInput
+    announcements?: AnnouncementUpdateManyWithoutGroupNestedInput
     contributions?: ContributionUpdateManyWithoutGroupNestedInput
     loans?: LoanUpdateManyWithoutGroupNestedInput
     payouts?: PayoutUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUpdateManyWithoutGroupNestedInput
+    polls?: PollUpdateManyWithoutGroupNestedInput
   }
 
   export type GroupUncheckedUpdateWithoutAuditLogsInput = {
@@ -16965,55 +25600,131 @@ export namespace Prisma {
     penaltyRules?: StringFieldUpdateOperationsInput | string
     savingsGoal?: FloatFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: UserUncheckedUpdateManyWithoutGroupNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutGroupNestedInput
     contributions?: ContributionUncheckedUpdateManyWithoutGroupNestedInput
     loans?: LoanUncheckedUpdateManyWithoutGroupNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUncheckedUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUncheckedUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutGroupNestedInput
+    polls?: PollUncheckedUpdateManyWithoutGroupNestedInput
   }
 
   export type UserCreateWithoutPenaltiesInput = {
     id?: string
     phone: string
+    email?: string | null
     nationalId?: string | null
     name: string
     password: string
     role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
     agreedToRules?: boolean
     agreedAt?: Date | string | null
+    agreementUrl?: string | null
     lastPasswordChange?: Date | string | null
     createdAt?: Date | string
     group: GroupCreateNestedOneWithoutMembersInput
     contributions?: ContributionCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementCreateNestedManyWithoutAuthorInput
     loans?: LoanCreateNestedManyWithoutUserInput
     payouts?: PayoutCreateNestedManyWithoutRequestedByInput
     payoutApprovals?: PayoutApprovalCreateNestedManyWithoutAdminInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    attendances?: AttendanceCreateNestedManyWithoutUserInput
+    votes?: VoteCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanCreateNestedManyWithoutGuarantorInput
   }
 
   export type UserUncheckedCreateWithoutPenaltiesInput = {
     id?: string
     phone: string
+    email?: string | null
     nationalId?: string | null
     name: string
     password: string
     role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
     groupId: string
     agreedToRules?: boolean
     agreedAt?: Date | string | null
+    agreementUrl?: string | null
     lastPasswordChange?: Date | string | null
     createdAt?: Date | string
     contributions?: ContributionUncheckedCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutAuthorInput
     loans?: LoanUncheckedCreateNestedManyWithoutUserInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutRequestedByInput
     payoutApprovals?: PayoutApprovalUncheckedCreateNestedManyWithoutAdminInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutUserInput
+    votes?: VoteUncheckedCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanUncheckedCreateNestedManyWithoutGuarantorInput
   }
 
   export type UserCreateOrConnectWithoutPenaltiesInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutPenaltiesInput, UserUncheckedCreateWithoutPenaltiesInput>
+  }
+
+  export type GroupCreateWithoutPenaltiesInput = {
+    id?: string
+    name: string
+    registrationId: string
+    contributionAmt: number
+    frequency: string
+    penaltyRules: string
+    savingsGoal?: number
+    startDate: Date | string
+    tier?: string
+    maxMembers?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: UserCreateNestedManyWithoutGroupInput
+    announcements?: AnnouncementCreateNestedManyWithoutGroupInput
+    contributions?: ContributionCreateNestedManyWithoutGroupInput
+    loans?: LoanCreateNestedManyWithoutGroupInput
+    payouts?: PayoutCreateNestedManyWithoutGroupInput
+    auditLogs?: AuditLogCreateNestedManyWithoutGroupInput
+    meetings?: MeetingCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceCreateNestedManyWithoutGroupInput
+    polls?: PollCreateNestedManyWithoutGroupInput
+  }
+
+  export type GroupUncheckedCreateWithoutPenaltiesInput = {
+    id?: string
+    name: string
+    registrationId: string
+    contributionAmt: number
+    frequency: string
+    penaltyRules: string
+    savingsGoal?: number
+    startDate: Date | string
+    tier?: string
+    maxMembers?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: UserUncheckedCreateNestedManyWithoutGroupInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutGroupInput
+    contributions?: ContributionUncheckedCreateNestedManyWithoutGroupInput
+    loans?: LoanUncheckedCreateNestedManyWithoutGroupInput
+    payouts?: PayoutUncheckedCreateNestedManyWithoutGroupInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutGroupInput
+    meetings?: MeetingUncheckedCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutGroupInput
+    polls?: PollUncheckedCreateNestedManyWithoutGroupInput
+  }
+
+  export type GroupCreateOrConnectWithoutPenaltiesInput = {
+    where: GroupWhereUniqueInput
+    create: XOR<GroupCreateWithoutPenaltiesInput, GroupUncheckedCreateWithoutPenaltiesInput>
   }
 
   export type UserUpsertWithoutPenaltiesInput = {
@@ -17030,12 +25741,311 @@ export namespace Prisma {
   export type UserUpdateWithoutPenaltiesInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    group?: GroupUpdateOneRequiredWithoutMembersNestedInput
+    contributions?: ContributionUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUpdateManyWithoutAuthorNestedInput
+    loans?: LoanUpdateManyWithoutUserNestedInput
+    payouts?: PayoutUpdateManyWithoutRequestedByNestedInput
+    payoutApprovals?: PayoutApprovalUpdateManyWithoutAdminNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUpdateManyWithoutUserNestedInput
+    votes?: VoteUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUpdateManyWithoutGuarantorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPenaltiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    groupId?: StringFieldUpdateOperationsInput | string
+    agreedToRules?: BoolFieldUpdateOperationsInput | boolean
+    agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contributions?: ContributionUncheckedUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutAuthorNestedInput
+    loans?: LoanUncheckedUpdateManyWithoutUserNestedInput
+    payouts?: PayoutUncheckedUpdateManyWithoutRequestedByNestedInput
+    payoutApprovals?: PayoutApprovalUncheckedUpdateManyWithoutAdminNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutUserNestedInput
+    votes?: VoteUncheckedUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUncheckedUpdateManyWithoutGuarantorNestedInput
+  }
+
+  export type GroupUpsertWithoutPenaltiesInput = {
+    update: XOR<GroupUpdateWithoutPenaltiesInput, GroupUncheckedUpdateWithoutPenaltiesInput>
+    create: XOR<GroupCreateWithoutPenaltiesInput, GroupUncheckedCreateWithoutPenaltiesInput>
+    where?: GroupWhereInput
+  }
+
+  export type GroupUpdateToOneWithWhereWithoutPenaltiesInput = {
+    where?: GroupWhereInput
+    data: XOR<GroupUpdateWithoutPenaltiesInput, GroupUncheckedUpdateWithoutPenaltiesInput>
+  }
+
+  export type GroupUpdateWithoutPenaltiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    registrationId?: StringFieldUpdateOperationsInput | string
+    contributionAmt?: FloatFieldUpdateOperationsInput | number
+    frequency?: StringFieldUpdateOperationsInput | string
+    penaltyRules?: StringFieldUpdateOperationsInput | string
+    savingsGoal?: FloatFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: UserUpdateManyWithoutGroupNestedInput
+    announcements?: AnnouncementUpdateManyWithoutGroupNestedInput
+    contributions?: ContributionUpdateManyWithoutGroupNestedInput
+    loans?: LoanUpdateManyWithoutGroupNestedInput
+    payouts?: PayoutUpdateManyWithoutGroupNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUpdateManyWithoutGroupNestedInput
+    polls?: PollUpdateManyWithoutGroupNestedInput
+  }
+
+  export type GroupUncheckedUpdateWithoutPenaltiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    registrationId?: StringFieldUpdateOperationsInput | string
+    contributionAmt?: FloatFieldUpdateOperationsInput | number
+    frequency?: StringFieldUpdateOperationsInput | string
+    penaltyRules?: StringFieldUpdateOperationsInput | string
+    savingsGoal?: FloatFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: UserUncheckedUpdateManyWithoutGroupNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutGroupNestedInput
+    contributions?: ContributionUncheckedUpdateManyWithoutGroupNestedInput
+    loans?: LoanUncheckedUpdateManyWithoutGroupNestedInput
+    payouts?: PayoutUncheckedUpdateManyWithoutGroupNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUncheckedUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutGroupNestedInput
+    polls?: PollUncheckedUpdateManyWithoutGroupNestedInput
+  }
+
+  export type GroupCreateWithoutAnnouncementsInput = {
+    id?: string
+    name: string
+    registrationId: string
+    contributionAmt: number
+    frequency: string
+    penaltyRules: string
+    savingsGoal?: number
+    startDate: Date | string
+    tier?: string
+    maxMembers?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: UserCreateNestedManyWithoutGroupInput
+    contributions?: ContributionCreateNestedManyWithoutGroupInput
+    loans?: LoanCreateNestedManyWithoutGroupInput
+    payouts?: PayoutCreateNestedManyWithoutGroupInput
+    auditLogs?: AuditLogCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyCreateNestedManyWithoutGroupInput
+    meetings?: MeetingCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceCreateNestedManyWithoutGroupInput
+    polls?: PollCreateNestedManyWithoutGroupInput
+  }
+
+  export type GroupUncheckedCreateWithoutAnnouncementsInput = {
+    id?: string
+    name: string
+    registrationId: string
+    contributionAmt: number
+    frequency: string
+    penaltyRules: string
+    savingsGoal?: number
+    startDate: Date | string
+    tier?: string
+    maxMembers?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: UserUncheckedCreateNestedManyWithoutGroupInput
+    contributions?: ContributionUncheckedCreateNestedManyWithoutGroupInput
+    loans?: LoanUncheckedCreateNestedManyWithoutGroupInput
+    payouts?: PayoutUncheckedCreateNestedManyWithoutGroupInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyUncheckedCreateNestedManyWithoutGroupInput
+    meetings?: MeetingUncheckedCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutGroupInput
+    polls?: PollUncheckedCreateNestedManyWithoutGroupInput
+  }
+
+  export type GroupCreateOrConnectWithoutAnnouncementsInput = {
+    where: GroupWhereUniqueInput
+    create: XOR<GroupCreateWithoutAnnouncementsInput, GroupUncheckedCreateWithoutAnnouncementsInput>
+  }
+
+  export type UserCreateWithoutAnnouncementsInput = {
+    id?: string
+    phone: string
+    email?: string | null
+    nationalId?: string | null
+    name: string
+    password: string
+    role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
+    agreedToRules?: boolean
+    agreedAt?: Date | string | null
+    agreementUrl?: string | null
+    lastPasswordChange?: Date | string | null
+    createdAt?: Date | string
+    group: GroupCreateNestedOneWithoutMembersInput
+    contributions?: ContributionCreateNestedManyWithoutUserInput
+    loans?: LoanCreateNestedManyWithoutUserInput
+    payouts?: PayoutCreateNestedManyWithoutRequestedByInput
+    payoutApprovals?: PayoutApprovalCreateNestedManyWithoutAdminInput
+    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    penalties?: PenaltyCreateNestedManyWithoutUserInput
+    attendances?: AttendanceCreateNestedManyWithoutUserInput
+    votes?: VoteCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanCreateNestedManyWithoutGuarantorInput
+  }
+
+  export type UserUncheckedCreateWithoutAnnouncementsInput = {
+    id?: string
+    phone: string
+    email?: string | null
+    nationalId?: string | null
+    name: string
+    password: string
+    role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
+    groupId: string
+    agreedToRules?: boolean
+    agreedAt?: Date | string | null
+    agreementUrl?: string | null
+    lastPasswordChange?: Date | string | null
+    createdAt?: Date | string
+    contributions?: ContributionUncheckedCreateNestedManyWithoutUserInput
+    loans?: LoanUncheckedCreateNestedManyWithoutUserInput
+    payouts?: PayoutUncheckedCreateNestedManyWithoutRequestedByInput
+    payoutApprovals?: PayoutApprovalUncheckedCreateNestedManyWithoutAdminInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    penalties?: PenaltyUncheckedCreateNestedManyWithoutUserInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutUserInput
+    votes?: VoteUncheckedCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanUncheckedCreateNestedManyWithoutGuarantorInput
+  }
+
+  export type UserCreateOrConnectWithoutAnnouncementsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAnnouncementsInput, UserUncheckedCreateWithoutAnnouncementsInput>
+  }
+
+  export type GroupUpsertWithoutAnnouncementsInput = {
+    update: XOR<GroupUpdateWithoutAnnouncementsInput, GroupUncheckedUpdateWithoutAnnouncementsInput>
+    create: XOR<GroupCreateWithoutAnnouncementsInput, GroupUncheckedCreateWithoutAnnouncementsInput>
+    where?: GroupWhereInput
+  }
+
+  export type GroupUpdateToOneWithWhereWithoutAnnouncementsInput = {
+    where?: GroupWhereInput
+    data: XOR<GroupUpdateWithoutAnnouncementsInput, GroupUncheckedUpdateWithoutAnnouncementsInput>
+  }
+
+  export type GroupUpdateWithoutAnnouncementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    registrationId?: StringFieldUpdateOperationsInput | string
+    contributionAmt?: FloatFieldUpdateOperationsInput | number
+    frequency?: StringFieldUpdateOperationsInput | string
+    penaltyRules?: StringFieldUpdateOperationsInput | string
+    savingsGoal?: FloatFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: UserUpdateManyWithoutGroupNestedInput
+    contributions?: ContributionUpdateManyWithoutGroupNestedInput
+    loans?: LoanUpdateManyWithoutGroupNestedInput
+    payouts?: PayoutUpdateManyWithoutGroupNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUpdateManyWithoutGroupNestedInput
+    polls?: PollUpdateManyWithoutGroupNestedInput
+  }
+
+  export type GroupUncheckedUpdateWithoutAnnouncementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    registrationId?: StringFieldUpdateOperationsInput | string
+    contributionAmt?: FloatFieldUpdateOperationsInput | number
+    frequency?: StringFieldUpdateOperationsInput | string
+    penaltyRules?: StringFieldUpdateOperationsInput | string
+    savingsGoal?: FloatFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: UserUncheckedUpdateManyWithoutGroupNestedInput
+    contributions?: ContributionUncheckedUpdateManyWithoutGroupNestedInput
+    loans?: LoanUncheckedUpdateManyWithoutGroupNestedInput
+    payouts?: PayoutUncheckedUpdateManyWithoutGroupNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUncheckedUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUncheckedUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutGroupNestedInput
+    polls?: PollUncheckedUpdateManyWithoutGroupNestedInput
+  }
+
+  export type UserUpsertWithoutAnnouncementsInput = {
+    update: XOR<UserUpdateWithoutAnnouncementsInput, UserUncheckedUpdateWithoutAnnouncementsInput>
+    create: XOR<UserCreateWithoutAnnouncementsInput, UserUncheckedCreateWithoutAnnouncementsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAnnouncementsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAnnouncementsInput, UserUncheckedUpdateWithoutAnnouncementsInput>
+  }
+
+  export type UserUpdateWithoutAnnouncementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    agreedToRules?: BoolFieldUpdateOperationsInput | boolean
+    agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     group?: GroupUpdateOneRequiredWithoutMembersNestedInput
@@ -17044,18 +26054,26 @@ export namespace Prisma {
     payouts?: PayoutUpdateManyWithoutRequestedByNestedInput
     payoutApprovals?: PayoutApprovalUpdateManyWithoutAdminNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    penalties?: PenaltyUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUpdateManyWithoutUserNestedInput
+    votes?: VoteUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUpdateManyWithoutGuarantorNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutPenaltiesInput = {
+  export type UserUncheckedUpdateWithoutAnnouncementsInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     groupId?: StringFieldUpdateOperationsInput | string
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contributions?: ContributionUncheckedUpdateManyWithoutUserNestedInput
@@ -17063,47 +26081,835 @@ export namespace Prisma {
     payouts?: PayoutUncheckedUpdateManyWithoutRequestedByNestedInput
     payoutApprovals?: PayoutApprovalUncheckedUpdateManyWithoutAdminNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    penalties?: PenaltyUncheckedUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutUserNestedInput
+    votes?: VoteUncheckedUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUncheckedUpdateManyWithoutGuarantorNestedInput
+  }
+
+  export type GroupCreateWithoutMeetingsInput = {
+    id?: string
+    name: string
+    registrationId: string
+    contributionAmt: number
+    frequency: string
+    penaltyRules: string
+    savingsGoal?: number
+    startDate: Date | string
+    tier?: string
+    maxMembers?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: UserCreateNestedManyWithoutGroupInput
+    announcements?: AnnouncementCreateNestedManyWithoutGroupInput
+    contributions?: ContributionCreateNestedManyWithoutGroupInput
+    loans?: LoanCreateNestedManyWithoutGroupInput
+    payouts?: PayoutCreateNestedManyWithoutGroupInput
+    auditLogs?: AuditLogCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceCreateNestedManyWithoutGroupInput
+    polls?: PollCreateNestedManyWithoutGroupInput
+  }
+
+  export type GroupUncheckedCreateWithoutMeetingsInput = {
+    id?: string
+    name: string
+    registrationId: string
+    contributionAmt: number
+    frequency: string
+    penaltyRules: string
+    savingsGoal?: number
+    startDate: Date | string
+    tier?: string
+    maxMembers?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: UserUncheckedCreateNestedManyWithoutGroupInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutGroupInput
+    contributions?: ContributionUncheckedCreateNestedManyWithoutGroupInput
+    loans?: LoanUncheckedCreateNestedManyWithoutGroupInput
+    payouts?: PayoutUncheckedCreateNestedManyWithoutGroupInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyUncheckedCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutGroupInput
+    polls?: PollUncheckedCreateNestedManyWithoutGroupInput
+  }
+
+  export type GroupCreateOrConnectWithoutMeetingsInput = {
+    where: GroupWhereUniqueInput
+    create: XOR<GroupCreateWithoutMeetingsInput, GroupUncheckedCreateWithoutMeetingsInput>
+  }
+
+  export type AttendanceCreateWithoutMeetingInput = {
+    id?: string
+    status: string
+    user: UserCreateNestedOneWithoutAttendancesInput
+    group: GroupCreateNestedOneWithoutAttendancesInput
+  }
+
+  export type AttendanceUncheckedCreateWithoutMeetingInput = {
+    id?: string
+    userId: string
+    status: string
+    groupId: string
+  }
+
+  export type AttendanceCreateOrConnectWithoutMeetingInput = {
+    where: AttendanceWhereUniqueInput
+    create: XOR<AttendanceCreateWithoutMeetingInput, AttendanceUncheckedCreateWithoutMeetingInput>
+  }
+
+  export type AttendanceCreateManyMeetingInputEnvelope = {
+    data: AttendanceCreateManyMeetingInput | AttendanceCreateManyMeetingInput[]
+  }
+
+  export type GroupUpsertWithoutMeetingsInput = {
+    update: XOR<GroupUpdateWithoutMeetingsInput, GroupUncheckedUpdateWithoutMeetingsInput>
+    create: XOR<GroupCreateWithoutMeetingsInput, GroupUncheckedCreateWithoutMeetingsInput>
+    where?: GroupWhereInput
+  }
+
+  export type GroupUpdateToOneWithWhereWithoutMeetingsInput = {
+    where?: GroupWhereInput
+    data: XOR<GroupUpdateWithoutMeetingsInput, GroupUncheckedUpdateWithoutMeetingsInput>
+  }
+
+  export type GroupUpdateWithoutMeetingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    registrationId?: StringFieldUpdateOperationsInput | string
+    contributionAmt?: FloatFieldUpdateOperationsInput | number
+    frequency?: StringFieldUpdateOperationsInput | string
+    penaltyRules?: StringFieldUpdateOperationsInput | string
+    savingsGoal?: FloatFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: UserUpdateManyWithoutGroupNestedInput
+    announcements?: AnnouncementUpdateManyWithoutGroupNestedInput
+    contributions?: ContributionUpdateManyWithoutGroupNestedInput
+    loans?: LoanUpdateManyWithoutGroupNestedInput
+    payouts?: PayoutUpdateManyWithoutGroupNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUpdateManyWithoutGroupNestedInput
+    polls?: PollUpdateManyWithoutGroupNestedInput
+  }
+
+  export type GroupUncheckedUpdateWithoutMeetingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    registrationId?: StringFieldUpdateOperationsInput | string
+    contributionAmt?: FloatFieldUpdateOperationsInput | number
+    frequency?: StringFieldUpdateOperationsInput | string
+    penaltyRules?: StringFieldUpdateOperationsInput | string
+    savingsGoal?: FloatFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: UserUncheckedUpdateManyWithoutGroupNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutGroupNestedInput
+    contributions?: ContributionUncheckedUpdateManyWithoutGroupNestedInput
+    loans?: LoanUncheckedUpdateManyWithoutGroupNestedInput
+    payouts?: PayoutUncheckedUpdateManyWithoutGroupNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUncheckedUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutGroupNestedInput
+    polls?: PollUncheckedUpdateManyWithoutGroupNestedInput
+  }
+
+  export type AttendanceUpsertWithWhereUniqueWithoutMeetingInput = {
+    where: AttendanceWhereUniqueInput
+    update: XOR<AttendanceUpdateWithoutMeetingInput, AttendanceUncheckedUpdateWithoutMeetingInput>
+    create: XOR<AttendanceCreateWithoutMeetingInput, AttendanceUncheckedCreateWithoutMeetingInput>
+  }
+
+  export type AttendanceUpdateWithWhereUniqueWithoutMeetingInput = {
+    where: AttendanceWhereUniqueInput
+    data: XOR<AttendanceUpdateWithoutMeetingInput, AttendanceUncheckedUpdateWithoutMeetingInput>
+  }
+
+  export type AttendanceUpdateManyWithWhereWithoutMeetingInput = {
+    where: AttendanceScalarWhereInput
+    data: XOR<AttendanceUpdateManyMutationInput, AttendanceUncheckedUpdateManyWithoutMeetingInput>
+  }
+
+  export type MeetingCreateWithoutAttendancesInput = {
+    id?: string
+    date: Date | string
+    title: string
+    createdAt?: Date | string
+    group: GroupCreateNestedOneWithoutMeetingsInput
+  }
+
+  export type MeetingUncheckedCreateWithoutAttendancesInput = {
+    id?: string
+    date: Date | string
+    title: string
+    groupId: string
+    createdAt?: Date | string
+  }
+
+  export type MeetingCreateOrConnectWithoutAttendancesInput = {
+    where: MeetingWhereUniqueInput
+    create: XOR<MeetingCreateWithoutAttendancesInput, MeetingUncheckedCreateWithoutAttendancesInput>
+  }
+
+  export type UserCreateWithoutAttendancesInput = {
+    id?: string
+    phone: string
+    email?: string | null
+    nationalId?: string | null
+    name: string
+    password: string
+    role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
+    agreedToRules?: boolean
+    agreedAt?: Date | string | null
+    agreementUrl?: string | null
+    lastPasswordChange?: Date | string | null
+    createdAt?: Date | string
+    group: GroupCreateNestedOneWithoutMembersInput
+    contributions?: ContributionCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementCreateNestedManyWithoutAuthorInput
+    loans?: LoanCreateNestedManyWithoutUserInput
+    payouts?: PayoutCreateNestedManyWithoutRequestedByInput
+    payoutApprovals?: PayoutApprovalCreateNestedManyWithoutAdminInput
+    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    penalties?: PenaltyCreateNestedManyWithoutUserInput
+    votes?: VoteCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanCreateNestedManyWithoutGuarantorInput
+  }
+
+  export type UserUncheckedCreateWithoutAttendancesInput = {
+    id?: string
+    phone: string
+    email?: string | null
+    nationalId?: string | null
+    name: string
+    password: string
+    role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
+    groupId: string
+    agreedToRules?: boolean
+    agreedAt?: Date | string | null
+    agreementUrl?: string | null
+    lastPasswordChange?: Date | string | null
+    createdAt?: Date | string
+    contributions?: ContributionUncheckedCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutAuthorInput
+    loans?: LoanUncheckedCreateNestedManyWithoutUserInput
+    payouts?: PayoutUncheckedCreateNestedManyWithoutRequestedByInput
+    payoutApprovals?: PayoutApprovalUncheckedCreateNestedManyWithoutAdminInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    penalties?: PenaltyUncheckedCreateNestedManyWithoutUserInput
+    votes?: VoteUncheckedCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanUncheckedCreateNestedManyWithoutGuarantorInput
+  }
+
+  export type UserCreateOrConnectWithoutAttendancesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAttendancesInput, UserUncheckedCreateWithoutAttendancesInput>
+  }
+
+  export type GroupCreateWithoutAttendancesInput = {
+    id?: string
+    name: string
+    registrationId: string
+    contributionAmt: number
+    frequency: string
+    penaltyRules: string
+    savingsGoal?: number
+    startDate: Date | string
+    tier?: string
+    maxMembers?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: UserCreateNestedManyWithoutGroupInput
+    announcements?: AnnouncementCreateNestedManyWithoutGroupInput
+    contributions?: ContributionCreateNestedManyWithoutGroupInput
+    loans?: LoanCreateNestedManyWithoutGroupInput
+    payouts?: PayoutCreateNestedManyWithoutGroupInput
+    auditLogs?: AuditLogCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyCreateNestedManyWithoutGroupInput
+    meetings?: MeetingCreateNestedManyWithoutGroupInput
+    polls?: PollCreateNestedManyWithoutGroupInput
+  }
+
+  export type GroupUncheckedCreateWithoutAttendancesInput = {
+    id?: string
+    name: string
+    registrationId: string
+    contributionAmt: number
+    frequency: string
+    penaltyRules: string
+    savingsGoal?: number
+    startDate: Date | string
+    tier?: string
+    maxMembers?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: UserUncheckedCreateNestedManyWithoutGroupInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutGroupInput
+    contributions?: ContributionUncheckedCreateNestedManyWithoutGroupInput
+    loans?: LoanUncheckedCreateNestedManyWithoutGroupInput
+    payouts?: PayoutUncheckedCreateNestedManyWithoutGroupInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyUncheckedCreateNestedManyWithoutGroupInput
+    meetings?: MeetingUncheckedCreateNestedManyWithoutGroupInput
+    polls?: PollUncheckedCreateNestedManyWithoutGroupInput
+  }
+
+  export type GroupCreateOrConnectWithoutAttendancesInput = {
+    where: GroupWhereUniqueInput
+    create: XOR<GroupCreateWithoutAttendancesInput, GroupUncheckedCreateWithoutAttendancesInput>
+  }
+
+  export type MeetingUpsertWithoutAttendancesInput = {
+    update: XOR<MeetingUpdateWithoutAttendancesInput, MeetingUncheckedUpdateWithoutAttendancesInput>
+    create: XOR<MeetingCreateWithoutAttendancesInput, MeetingUncheckedCreateWithoutAttendancesInput>
+    where?: MeetingWhereInput
+  }
+
+  export type MeetingUpdateToOneWithWhereWithoutAttendancesInput = {
+    where?: MeetingWhereInput
+    data: XOR<MeetingUpdateWithoutAttendancesInput, MeetingUncheckedUpdateWithoutAttendancesInput>
+  }
+
+  export type MeetingUpdateWithoutAttendancesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    group?: GroupUpdateOneRequiredWithoutMeetingsNestedInput
+  }
+
+  export type MeetingUncheckedUpdateWithoutAttendancesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutAttendancesInput = {
+    update: XOR<UserUpdateWithoutAttendancesInput, UserUncheckedUpdateWithoutAttendancesInput>
+    create: XOR<UserCreateWithoutAttendancesInput, UserUncheckedCreateWithoutAttendancesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAttendancesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAttendancesInput, UserUncheckedUpdateWithoutAttendancesInput>
+  }
+
+  export type UserUpdateWithoutAttendancesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    agreedToRules?: BoolFieldUpdateOperationsInput | boolean
+    agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    group?: GroupUpdateOneRequiredWithoutMembersNestedInput
+    contributions?: ContributionUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUpdateManyWithoutAuthorNestedInput
+    loans?: LoanUpdateManyWithoutUserNestedInput
+    payouts?: PayoutUpdateManyWithoutRequestedByNestedInput
+    payoutApprovals?: PayoutApprovalUpdateManyWithoutAdminNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    penalties?: PenaltyUpdateManyWithoutUserNestedInput
+    votes?: VoteUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUpdateManyWithoutGuarantorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAttendancesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    groupId?: StringFieldUpdateOperationsInput | string
+    agreedToRules?: BoolFieldUpdateOperationsInput | boolean
+    agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contributions?: ContributionUncheckedUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutAuthorNestedInput
+    loans?: LoanUncheckedUpdateManyWithoutUserNestedInput
+    payouts?: PayoutUncheckedUpdateManyWithoutRequestedByNestedInput
+    payoutApprovals?: PayoutApprovalUncheckedUpdateManyWithoutAdminNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    penalties?: PenaltyUncheckedUpdateManyWithoutUserNestedInput
+    votes?: VoteUncheckedUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUncheckedUpdateManyWithoutGuarantorNestedInput
+  }
+
+  export type GroupUpsertWithoutAttendancesInput = {
+    update: XOR<GroupUpdateWithoutAttendancesInput, GroupUncheckedUpdateWithoutAttendancesInput>
+    create: XOR<GroupCreateWithoutAttendancesInput, GroupUncheckedCreateWithoutAttendancesInput>
+    where?: GroupWhereInput
+  }
+
+  export type GroupUpdateToOneWithWhereWithoutAttendancesInput = {
+    where?: GroupWhereInput
+    data: XOR<GroupUpdateWithoutAttendancesInput, GroupUncheckedUpdateWithoutAttendancesInput>
+  }
+
+  export type GroupUpdateWithoutAttendancesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    registrationId?: StringFieldUpdateOperationsInput | string
+    contributionAmt?: FloatFieldUpdateOperationsInput | number
+    frequency?: StringFieldUpdateOperationsInput | string
+    penaltyRules?: StringFieldUpdateOperationsInput | string
+    savingsGoal?: FloatFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: UserUpdateManyWithoutGroupNestedInput
+    announcements?: AnnouncementUpdateManyWithoutGroupNestedInput
+    contributions?: ContributionUpdateManyWithoutGroupNestedInput
+    loans?: LoanUpdateManyWithoutGroupNestedInput
+    payouts?: PayoutUpdateManyWithoutGroupNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUpdateManyWithoutGroupNestedInput
+    polls?: PollUpdateManyWithoutGroupNestedInput
+  }
+
+  export type GroupUncheckedUpdateWithoutAttendancesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    registrationId?: StringFieldUpdateOperationsInput | string
+    contributionAmt?: FloatFieldUpdateOperationsInput | number
+    frequency?: StringFieldUpdateOperationsInput | string
+    penaltyRules?: StringFieldUpdateOperationsInput | string
+    savingsGoal?: FloatFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: UserUncheckedUpdateManyWithoutGroupNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutGroupNestedInput
+    contributions?: ContributionUncheckedUpdateManyWithoutGroupNestedInput
+    loans?: LoanUncheckedUpdateManyWithoutGroupNestedInput
+    payouts?: PayoutUncheckedUpdateManyWithoutGroupNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUncheckedUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUncheckedUpdateManyWithoutGroupNestedInput
+    polls?: PollUncheckedUpdateManyWithoutGroupNestedInput
+  }
+
+  export type GroupCreateWithoutPollsInput = {
+    id?: string
+    name: string
+    registrationId: string
+    contributionAmt: number
+    frequency: string
+    penaltyRules: string
+    savingsGoal?: number
+    startDate: Date | string
+    tier?: string
+    maxMembers?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: UserCreateNestedManyWithoutGroupInput
+    announcements?: AnnouncementCreateNestedManyWithoutGroupInput
+    contributions?: ContributionCreateNestedManyWithoutGroupInput
+    loans?: LoanCreateNestedManyWithoutGroupInput
+    payouts?: PayoutCreateNestedManyWithoutGroupInput
+    auditLogs?: AuditLogCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyCreateNestedManyWithoutGroupInput
+    meetings?: MeetingCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceCreateNestedManyWithoutGroupInput
+  }
+
+  export type GroupUncheckedCreateWithoutPollsInput = {
+    id?: string
+    name: string
+    registrationId: string
+    contributionAmt: number
+    frequency: string
+    penaltyRules: string
+    savingsGoal?: number
+    startDate: Date | string
+    tier?: string
+    maxMembers?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: UserUncheckedCreateNestedManyWithoutGroupInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutGroupInput
+    contributions?: ContributionUncheckedCreateNestedManyWithoutGroupInput
+    loans?: LoanUncheckedCreateNestedManyWithoutGroupInput
+    payouts?: PayoutUncheckedCreateNestedManyWithoutGroupInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutGroupInput
+    penalties?: PenaltyUncheckedCreateNestedManyWithoutGroupInput
+    meetings?: MeetingUncheckedCreateNestedManyWithoutGroupInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutGroupInput
+  }
+
+  export type GroupCreateOrConnectWithoutPollsInput = {
+    where: GroupWhereUniqueInput
+    create: XOR<GroupCreateWithoutPollsInput, GroupUncheckedCreateWithoutPollsInput>
+  }
+
+  export type VoteCreateWithoutPollInput = {
+    id?: string
+    choice: string
+    user: UserCreateNestedOneWithoutVotesInput
+  }
+
+  export type VoteUncheckedCreateWithoutPollInput = {
+    id?: string
+    userId: string
+    choice: string
+  }
+
+  export type VoteCreateOrConnectWithoutPollInput = {
+    where: VoteWhereUniqueInput
+    create: XOR<VoteCreateWithoutPollInput, VoteUncheckedCreateWithoutPollInput>
+  }
+
+  export type VoteCreateManyPollInputEnvelope = {
+    data: VoteCreateManyPollInput | VoteCreateManyPollInput[]
+  }
+
+  export type GroupUpsertWithoutPollsInput = {
+    update: XOR<GroupUpdateWithoutPollsInput, GroupUncheckedUpdateWithoutPollsInput>
+    create: XOR<GroupCreateWithoutPollsInput, GroupUncheckedCreateWithoutPollsInput>
+    where?: GroupWhereInput
+  }
+
+  export type GroupUpdateToOneWithWhereWithoutPollsInput = {
+    where?: GroupWhereInput
+    data: XOR<GroupUpdateWithoutPollsInput, GroupUncheckedUpdateWithoutPollsInput>
+  }
+
+  export type GroupUpdateWithoutPollsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    registrationId?: StringFieldUpdateOperationsInput | string
+    contributionAmt?: FloatFieldUpdateOperationsInput | number
+    frequency?: StringFieldUpdateOperationsInput | string
+    penaltyRules?: StringFieldUpdateOperationsInput | string
+    savingsGoal?: FloatFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: UserUpdateManyWithoutGroupNestedInput
+    announcements?: AnnouncementUpdateManyWithoutGroupNestedInput
+    contributions?: ContributionUpdateManyWithoutGroupNestedInput
+    loans?: LoanUpdateManyWithoutGroupNestedInput
+    payouts?: PayoutUpdateManyWithoutGroupNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUpdateManyWithoutGroupNestedInput
+  }
+
+  export type GroupUncheckedUpdateWithoutPollsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    registrationId?: StringFieldUpdateOperationsInput | string
+    contributionAmt?: FloatFieldUpdateOperationsInput | number
+    frequency?: StringFieldUpdateOperationsInput | string
+    penaltyRules?: StringFieldUpdateOperationsInput | string
+    savingsGoal?: FloatFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    tier?: StringFieldUpdateOperationsInput | string
+    maxMembers?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: UserUncheckedUpdateManyWithoutGroupNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutGroupNestedInput
+    contributions?: ContributionUncheckedUpdateManyWithoutGroupNestedInput
+    loans?: LoanUncheckedUpdateManyWithoutGroupNestedInput
+    payouts?: PayoutUncheckedUpdateManyWithoutGroupNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutGroupNestedInput
+    penalties?: PenaltyUncheckedUpdateManyWithoutGroupNestedInput
+    meetings?: MeetingUncheckedUpdateManyWithoutGroupNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutGroupNestedInput
+  }
+
+  export type VoteUpsertWithWhereUniqueWithoutPollInput = {
+    where: VoteWhereUniqueInput
+    update: XOR<VoteUpdateWithoutPollInput, VoteUncheckedUpdateWithoutPollInput>
+    create: XOR<VoteCreateWithoutPollInput, VoteUncheckedCreateWithoutPollInput>
+  }
+
+  export type VoteUpdateWithWhereUniqueWithoutPollInput = {
+    where: VoteWhereUniqueInput
+    data: XOR<VoteUpdateWithoutPollInput, VoteUncheckedUpdateWithoutPollInput>
+  }
+
+  export type VoteUpdateManyWithWhereWithoutPollInput = {
+    where: VoteScalarWhereInput
+    data: XOR<VoteUpdateManyMutationInput, VoteUncheckedUpdateManyWithoutPollInput>
+  }
+
+  export type PollCreateWithoutVoicesInput = {
+    id?: string
+    title: string
+    description: string
+    status?: string
+    createdAt?: Date | string
+    group: GroupCreateNestedOneWithoutPollsInput
+  }
+
+  export type PollUncheckedCreateWithoutVoicesInput = {
+    id?: string
+    title: string
+    description: string
+    status?: string
+    groupId: string
+    createdAt?: Date | string
+  }
+
+  export type PollCreateOrConnectWithoutVoicesInput = {
+    where: PollWhereUniqueInput
+    create: XOR<PollCreateWithoutVoicesInput, PollUncheckedCreateWithoutVoicesInput>
+  }
+
+  export type UserCreateWithoutVotesInput = {
+    id?: string
+    phone: string
+    email?: string | null
+    nationalId?: string | null
+    name: string
+    password: string
+    role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
+    agreedToRules?: boolean
+    agreedAt?: Date | string | null
+    agreementUrl?: string | null
+    lastPasswordChange?: Date | string | null
+    createdAt?: Date | string
+    group: GroupCreateNestedOneWithoutMembersInput
+    contributions?: ContributionCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementCreateNestedManyWithoutAuthorInput
+    loans?: LoanCreateNestedManyWithoutUserInput
+    payouts?: PayoutCreateNestedManyWithoutRequestedByInput
+    payoutApprovals?: PayoutApprovalCreateNestedManyWithoutAdminInput
+    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    penalties?: PenaltyCreateNestedManyWithoutUserInput
+    attendances?: AttendanceCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanCreateNestedManyWithoutGuarantorInput
+  }
+
+  export type UserUncheckedCreateWithoutVotesInput = {
+    id?: string
+    phone: string
+    email?: string | null
+    nationalId?: string | null
+    name: string
+    password: string
+    role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
+    groupId: string
+    agreedToRules?: boolean
+    agreedAt?: Date | string | null
+    agreementUrl?: string | null
+    lastPasswordChange?: Date | string | null
+    createdAt?: Date | string
+    contributions?: ContributionUncheckedCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutAuthorInput
+    loans?: LoanUncheckedCreateNestedManyWithoutUserInput
+    payouts?: PayoutUncheckedCreateNestedManyWithoutRequestedByInput
+    payoutApprovals?: PayoutApprovalUncheckedCreateNestedManyWithoutAdminInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    penalties?: PenaltyUncheckedCreateNestedManyWithoutUserInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutUserInput
+    guaranteedLoans?: LoanUncheckedCreateNestedManyWithoutGuarantorInput
+  }
+
+  export type UserCreateOrConnectWithoutVotesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutVotesInput, UserUncheckedCreateWithoutVotesInput>
+  }
+
+  export type PollUpsertWithoutVoicesInput = {
+    update: XOR<PollUpdateWithoutVoicesInput, PollUncheckedUpdateWithoutVoicesInput>
+    create: XOR<PollCreateWithoutVoicesInput, PollUncheckedCreateWithoutVoicesInput>
+    where?: PollWhereInput
+  }
+
+  export type PollUpdateToOneWithWhereWithoutVoicesInput = {
+    where?: PollWhereInput
+    data: XOR<PollUpdateWithoutVoicesInput, PollUncheckedUpdateWithoutVoicesInput>
+  }
+
+  export type PollUpdateWithoutVoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    group?: GroupUpdateOneRequiredWithoutPollsNestedInput
+  }
+
+  export type PollUncheckedUpdateWithoutVoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutVotesInput = {
+    update: XOR<UserUpdateWithoutVotesInput, UserUncheckedUpdateWithoutVotesInput>
+    create: XOR<UserCreateWithoutVotesInput, UserUncheckedCreateWithoutVotesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutVotesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutVotesInput, UserUncheckedUpdateWithoutVotesInput>
+  }
+
+  export type UserUpdateWithoutVotesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    agreedToRules?: BoolFieldUpdateOperationsInput | boolean
+    agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    group?: GroupUpdateOneRequiredWithoutMembersNestedInput
+    contributions?: ContributionUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUpdateManyWithoutAuthorNestedInput
+    loans?: LoanUpdateManyWithoutUserNestedInput
+    payouts?: PayoutUpdateManyWithoutRequestedByNestedInput
+    payoutApprovals?: PayoutApprovalUpdateManyWithoutAdminNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    penalties?: PenaltyUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUpdateManyWithoutGuarantorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutVotesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    groupId?: StringFieldUpdateOperationsInput | string
+    agreedToRules?: BoolFieldUpdateOperationsInput | boolean
+    agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contributions?: ContributionUncheckedUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutAuthorNestedInput
+    loans?: LoanUncheckedUpdateManyWithoutUserNestedInput
+    payouts?: PayoutUncheckedUpdateManyWithoutRequestedByNestedInput
+    payoutApprovals?: PayoutApprovalUncheckedUpdateManyWithoutAdminNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    penalties?: PenaltyUncheckedUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUncheckedUpdateManyWithoutGuarantorNestedInput
   }
 
   export type UserCreateManyGroupInput = {
     id?: string
     phone: string
+    email?: string | null
     nationalId?: string | null
     name: string
     password: string
     role: string
+    mustChangePassword?: boolean
+    isActive?: boolean
     agreedToRules?: boolean
     agreedAt?: Date | string | null
+    agreementUrl?: string | null
     lastPasswordChange?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type AnnouncementCreateManyGroupInput = {
+    id?: string
+    title: string
+    body: string
+    type?: string
+    eventDate?: Date | string | null
+    createdBy: string
     createdAt?: Date | string
   }
 
   export type ContributionCreateManyGroupInput = {
     id?: string
+    refNo?: string | null
     amount: number
     status: string
     timestamp?: Date | string
     userId: string
     isLocked?: boolean
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
   }
 
   export type LoanCreateManyGroupInput = {
     id?: string
+    refNo?: string | null
     amount: number
     interestRate: number
     deadline: Date | string
     status: string
     userId: string
+    guarantorId?: string | null
     createdAt?: Date | string
   }
 
   export type PayoutCreateManyGroupInput = {
     id?: string
+    refNo?: string | null
     amount: number
     description: string
     status: string
     requestedById: string
     loanId?: string | null
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
     createdAt?: Date | string
   }
 
@@ -17115,103 +26921,200 @@ export namespace Prisma {
     userId?: string | null
   }
 
+  export type PenaltyCreateManyGroupInput = {
+    id?: string
+    amount: number
+    reason: string
+    status: string
+    userId: string
+    timestamp?: Date | string
+  }
+
+  export type MeetingCreateManyGroupInput = {
+    id?: string
+    date: Date | string
+    title: string
+    createdAt?: Date | string
+  }
+
+  export type AttendanceCreateManyGroupInput = {
+    id?: string
+    meetingId: string
+    userId: string
+    status: string
+  }
+
+  export type PollCreateManyGroupInput = {
+    id?: string
+    title: string
+    description: string
+    status?: string
+    createdAt?: Date | string
+  }
+
   export type UserUpdateWithoutGroupInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contributions?: ContributionUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUpdateManyWithoutAuthorNestedInput
     loans?: LoanUpdateManyWithoutUserNestedInput
     payouts?: PayoutUpdateManyWithoutRequestedByNestedInput
     payoutApprovals?: PayoutApprovalUpdateManyWithoutAdminNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
     penalties?: PenaltyUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUpdateManyWithoutUserNestedInput
+    votes?: VoteUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUpdateManyWithoutGuarantorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGroupInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contributions?: ContributionUncheckedUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutAuthorNestedInput
     loans?: LoanUncheckedUpdateManyWithoutUserNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutRequestedByNestedInput
     payoutApprovals?: PayoutApprovalUncheckedUpdateManyWithoutAdminNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
     penalties?: PenaltyUncheckedUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutUserNestedInput
+    votes?: VoteUncheckedUpdateManyWithoutUserNestedInput
+    guaranteedLoans?: LoanUncheckedUpdateManyWithoutGuarantorNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutGroupInput = {
     id?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     nationalId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    mustChangePassword?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     agreedToRules?: BoolFieldUpdateOperationsInput | boolean
     agreedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agreementUrl?: NullableStringFieldUpdateOperationsInput | string | null
     lastPasswordChange?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnnouncementUpdateWithoutGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutAnnouncementsNestedInput
+  }
+
+  export type AnnouncementUncheckedUpdateWithoutGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnnouncementUncheckedUpdateManyWithoutGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ContributionUpdateWithoutGroupInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     isLocked?: BoolFieldUpdateOperationsInput | boolean
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutContributionsNestedInput
   }
 
   export type ContributionUncheckedUpdateWithoutGroupInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
     isLocked?: BoolFieldUpdateOperationsInput | boolean
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ContributionUncheckedUpdateManyWithoutGroupInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
     isLocked?: BoolFieldUpdateOperationsInput | boolean
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LoanUpdateWithoutGroupInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     interestRate?: FloatFieldUpdateOperationsInput | number
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutLoansNestedInput
+    guarantor?: UserUpdateOneWithoutGuaranteedLoansNestedInput
     repayments?: RepaymentUpdateManyWithoutLoanNestedInput
     payouts?: PayoutUpdateManyWithoutLoanNestedInput
   }
 
   export type LoanUncheckedUpdateWithoutGroupInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     interestRate?: FloatFieldUpdateOperationsInput | number
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    guarantorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     repayments?: RepaymentUncheckedUpdateManyWithoutLoanNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutLoanNestedInput
@@ -17219,19 +27122,25 @@ export namespace Prisma {
 
   export type LoanUncheckedUpdateManyWithoutGroupInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     interestRate?: FloatFieldUpdateOperationsInput | number
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    guarantorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PayoutUpdateWithoutGroupInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     approvals?: PayoutApprovalUpdateManyWithoutPayoutNestedInput
     requestedBy?: UserUpdateOneRequiredWithoutPayoutsNestedInput
@@ -17240,22 +27149,30 @@ export namespace Prisma {
 
   export type PayoutUncheckedUpdateWithoutGroupInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     requestedById?: StringFieldUpdateOperationsInput | string
     loanId?: NullableStringFieldUpdateOperationsInput | string | null
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     approvals?: PayoutApprovalUncheckedUpdateManyWithoutPayoutNestedInput
   }
 
   export type PayoutUncheckedUpdateManyWithoutGroupInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     requestedById?: StringFieldUpdateOperationsInput | string
     loanId?: NullableStringFieldUpdateOperationsInput | string | null
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -17283,32 +27200,149 @@ export namespace Prisma {
     userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type PenaltyUpdateWithoutGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPenaltiesNestedInput
+  }
+
+  export type PenaltyUncheckedUpdateWithoutGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PenaltyUncheckedUpdateManyWithoutGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MeetingUpdateWithoutGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attendances?: AttendanceUpdateManyWithoutMeetingNestedInput
+  }
+
+  export type MeetingUncheckedUpdateWithoutGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attendances?: AttendanceUncheckedUpdateManyWithoutMeetingNestedInput
+  }
+
+  export type MeetingUncheckedUpdateManyWithoutGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AttendanceUpdateWithoutGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    meeting?: MeetingUpdateOneRequiredWithoutAttendancesNestedInput
+    user?: UserUpdateOneRequiredWithoutAttendancesNestedInput
+  }
+
+  export type AttendanceUncheckedUpdateWithoutGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meetingId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AttendanceUncheckedUpdateManyWithoutGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meetingId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PollUpdateWithoutGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voices?: VoteUpdateManyWithoutPollNestedInput
+  }
+
+  export type PollUncheckedUpdateWithoutGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    voices?: VoteUncheckedUpdateManyWithoutPollNestedInput
+  }
+
+  export type PollUncheckedUpdateManyWithoutGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ContributionCreateManyUserInput = {
     id?: string
+    refNo?: string | null
     amount: number
     status: string
     timestamp?: Date | string
     groupId: string
     isLocked?: boolean
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
+  }
+
+  export type AnnouncementCreateManyAuthorInput = {
+    id?: string
+    title: string
+    body: string
+    type?: string
+    eventDate?: Date | string | null
+    groupId: string
+    createdAt?: Date | string
   }
 
   export type LoanCreateManyUserInput = {
     id?: string
+    refNo?: string | null
     amount: number
     interestRate: number
     deadline: Date | string
     status: string
     groupId: string
+    guarantorId?: string | null
     createdAt?: Date | string
   }
 
   export type PayoutCreateManyRequestedByInput = {
     id?: string
+    refNo?: string | null
     amount: number
     description: string
     status: string
     groupId: string
     loanId?: string | null
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
     createdAt?: Date | string
   }
 
@@ -17331,55 +27365,127 @@ export namespace Prisma {
     amount: number
     reason: string
     status: string
+    groupId: string
     timestamp?: Date | string
+  }
+
+  export type AttendanceCreateManyUserInput = {
+    id?: string
+    meetingId: string
+    status: string
+    groupId: string
+  }
+
+  export type VoteCreateManyUserInput = {
+    id?: string
+    pollId: string
+    choice: string
+  }
+
+  export type LoanCreateManyGuarantorInput = {
+    id?: string
+    refNo?: string | null
+    amount: number
+    interestRate: number
+    deadline: Date | string
+    status: string
+    userId: string
+    groupId: string
+    createdAt?: Date | string
   }
 
   export type ContributionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     isLocked?: BoolFieldUpdateOperationsInput | boolean
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     group?: GroupUpdateOneRequiredWithoutContributionsNestedInput
   }
 
   export type ContributionUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     groupId?: StringFieldUpdateOperationsInput | string
     isLocked?: BoolFieldUpdateOperationsInput | boolean
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ContributionUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     groupId?: StringFieldUpdateOperationsInput | string
     isLocked?: BoolFieldUpdateOperationsInput | boolean
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type AnnouncementUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    group?: GroupUpdateOneRequiredWithoutAnnouncementsNestedInput
+  }
+
+  export type AnnouncementUncheckedUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    groupId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnnouncementUncheckedUpdateManyWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    groupId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LoanUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     interestRate?: FloatFieldUpdateOperationsInput | number
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     group?: GroupUpdateOneRequiredWithoutLoansNestedInput
+    guarantor?: UserUpdateOneWithoutGuaranteedLoansNestedInput
     repayments?: RepaymentUpdateManyWithoutLoanNestedInput
     payouts?: PayoutUpdateManyWithoutLoanNestedInput
   }
 
   export type LoanUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     interestRate?: FloatFieldUpdateOperationsInput | number
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     groupId?: StringFieldUpdateOperationsInput | string
+    guarantorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     repayments?: RepaymentUncheckedUpdateManyWithoutLoanNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutLoanNestedInput
@@ -17387,19 +27493,25 @@ export namespace Prisma {
 
   export type LoanUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     interestRate?: FloatFieldUpdateOperationsInput | number
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     groupId?: StringFieldUpdateOperationsInput | string
+    guarantorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PayoutUpdateWithoutRequestedByInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     approvals?: PayoutApprovalUpdateManyWithoutPayoutNestedInput
     group?: GroupUpdateOneRequiredWithoutPayoutsNestedInput
@@ -17408,22 +27520,30 @@ export namespace Prisma {
 
   export type PayoutUncheckedUpdateWithoutRequestedByInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     groupId?: StringFieldUpdateOperationsInput | string
     loanId?: NullableStringFieldUpdateOperationsInput | string | null
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     approvals?: PayoutApprovalUncheckedUpdateManyWithoutPayoutNestedInput
   }
 
   export type PayoutUncheckedUpdateManyWithoutRequestedByInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     groupId?: StringFieldUpdateOperationsInput | string
     loanId?: NullableStringFieldUpdateOperationsInput | string | null
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -17475,6 +27595,7 @@ export namespace Prisma {
     reason?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    group?: GroupUpdateOneRequiredWithoutPenaltiesNestedInput
   }
 
   export type PenaltyUncheckedUpdateWithoutUserInput = {
@@ -17482,6 +27603,7 @@ export namespace Prisma {
     amount?: FloatFieldUpdateOperationsInput | number
     reason?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -17490,7 +27612,87 @@ export namespace Prisma {
     amount?: FloatFieldUpdateOperationsInput | number
     reason?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AttendanceUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    meeting?: MeetingUpdateOneRequiredWithoutAttendancesNestedInput
+    group?: GroupUpdateOneRequiredWithoutAttendancesNestedInput
+  }
+
+  export type AttendanceUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meetingId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AttendanceUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meetingId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type VoteUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    choice?: StringFieldUpdateOperationsInput | string
+    poll?: PollUpdateOneRequiredWithoutVoicesNestedInput
+  }
+
+  export type VoteUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    pollId?: StringFieldUpdateOperationsInput | string
+    choice?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type VoteUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    pollId?: StringFieldUpdateOperationsInput | string
+    choice?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LoanUpdateWithoutGuarantorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: FloatFieldUpdateOperationsInput | number
+    interestRate?: FloatFieldUpdateOperationsInput | number
+    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutLoansNestedInput
+    group?: GroupUpdateOneRequiredWithoutLoansNestedInput
+    repayments?: RepaymentUpdateManyWithoutLoanNestedInput
+    payouts?: PayoutUpdateManyWithoutLoanNestedInput
+  }
+
+  export type LoanUncheckedUpdateWithoutGuarantorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: FloatFieldUpdateOperationsInput | number
+    interestRate?: FloatFieldUpdateOperationsInput | number
+    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    repayments?: RepaymentUncheckedUpdateManyWithoutLoanNestedInput
+    payouts?: PayoutUncheckedUpdateManyWithoutLoanNestedInput
+  }
+
+  export type LoanUncheckedUpdateManyWithoutGuarantorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: FloatFieldUpdateOperationsInput | number
+    interestRate?: FloatFieldUpdateOperationsInput | number
+    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RepaymentCreateManyLoanInput = {
@@ -17501,11 +27703,15 @@ export namespace Prisma {
 
   export type PayoutCreateManyLoanInput = {
     id?: string
+    refNo?: string | null
     amount: number
     description: string
     status: string
     requestedById: string
     groupId: string
+    fundType?: string
+    paymentStatus?: string | null
+    providerRef?: string | null
     createdAt?: Date | string
   }
 
@@ -17529,9 +27735,13 @@ export namespace Prisma {
 
   export type PayoutUpdateWithoutLoanInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     approvals?: PayoutApprovalUpdateManyWithoutPayoutNestedInput
     requestedBy?: UserUpdateOneRequiredWithoutPayoutsNestedInput
@@ -17540,22 +27750,30 @@ export namespace Prisma {
 
   export type PayoutUncheckedUpdateWithoutLoanInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     requestedById?: StringFieldUpdateOperationsInput | string
     groupId?: StringFieldUpdateOperationsInput | string
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     approvals?: PayoutApprovalUncheckedUpdateManyWithoutPayoutNestedInput
   }
 
   export type PayoutUncheckedUpdateManyWithoutLoanInput = {
     id?: StringFieldUpdateOperationsInput | string
+    refNo?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: FloatFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     requestedById?: StringFieldUpdateOperationsInput | string
     groupId?: StringFieldUpdateOperationsInput | string
+    fundType?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -17583,6 +27801,58 @@ export namespace Prisma {
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type AttendanceCreateManyMeetingInput = {
+    id?: string
+    userId: string
+    status: string
+    groupId: string
+  }
+
+  export type AttendanceUpdateWithoutMeetingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneRequiredWithoutAttendancesNestedInput
+    group?: GroupUpdateOneRequiredWithoutAttendancesNestedInput
+  }
+
+  export type AttendanceUncheckedUpdateWithoutMeetingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AttendanceUncheckedUpdateManyWithoutMeetingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    groupId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type VoteCreateManyPollInput = {
+    id?: string
+    userId: string
+    choice: string
+  }
+
+  export type VoteUpdateWithoutPollInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    choice?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneRequiredWithoutVotesNestedInput
+  }
+
+  export type VoteUncheckedUpdateWithoutPollInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    choice?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type VoteUncheckedUpdateManyWithoutPollInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    choice?: StringFieldUpdateOperationsInput | string
+  }
+
 
 
   /**
@@ -17604,6 +27874,14 @@ export namespace Prisma {
      * @deprecated Use PayoutCountOutputTypeDefaultArgs instead
      */
     export type PayoutCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PayoutCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use MeetingCountOutputTypeDefaultArgs instead
+     */
+    export type MeetingCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MeetingCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use PollCountOutputTypeDefaultArgs instead
+     */
+    export type PollCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PollCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use GroupDefaultArgs instead
      */
@@ -17644,6 +27922,26 @@ export namespace Prisma {
      * @deprecated Use VerificationCodeDefaultArgs instead
      */
     export type VerificationCodeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VerificationCodeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use AnnouncementDefaultArgs instead
+     */
+    export type AnnouncementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AnnouncementDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use MeetingDefaultArgs instead
+     */
+    export type MeetingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MeetingDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use AttendanceDefaultArgs instead
+     */
+    export type AttendanceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AttendanceDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use PollDefaultArgs instead
+     */
+    export type PollArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PollDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use VoteDefaultArgs instead
+     */
+    export type VoteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VoteDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

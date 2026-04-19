@@ -45,4 +45,38 @@ router.get('/', authenticate, async (req: AuthRequest, res) => {
     }
 });
 
+// Waive a penalty (Admin / Treasurer)
+router.post('/:id/waive', authenticate, authorize([ROLES.ADMIN, ROLES.TREASURER]), async (req: AuthRequest, res) => {
+    const penaltyId = req.params.id;
+    const groupId = req.user?.groupId;
+
+    try {
+        const penalty = await prisma.penalty.findUnique({
+            where: { id: penaltyId as string }
+        });
+
+        if (!penalty) return res.status(404).json({ error: 'Penalty not found' });
+        if (penalty.groupId !== groupId) return res.status(403).json({ error: 'Unauthorized to waive this penalty' });
+        if (penalty.status === 'PAID') return res.status(400).json({ error: 'Cannot waive a paid penalty' });
+
+        const updatedPenalty = await prisma.penalty.update({
+            where: { id: penaltyId as string },
+            data: { status: 'WAIVED' }
+        });
+
+        await prisma.auditLog.create({
+            data: {
+                action: 'PENALTY_WAIVED',
+                details: JSON.stringify({ penaltyId, amount: updatedPenalty.amount, reason: updatedPenalty.reason }),
+                userId: req.user?.userId,
+                groupId
+            }
+        });
+
+        res.json(updatedPenalty);
+    } catch (error: any) {
+        res.status(500).json({ error: 'Failed to waive penalty', details: error.message });
+    }
+});
+
 export default router;

@@ -15,4 +15,21 @@ api.interceptors.request.use((config) => {
     return Promise.reject(error);
 });
 
+// Response interceptor: auto-redirect to login on 401 (expired/invalid token)
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response?.status === 401) {
+            // Don't redirect if we're already on the login page
+            const isLoginRoute = window.location.pathname === '/login' || window.location.pathname === '/register';
+            if (!isLoginRoute) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                window.location.href = '/login';
+            }
+        }
+        return Promise.reject(error);
+    }
+);
+
 export default api;

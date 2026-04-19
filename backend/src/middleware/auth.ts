@@ -1,7 +1,15 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_for_dev_only';
+// Enforce JWT_SECRET in production — never use a fallback
+const JWT_SECRET = process.env.JWT_SECRET || (process.env.NODE_ENV === 'production' ? '' : 'dev_only_secret_do_not_use_in_prod');
+
+if (!JWT_SECRET) {
+    console.error('[FATAL] JWT_SECRET environment variable is not set. Refusing to start in production without it.');
+    process.exit(1);
+}
+
+export { JWT_SECRET };
 
 export interface AuthRequest extends Request {
     user?: {
@@ -23,7 +31,7 @@ export const authenticate = (req: AuthRequest, res: Response, next: NextFunction
         req.user = decoded;
         next();
     } catch (error) {
-        return res.status(403).json({ error: 'Invalid or expired token' });
+        return res.status(401).json({ error: 'Invalid or expired token. Please log in again.' });
     }
 };
 

@@ -128,6 +128,8 @@ exports.Prisma.GroupScalarFieldEnum = {
   penaltyRules: 'penaltyRules',
   savingsGoal: 'savingsGoal',
   startDate: 'startDate',
+  tier: 'tier',
+  maxMembers: 'maxMembers',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -135,35 +137,45 @@ exports.Prisma.GroupScalarFieldEnum = {
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   phone: 'phone',
+  email: 'email',
   nationalId: 'nationalId',
   name: 'name',
   password: 'password',
   role: 'role',
+  mustChangePassword: 'mustChangePassword',
+  isActive: 'isActive',
   groupId: 'groupId',
   agreedToRules: 'agreedToRules',
   agreedAt: 'agreedAt',
+  agreementUrl: 'agreementUrl',
   lastPasswordChange: 'lastPasswordChange',
   createdAt: 'createdAt'
 };
 
 exports.Prisma.ContributionScalarFieldEnum = {
   id: 'id',
+  refNo: 'refNo',
   amount: 'amount',
   status: 'status',
   timestamp: 'timestamp',
   userId: 'userId',
   groupId: 'groupId',
-  isLocked: 'isLocked'
+  isLocked: 'isLocked',
+  fundType: 'fundType',
+  paymentStatus: 'paymentStatus',
+  providerRef: 'providerRef'
 };
 
 exports.Prisma.LoanScalarFieldEnum = {
   id: 'id',
+  refNo: 'refNo',
   amount: 'amount',
   interestRate: 'interestRate',
   deadline: 'deadline',
   status: 'status',
   userId: 'userId',
   groupId: 'groupId',
+  guarantorId: 'guarantorId',
   createdAt: 'createdAt'
 };
 
@@ -176,12 +188,16 @@ exports.Prisma.RepaymentScalarFieldEnum = {
 
 exports.Prisma.PayoutScalarFieldEnum = {
   id: 'id',
+  refNo: 'refNo',
   amount: 'amount',
   description: 'description',
   status: 'status',
   requestedById: 'requestedById',
   groupId: 'groupId',
   loanId: 'loanId',
+  fundType: 'fundType',
+  paymentStatus: 'paymentStatus',
+  providerRef: 'providerRef',
   createdAt: 'createdAt'
 };
 
@@ -207,6 +223,7 @@ exports.Prisma.PenaltyScalarFieldEnum = {
   reason: 'reason',
   status: 'status',
   userId: 'userId',
+  groupId: 'groupId',
   timestamp: 'timestamp'
 };
 
@@ -216,6 +233,49 @@ exports.Prisma.VerificationCodeScalarFieldEnum = {
   code: 'code',
   expiresAt: 'expiresAt',
   createdAt: 'createdAt'
+};
+
+exports.Prisma.AnnouncementScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  body: 'body',
+  type: 'type',
+  eventDate: 'eventDate',
+  groupId: 'groupId',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MeetingScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  title: 'title',
+  groupId: 'groupId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.AttendanceScalarFieldEnum = {
+  id: 'id',
+  meetingId: 'meetingId',
+  userId: 'userId',
+  status: 'status',
+  groupId: 'groupId'
+};
+
+exports.Prisma.PollScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  status: 'status',
+  groupId: 'groupId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.VoteScalarFieldEnum = {
+  id: 'id',
+  pollId: 'pollId',
+  userId: 'userId',
+  choice: 'choice'
 };
 
 exports.Prisma.SortOrder = {
@@ -239,7 +299,12 @@ exports.Prisma.ModelName = {
   PayoutApproval: 'PayoutApproval',
   AuditLog: 'AuditLog',
   Penalty: 'Penalty',
-  VerificationCode: 'VerificationCode'
+  VerificationCode: 'VerificationCode',
+  Announcement: 'Announcement',
+  Meeting: 'Meeting',
+  Attendance: 'Attendance',
+  Poll: 'Poll',
+  Vote: 'Vote'
 };
 
 /**
