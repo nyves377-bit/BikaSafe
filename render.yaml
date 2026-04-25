@@ -4,7 +4,7 @@ services:
     name: bikasafe-backend
     env: node
     plan: free
-    buildCommand: cd backend && npm install && npm run build && npx prisma db push
+    buildCommand: cd backend && npm install && node scripts/patch-schema.js && npm run build && npx prisma db push
     startCommand: cd backend && npm run start
     envVars:
       - key: DATABASE_URL
