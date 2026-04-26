@@ -1,9 +1,27 @@
 import cron from 'node-cron';
 import { prisma } from '../index';
 import { SMSService } from './smsService';
+import { applyPenalties } from './penaltyEngine';
 
 export const startCronJobs = () => {
-    // Run every day at 08:00 AM
+    // 1. Penalty Engine - Run every day at Midnight
+    cron.schedule('0 0 * * *', async () => {
+        console.log('[CRON] Running daily penalty checks...');
+        try {
+            const groups = await prisma.group.findMany({
+                select: { id: true, name: true }
+            });
+
+            for (const group of groups) {
+                await applyPenalties(group.id);
+            }
+            console.log(`[CRON] Penalty check completed for ${groups.length} groups.`);
+        } catch (error) {
+            console.error('[CRON] Error during penalty checks:', error);
+        }
+    });
+
+    // 2. Reminders - Run every day at 08:00 AM
     cron.schedule('0 8 * * *', async () => {
         console.log('[CRON] Running daily morning routines...');
 
@@ -50,5 +68,5 @@ export const startCronJobs = () => {
         }
     });
 
-    console.log('[CRON] Background Services Started. Next run: 08:00 AM daily.');
+    console.log('[CRON] Background Services Started: Penalty Engine (00:00) & Reminders (08:00).');
 };
