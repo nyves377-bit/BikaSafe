@@ -4,8 +4,9 @@ services:
     name: bikasafe-backend
     env: node
     plan: free
-    buildCommand: cd backend && npm install && node scripts/patch-schema.js && npm run build && npx prisma db push
-    startCommand: cd backend && npm run start
+    rootDir: backend
+    buildCommand: npm install && node scripts/patch-schema.js && npm run build && npx prisma db push
+    startCommand: npm run start
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -22,8 +23,9 @@ services:
   - type: web
     name: bikasafe-frontend
     env: static
-    buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: frontend/dist
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
         value: https://bikasafe-backend.onrender.com
