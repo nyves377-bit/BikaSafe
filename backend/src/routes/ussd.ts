@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { USSDService } from '../services/ussdService';
 
 const router = Router();
@@ -12,7 +12,7 @@ const router = Router();
  *   "text": ""
  * }
  */
-router.post('/', async (req, res) => {
+router.post('/', async (req: Request, res: Response) => {
     const { sessionId, phoneNumber, text } = req.body;
 
     if (!sessionId || !phoneNumber) {

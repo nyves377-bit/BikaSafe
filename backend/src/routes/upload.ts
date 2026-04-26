@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import multer from 'multer';
+import multer, { FileFilterCallback } from 'multer';
 import path from 'path';
 import fs from 'fs';
 import { authenticate, AuthRequest } from '../middleware/auth';
@@ -24,7 +24,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage: storage,
-    fileFilter: (req, file, cb) => {
+    fileFilter: (req: Express.Request, file: Express.Multer.File, cb: FileFilterCallback) => {
         const allowedTypes = /jpeg|jpg|png|pdf/;
         const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
         const mimetype = allowedTypes.test(file.mimetype);

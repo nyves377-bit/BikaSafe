@@ -17,6 +17,7 @@ export interface AuthRequest extends Request {
         role: string;
         groupId: string;
     };
+    file?: Express.Multer.File;
 }
 
 export const authenticate = (req: AuthRequest, res: Response, next: NextFunction) => {
