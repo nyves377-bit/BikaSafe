@@ -3,6 +3,7 @@ import { prisma } from '../index';
 import { authenticate, authorize, ROLES, AuthRequest } from '../middleware/auth';
 import { generateRefNo } from '../utils/reference';
 import { z } from 'zod/v4';
+import { sendLoanApprovedEmail, sendLoanRejectedEmail } from '../services/emailService';
 
 const router = Router();
 
@@ -71,7 +72,7 @@ router.patch('/:id/status', authenticate, authorize([ROLES.TREASURER]), async (r
     try {
         const loan = await prisma.loan.findFirst({
             where: { id: loanId, groupId: groupId as string },
-            include: { user: { select: { name: true } } }
+            include: { user: { select: { name: true, email: true } }, group: { select: { name: true } } }
         });
 
         if (!loan) return res.status(404).json({ error: 'Loan not found' });
@@ -105,6 +106,14 @@ router.patch('/:id/status', authenticate, authorize([ROLES.TREASURER]), async (r
                 }
             });
 
+            // Notify borrower via email (non-blocking)
+            if (loan.user.email) {
+                sendLoanApprovedEmail(
+                    loan.user.email!, loan.user.name, loan.group.name,
+                    Number(loan.amount), loan.deadline, loan.refNo ?? 'N/A'
+                ).catch(() => {});
+            }
+
             return res.json({ loan: updatedLoan, payout });
         } else {
             const updatedLoan = await prisma.loan.update({
@@ -120,6 +129,14 @@ router.patch('/:id/status', authenticate, authorize([ROLES.TREASURER]), async (r
                     groupId: groupId!
                 }
             });
+
+            // Notify borrower via email (non-blocking)
+            if (loan.user.email) {
+                sendLoanRejectedEmail(
+                    loan.user.email!, loan.user.name, loan.group.name,
+                    Number(loan.amount), loan.refNo ?? 'N/A'
+                ).catch(() => {});
+            }
 
             return res.json(updatedLoan);
         }

@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { authenticate, AuthRequest, JWT_SECRET } from '../middleware/auth';
 import { z } from 'zod/v4';
+import { sendWelcomeEmail } from '../services/emailService';
 
 const router = Router();
 
@@ -196,6 +197,11 @@ router.post('/register', async (req, res) => {
                 mustChangePassword: false
             }
         });
+
+        // Send welcome email (non-blocking — we don't await so it won't delay the response)
+        if (result.user.email) {
+            sendWelcomeEmail(result.user.email, result.user.name, result.group.name).catch(() => {});
+        }
     } catch (error: any) {
         if (error.code === 'P2002') {
             return res.status(400).json({ error: 'Phone number or Group Registration ID already exists' });
