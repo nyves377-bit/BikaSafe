@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs';
 import { authenticate, AuthRequest, JWT_SECRET } from '../middleware/auth';
 import { z } from 'zod/v4';
 import { sendWelcomeEmail } from '../services/emailService';
+import { SMSService } from '../services/smsService';
 
 const router = Router();
 
@@ -198,9 +199,12 @@ router.post('/register', async (req, res) => {
             }
         });
 
-        // Send welcome email (non-blocking — we don't await so it won't delay the response)
+        // Send welcome email and SMS (non-blocking)
         if (result.user.email) {
             sendWelcomeEmail(result.user.email, result.user.name, result.group.name).catch(() => {});
+        }
+        if (result.user.phone) {
+            SMSService.sendSMS(result.user.phone, `Welcome to BikaSafe, ${result.user.name}! Your group "${result.group.name}" is now ready. Start saving together!`).catch(() => {});
         }
     } catch (error: any) {
         if (error.code === 'P2002') {

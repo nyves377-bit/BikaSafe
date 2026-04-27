@@ -3,6 +3,7 @@ import { prisma } from '../index';
 import { authenticate, authorize, ROLES, AuthRequest } from '../middleware/auth';
 import { PaymentService, PaymentStatus } from '../services/paymentService';
 import { SMSService } from '../services/smsService';
+import { sendContributionReceiptEmail } from '../services/emailService';
 import { generateRefNo } from '../utils/reference';
 import { z } from 'zod/v4';
 
@@ -90,6 +91,18 @@ router.post('/record', authenticate, authorize([ROLES.TREASURER]), async (req: A
         });
 
         res.json(contribution);
+
+        // Notify member via SMS and Email (non-blocking)
+        prisma.user.findUnique({ where: { id: userId } }).then(member => {
+            if (member) {
+                if (member.phone) {
+                    SMSService.notifyContributionSuccess(member.phone, amount, contribution.refNo!).catch(() => {});
+                }
+                if (member.email) {
+                    sendContributionReceiptEmail(member.email, member.name, group.name, amount, contribution.refNo!, new Date()).catch(() => {});
+                }
+            }
+        }).catch(() => {});
     } catch (error: any) {
         console.error('[CONTRIBUTION] Record error:', error.message);
         res.status(500).json({ error: 'Failed to record contribution' });
@@ -134,7 +147,10 @@ router.post('/initiate-mobile-payment', authenticate, async (req: AuthRequest, r
         if (payment.success) {
             PaymentService.simulateCallback('CONTRIBUTION', contribution.id, PaymentStatus.SUCCESS).then(() => {
                 if (member.phone) {
-                    SMSService.notifyContributionSuccess(member.phone!, amount, contribution.refNo!);
+                    SMSService.notifyContributionSuccess(member.phone, amount, contribution.refNo!).catch(() => {});
+                }
+                if (member.email) {
+                    sendContributionReceiptEmail(member.email, member.name, group.name, amount, contribution.refNo!, new Date()).catch(() => {});
                 }
             });
 

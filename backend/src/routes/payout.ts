@@ -6,6 +6,7 @@ import { SMSService } from '../services/smsService';
 import { generateRefNo } from '../utils/reference';
 import { z } from 'zod/v4';
 import { GroupService } from '../services/groupService';
+import { sendPayoutNotificationEmail } from '../services/emailService';
 
 const router = Router();
 
@@ -163,6 +164,13 @@ router.post('/:id/approve', authenticate, authorize([ROLES.TREASURER]), async (r
 
                 if (disbursement.success) {
                     await SMSService.notifyDisbursementSuccess(userToPay.phone!, updatedPayout.amount, disbursement.providerRef!);
+                    
+                    // Also send email if available
+                    const member = await tx.user.findUnique({ where: { id: payout.requestedById }, select: { email: true, name: true } });
+                    const group = await tx.group.findUnique({ where: { id: payout.groupId as string }, select: { name: true } });
+                    if (member?.email && group) {
+                        sendPayoutNotificationEmail(member.email, member.name, group.name, updatedPayout.amount, updatedPayout.refNo!, updatedPayout.description).catch(() => {});
+                    }
                 }
 
                 await tx.auditLog.create({
