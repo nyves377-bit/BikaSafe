@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import api from '../api/instance';
-import { Shield, Lock, User, Phone, Mail, Building, ArrowRight, CheckCircle2, ChevronRight, Check, Hash, AlertCircle, ShieldCheck, CreditCard, Smartphone } from 'lucide-react';
+// ── PAYMENT IMPORTS (kept for future use) ──────────────────────────────────
+// import { Shield, Lock, User, Phone, Mail, Building, ArrowRight, CheckCircle2, ChevronRight, Check, Hash, AlertCircle, ShieldCheck, CreditCard, Smartphone } from 'lucide-react';
+import { Lock, User, Mail, Building, ArrowRight, CheckCircle2, Hash, AlertCircle, ShieldCheck, Smartphone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from '../utils/cn';
 import Logo from '../components/Logo';
@@ -20,8 +22,9 @@ const SignupPage: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
-    const [showPaymentModal, setShowPaymentModal] = useState(false);
-    const [paymentProcessing, setPaymentProcessing] = useState(false);
+    // ── PAYMENT STATE (kept for future use) ─────────────────────────────────
+    // const [showPaymentModal, setShowPaymentModal] = useState(false);
+    // const [paymentProcessing, setPaymentProcessing] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -48,10 +51,11 @@ const SignupPage: React.FC = () => {
             return;
         }
 
-        if (formData.tier === 'ELITE') {
-            setShowPaymentModal(true);
-            return;
-        }
+        // ── PAYMENT GATE (kept for future use) ──────────────────────────────
+        // if (formData.tier === 'ELITE') {
+        //     setShowPaymentModal(true);
+        //     return;
+        // }
 
         executeRegistration();
     };
@@ -221,6 +225,7 @@ const SignupPage: React.FC = () => {
                                     </div>
                                 </div>
 
+                                {/* ── SUBSCRIPTION PLAN SELECTOR (kept for future payment activation) ──
                                 <div className="space-y-3 mb-2">
                                     <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest ml-1">Subscription Plan</label>
                                     <div className="grid grid-cols-2 gap-3">
@@ -258,7 +263,7 @@ const SignupPage: React.FC = () => {
                                     <div className="bg-white/5 border border-white/10 rounded-2xl p-4 animate-in slide-in-from-top-2 duration-300">
                                         <div className="flex items-center justify-between mb-3">
                                             <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Billing Cycle</span>
-                                                                                        <span className="text-[10px] font-bold text-brand-400">Annual Discount Applied</span>
+                                            <span className="text-[10px] font-bold text-brand-400">Annual Discount Applied</span>
                                         </div>
                                         <div className="grid grid-cols-2 gap-2">
                                             <button
@@ -288,6 +293,7 @@ const SignupPage: React.FC = () => {
                                         </div>
                                     </div>
                                 )}
+                                ── END SUBSCRIPTION PLAN SELECTOR ── */}
 
                                 <div className="space-y-2">
                                     <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest ml-1">Password</label>
@@ -347,23 +353,22 @@ const SignupPage: React.FC = () => {
                 </div>
             </div>
 
-                        {/* Payment Activation Modal */}
+                        {/* ── PAYMENT ACTIVATION MODAL (kept for future use — uncomment to re-enable) ──
             {showPaymentModal && (
                 <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-xl z-[100] flex items-center justify-center p-6">
                     <div className="bg-slate-900 border border-white/10 w-full max-w-md rounded-[40px] p-10 relative overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
                         {!paymentProcessing ? (
                             <>
                                 <div className="bg-brand-500/10 w-16 h-16 rounded-3xl flex items-center justify-center mb-8 mx-auto">
-                                                                        <CreditCard className="w-8 h-8 text-brand-400" />
-                                                                                                </div>
+                                    <CreditCard className="w-8 h-8 text-brand-400" />
+                                </div>
                                 <h3 className="text-2xl font-black text-white text-center mb-2">Elite Activation</h3>
                                 <p className="text-slate-400 text-sm text-center mb-8 font-medium italic">
                                     Payment of <strong>RWF {formData.billingCycle === 'ANNUAL' ? '50,000' : '5,000'}</strong> will be deposited to the BikaSafe Official Treasury Account.
                                 </p>
-
                                 <div className="space-y-6">
                                     <div className="space-y-2">
-                                                                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Payment Phone Number</label>
+                                        <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Payment Phone Number</label>
                                         <div className="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center gap-3">
                                             <Phone className="w-4 h-4 text-brand-400" />
                                             <input
@@ -380,7 +385,7 @@ const SignupPage: React.FC = () => {
                                             setTimeout(() => {
                                                 setShowPaymentModal(false);
                                                 executeRegistration();
-                                            }, 5000); // 5 sec simulation
+                                            }, 5000);
                                         }}
                                         className="w-full bg-brand-600 text-white py-5 rounded-[24px] text-sm font-black hover:bg-brand-500 transition-all shadow-xl shadow-brand-600/20 active:scale-95 flex items-center justify-center gap-2"
                                     >
@@ -404,7 +409,7 @@ const SignupPage: React.FC = () => {
                                     </div>
                                 </div>
                                 <h3 className="text-2xl font-black text-white mb-2">Waiting for PIN...</h3>
-                                                                <p className="text-slate-400 text-sm font-medium">We've sent a secure payment push to your phone.{"\n"}Please enter your PIN to confirm payment.</p>
+                                <p className="text-slate-400 text-sm font-medium">We've sent a secure payment push to your phone. Please enter your PIN to confirm payment.</p>
                                 <div className="mt-8 flex justify-center gap-2">
                                     {[1, 2, 3, 4].map(i => (
                                         <div key={i} className="w-2 h-2 rounded-full bg-brand-500 animate-pulse" style={{ animationDelay: `${i * 100}ms` }} />
@@ -416,6 +421,7 @@ const SignupPage: React.FC = () => {
                     </div>
                 </div>
             )}
+            ── END PAYMENT MODAL ── */}
         </div>
     );
 };

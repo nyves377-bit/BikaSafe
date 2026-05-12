@@ -52,6 +52,8 @@ model User {
   agreedAt           DateTime?
   agreementUrl       String?        // URL or path to uploaded agreement
   lastPasswordChange DateTime?
+  resetToken         String?        // Hashed OTP for password reset
+  resetTokenExpiry   DateTime?      // OTP expiry (15 minutes)
   contributions Contribution[]
   announcements Announcement[] @relation("AnnouncementAuthor")
   loans         Loan[]

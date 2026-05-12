@@ -8,6 +8,7 @@ import PrivacyPage from './pages/PrivacyPage';
 import LandingPage from './pages/LandingPage';
 import AuditPolicyPage from './pages/AuditPolicyPage';
 import MissionPage from './pages/MissionPage';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ErrorBoundary from './components/ErrorBoundary';
 
 // Validate token by checking its expiry instead of just checking presence
@@ -43,6 +44,7 @@ const App: React.FC = () => {
                 <Routes>
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<SignupPage />} />
+                    <Route path="/forgot-password" element={<ForgotPasswordPage />} />
                     <Route path="/terms" element={<TermsPage />} />
                     <Route path="/privacy" element={<PrivacyPage />} />
                     <Route path="/audit-policy" element={<AuditPolicyPage />} />

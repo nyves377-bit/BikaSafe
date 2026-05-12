@@ -215,6 +215,90 @@ router.post('/register', async (req, res) => {
     }
 });
 
+// ─── FORGOT PASSWORD — Send OTP via SMS ─────────────────────────────
+router.post('/forgot-password', async (req, res) => {
+    const { phone } = req.body;
+    if (!phone || !/^\d{10}$/.test(phone)) {
+        return (res as any).status(400).json({ error: 'A valid 10-digit phone number is required' });
+    }
+
+    try {
+        const user = await prisma.user.findUnique({ where: { phone } });
+
+        // Always return success to avoid user enumeration
+        if (!user || !user.isActive) {
+            return res.json({ message: 'If this number is registered, an OTP has been sent.' });
+        }
+
+        // Generate 6-digit OTP
+        const otp = String(Math.floor(100000 + Math.random() * 900000));
+        const hashedOtp = await bcrypt.hash(otp, 10);
+        const expiry = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes
+
+        await prisma.user.update({
+            where: { id: user.id },
+            data: { resetToken: hashedOtp, resetTokenExpiry: expiry }
+        });
+
+        // Send OTP via SMS (non-blocking)
+        SMSService.sendSMS(
+            phone,
+            `Your BikaSafe password reset code is: ${otp}. Valid for 15 minutes. Do not share this code.`
+        ).catch((err: any) => console.error('[AUTH] OTP SMS failed:', err.message));
+
+        res.json({ message: 'If this number is registered, an OTP has been sent.' });
+    } catch (error: any) {
+        console.error('[AUTH] Forgot password error:', error.message);
+        res.status(500).json({ error: 'Failed to process request' });
+    }
+});
+
+// ─── RESET PASSWORD — Verify OTP + Set New Password ─────────────────
+router.post('/reset-password', async (req, res) => {
+    const { phone, otp, newPassword } = req.body;
+
+    if (!phone || !otp || !newPassword) {
+        return (res as any).status(400).json({ error: 'Phone, OTP, and new password are required' });
+    }
+    if (newPassword.length < 6) {
+        return (res as any).status(400).json({ error: 'Password must be at least 6 characters' });
+    }
+
+    try {
+        const user = await prisma.user.findUnique({ where: { phone } });
+
+        if (!user || !user.resetToken || !user.resetTokenExpiry) {
+            return (res as any).status(400).json({ error: 'Invalid or expired OTP. Please request a new one.' });
+        }
+
+        if (new Date() > user.resetTokenExpiry) {
+            return (res as any).status(400).json({ error: 'OTP has expired. Please request a new one.' });
+        }
+
+        const isOtpValid = await bcrypt.compare(otp, user.resetToken);
+        if (!isOtpValid) {
+            return (res as any).status(400).json({ error: 'Incorrect OTP. Please check and try again.' });
+        }
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        await prisma.user.update({
+            where: { id: user.id },
+            data: {
+                password: hashedPassword,
+                resetToken: null,
+                resetTokenExpiry: null,
+                mustChangePassword: false,
+                lastPasswordChange: new Date()
+            }
+        });
+
+        res.json({ message: 'Password reset successfully. You can now log in with your new password.' });
+    } catch (error: any) {
+        console.error('[AUTH] Reset password error:', error.message);
+        res.status(500).json({ error: 'Failed to reset password' });
+    }
+});
+
 // ─── CHANGE PASSWORD ─────────────────────────────────────────────────
 router.post('/change-password', authenticate, async (req: AuthRequest, res: any) => {
     const parsed = changePasswordSchema.safeParse(req.body);
@@ -249,4 +333,91 @@ router.post('/change-password', authenticate, async (req: AuthRequest, res: any)
     }
 });
 
+// ─── GET MY PROFILE ──────────────────────────────────────────────────
+router.get('/me', authenticate, async (req: AuthRequest, res: any) => {
+    const userId = req.user?.userId;
+    const groupId = req.user?.groupId;
+
+    try {
+        const [profile, myContribs, myLoans, myPenalties] = await Promise.all([
+            prisma.user.findUnique({
+                where: { id: userId },
+                select: {
+                    id: true, name: true, phone: true, email: true,
+                    nationalId: true, role: true, agreedToRules: true,
+                    agreedAt: true, isActive: true, createdAt: true,
+                    mustChangePassword: true,
+                    group: { select: { name: true, tier: true, contributionAmt: true, frequency: true } }
+                }
+            }),
+            prisma.contribution.aggregate({
+                _sum: { amount: true },
+                _count: true,
+                where: { userId, status: 'PAID', fundType: 'SAVINGS' }
+            }),
+            prisma.loan.findMany({
+                where: { userId },
+                select: { id: true, amount: true, status: true, createdAt: true, interestRate: true },
+                orderBy: { createdAt: 'desc' },
+                take: 5
+            }),
+            prisma.penalty.count({ where: { userId, status: 'UNPAID' } })
+        ]);
+
+        if (!profile) return res.status(404).json({ error: 'User not found' });
+
+        res.json({
+            ...profile,
+            stats: {
+                totalContributed: myContribs._sum.amount || 0,
+                contributionCount: myContribs._count || 0,
+                unpaidPenalties: myPenalties
+            },
+            recentLoans: myLoans
+        });
+    } catch (error: any) {
+        console.error('[AUTH] Profile fetch error:', error.message);
+        res.status(500).json({ error: 'Failed to fetch profile' });
+    }
+});
+
+// ─── UPDATE MY PROFILE ───────────────────────────────────────────────
+router.patch('/profile', authenticate, async (req: AuthRequest, res: any) => {
+    const userId = req.user?.userId;
+    const { email, phone, name } = req.body;
+
+    // Validate
+    if (phone && !/^\d{10}$/.test(phone)) {
+        return res.status(400).json({ error: 'Phone must be exactly 10 digits' });
+    }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return res.status(400).json({ error: 'Invalid email address' });
+    }
+    if (name && (name.length < 2 || name.length > 100)) {
+        return res.status(400).json({ error: 'Name must be between 2 and 100 characters' });
+    }
+
+    try {
+        const updated = await prisma.user.update({
+            where: { id: userId },
+            data: {
+                ...(name && { name }),
+                ...(phone && { phone }),
+                ...(email !== undefined && { email: email || null })
+            },
+            select: { id: true, name: true, phone: true, email: true, nationalId: true, role: true }
+        });
+        res.json({ message: 'Profile updated successfully', user: updated });
+    } catch (error: any) {
+        if (error.code === 'P2002') {
+            const field = error.meta?.target || '';
+            if (field.includes('phone')) return res.status(400).json({ error: 'This phone number is already in use' });
+            if (field.includes('email')) return res.status(400).json({ error: 'This email is already in use' });
+        }
+        console.error('[AUTH] Profile update error:', error.message);
+        res.status(500).json({ error: 'Failed to update profile' });
+    }
+});
+
 export default router;
+

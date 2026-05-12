@@ -130,6 +130,14 @@ const LoginPage: React.FC = () => {
                                         className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white placeholder:text-slate-600 outline-none focus:border-brand-500/50 focus:bg-white/10 transition-all text-lg font-medium"
                                     />
                                 </div>
+                                <div className="flex justify-end">
+                                    <Link
+                                        to="/forgot-password"
+                                        className="text-[11px] text-brand-400 hover:text-brand-300 font-bold transition-colors"
+                                    >
+                                        Forgot Password?
+                                    </Link>
+                                </div>
                             </div>
                         </div>
 

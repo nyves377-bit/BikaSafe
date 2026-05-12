@@ -6,6 +6,7 @@ import { cn } from '../utils/cn';
 import Logo from '../components/Logo';
 import api from '../api/instance';
 import NotificationCenter from '../components/NotificationCenter';
+import ProfileDrawer from '../components/ProfileDrawer';
 import { GoalModal, ChangePasswordModal, RecordContributionModal, AddMemberModal, LoanRequestModal, WithdrawalRequestModal, AnnouncementModal, MeetingModal, PollModal, LoanCalculator, FinanceChart } from '../components/dashboard/Modals';
 
 
@@ -48,6 +49,7 @@ const Dashboard: React.FC = () => {
     const [dismissedBanner, setDismissedBanner] = useState(false);
     const [meetings, setMeetings] = useState<any[]>([]);
     const [polls, setPolls] = useState<any[]>([]);
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
 
     useEffect(() => {
         const savedUser = localStorage.getItem('user');
@@ -216,6 +218,39 @@ const Dashboard: React.FC = () => {
         ...(user?.role === 'ADMIN' || user?.role === 'TREASURER' ? [{ icon: ShieldCheck, label: 'History' }] : []),
     ];
 
+    // ── Real chart data: contributions aggregated by last 6 months ────────
+    const chartData = (() => {
+        const months: { name: string; amount: number }[] = [];
+        const now = new Date();
+        for (let i = 5; i >= 0; i--) {
+            const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+            const label = d.toLocaleString('default', { month: 'short' });
+            const total = contributions
+                .filter(c => {
+                    const t = new Date(c.timestamp);
+                    return t.getFullYear() === d.getFullYear() && t.getMonth() === d.getMonth() && c.fundType !== 'SOCIAL';
+                })
+                .reduce((sum: number, c: any) => sum + (c.amount || 0), 0);
+            months.push({ name: label, amount: total });
+        }
+        return months;
+    })();
+
+    // ── Real trust score: 0-100 based on behaviour ───────────────────────
+    const trustScore = (() => {
+        if (!contributions.length && !penalties.length && !loans.length) return 0;
+        let score = 100;
+        const unpaidPenalties = penalties.filter((p: any) => p.status === 'UNPAID').length;
+        const totalPenalties = penalties.length;
+        const lateMissed = contributions.filter((c: any) => c.status === 'LATE' || c.status === 'MISSED').length;
+        const totalContributions = contributions.length;
+        const overdueLoans = loans.filter((l: any) => l.status === 'OVERDUE').length;
+        if (unpaidPenalties > 0) score -= Math.min(40, unpaidPenalties * 10);
+        if (totalContributions > 0) score -= Math.min(30, Math.round((lateMissed / totalContributions) * 30));
+        if (overdueLoans > 0) score -= Math.min(30, overdueLoans * 15);
+        return Math.max(0, score);
+    })();
+
     const renderTabContent = () => {
         if (activeTab === 'Overview') {
             return (
@@ -358,40 +393,11 @@ const Dashboard: React.FC = () => {
                                 <h3 className="font-extrabold text-xl text-white">Savings Trends</h3>
                                 <div className="flex items-center gap-2">
                                     <div className="w-3 h-3 bg-brand-500 rounded-full" />
-                                    <span className="text-xs font-bold text-slate-500">Total Savings (RWF)</span>
+                                    <span className="text-xs font-bold text-slate-500">Last 6 Months (RWF)</span>
                                 </div>
                             </div>
 
-                            {user?.tier === 'FREE' ? (
-                                <div className="h-[250px] relative mt-4">
-                                    <div className="absolute inset-0 bg-[#0a0f1e]/80 backdrop-blur-sm z-10 flex flex-col items-center justify-center text-center p-6 rounded-2xl">
-                                        <div className="w-12 h-12 bg-brand-500/10 text-brand-400 rounded-2xl flex items-center justify-center mb-4">
-                                            <Lock className="w-6 h-6" />
-                                        </div>
-                                        <p className="text-xs text-slate-500 font-medium mb-4">Upgrade to Elite to unlock high-fidelity charts and automated reports.</p>
-                                        <button onClick={() => alert("Upgrade feature coming soon!")} className="bg-brand-600 text-white px-6 py-2 rounded-xl text-[10px] font-black hover:bg-brand-700 transition-all shadow-lg shadow-brand-500/20">
-                                            Upgrade now
-                                        </button>
-                                    </div>
-                                    <div className="opacity-20 pointer-events-none filter blur-[2px]">
-                                                                                <FinanceChart data={[
-                                            { name: 'Jan', amount: 0 },
-                                            { name: 'Feb', amount: 0 },
-                                            { name: 'Mar', amount: 0 },
-                                            { name: 'Apr', amount: 0 },
-                                            { name: 'May', amount: 0 },
-                                        ]} />
-                                    </div>
-                                </div>
-                            ) : (
-                                                                <FinanceChart data={[
-                                    { name: 'Jan', amount: 0 },
-                                    { name: 'Feb', amount: 0 },
-                                    { name: 'Mar', amount: 0 },
-                                    { name: 'Apr', amount: 0 },
-                                    { name: 'May', amount: stats.totalSavings || 0 },
-                                ]} />
-                            )}
+                            <FinanceChart data={chartData} />
                         </div>
                     </div>
 
@@ -596,9 +602,26 @@ const Dashboard: React.FC = () => {
                                         m.phone.includes(searchTerm) ||
                                         (m.nationalId && m.nationalId.includes(searchTerm))
                                     )
-                                    .map((m, i) => (
-                                        <tr key={i} className="border-t border-white/5 hover:bg-white/3 transition-colors">
-                                            <td className="px-8 py-5 font-bold text-slate-200">{m.name}</td>
+                                    .map((m, i) => {
+                                        const handleToggleActive = async () => {
+                                            const action = m.isActive ? 'deactivate' : 'reactivate';
+                                            if (!window.confirm(`Are you sure you want to ${action} ${m.name}?`)) return;
+                                            try {
+                                                await api.patch(`/api/groups/${action}-member/${m.id}`);
+                                                fetchDashboardData();
+                                            } catch (err: any) {
+                                                alert(err.response?.data?.error || `Failed to ${action} member`);
+                                            }
+                                        };
+                                        return (
+                                        <tr key={i} className={cn(
+                                            "border-t border-white/5 transition-colors",
+                                            m.isActive ? "hover:bg-white/3" : "opacity-50 bg-red-500/5"
+                                        )}>
+                                            <td className="px-8 py-5 font-bold text-slate-200">
+                                                <span>{m.name}</span>
+                                                {!m.isActive && <span className="ml-2 text-[9px] font-black text-red-400 bg-red-500/10 px-1.5 py-0.5 rounded uppercase tracking-widest">Inactive</span>}
+                                            </td>
                                             <td className="px-8 py-5 text-slate-500 font-medium">{m.phone}</td>
                                             <td className="px-8 py-5 text-slate-500 font-medium tracking-wider">{m.nationalId || '-'}</td>
                                             <td className="px-8 py-5">
@@ -644,8 +667,20 @@ const Dashboard: React.FC = () => {
                                                     )}
                                                 </div>
                                             </td>
+                                            {user?.role === 'ADMIN' && m.role !== 'ADMIN' && (
+                                                <td className="px-4 py-5">
+                                                    <button
+                                                        onClick={handleToggleActive}
+                                                        title={m.isActive ? 'Deactivate' : 'Reactivate'}
+                                                        className={cn("p-1.5 rounded-lg transition-all", m.isActive ? "bg-red-500/10 text-red-400 hover:bg-red-500/20" : "bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20")}
+                                                    >
+                                                        <Trash2 className="w-4 h-4" />
+                                                    </button>
+                                                </td>
+                                            )}
                                         </tr>
-                                    ))}
+                                        );
+                                    })}
                             </tbody>
                         </table>
                     </div>
@@ -1523,7 +1558,11 @@ const Dashboard: React.FC = () => {
                             <span className="text-xs font-black uppercase tracking-wider">Quick Export</span>
                         </button>
                         <div className="h-8 w-[1px] bg-white/8 mx-2" />
-                        <div className="flex items-center gap-3">
+                        <div
+                            className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+                            onClick={() => setIsProfileOpen(true)}
+                            title="View my profile"
+                        >
                             <div className="bg-brand-500/20 text-brand-400 w-10 h-10 rounded-xl flex items-center justify-center font-bold border border-brand-500/20">
                                 {user?.name?.[0] || 'U'}
                             </div>
@@ -1606,7 +1645,7 @@ const Dashboard: React.FC = () => {
                             { label: 'Social Fund', value: `RWF ${stats.totalSocial.toLocaleString()}`, change: 'Emergency', up: true, icon: Heart, iconBg: 'bg-rose-500/15 text-rose-400' },
                             { label: 'Active Loans', value: `RWF ${stats.activeLoanAmount.toLocaleString()}`, change: `${stats.activeLoans} Active`, up: stats.activeLoans > 0, icon: TrendingUp, iconBg: 'bg-blue-500/15 text-blue-400' },
                             { label: 'Members', value: `${stats.memberCount} Players`, change: '+2', up: true, icon: Users, iconBg: 'bg-indigo-500/15 text-indigo-400' },
-                            { label: 'Trust Score', value: `${stats.trustScore}%`, change: '+0.5', up: true, icon: ShieldCheck, iconBg: 'bg-emerald-500/15 text-emerald-400' },
+                            { label: 'Trust Score', value: `${trustScore}%`, change: trustScore >= 80 ? 'Excellent' : trustScore >= 50 ? 'Good' : 'Needs Work', up: trustScore >= 50, icon: ShieldCheck, iconBg: 'bg-emerald-500/15 text-emerald-400' },
                         ].map((stat, i) => (
                             <div key={i} className="glass-card p-7 rounded-[28px] shadow-dark-card hover:shadow-dark-card-hover transition-all duration-300 group cursor-default">
                                 <div className="flex items-start justify-between mb-4">
@@ -1745,6 +1784,14 @@ const Dashboard: React.FC = () => {
                     }}
                 />
             )}
+
+            {/* Profile Drawer */}
+            <ProfileDrawer
+                isOpen={isProfileOpen}
+                onClose={() => setIsProfileOpen(false)}
+                currentUser={user}
+                onProfileUpdated={(updatedUser) => setUser(updatedUser)}
+            />
         </div>
 
     );

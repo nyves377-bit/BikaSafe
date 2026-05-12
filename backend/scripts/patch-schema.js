@@ -6,15 +6,16 @@ const schemaPath = path.join(__dirname, '../prisma/schema.prisma');
 try {
   let schema = fs.readFileSync(schemaPath, 'utf8');
 
-  // Replace sqlite provider with postgresql
+  // Switch Prisma provider from sqlite → postgresql for Render deployment
   schema = schema.replace(
     /provider\s*=\s*"sqlite"/,
     'provider = "postgresql"'
   );
 
   fs.writeFileSync(schemaPath, schema);
-  console.log('Successfully patched schema.prisma to use PostgreSQL for Render deployment.');
+  console.log('✅ schema.prisma patched: sqlite → postgresql');
+  console.log('Ready for Render PostgreSQL deployment.');
 } catch (error) {
-  console.error('Failed to patch schema.prisma:', error);
+  console.error('❌ Failed to patch schema.prisma:', error);
   process.exit(1);
 }
