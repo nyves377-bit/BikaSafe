@@ -83,12 +83,8 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// ─── DEMO LOGIN (Development Only) ──────────────────────────────────
+// ─── DEMO LOGIN (Development & Review) ──────────────────────────────────
 router.post('/demo-login', async (req, res) => {
-    if (process.env.NODE_ENV === 'production') {
-        return res.status(404).json({ error: 'Not available' });
-    }
-
     try {
         const demoPhone = '0788000000';
         let user = await prisma.user.findUnique({ where: { phone: demoPhone }, include: { group: true } });
