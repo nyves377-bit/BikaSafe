@@ -122,10 +122,25 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 });
 
 // ─── Startup ─────────────────────────────────────────────────────────
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-    startCronJobs();
-    if (process.env.NODE_ENV !== 'production') {
-        console.log(`[DEV] Demo login available at POST /api/auth/demo-login`);
+
+// ─── START SERVER & INIT DATABASE ───────────────────────────────────────
+async function startServer() {
+    try {
+        console.log('Synchronizing database schema...');
+        const { execSync } = require('child_process');
+        execSync('npx prisma db push --accept-data-loss', { stdio: 'inherit' });
+        console.log('Database schema synchronized successfully.');
+    } catch (error) {
+        console.error('Failed to synchronize database schema:', error);
     }
-});
+
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+        startCronJobs();
+        if (process.env.NODE_ENV !== 'production') {
+            console.log(`[DEV] Demo login available at POST /api/auth/demo-login`);
+        }
+    });
+}
+
+startServer();
