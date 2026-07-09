@@ -134,6 +134,16 @@ async function startServer() {
         console.error('Failed to synchronize database schema:', error);
     }
 
+    app.get('/api/debug/db-push', (req, res) => {
+        try {
+            const { execSync } = require('child_process');
+            const output = execSync('npx prisma db push --accept-data-loss', { encoding: 'utf-8' });
+            res.send(`<pre>${output}</pre>`);
+        } catch (err: any) {
+            res.send(`<pre>Error: ${err.message}\n\nStdout: ${err.stdout}\n\nStderr: ${err.stderr}</pre>`);
+        }
+    });
+
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
         startCronJobs();
