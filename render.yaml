@@ -7,8 +7,8 @@ services:
     rootDir: backend
     # patch-schema.js switches Prisma provider: sqlite → postgresql before build
     # db push applies the current schema to the Render PostgreSQL DB (no migration history needed)
-    buildCommand: npm install && node scripts/patch-schema.js && npm run build && npx prisma db push --accept-data-loss
-    startCommand: npm run start
+    buildCommand: npm install && node scripts/patch-schema.js && npm run build
+    startCommand: npx prisma db push --accept-data-loss && npm run start
     envVars:
       - key: DATABASE_URL
         fromDatabase:
