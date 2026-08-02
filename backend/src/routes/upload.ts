@@ -7,7 +7,10 @@ import { prisma } from '../index';
 
 const router = Router();
 
-// Configure storage
+// ⚠️  IMPORTANT: Local disk storage is EPHEMERAL on cloud platforms (Render, Railway, Fly.io).
+// Uploaded files will be lost on every redeploy. For production with real data:
+//   1. Replace multer.diskStorage with multer-s3, multer-cloud, or Cloudinary storage
+//   2. Store only the cloud URL in agreementUrl, not a local path
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const uploadDir = 'uploads/agreements';

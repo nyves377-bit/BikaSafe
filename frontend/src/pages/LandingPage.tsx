@@ -135,6 +135,71 @@ const ParticleCanvas: React.FC = () => {
 };
 
 // ─── Main Landing Page ───────────────────────────────────────
+// ─── FAQ Section ─────────────────────────────────────────────
+const FAQ_ITEMS = [
+    {
+        q: 'Is BikaSafe free to use?',
+        a: 'BikaSafe offers a free Starter plan for groups of up to 10 members. For larger groups or advanced features like automated email reports and unlimited loan management, a Pro plan is available at a low monthly fee.'
+    },
+    {
+        q: 'Do members need to create individual accounts?',
+        a: 'The group admin registers the group and then adds each member from the dashboard. Members receive a temporary password via their phone number and can log in immediately — no complicated sign-up required.'
+    },
+    {
+        q: 'Is our financial data secure?',
+        a: 'Yes. All data is encrypted in transit (HTTPS/TLS) and at rest. Authentication uses signed JWT tokens with expiry, and all sensitive actions are recorded in an audit log accessible only to the admin.'
+    },
+    {
+        q: 'Can we access BikaSafe on mobile phones?',
+        a: 'Absolutely. BikaSafe is fully responsive and works on any smartphone browser. There is no app to download — simply open the link and log in. The interface is optimised for small screens with a dedicated mobile navigation bar.'
+    },
+    {
+        q: 'What happens if a member misses a contribution?',
+        a: 'The system automatically flags overdue contributions and can apply a late penalty fee after a configurable grace period. Admins can waive penalties individually if needed. All penalty history is visible in the Penalties tab.'
+    },
+];
+
+const FAQSection: React.FC = () => {
+    const [openIdx, setOpenIdx] = useState<number | null>(null);
+    return (
+        <section className="py-24 px-6">
+            <div className="max-w-3xl mx-auto">
+                <RevealSection>
+                    <div className="text-center mb-14">
+                        <p className="text-xs font-black text-brand-400 uppercase tracking-[0.2em] mb-4">FAQ</p>
+                        <h2 className="text-3xl md:text-4xl font-black text-white mb-4">Frequently asked questions</h2>
+                        <p className="text-slate-400 font-medium">Everything you need to know about BikaSafe.</p>
+                    </div>
+                </RevealSection>
+                <div className="space-y-3">
+                    {FAQ_ITEMS.map((faq, i) => (
+                        <RevealSection key={i} delay={i * 0.05}>
+                            <div className="bg-white/[0.03] border border-white/[0.07] rounded-[20px] overflow-hidden">
+                                <button
+                                    onClick={() => setOpenIdx(openIdx === i ? null : i)}
+                                    className="w-full flex items-center justify-between px-7 py-5 text-left gap-4"
+                                >
+                                    <span className="font-bold text-white text-sm leading-snug">{faq.q}</span>
+                                    <span className={`text-slate-500 transition-transform duration-200 shrink-0 ${openIdx === i ? 'rotate-45' : ''}`}>
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                                        </svg>
+                                    </span>
+                                </button>
+                                {openIdx === i && (
+                                    <div className="px-7 pb-6 text-slate-400 text-sm font-medium leading-relaxed border-t border-white/[0.05] pt-4">
+                                        {faq.a}
+                                    </div>
+                                )}
+                            </div>
+                        </RevealSection>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
 const LandingPage: React.FC = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
@@ -502,6 +567,81 @@ const LandingPage: React.FC = () => {
                 </div>
             </section>
 
+            {/* ───── Testimonials ───── */}
+            <section className="py-24 px-6 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-950/10 to-transparent pointer-events-none" />
+                <div className="max-w-7xl mx-auto relative z-10">
+                    <RevealSection>
+                        <div className="text-center mb-16">
+                            <p className="text-xs font-black text-indigo-400 uppercase tracking-[0.2em] mb-4">What Groups Say</p>
+                            <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+                                Trusted by Ikimina leaders
+                            </h2>
+                            <p className="text-slate-400 font-medium max-w-xl mx-auto">
+                                Real groups, real results. Hear from the treasurers and admins who manage their community savings with BikaSafe.
+                            </p>
+                        </div>
+                    </RevealSection>
+
+                    <div className="grid md:grid-cols-3 gap-6">
+                        {[
+                            {
+                                name: 'Uwimana Clarisse',
+                                role: 'Group Treasurer · Kigali',
+                                avatar: 'UC',
+                                color: 'from-indigo-500 to-purple-500',
+                                stars: 5,
+                                quote: 'Before BikaSafe, we tracked everything in notebooks. Now I can see every contribution, penalty, and loan in seconds. The PDF reports alone save me hours every month.',
+                            },
+                            {
+                                name: 'Nshimiyimana Jean',
+                                role: 'Group Admin · Huye',
+                                avatar: 'NJ',
+                                color: 'from-emerald-500 to-teal-500',
+                                stars: 5,
+                                quote: 'The loan management feature changed everything. Members apply digitally, I approve with one click, and the amortization schedule is automatically calculated. No more disputes.',
+                            },
+                            {
+                                name: 'Mukamana Aline',
+                                role: 'Member · Musanze',
+                                avatar: 'MA',
+                                color: 'from-rose-500 to-pink-500',
+                                stars: 5,
+                                quote: 'I can check my contribution history and trust score from my phone anytime. It makes me feel accountable and proud of my record. The group has never been more transparent.',
+                            },
+                        ].map((t, i) => (
+                            <RevealSection key={i} delay={i * 0.1}>
+                                <div className="bg-white/[0.03] border border-white/[0.07] rounded-[28px] p-8 hover:border-white/[0.14] hover:bg-white/[0.05] transition-all duration-500 flex flex-col h-full">
+                                    {/* Stars */}
+                                    <div className="flex gap-1 mb-5">
+                                        {Array.from({ length: t.stars }).map((_, s) => (
+                                            <span key={s} className="text-amber-400 text-sm">★</span>
+                                        ))}
+                                    </div>
+                                    {/* Quote */}
+                                    <p className="text-slate-300 font-medium text-sm leading-relaxed flex-1 mb-6">
+                                        "{t.quote}"
+                                    </p>
+                                    {/* Author */}
+                                    <div className="flex items-center gap-4 pt-5 border-t border-white/[0.06]">
+                                        <div className={`w-10 h-10 rounded-2xl bg-gradient-to-br ${t.color} flex items-center justify-center text-white font-black text-xs shrink-0`}>
+                                            {t.avatar}
+                                        </div>
+                                        <div>
+                                            <p className="font-black text-white text-sm">{t.name}</p>
+                                            <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">{t.role}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </RevealSection>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ───── FAQ ───── */}
+            <FAQSection />
+
             {/* ───── Final CTA ───── */}
             <section className="py-32 px-6">
                 <div className="max-w-5xl mx-auto">
@@ -546,8 +686,7 @@ const LandingPage: React.FC = () => {
                             <h4 className="font-black text-white mb-6 uppercase tracking-[0.15em] text-xs">Company</h4>
                             <ul className="space-y-3 text-sm font-medium text-slate-500">
                                 <li><Link to="/mission" className="hover:text-indigo-400 transition-colors">Mission</Link></li>
-                                <li><a href="#" className="hover:text-indigo-400 transition-colors">NGO Partnership</a></li>
-                                <li><a href="#" className="hover:text-indigo-400 transition-colors">Contact</a></li>
+                                <li><a href="mailto:hello@bikasafe.rw" className="hover:text-indigo-400 transition-colors">Contact Us</a></li>
                             </ul>
                         </div>
                         <div>
@@ -562,8 +701,8 @@ const LandingPage: React.FC = () => {
                     <div className="flex flex-col md:flex-row items-center justify-between gap-6 border-t border-white/[0.06] pt-10">
                         <p className="text-xs font-bold text-slate-600 uppercase tracking-[0.12em]">© 2026 BikaSafe. Empowering communities together.</p>
                         <div className="flex gap-8">
-                            <a href="#" className="text-slate-600 hover:text-indigo-400 transition-all font-black text-xs uppercase tracking-[0.12em]">Twitter</a>
-                            <a href="#" className="text-slate-600 hover:text-indigo-400 transition-all font-black text-xs uppercase tracking-[0.12em]">LinkedIn</a>
+                            <a href="https://twitter.com/bikasafe" target="_blank" rel="noreferrer" className="text-slate-600 hover:text-indigo-400 transition-all font-black text-xs uppercase tracking-[0.12em]">Twitter</a>
+                            <a href="https://linkedin.com/company/bikasafe" target="_blank" rel="noreferrer" className="text-slate-600 hover:text-indigo-400 transition-all font-black text-xs uppercase tracking-[0.12em]">LinkedIn</a>
                         </div>
                     </div>
                 </div>

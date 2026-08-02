@@ -94,9 +94,16 @@ export const startCronJobs = () => {
                 }
             }
 
-            // 2. Scan for unpaid penalties (SMS only — email was sent when penalty was created)
+            // 2. Scan for unpaid penalties older than 3 days (SMS only — email was sent when penalty was created)
+            // Only remind if the penalty is at least 3 days old (avoid same-day spam)
+            const threeDaysAgo = new Date();
+            threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
+
             const unpaidPenalties = await prisma.penalty.findMany({
-                where: { status: 'UNPAID' },
+                where: {
+                    status: 'UNPAID',
+                    timestamp: { lte: threeDaysAgo }
+                },
                 include: { user: true, group: true }
             });
 

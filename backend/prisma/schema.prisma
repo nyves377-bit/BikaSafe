@@ -113,6 +113,8 @@ model Repayment {
   timestamp DateTime @default(now())
   loanId    String
   loan      Loan     @relation(fields: [loanId], references: [id])
+
+  @@index([loanId])
 }
 
 model Payout {
@@ -132,6 +134,9 @@ model Payout {
   paymentStatus String?  @default("PENDING") // PENDING, SUCCESS, FAILED
   providerRef   String?  @unique             // External reference from MoMo/Airtel
   createdAt     DateTime @default(now())
+
+  @@index([groupId])
+  @@index([status])
 }
 
 model PayoutApproval {
@@ -173,13 +178,8 @@ model Penalty {
   @@index([userId])
 }
 
-model VerificationCode {
-  id        String   @id @default(uuid())
-  phone     String
-  code      String
-  expiresAt DateTime
-  createdAt DateTime @default(now())
-}
+// NOTE: VerificationCode model removed — unused.
+// Password reset uses resetToken + resetTokenExpiry fields on the User model instead.
 
 model Announcement {
   id        String    @id @default(uuid())
@@ -192,6 +192,8 @@ model Announcement {
   createdBy String
   author    User      @relation("AnnouncementAuthor", fields: [createdBy], references: [id])
   createdAt DateTime  @default(now())
+
+  @@index([groupId])
 }
 
 model Meeting {
@@ -202,6 +204,8 @@ model Meeting {
   group     Group    @relation(fields: [groupId], references: [id])
   attendances Attendance[]
   createdAt DateTime @default(now())
+
+  @@index([groupId])
 }
 
 model Attendance {
@@ -213,6 +217,10 @@ model Attendance {
   status    String   // PRESENT, ABSENT, LATE
   groupId   String
   group     Group    @relation(fields: [groupId], references: [id])
+
+  @@index([meetingId])
+  @@index([userId])
+  @@index([groupId])
 }
 
 model Poll {
@@ -224,6 +232,8 @@ model Poll {
   group       Group    @relation(fields: [groupId], references: [id])
   voices      Vote[]
   createdAt   DateTime @default(now())
+
+  @@index([groupId])
 }
 
 model Vote {

@@ -821,8 +821,8 @@ export const MeetingModal: React.FC<{ members: any[], onClose: () => void; onSuc
         setError('');
         try {
             setLoading(true);
-            const attendanceList = Object.entries(attendance).map(([userId, status]) => ({ userId, status }));
-            await api.post('/api/meetings', { title, date: new Date(date).toISOString(), attendanceList });
+            const attendances = Object.entries(attendance).map(([userId, status]) => ({ userId, status }));
+            await api.post('/api/meetings', { title, date: new Date(date).toISOString(), attendances });
             onSuccess();
         } catch (err: any) {
             setError(err.response?.data?.error || 'Failed to create meeting');
@@ -869,9 +869,13 @@ export const MeetingModal: React.FC<{ members: any[], onClose: () => void; onSuc
                     </div>
 
                     {error && <p className="text-red-500 text-xs font-bold px-1">{error}</p>}
-                    <button disabled={loading} className="w-full bg-brand-500 text-white py-4 rounded-[20px] font-black text-sm hover:focus-visible">
-                        {loading ? 'Saving...' : 'Save Meeting & Issue Penalties'}
+                    <button 
+                        disabled={loading} 
+                        className="w-full bg-brand-500 text-white py-4 rounded-[20px] font-black text-sm shadow-xl shadow-brand-500/20 hover:bg-brand-400 transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
+                    >
+                        {loading ? 'Saving...' : <><CheckCircle2 className="w-4 h-4" /> Save Meeting & Issue Penalties</>}
                     </button>
+
                 </form>
             </div>
         </div>

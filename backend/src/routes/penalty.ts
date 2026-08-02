@@ -79,4 +79,39 @@ router.post('/:id/waive', authenticate, authorize([ROLES.ADMIN, ROLES.TREASURER]
     }
 });
 
+// Mark a penalty as paid (Admin / Treasurer — for cash payments)
+router.post('/:id/mark-paid', authenticate, authorize([ROLES.ADMIN, ROLES.TREASURER]), async (req: AuthRequest, res: any) => {
+    const penaltyId = req.params.id;
+    const groupId = req.user?.groupId;
+
+    try {
+        const penalty = await prisma.penalty.findUnique({
+            where: { id: penaltyId as string }
+        });
+
+        if (!penalty) return res.status(404).json({ error: 'Penalty not found' });
+        if (penalty.groupId !== groupId) return res.status(403).json({ error: 'Unauthorized' });
+        if (penalty.status === 'PAID') return res.status(400).json({ error: 'Penalty is already paid' });
+        if (penalty.status === 'WAIVED') return res.status(400).json({ error: 'Cannot mark a waived penalty as paid' });
+
+        const updatedPenalty = await prisma.penalty.update({
+            where: { id: penaltyId as string },
+            data: { status: 'PAID' }
+        });
+
+        await prisma.auditLog.create({
+            data: {
+                action: 'PENALTY_MARKED_PAID',
+                details: JSON.stringify({ penaltyId, amount: updatedPenalty.amount, reason: updatedPenalty.reason }),
+                userId: req.user?.userId,
+                groupId
+            }
+        });
+
+        res.json(updatedPenalty);
+    } catch (error: any) {
+        res.status(500).json({ error: 'Failed to mark penalty as paid', details: error.message });
+    }
+});
+
 export default router;

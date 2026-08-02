@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Wallet, Users, TrendingUp, CreditCard, FileText, LogOut, Search, Bell, Plus, Download, ChevronRight, AlertCircle, ArrowUpRight, ArrowDownLeft, ShieldCheck, CheckCircle2, MoreVertical, Filter, Printer, FileCheck, Lock, Upload, Megaphone, Trash2, Calendar, X, Vote, CheckSquare, Layers, Heart } from 'lucide-react';
+import { Wallet, Users, TrendingUp, CreditCard, FileText, LogOut, Search, Bell, Plus, Download, ChevronRight, AlertCircle, ArrowUpRight, ArrowDownLeft, ShieldCheck, CheckCircle2, MoreVertical, Filter, Printer, FileCheck, Lock, Upload, Megaphone, Trash2, Calendar, X, Vote, CheckSquare, Layers, Heart, Settings } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { generatePDFStatement, exportToExcel, generateAgreementPDF } from '../utils/exports';
+import { generatePDFStatement, exportToExcel, generateAgreementPDF, generateMemberStatement } from '../utils/exports';
 import { cn } from '../utils/cn';
 import Logo from '../components/Logo';
 import api from '../api/instance';
 import NotificationCenter from '../components/NotificationCenter';
 import ProfileDrawer from '../components/ProfileDrawer';
 import { GoalModal, ChangePasswordModal, RecordContributionModal, AddMemberModal, LoanRequestModal, WithdrawalRequestModal, AnnouncementModal, MeetingModal, PollModal, LoanCalculator, FinanceChart } from '../components/dashboard/Modals';
+import { useToast } from '../context/ToastContext';
+import GroupSettingsModal from '../components/dashboard/GroupSettingsModal';
 
 
 // import axios from 'axios'; (removed in favor of api instance)
 
 
 const Dashboard: React.FC = () => {
+    const { toast } = useToast();
     const [user, setUser] = useState<any>(null);
     const [stats, setStats] = useState({
         totalSavings: 0,
@@ -51,6 +54,19 @@ const Dashboard: React.FC = () => {
     const [polls, setPolls] = useState<any[]>([]);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
 
+    // Monthly Statement State
+    const [stmtMonth, setStmtMonth] = useState(new Date().getMonth());
+    const [stmtYear, setStmtYear] = useState(new Date().getFullYear());
+    const [stmtMemberId, setStmtMemberId] = useState('');
+    // Email report modal state
+    const [emailReportInput, setEmailReportInput] = useState('');
+    const [isEmailReportOpen, setIsEmailReportOpen] = useState(false);
+    const [isGroupSettingsOpen, setIsGroupSettingsOpen] = useState(false);
+    const [contribPage, setContribPage] = useState(0);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [lastRefreshed, setLastRefreshed] = useState<Date | null>(null);
+    const [refreshLabel, setRefreshLabel] = useState('');
+
     useEffect(() => {
         const savedUser = localStorage.getItem('user');
         if (savedUser) {
@@ -63,8 +79,50 @@ const Dashboard: React.FC = () => {
             if (parsed.mustChangePassword || localStorage.getItem('mustChangePassword') === 'true') {
                 setIsChangePasswordModalOpen(true);
             }
+            setStmtMemberId(parsed.id);
         }
     }, []);
+
+    // Auto-refresh dashboard data every 90 seconds
+    useEffect(() => {
+        const refreshInterval = setInterval(() => {
+            if (document.visibilityState === 'visible') {
+                fetchDashboardData();
+            }
+        }, 90_000);
+        return () => clearInterval(refreshInterval);
+    }, []);
+
+    // Session expiry warning: warn 2 minutes before token expires
+    useEffect(() => {
+        const checkExpiry = () => {
+            const token = localStorage.getItem('token');
+            if (!token) return;
+            try {
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                const msLeft = payload.exp * 1000 - Date.now();
+                if (msLeft > 0 && msLeft < 2 * 60 * 1000) {
+                    toast.warning('Your session expires soon — save your work and re-login.');
+                }
+            } catch { /* ignore */ }
+        };
+        const expiryCheck = setInterval(checkExpiry, 60_000);
+        return () => clearInterval(expiryCheck);
+    }, []);
+
+    // Live 'Updated X ago' label, re-evaluates every 30s
+    useEffect(() => {
+        const update = () => {
+            if (!lastRefreshed) { setRefreshLabel(''); return; }
+            const diff = Math.floor((Date.now() - lastRefreshed.getTime()) / 1000);
+            if (diff < 60) setRefreshLabel('Updated just now');
+            else if (diff < 3600) setRefreshLabel(`Updated ${Math.floor(diff / 60)}m ago`);
+            else setRefreshLabel(`Updated ${Math.floor(diff / 3600)}h ago`);
+        };
+        update();
+        const t = setInterval(update, 30_000);
+        return () => clearInterval(t);
+    }, [lastRefreshed]);
 
     const fetchDashboardData = async (currentUser?: any) => {
         const activeUser = currentUser || user;
@@ -94,7 +152,19 @@ const Dashboard: React.FC = () => {
                 const auditRes = await api.get('/api/audit');
                 setAuditLogs(auditRes.data?.data || auditRes.data || []);
             }
-        } catch (err) {
+            setLastRefreshed(new Date());
+        } catch (err: any) {
+            const status = err.response?.status;
+            if (status === 401 || status === 403) {
+                // Token invalid/expired — clean up and redirect
+                localStorage.clear();
+                window.location.href = '/login';
+                return;
+            }
+            // Only show toast on background refreshes (not the initial load)
+            if (!loading) {
+                toast.warning('Could not refresh data — check your connection.');
+            }
             console.error('Failed to fetch dashboard data', err);
         } finally {
             setLoading(false);
@@ -126,8 +196,9 @@ const Dashboard: React.FC = () => {
         try {
             await api.post(`/api/payouts/${id}/approve`);
             fetchDashboardData();
+            toast.success('Payout approved successfully');
         } catch (err: any) {
-            alert(err.response?.data?.error || 'Failed to approve payout');
+            toast.error(err.response?.data?.error || 'Failed to approve payout');
         }
     };
 
@@ -136,8 +207,9 @@ const Dashboard: React.FC = () => {
             await api.patch('/api/groups/goal', { goal: newGoal });
             fetchDashboardData();
             setIsGoalModalOpen(false);
+            toast.success('Savings goal updated!');
         } catch (err: any) {
-            alert(err.response?.data?.error || 'Failed to update savings goal');
+            toast.error(err.response?.data?.error || 'Failed to update savings goal');
         }
     };
 
@@ -151,26 +223,91 @@ const Dashboard: React.FC = () => {
             document.body.appendChild(link);
             link.click();
             link.remove();
+            toast.success('Report downloaded successfully');
         } catch (err) {
             console.error('Failed to download Excel report', err);
-            alert('Failed to download Excel report');
+            toast.error('Failed to download report');
         }
     };
 
     const handleEmailReport = async () => {
-        const email = prompt('Enter the email address to receive the report:', user?.email || '');
+        const email = emailReportInput.trim();
         if (!email) return;
-
+        setIsEmailReportOpen(false);
+        setEmailReportInput('');
         try {
             await api.post('/api/reports/email', { email });
-            alert(`Report has been sent to ${email}`);
+            toast.success(`Report sent to ${email}`);
         } catch (err: any) {
-            console.error('Failed to send email report', err);
-            const errorMsg = err.response?.data?.error || 'Failed to send email report';
-            const errorDetail = err.response?.data?.details ? `\n\nDetails: ${err.response.data.details}` : '';
-            const errorTip = err.response?.data?.tip ? `\n\nTip: ${err.response.data.tip}` : '';
-            alert(`${errorMsg}${errorDetail}${errorTip}`);
+            const msg = err.response?.data?.error || 'Failed to send report';
+            const tip = err.response?.data?.tip ? ` Tip: ${err.response.data.tip}` : '';
+            toast.error(`${msg}${tip}`);
         }
+    };
+
+    const handleMonthlyStatement = () => {
+        const targetMember = members.find(m => m.id === stmtMemberId) || user;
+        if (!targetMember) { toast.error('Member not found'); return; }
+
+        const monthName = new Date(stmtYear, stmtMonth).toLocaleString('default', { month: 'long' });
+        
+        // Filter transactions for this member and month
+        const memberContribs = contributions.filter(c => 
+            c.userId === targetMember.id && 
+            new Date(c.timestamp).getMonth() === stmtMonth && 
+            new Date(c.timestamp).getFullYear() === stmtYear
+        );
+
+        const memberLoans = loans.filter(l => 
+            l.userId === targetMember.id && 
+            new Date(l.createdAt).getMonth() === stmtMonth && 
+            new Date(l.createdAt).getFullYear() === stmtYear
+        );
+
+        const memberPenalties = penalties.filter(p => 
+            p.userId === targetMember.id && 
+            new Date(p.timestamp).getMonth() === stmtMonth && 
+            new Date(p.timestamp).getFullYear() === stmtYear
+        );
+
+        const transactions = [
+            ...memberContribs.map(c => ({
+                date: c.timestamp,
+                description: `${c.fundType} Contribution`,
+                type: 'CONTRIBUTION',
+                status: c.status,
+                amount: c.amount
+            })),
+            ...memberLoans.map(l => ({
+                date: l.createdAt,
+                description: 'Loan Disbursement',
+                type: 'LOAN',
+                status: l.status,
+                amount: -l.amount
+            })),
+            ...memberPenalties.map(p => ({
+                date: p.timestamp,
+                description: `Penalty: ${p.reason}`,
+                type: 'PENALTY',
+                status: p.status,
+                amount: -p.amount
+            }))
+        ].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+        const summary = {
+            totalSavings: memberContribs.filter(c => c.fundType === 'SAVINGS' && c.status === 'PAID').reduce((s, c) => s + c.amount, 0),
+            totalSocial: memberContribs.filter(c => c.fundType === 'SOCIAL' && c.status === 'PAID').reduce((s, c) => s + c.amount, 0),
+            totalLoans: memberLoans.filter(l => l.status === 'ACTIVE').reduce((s, l) => s + l.amount, 0),
+            totalPenalties: memberPenalties.filter(p => p.status === 'UNPAID').reduce((s, p) => s + p.amount, 0)
+        };
+
+        generateMemberStatement(
+            { name: targetMember.name, phone: targetMember.phone, role: targetMember.role },
+            { name: stats.groupName || 'BikaSafe Group', currency: 'RWF' },
+            { month: monthName, year: stmtYear.toString() },
+            summary,
+            transactions
+        );
     };
 
     const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -185,7 +322,7 @@ const Dashboard: React.FC = () => {
             const res = await api.post('/api/upload/agreement', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
-            alert(res.data.message);
+            toast.success(res.data.message || 'Agreement uploaded successfully');
             // Update local user state
             const updatedUser = { ...user, agreedToRules: true, agreedAt: new Date().toISOString(), agreementUrl: res.data.url };
             setUser(updatedUser);
@@ -193,7 +330,7 @@ const Dashboard: React.FC = () => {
             fetchDashboardData();
         } catch (err: any) {
             console.error('Upload failed', err);
-            alert(err.response?.data?.error || 'Upload failed');
+            toast.error(err.response?.data?.error || 'Upload failed');
         } finally {
             setLoading(false);
         }
@@ -217,6 +354,13 @@ const Dashboard: React.FC = () => {
         { icon: FileText, label: 'Reports' },
         ...(user?.role === 'ADMIN' || user?.role === 'TREASURER' ? [{ icon: ShieldCheck, label: 'History' }] : []),
     ];
+
+    // Clear search when switching tabs so one tab's search doesn't bleed into another
+    const handleTabChange = (tab: string) => {
+        setActiveTab(tab);
+        setSearchTerm('');
+        setIsSidebarOpen(false);   // close mobile drawer
+    };
 
     // ── Real chart data: contributions aggregated by last 6 months ────────
     const chartData = (() => {
@@ -357,7 +501,18 @@ const Dashboard: React.FC = () => {
                             </div>
                             <div className="p-2">
                                 {loading ? (
-                                    <div className="p-8 text-center text-slate-500 font-medium">Loading contributions...</div>
+                                    <div className="p-4 space-y-2">
+                                        {[1,2,3,4,5].map(i => (
+                                            <div key={i} className="flex items-center gap-5 p-4 rounded-2xl">
+                                                <div className="skeleton w-12 h-12 rounded-2xl flex-shrink-0" />
+                                                <div className="flex-1 space-y-2">
+                                                    <div className="skeleton h-4 w-32 rounded-lg" />
+                                                    <div className="skeleton h-3 w-24 rounded-lg" />
+                                                </div>
+                                                <div className="skeleton h-5 w-16 rounded-lg" />
+                                            </div>
+                                        ))}
+                                    </div>
                                 ) : contributions.length === 0 ? (
                                     <div className="p-8 text-center text-slate-500 font-medium whitespace-pre-wrap">No contributions recorded yet.{"\n"}Click "Record Entry" to start.</div>
                                 ) : contributions
@@ -413,7 +568,7 @@ const Dashboard: React.FC = () => {
                                         There are {penalties.filter(p => p.status === 'UNPAID').length} unpaid penalties in the group. Please resolve these to maintain a high trust score.
                                     </p>
                                     <button
-                                        onClick={() => setActiveTab('Reports')}
+                                        onClick={() => setActiveTab('Penalties')}
                                         className="w-full bg-amber-500 text-white py-4 rounded-2xl text-sm font-black hover:bg-amber-400 transition-all active:scale-95"
                                     >
                                         Review Penalties
@@ -540,7 +695,7 @@ const Dashboard: React.FC = () => {
                         <div
                             onClick={() => {
                                 if (user?.role === 'ADMIN') setIsGoalModalOpen(true);
-                                else alert(`Current saving progress: ${Math.round((stats.totalSavings / (stats.savingsGoal || 5000000)) * 100)}% of the group target.`);
+                                else toast.info(`Savings progress: ${Math.round((stats.totalSavings / (stats.savingsGoal || 5000000)) * 100)}% of the group target`);
                             }}
                             className="glass-card border border-white/8 text-white rounded-[28px] p-8 relative overflow-hidden shadow-dark-card cursor-pointer hover:scale-[1.02] transition-all"
                         >
@@ -593,6 +748,7 @@ const Dashboard: React.FC = () => {
                                     <th className="px-8 py-4 text-[11px] font-black text-slate-400 uppercase tracking-widest">National ID</th>
                                     <th className="px-8 py-4 text-[11px] font-black text-slate-400 uppercase tracking-widest">Role</th>
                                     <th className="px-8 py-4 text-[11px] font-black text-slate-400 uppercase tracking-widest">Agreement</th>
+                                    {user?.role === 'ADMIN' && <th className="px-4 py-4 text-[11px] font-black text-slate-400 uppercase tracking-widest">Actions</th>}
                                 </tr>
                             </thead>
                             <tbody>
@@ -604,13 +760,13 @@ const Dashboard: React.FC = () => {
                                     )
                                     .map((m, i) => {
                                         const handleToggleActive = async () => {
-                                            const action = m.isActive ? 'deactivate' : 'reactivate';
-                                            if (!window.confirm(`Are you sure you want to ${action} ${m.name}?`)) return;
+                                            const action = m.isActive ? 'suspend' : 'reactivate';
                                             try {
-                                                await api.patch(`/api/groups/${action}-member/${m.id}`);
+                                                const { data } = await api.patch(`/api/group/members/${m.id}/toggle-active`);
+                                                toast.success(data.message);
                                                 fetchDashboardData();
                                             } catch (err: any) {
-                                                alert(err.response?.data?.error || `Failed to ${action} member`);
+                                                toast.error(err.response?.data?.error || `Failed to ${action} member`);
                                             }
                                         };
                                         return (
@@ -697,8 +853,9 @@ const Dashboard: React.FC = () => {
                 try {
                     await api.patch(`/api/loans/${loanId}/status`, { status });
                     fetchDashboardData();
+                    toast.success(`Loan ${status.toLowerCase()} successfully`);
                 } catch (err: any) {
-                    alert(err.response?.data?.error || 'Failed to update loan status');
+                    toast.error(err.response?.data?.error || 'Failed to update loan status');
                 }
             };
 
@@ -826,16 +983,32 @@ const Dashboard: React.FC = () => {
                                                     <td className="px-8 py-5 font-black text-white">RWF {l.amount.toLocaleString()}</td>
                                                     <td className="px-8 py-5 text-slate-500 font-medium text-xs">{new Date(l.createdAt).toLocaleDateString()}</td>
                                                     <td className="px-8 py-5">
-                                                        <span className={cn(
-                                                            "px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider",
-                                                            l.status === 'ACTIVE' ? "bg-emerald-500/10 text-emerald-400" :
-                                                                l.status === 'REJECTED' ? "bg-red-500/10 text-red-400" :
-                                                                    l.status === 'APPROVED' ? "bg-amber-500/10 text-amber-400" :
-                                                                        "bg-white/5 text-slate-500"
-                                                        )}>
-                                                            {l.status === 'APPROVED' ? 'DISBURSING' : l.status}
-                                                        </span>
-                                                    </td>
+                                                         <div className="flex flex-col gap-1.5">
+                                                             <span className={cn(
+                                                                 "px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider inline-block w-fit",
+                                                                 l.status === 'ACTIVE'   ? "bg-emerald-500/10 text-emerald-400" :
+                                                                 l.status === 'REJECTED' ? "bg-red-500/10 text-red-400" :
+                                                                 l.status === 'APPROVED' ? "bg-amber-500/10 text-amber-400" :
+                                                                 l.status === 'REPAID'   ? "bg-blue-500/10 text-blue-400" :
+                                                                                           "bg-white/5 text-slate-500"
+                                                             )}>
+                                                                 {l.status === 'APPROVED' ? 'DISBURSING' : l.status}
+                                                             </span>
+                                                             {l.status === 'ACTIVE' && (() => {
+                                                                 const totalWithInterest = Number(l.amount) * (1 + Number(l.interestRate) / 100);
+                                                                 const totalRepaid = (l.repayments || []).reduce((s: number, r: any) => s + Number(r.amount), 0);
+                                                                 const pct = Math.min(100, Math.round((totalRepaid / totalWithInterest) * 100));
+                                                                 return (
+                                                                     <div className="w-24">
+                                                                         <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                                                                             <div className="h-full bg-emerald-500 rounded-full transition-all" style={{ width: `${pct}%` }} />
+                                                                         </div>
+                                                                         <p className="text-[9px] text-slate-600 font-bold mt-0.5">{pct}% repaid</p>
+                                                                     </div>
+                                                                 );
+                                                             })()}
+                                                         </div>
+                                                     </td>
                                                 </tr>
                                                 {l.status === 'ACTIVE' && (
                                                     <tr key={`amort-${i}`} className="bg-white/2 border-t border-white/5">
@@ -848,20 +1021,56 @@ const Dashboard: React.FC = () => {
                                                                     <span>Interest</span>
                                                                     <span>Payment</span>
                                                                 </div>
-                                                                {Array.from({length: 3}).map((_, idx) => {
-                                                                    // Simplified amortization for demo
-                                                                    const totalPay = l.amount * (1 + l.interestRate / 100);
-                                                                    const payment = totalPay / 3;
-                                                                    const date = new Date(l.createdAt);
-                                                                    date.setMonth(date.getMonth() + idx + 1);
+                                                                {(() => {
+                                                                    const months = l.duration || 3;
+                                                                    const principal = l.amount;
+                                                                    const rate = (l.interestRate / 100) / months;
+                                                                    const payment = rate === 0
+                                                                        ? principal / months
+                                                                        : (principal * rate * Math.pow(1 + rate, months)) / (Math.pow(1 + rate, months) - 1);
+                                                                    let balance = principal;
+                                                                    return Array.from({ length: months }).map((_, idx) => {
+                                                                        const interest = balance * rate;
+                                                                        const principalPart = payment - interest;
+                                                                        balance -= principalPart;
+                                                                        const date = new Date(l.createdAt);
+                                                                        date.setMonth(date.getMonth() + idx + 1);
+                                                                        return (
+                                                                            <div key={idx} className="grid grid-cols-4 gap-4 text-xs font-medium text-slate-300 py-1 border-t border-slate-700/30">
+                                                                                <span>{date.toLocaleDateString()}</span>
+                                                                                <span>RWF {principalPart.toFixed(0)}</span>
+                                                                                <span>RWF {interest.toFixed(0)}</span>
+                                                                                <span className="text-white font-bold">RWF {payment.toFixed(0)}</span>
+                                                                            </div>
+                                                                        );
+                                                                    });
+                                                                 })()}
+                                                                {(user?.role === 'ADMIN' || user?.role === 'TREASURER') && (() => {
+                                                                    const totalWithInterest = Number(l.amount) * (1 + Number(l.interestRate) / 100);
+                                                                    const totalRepaid = (l.repayments || []).reduce((s: number, r: any) => s + Number(r.amount), 0);
+                                                                    const remaining = Math.max(0, totalWithInterest - totalRepaid);
                                                                     return (
-                                                                    <div key={idx} className="grid grid-cols-4 gap-4 text-xs font-medium text-slate-300 py-1 border-t border-slate-700/30">
-                                                                        <span>{date.toLocaleDateString()}</span>
-                                                                        <span>RWF {(l.amount/3).toFixed(0)}</span>
-                                                                        <span>RWF {((l.amount * l.interestRate/100)/3).toFixed(0)}</span>
-                                                                        <span className="text-white font-bold">RWF {payment.toFixed(0)}</span>
-                                                                    </div>
-                                                                )})}
+                                                                        <button
+                                                                            onClick={async () => {
+                                                                                try {
+                                                                                    const res = await api.post(`/api/loans/${l.id}/repay`, { amount: remaining });
+                                                                                    if (res.data.loanStatus === 'REPAID') {
+                                                                                        toast.success('Loan fully repaid and closed!');
+                                                                                    } else {
+                                                                                        toast.success(`Repayment of RWF ${remaining.toLocaleString()} recorded`);
+                                                                                    }
+                                                                                    fetchDashboardData();
+                                                                                } catch (err: any) {
+                                                                                    toast.error(err.response?.data?.error || 'Repayment failed');
+                                                                                }
+                                                                            }}
+                                                                            className="mt-3 w-full py-2.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-xl text-xs font-black hover:bg-emerald-500/20 transition-all active:scale-95 flex items-center justify-center gap-2"
+                                                                        >
+                                                                            <CheckCircle2 className="w-3.5 h-3.5" />
+                                                                            Mark as Fully Repaid (RWF {remaining.toLocaleString()} remaining)
+                                                                        </button>
+                                                                    );
+                                                                })()}
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -881,6 +1090,14 @@ const Dashboard: React.FC = () => {
         }
 
         if (activeTab === 'Contribute') {
+            const PAGE_SIZE = 10;
+            const filtered = contributions.filter(c =>
+                (c.user?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                 c.amount.toString().includes(searchTerm))
+            );
+            const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+            const paginated = filtered.slice(contribPage * PAGE_SIZE, (contribPage + 1) * PAGE_SIZE);
+
             return (
                 <div className="glass-card rounded-[28px] shadow-dark-card border border-white/5 overflow-hidden">
                     <div className="p-8 border-b border-white/5 flex items-center justify-between">
@@ -901,7 +1118,9 @@ const Dashboard: React.FC = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {contributions.map((c, i) => (
+                                {paginated.length === 0 ? (
+                                    <tr><td colSpan={5} className="px-8 py-12 text-center text-slate-500 font-medium">No contributions found.</td></tr>
+                                ) : paginated.map((c, i) => (
                                     <tr key={i} className="border-t border-white/5 hover:bg-white/3 transition-colors">
                                         <td className="px-8 py-5 font-bold text-slate-200">{c.user?.name}</td>
                                         <td className="px-8 py-5 font-black text-white">RWF {c.amount.toLocaleString()}</td>
@@ -920,6 +1139,26 @@ const Dashboard: React.FC = () => {
                             </tbody>
                         </table>
                     </div>
+                    {totalPages > 1 && (
+                        <div className="px-8 py-4 border-t border-white/5 flex items-center justify-between">
+                            <span className="text-xs text-slate-500 font-bold">
+                                Showing {contribPage * PAGE_SIZE + 1}–{Math.min((contribPage + 1) * PAGE_SIZE, filtered.length)} of {filtered.length}
+                            </span>
+                            <div className="flex items-center gap-2">
+                                <button
+                                    onClick={() => setContribPage(p => Math.max(0, p - 1))}
+                                    disabled={contribPage === 0}
+                                    className="px-4 py-2 rounded-xl text-xs font-black bg-white/5 text-slate-400 hover:bg-white/10 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                                >← Prev</button>
+                                <span className="text-xs font-bold text-slate-400">{contribPage + 1} / {totalPages}</span>
+                                <button
+                                    onClick={() => setContribPage(p => Math.min(totalPages - 1, p + 1))}
+                                    disabled={contribPage >= totalPages - 1}
+                                    className="px-4 py-2 rounded-xl text-xs font-black bg-white/5 text-slate-400 hover:bg-white/10 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                                >Next →</button>
+                            </div>
+                        </div>
+                    )}
                 </div>
             );
         }
@@ -974,23 +1213,13 @@ const Dashboard: React.FC = () => {
                 generatePDFStatement(exportData, 'BikaSafe Group Ledger', `Ledger_${new Date().toISOString().split('T')[0]}`);
             };
 
-            const handleExportExcel = () => {
-                const exportData = ledger.map(item => ({
-                    Date: new Date(item.date).toLocaleDateString(),
-                    Member: item.member,
-                    Type: item.type,
-                    Amount: item.amount,
-                    Status: item.status
-                }));
-                exportToExcel(exportData, `Ledger_${new Date().toISOString().split('T')[0]}`);
-            };
-
             const triggerPenaltyCheck = async () => {
                 try {
                     await api.post('/api/penalties/trigger-check');
                     fetchDashboardData();
+                    toast.success('Penalty check completed');
                 } catch (err) {
-                    console.error('Failed to trigger penalty check', err);
+                    toast.error('Failed to trigger penalty check');
                 }
             };
 
@@ -1004,7 +1233,7 @@ const Dashboard: React.FC = () => {
                             <button onClick={handleDownloadExcel} className="glass-card border border-white/8 text-slate-300 px-5 py-3 rounded-2xl font-bold text-sm hover:bg-white/10 transition-all flex items-center gap-2">
                                 <Download className="w-4 h-4" /> Excel Export
                             </button>
-                            <button onClick={handleEmailReport} className="glass-card border border-white/8 text-slate-300 px-5 py-3 rounded-2xl font-bold text-sm hover:bg-white/10 transition-all flex items-center gap-2">
+                            <button onClick={() => { setEmailReportInput(user?.email || ''); setIsEmailReportOpen(true); }} className="glass-card border border-white/8 text-slate-300 px-5 py-3 rounded-2xl font-bold text-sm hover:bg-white/10 transition-all flex items-center gap-2">
                                 <Bell className="w-4 h-4" /> Email Report
                             </button>
                             {user?.agreedToRules && (
@@ -1024,6 +1253,59 @@ const Dashboard: React.FC = () => {
                                 <AlertCircle className="w-4 h-4" /> Trigger Penalty Check
                             </button>
                         )}
+                    </div>
+
+                    {/* Monthly Statement Generator Section */}
+                    <div className="glass-card rounded-[28px] border border-white/5 p-8 shadow-dark-card animate-fade-in-up">
+                        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                            <div className="flex items-center gap-4">
+                                <div className="w-12 h-12 rounded-2xl bg-brand-500/10 flex items-center justify-center text-brand-400">
+                                    <FileText className="w-6 h-6" />
+                                </div>
+                                <div>
+                                    <h3 className="text-lg font-black text-white">Monthly Member Statement</h3>
+                                    <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mt-0.5">Professional Financial Reports</p>
+                                </div>
+                            </div>
+                            <div className="flex flex-wrap items-center gap-3">
+                                {(user?.role === 'ADMIN' || user?.role === 'TREASURER') && (
+                                    <select
+                                        value={stmtMemberId}
+                                        onChange={(e) => setStmtMemberId(e.target.value)}
+                                        className="bg-slate-800/50 border border-white/10 rounded-xl px-4 py-2.5 text-xs font-bold text-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
+                                    >
+                                        <option value="">Select Member</option>
+                                        {members.map(m => (
+                                            <option key={m.id} value={m.id} className="bg-slate-900">{m.name}</option>
+                                        ))}
+                                    </select>
+                                )}
+                                <select
+                                    value={stmtMonth}
+                                    onChange={(e) => setStmtMonth(parseInt(e.target.value))}
+                                    className="bg-slate-800/50 border border-white/10 rounded-xl px-4 py-2.5 text-xs font-bold text-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
+                                >
+                                    {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map((m, i) => (
+                                        <option key={i} value={i} className="bg-slate-900">{m}</option>
+                                    ))}
+                                </select>
+                                <select
+                                    value={stmtYear}
+                                    onChange={(e) => setStmtYear(parseInt(e.target.value))}
+                                    className="bg-slate-800/50 border border-white/10 rounded-xl px-4 py-2.5 text-xs font-bold text-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
+                                >
+                                    {Array.from({ length: new Date().getFullYear() - 2021 }, (_, i) => 2022 + i).map(y => (
+                                        <option key={y} value={y} className="bg-slate-900">{y}</option>
+                                    ))}
+                                </select>
+                                <button
+                                    onClick={handleMonthlyStatement}
+                                    className="bg-brand-500 text-white px-6 py-2.5 rounded-xl text-xs font-black hover:bg-brand-400 transition-all shadow-xl shadow-brand-500/20 active:scale-95"
+                                >
+                                    Generate Statement
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="glass-card rounded-[32px] shadow-dark-card border border-white/5 overflow-hidden">
@@ -1100,7 +1382,15 @@ const Dashboard: React.FC = () => {
                                                 </span>
                                             </td>
                                             <td className="px-4 py-6 text-right">
-                                                <button className="p-2 text-slate-700 hover:text-slate-400 transition-colors">
+                                                <button
+                                                    title="Copy row"
+                                                    onClick={() => {
+                                                        const text = `${new Date(item.date).toLocaleDateString()} | ${item.member} | ${item.type} | ${item.amount > 0 ? '+' : ''}${item.amount.toLocaleString()} RWF | ${item.status}`;
+                                                        navigator.clipboard.writeText(text);
+                                                        toast.success('Row copied to clipboard');
+                                                    }}
+                                                    className="p-2 text-slate-700 hover:text-slate-400 transition-colors active:scale-90"
+                                                >
                                                     <MoreVertical className="w-4 h-4" />
                                                 </button>
                                             </td>
@@ -1178,12 +1468,12 @@ const Dashboard: React.FC = () => {
             };
 
             const handleDelete = async (id: string) => {
-                if (!confirm('Delete this announcement?')) return;
                 try {
                     await api.delete(`/api/announcements/${id}`);
                     setAnnouncements(prev => prev.filter(a => a.id !== id));
+                    toast.success('Announcement deleted');
                 } catch (err: any) {
-                    alert(err.response?.data?.error || 'Failed to delete');
+                    toast.error(err.response?.data?.error || 'Failed to delete');
                 }
             };
 
@@ -1292,7 +1582,7 @@ const Dashboard: React.FC = () => {
                                     <div key={m.id} className="bg-white/5 p-6 rounded-2xl border border-white/10 flex items-center justify-between">
                                         <div>
                                             <h4 className="font-bold text-lg text-white mb-1">{m.title}</h4>
-                                            <p className="text-xs text-brand-400 font-black tracking-widest">{new Date(m.date).toLocaleDateString()}</p>
+                                            <p className="text-xs text-brand-400 font-black tracking-widest uppercase">{new Date(m.date).toLocaleDateString('en-RW', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}</p>
                                         </div>
                                         <div className="flex gap-2">
                                            <span className="bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-xl text-xs font-black">
@@ -1359,16 +1649,36 @@ const Dashboard: React.FC = () => {
                                         {p.status === 'OPEN' && !hasVoted && (
                                             <div className="flex gap-4 mt-4">
                                                 <button onClick={async () => {
-                                                    await api.post(`/api/polls/${p.id}/vote`, { choice: 'YES' });
-                                                    fetchDashboardData();
-                                                }} className="flex-1 bg-emerald-500/20 text-emerald-400 py-3 rounded-xl font-black hover:bg-emerald-500/30 transition-all">Vote YES</button>
+                                                    try {
+                                                        await api.post(`/api/polls/${p.id}/vote`, { choice: 'YES' });
+                                                        fetchDashboardData();
+                                                        toast.success('Vote cast: YES');
+                                                    } catch (err: any) {
+                                                        toast.error(err.response?.data?.error || 'Failed to cast vote');
+                                                    }
+                                                }} className="flex-1 bg-emerald-500/20 text-emerald-400 py-3 rounded-xl font-black hover:bg-emerald-500/30 transition-all active:scale-95">Vote YES</button>
                                                 <button onClick={async () => {
-                                                    await api.post(`/api/polls/${p.id}/vote`, { choice: 'NO' });
-                                                    fetchDashboardData();
-                                                }} className="flex-1 bg-red-500/20 text-red-400 py-3 rounded-xl font-black hover:bg-red-500/30 transition-all">Vote NO</button>
+                                                    try {
+                                                        await api.post(`/api/polls/${p.id}/vote`, { choice: 'NO' });
+                                                        fetchDashboardData();
+                                                        toast.success('Vote cast: NO');
+                                                    } catch (err: any) {
+                                                        toast.error(err.response?.data?.error || 'Failed to cast vote');
+                                                    }
+                                                }} className="flex-1 bg-red-500/20 text-red-400 py-3 rounded-xl font-black hover:bg-red-500/30 transition-all active:scale-95">Vote NO</button>
                                             </div>
                                         )}
-                                        {hasVoted && <p className="text-center text-xs font-bold text-brand-400 mt-4">You have voted on this poll.</p>}
+                                        {hasVoted && (() => {
+                                            const myVote = p.voices?.find((v: any) => v.userId === user?.id)?.choice;
+                                            return (
+                                                <div className="mt-4 text-center">
+                                                    <span className={cn(
+                                                        "px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest",
+                                                        myVote === 'YES' ? "bg-emerald-500/20 text-emerald-400" : "bg-red-500/20 text-red-400"
+                                                    )}>Your vote: {myVote}</span>
+                                                </div>
+                                            );
+                                        })()}
                                     </div>
                                 )})}
                             </div>
@@ -1380,46 +1690,103 @@ const Dashboard: React.FC = () => {
 
         if (activeTab === 'Penalties') {
             const handleWaive = async (id: string) => {
-                if (!confirm('Are you sure you want to completely waive this fine?')) return;
                 try {
                     await api.post(`/api/penalties/${id}/waive`);
                     fetchDashboardData();
+                    toast.success('Penalty waived successfully');
                 } catch (err: any) {
-                    alert(err.response?.data?.error || 'Failed to waive penalty');
+                    toast.error(err.response?.data?.error || 'Failed to waive penalty');
                 }
             };
+
+            const handleMarkPaid = async (id: string) => {
+                try {
+                    await api.post(`/api/penalties/${id}/mark-paid`);
+                    fetchDashboardData();
+                    toast.success('Penalty marked as paid');
+                } catch (err: any) {
+                    toast.error(err.response?.data?.error || 'Failed to mark penalty as paid');
+                }
+            };
+
+            const unpaidCount = penalties.filter(p => p.status === 'UNPAID').length;
 
             return (
                 <div className="glass-card rounded-[28px] shadow-dark-card border border-white/5 overflow-hidden">
                     <div className="p-8 border-b border-white/5 flex items-center justify-between">
-                        <h3 className="font-extrabold text-xl text-white">Group Penalties & Fines</h3>
+                        <div>
+                            <h3 className="font-extrabold text-xl text-white">Group Penalties & Fines</h3>
+                            {unpaidCount > 0 && (
+                                <p className="text-xs text-orange-400 font-bold mt-1">{unpaidCount} unpaid fine{unpaidCount > 1 ? 's' : ''} outstanding</p>
+                            )}
+                        </div>
+                        {(user?.role === 'ADMIN' || user?.role === 'TREASURER') && (
+                            <button
+                                onClick={async () => {
+                                    try {
+                                        await api.post('/api/penalties/trigger-check');
+                                        fetchDashboardData();
+                                        toast.success('Penalty check completed');
+                                    } catch (err: any) {
+                                        toast.error('Failed to run penalty check');
+                                    }
+                                }}
+                                className="bg-white/5 text-slate-400 border border-white/10 px-4 py-2 rounded-xl text-xs font-black hover:bg-white/10 hover:text-white transition-all"
+                            >
+                                Run Check
+                            </button>
+                        )}
                     </div>
                     <div className="p-8">
                         {penalties.length === 0 ? (
-                            <div className="text-center text-slate-500 font-medium py-10">No penalties recorded.</div>
+                            <div className="text-center py-16">
+                                <div className="bg-emerald-500/10 w-16 h-16 rounded-[24px] flex items-center justify-center mx-auto mb-4">
+                                    <CheckCircle2 className="w-8 h-8 text-emerald-400" />
+                                </div>
+                                <p className="text-slate-400 font-bold">No penalties recorded.</p>
+                                <p className="text-xs text-slate-600 mt-1 font-medium">All members are in good standing.</p>
+                            </div>
                         ) : (
-                            <div className="space-y-4">
+                            <div className="space-y-3">
                                 {penalties.map(p => (
-                                    <div key={p.id} className="bg-white/5 p-6 rounded-2xl border border-white/10 flex items-center justify-between">
-                                        <div>
-                                            <h4 className="font-bold text-lg text-white mb-1">{p.user?.name}</h4>
-                                            <p className="text-xs text-slate-400 font-medium mb-1">{p.reason}</p>
-                                            <p className="text-xs font-black tracking-widest text-brand-400">RWF {p.amount.toLocaleString()}</p>
-                                        </div>
+                                    <div key={p.id} className="bg-white/5 p-5 rounded-2xl border border-white/10 flex items-center justify-between gap-4">
                                         <div className="flex items-center gap-4">
+                                            <div className={cn(
+                                                "w-10 h-10 rounded-xl flex items-center justify-center font-black text-lg shrink-0",
+                                                p.status === 'UNPAID' ? "bg-red-500/10 text-red-400" :
+                                                p.status === 'PAID'   ? "bg-emerald-500/10 text-emerald-400" :
+                                                                        "bg-slate-500/10 text-slate-400"
+                                            )}>
+                                                {p.user?.name?.[0] || '?'}
+                                            </div>
+                                            <div>
+                                                <h4 className="font-bold text-white">{p.user?.name}</h4>
+                                                <p className="text-xs text-slate-400 font-medium">{p.reason}</p>
+                                                <p className="text-xs font-black tracking-widest text-brand-400 mt-0.5">RWF {Number(p.amount).toLocaleString()}</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-3 shrink-0">
                                             <span className={cn("px-3 py-1 rounded-xl text-[10px] font-black uppercase",
                                                 p.status === 'UNPAID' ? "bg-red-500/20 text-red-400" :
-                                                    p.status === 'PAID' ? "bg-emerald-500/20 text-emerald-400" :
-                                                        "bg-slate-500/20 text-slate-400"
+                                                p.status === 'PAID'   ? "bg-emerald-500/20 text-emerald-400" :
+                                                                        "bg-slate-500/20 text-slate-400"
                                             )}>{p.status}</span>
 
                                             {(user?.role === 'ADMIN' || user?.role === 'TREASURER') && p.status === 'UNPAID' && (
-                                                <button
-                                                    onClick={() => handleWaive(p.id)}
-                                                    className="bg-brand-500 text-white px-4 py-2 rounded-xl text-xs font-black shadow-xl shadow-brand-500/20 hover:bg-brand-400 transition-all active:scale-95"
-                                                >
-                                                    Waive Fine
-                                                </button>
+                                                <>
+                                                    <button
+                                                        onClick={() => handleMarkPaid(p.id)}
+                                                        className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-xl text-xs font-black hover:bg-emerald-500/20 transition-all active:scale-95"
+                                                    >
+                                                        Mark Paid
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleWaive(p.id)}
+                                                        className="bg-brand-500/10 text-brand-400 border border-brand-500/20 px-4 py-2 rounded-xl text-xs font-black hover:bg-brand-500/20 transition-all active:scale-95"
+                                                    >
+                                                        Waive
+                                                    </button>
+                                                </>
                                             )}
                                         </div>
                                     </div>
@@ -1432,13 +1799,22 @@ const Dashboard: React.FC = () => {
         }
 
         if (activeTab === 'Share-Out') {
-            const totalGroupFunds = stats.totalSavings + (penalties.reduce((sum, p) => sum + p.amount, 0));
-            // simplified ratio per member
+            // Only PAID penalties count as collected revenue that can be distributed
+            const paidPenaltyTotal = penalties
+                .filter(p => p.status === 'PAID')
+                .reduce((sum, p) => sum + Number(p.amount), 0);
+            const totalGroupFunds = stats.totalSavings + paidPenaltyTotal;
+            const totalMemberContribs = contributions
+                .filter(c => c.status === 'PAID' && c.fundType === 'SAVINGS')
+                .reduce((sum, c) => sum + c.amount, 0);
+            // Ratio: each member's SAVINGS contributions vs total SAVINGS pool
             const memberShares = members.map(m => {
-                const memberTotal = contributions.filter(c => c.userId === m.id && c.status === 'PAID').reduce((sum, c) => sum + c.amount, 0);
-                const percentage = totalGroupFunds > 0 ? (memberTotal / totalGroupFunds) : 0;
+                const memberTotal = contributions
+                    .filter(c => c.userId === m.id && c.status === 'PAID' && c.fundType === 'SAVINGS')
+                    .reduce((sum, c) => sum + c.amount, 0);
+                const percentage = totalMemberContribs > 0 ? (memberTotal / totalMemberContribs) : 0;
                 return { ...m, memberTotal, percentage };
-            }).sort((a,b) => b.percentage - a.percentage);
+            }).sort((a, b) => b.percentage - a.percentage);
 
             return (
                 <div className="glass-card rounded-[28px] shadow-dark-card border border-white/5 overflow-hidden">
@@ -1446,6 +1822,13 @@ const Dashboard: React.FC = () => {
                         <div>
                             <h3 className="font-extrabold text-xl text-white">End-of-Cycle Share-Out Calculator</h3>
                             <p className="text-xs text-brand-400 font-bold uppercase tracking-widest mt-1">Total Divisible Pool: RWF {totalGroupFunds.toLocaleString()}</p>
+                        </div>
+                        <div className="text-right">
+                            <p className="text-[10px] text-slate-600 font-bold uppercase tracking-widest">Savings</p>
+                            <p className="text-sm font-black text-slate-400">RWF {stats.totalSavings.toLocaleString()}</p>
+                            {paidPenaltyTotal > 0 && (
+                                <p className="text-[10px] text-emerald-500 font-bold mt-0.5">+ RWF {paidPenaltyTotal.toLocaleString()} penalties</p>
+                            )}
                         </div>
                     </div>
                     <div className="overflow-x-auto">
@@ -1480,17 +1863,29 @@ const Dashboard: React.FC = () => {
             {/* Ambient background orbs */}
             <div className="glow-orb w-[600px] h-[600px] bg-brand-500/5 top-[-200px] left-[-200px]" />
             <div className="glow-orb w-[500px] h-[500px] bg-blue-500/5 bottom-[-200px] right-[-100px]" />
-            {/* Sidebar (Desktop) */}
-            <aside className="fixed left-0 top-0 h-full w-64 bg-[#0a0f1e]/95 border-r border-white/5 hidden lg:flex flex-col z-20 backdrop-blur-xl">
+            {/* Mobile sidebar backdrop */}
+            {isSidebarOpen && (
+                <div
+                    className="fixed inset-0 bg-black/60 z-20 lg:hidden backdrop-blur-sm"
+                    onClick={() => setIsSidebarOpen(false)}
+                />
+            )}
+
+            {/* Sidebar — desktop always visible, mobile slides in */}
+            <aside className={cn(
+                "fixed left-0 top-0 h-full w-64 bg-[#0a0f1e]/98 border-r border-white/5 flex flex-col z-30 backdrop-blur-xl transition-transform duration-300",
+                "lg:translate-x-0",
+                isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+            )}>
                 <div className="p-8 border-b border-white/5">
                     <Logo size="md" theme="dark" />
                 </div>
 
-                <nav className="flex-1 px-4 space-y-1 mt-6">
+                <nav className="flex-1 px-4 space-y-1 mt-6 overflow-y-auto custom-scrollbar">
                     {navItems.map((item) => (
                         <button
                             key={item.label}
-                            onClick={() => setActiveTab(item.label)}
+                            onClick={() => handleTabChange(item.label)}
                             className={cn(
                                 "w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl font-bold transition-all duration-200",
                                 activeTab === item.label
@@ -1505,6 +1900,15 @@ const Dashboard: React.FC = () => {
                 </nav>
 
                 <div className="p-4 border-t border-white/5 flex flex-col gap-1">
+                    {user?.role === 'ADMIN' && (
+                        <button
+                            onClick={() => setIsGroupSettingsOpen(true)}
+                            className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-slate-400 hover:bg-white/5 hover:text-slate-200 transition-all"
+                        >
+                            <Settings className="w-5 h-5 text-slate-500" />
+                            Group Settings
+                        </button>
+                    )}
                     <button
                         onClick={() => setIsChangePasswordModalOpen(true)}
                         className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-slate-400 hover:bg-white/5 hover:text-slate-200 transition-all"
@@ -1523,10 +1927,22 @@ const Dashboard: React.FC = () => {
             </aside>
 
             {/* Main Content */}
-            <main className="lg:ml-64 min-h-screen relative z-10">
+            <main className="lg:ml-64 min-h-screen relative z-10 pb-24 lg:pb-0">
                 {/* Top Header */}
                 <header className="bg-[#0a0f1e]/80 backdrop-blur-xl sticky top-0 border-b border-white/5 z-10 px-6 py-4 flex justify-between items-center">
                     <div className="flex items-center gap-4 flex-1">
+                        {/* Hamburger — mobile only */}
+                        <button
+                            onClick={() => setIsSidebarOpen(true)}
+                            className="lg:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:text-white transition-all shrink-0"
+                            aria-label="Open menu"
+                        >
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                        {/* Active tab name — mobile only */}
+                        <span className="lg:hidden text-sm font-black text-white truncate">{activeTab}</span>
                         <div className="relative max-w-md w-full hidden md:block">
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4" />
                             <input
@@ -1541,11 +1957,18 @@ const Dashboard: React.FC = () => {
 
                     <div className="flex items-center gap-4">
                         <button
-                            onClick={() => setIsNotificationsOpen(true)}
+                            onClick={() => {
+                                setIsNotificationsOpen(true);
+                                localStorage.setItem('notifSeenAt', Date.now().toString());
+                            }}
                             className="p-2.5 bg-white/5 text-slate-400 rounded-xl relative hover:text-brand-400 transition-all hover:bg-white/10 border border-white/5"
                         >
                             <Bell className="w-5 h-5" />
-                            {auditLogs.length > 0 && (
+                            {auditLogs.filter(l => {
+                                const logTime = new Date(l.createdAt || l.timestamp).getTime();
+                                const seenAt = parseInt(localStorage.getItem('notifSeenAt') || '0', 10);
+                                return logTime > seenAt;
+                            }).length > 0 && (
                                 <span className="absolute top-2 right-2 w-2 h-2 bg-brand-500 rounded-full border-2 border-[#0a0f1e] animate-pulse" />
                             )}
                         </button>
@@ -1556,6 +1979,16 @@ const Dashboard: React.FC = () => {
                         >
                             <Download className="w-4 h-4" />
                             <span className="text-xs font-black uppercase tracking-wider">Quick Export</span>
+                        </button>
+                        <button
+                            onClick={() => fetchDashboardData()}
+                            className="hidden md:flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-slate-300 transition-colors px-3 py-1.5 rounded-xl hover:bg-white/5"
+                            title="Refresh data"
+                        >
+                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h5M20 20v-5h-5M4 9a8 8 0 0114.93-2M20 15a8 8 0 01-14.93 2" />
+                            </svg>
+                            {refreshLabel || 'Refresh'}
                         </button>
                         <div className="h-8 w-[1px] bg-white/8 mx-2" />
                         <div
@@ -1624,7 +2057,10 @@ const Dashboard: React.FC = () => {
                                     Add Member
                                 </button>
                             )}
-                            <button className="bg-white/5 border border-white/10 text-slate-300 px-5 py-3 rounded-2xl font-bold flex items-center gap-2 hover:bg-white/10 hover:text-white transition-all text-sm active:scale-95">
+                            <button
+                                onClick={handleDownloadExcel}
+                                className="bg-white/5 border border-white/10 text-slate-300 px-5 py-3 rounded-2xl font-bold flex items-center gap-2 hover:bg-white/10 hover:text-white transition-all text-sm active:scale-95"
+                            >
                                 <Download className="w-4 h-4" />
                                 Export
                             </button>
@@ -1723,6 +2159,19 @@ const Dashboard: React.FC = () => {
                 />
             )}
 
+            {/* Group Settings Modal */}
+            <GroupSettingsModal
+                isOpen={isGroupSettingsOpen}
+                onClose={() => setIsGroupSettingsOpen(false)}
+                onSuccess={() => { fetchDashboardData(); toast.success('Group settings updated!'); }}
+                currentStats={{
+                    groupName: stats.groupName,
+                    contributionAmt: (stats as any).contributionAmt,
+                    frequency: (stats as any).frequency,
+                    penaltyRules: (stats as any).penaltyRules,
+                }}
+            />
+
             {/* Change Password Modal */}
             {isChangePasswordModalOpen && (
                 <ChangePasswordModal
@@ -1739,7 +2188,7 @@ const Dashboard: React.FC = () => {
                         const updatedUser = { ...user, mustChangePassword: false };
                         setUser(updatedUser);
                         localStorage.setItem('user', JSON.stringify(updatedUser));
-                        alert("Password updated successfully! Please use your new password next time you sign in.");
+                        toast.success('Password updated! Use your new password next time you sign in.');
                     }}
                 />
             )}
@@ -1792,6 +2241,66 @@ const Dashboard: React.FC = () => {
                 currentUser={user}
                 onProfileUpdated={(updatedUser) => setUser(updatedUser)}
             />
+
+            {/* ── Email Report Modal ───────────────────────────────────── */}
+            {isEmailReportOpen && (
+                <div className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4">
+                    <div className="glass-card border border-white/10 rounded-[32px] w-full max-w-sm p-8 shadow-2xl animate-fade-in">
+                        <div className="flex justify-between items-center mb-6">
+                            <h2 className="text-xl font-black text-white">Email Report</h2>
+                            <button onClick={() => setIsEmailReportOpen(false)} className="p-2 hover:bg-white/10 rounded-xl transition-colors">
+                                <X className="w-5 h-5 text-slate-400" />
+                            </button>
+                        </div>
+                        <p className="text-sm text-slate-400 font-medium mb-6">Enter the email address to receive the full group report.</p>
+                        <div className="space-y-4">
+                            <input
+                                type="email"
+                                value={emailReportInput}
+                                onChange={e => setEmailReportInput(e.target.value)}
+                                onKeyDown={e => e.key === 'Enter' && handleEmailReport()}
+                                placeholder="you@example.com"
+                                className="input-dark w-full rounded-2xl px-5 py-3 text-sm font-medium"
+                                autoFocus
+                            />
+                            <button
+                                onClick={handleEmailReport}
+                                disabled={!emailReportInput.includes('@')}
+                                className="w-full py-3 bg-brand-600 text-white rounded-2xl font-black text-sm hover:bg-brand-500 transition-all disabled:opacity-40 disabled:cursor-not-allowed active:scale-95"
+                            >
+                                Send Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* ── Mobile Bottom Navigation Bar ─────────────────────────────── */}
+            <nav className="fixed bottom-0 left-0 right-0 z-30 lg:hidden bg-[#0a0f1e]/95 backdrop-blur-xl border-t border-white/5 pb-safe">
+                <div className="flex items-center justify-around px-2 py-2">
+                    {[
+                        { icon: Wallet,     label: 'Overview' },
+                        { icon: TrendingUp, label: 'Loans' },
+                        { icon: CreditCard, label: 'Contribute' },
+                        { icon: Users,      label: 'Members' },
+                        { icon: FileText,   label: 'Reports' },
+                    ].map(({ icon: Icon, label }) => (
+                        <button
+                            key={label}
+                            onClick={() => handleTabChange(label)}
+                            className={cn(
+                                'flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all',
+                                activeTab === label
+                                    ? 'text-brand-400 bg-brand-500/10'
+                                    : 'text-slate-500 hover:text-slate-300'
+                            )}
+                        >
+                            <Icon className="w-5 h-5" />
+                            <span className="text-[9px] font-black uppercase tracking-wider">{label}</span>
+                        </button>
+                    ))}
+                </div>
+            </nav>
         </div>
 
     );

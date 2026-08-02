@@ -110,7 +110,8 @@ router.post('/:id/approve', authenticate, authorize([ROLES.TREASURER]), async (r
             where: { payoutId }
         });
 
-        if (approvalCount >= 1) {
+        // Require 2 unique approvals from different Treasurers (dual-control)
+        if (approvalCount >= 2) {
             await prisma.$transaction(async (tx) => {
                 // Check Treasury Balance first
                 const balance = await GroupService.getGroupBalance(payout.groupId as string);

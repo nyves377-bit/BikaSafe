@@ -70,7 +70,8 @@ npm run dev              # Starts on http://localhost:5001
 ```bash
 cd frontend
 npm install
-npm run dev              # Starts on http://localhost:3000
+cp .env.example .env   # Edit VITE_API_URL if your backend is not on port 5001
+npm run dev              # Starts on http://localhost:5173
 ```
 
 ### 4. Demo Login

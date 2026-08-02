@@ -127,22 +127,28 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 async function startServer() {
     try {
         console.log('Synchronizing database schema...');
-        const { execSync } = require('child_process');
-        execSync('npx prisma db push --accept-data-loss', { stdio: 'inherit' });
+        const { exec } = require('child_process');
+        const { promisify } = require('util');
+        const execAsync = promisify(exec);
+        await execAsync('npx prisma db push --accept-data-loss');
         console.log('Database schema synchronized successfully.');
     } catch (error) {
         console.error('Failed to synchronize database schema:', error);
+        // Non-fatal — continue starting the server
     }
 
-    app.get('/api/debug/db-push', (req, res) => {
-        try {
-            const { execSync } = require('child_process');
-            const output = execSync('npx prisma db push --accept-data-loss', { encoding: 'utf-8' });
-            res.send(`<pre>${output}</pre>`);
-        } catch (err: any) {
-            res.send(`<pre>Error: ${err.message}\n\nStdout: ${err.stdout}\n\nStderr: ${err.stderr}</pre>`);
-        }
-    });
+    // ⚠️  Dev-only: never expose this route in production
+    if (process.env.NODE_ENV !== 'production') {
+        app.get('/api/debug/db-push', (req, res) => {
+            try {
+                const { execSync } = require('child_process');
+                const output = execSync('npx prisma db push --accept-data-loss', { encoding: 'utf-8' });
+                res.send(`<pre>${output}</pre>`);
+            } catch (err: any) {
+                res.send(`<pre>Error: ${err.message}\n\nStdout: ${err.stdout}\n\nStderr: ${err.stderr}</pre>`);
+            }
+        });
+    }
 
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);

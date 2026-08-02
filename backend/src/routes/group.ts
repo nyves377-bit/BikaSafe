@@ -48,17 +48,38 @@ async function calculateTrustScore(groupId: string): Promise<number> {
     return Math.round((contribScore + loanScore + penaltyScore) * 10) / 10;
 }
 
-// Create a new Ikimina group (Admin initial setup)
+// Validation schema for group registration
+const registerGroupSchema = z.object({
+    groupName: z.string().min(2).max(100),
+    registrationId: z.string().min(2).max(50),
+    contributionAmt: z.coerce.number().positive().max(10_000_000),
+    frequency: z.enum(['WEEKLY', 'BIWEEKLY', 'MONTHLY']).default('MONTHLY'),
+    startDate: z.string().refine(v => !isNaN(Date.parse(v)), { message: 'Invalid date' }),
+    adminName: z.string().min(2).max(100),
+    adminPhone: z.string().length(10).regex(/^\d+$/),
+});
+
+// Create a new Ikimina group (Admin initial setup — public route used by the signup flow)
 router.post('/register', async (req, res) => {
-    const { groupName, registrationId, contributionAmt, frequency, startDate, adminName, adminPhone } = req.body;
+    const parsed = registerGroupSchema.safeParse(req.body);
+    if (!parsed.success) {
+        return res.status(400).json({ error: parsed.error.issues[0].message });
+    }
+    const { groupName, registrationId, contributionAmt, frequency, startDate, adminName, adminPhone } = parsed.data;
 
     try {
+        // Check for duplicate registration ID
+        const existing = await prisma.group.findUnique({ where: { registrationId } });
+        if (existing) {
+            return res.status(409).json({ error: 'A group with this registration ID already exists' });
+        }
+
         const result = await prisma.$transaction(async (tx: any) => {
             const group = await tx.group.create({
                 data: {
                     name: groupName,
                     registrationId,
-                    contributionAmt: parseFloat(contributionAmt),
+                    contributionAmt: contributionAmt,
                     frequency,
                     startDate: new Date(startDate),
                     penaltyRules: JSON.stringify({ lateFee: 500, gracePeriodDays: 2 })
@@ -256,7 +277,7 @@ router.get('/stats', authenticate, async (req: AuthRequest, res: any) => {
             }),
             prisma.group.findUnique({
                 where: { id: groupId },
-                select: { name: true, savingsGoal: true }
+                select: { name: true, savingsGoal: true, contributionAmt: true, frequency: true, penaltyRules: true }
             }),
             prisma.loan.aggregate({
                 _sum: { amount: true },
@@ -281,7 +302,10 @@ router.get('/stats', authenticate, async (req: AuthRequest, res: any) => {
             memberCount,
             activeLoans,
             activeLoanAmount,
-            trustScore
+            trustScore,
+            contributionAmt: groupInfo?.contributionAmt,
+            frequency: groupInfo?.frequency,
+            penaltyRules: groupInfo?.penaltyRules,
         });
     } catch (error: any) {
         console.error('[GROUP] Stats error:', error.message);
@@ -353,6 +377,101 @@ router.post('/sign-agreement', authenticate, async (req: AuthRequest, res: any) 
         res.json({ message: 'Agreement signed successfully', user: updatedUser });
     } catch (error: any) {
         res.status(500).json({ error: 'Failed to sign agreement' });
+    }
+});
+
+// ─── Group Settings (Admin only) ─────────────────────────────────────
+const groupSettingsSchema = z.object({
+    name: z.string().min(2).max(100).optional(),
+    contributionAmt: z.coerce.number().positive().max(10_000_000).optional(),
+    frequency: z.enum(['WEEKLY', 'BIWEEKLY', 'MONTHLY']).optional(),
+    penaltyLateFee: z.coerce.number().min(0).max(1_000_000).optional(),
+    penaltyGraceDays: z.coerce.number().int().min(0).max(30).optional(),
+});
+
+router.patch('/settings', authenticate, authorize([ROLES.ADMIN]), async (req: AuthRequest, res: any) => {
+    const groupId = req.user?.groupId;
+    if (!groupId) return res.status(400).json({ error: 'Group ID not found' });
+
+    const parsed = groupSettingsSchema.safeParse(req.body);
+    if (!parsed.success) {
+        return res.status(400).json({ error: parsed.error.issues[0].message });
+    }
+
+    const { name, contributionAmt, frequency, penaltyLateFee, penaltyGraceDays } = parsed.data;
+
+    try {
+        const group = await prisma.group.findUnique({ where: { id: groupId } });
+        if (!group) return res.status(404).json({ error: 'Group not found' });
+
+        // Build penaltyRules JSON if either penalty field is provided
+        let penaltyRules = group.penaltyRules ? JSON.parse(group.penaltyRules as string) : { lateFee: 500, gracePeriodDays: 2 };
+        if (penaltyLateFee !== undefined) penaltyRules.lateFee = penaltyLateFee;
+        if (penaltyGraceDays !== undefined) penaltyRules.gracePeriodDays = penaltyGraceDays;
+
+        const updated = await prisma.group.update({
+            where: { id: groupId },
+            data: {
+                ...(name && { name }),
+                ...(contributionAmt && { contributionAmt }),
+                ...(frequency && { frequency }),
+                penaltyRules: JSON.stringify(penaltyRules),
+            },
+        });
+
+        await prisma.auditLog.create({
+            data: {
+                action: 'GROUP_SETTINGS_UPDATED',
+                details: JSON.stringify({ name, contributionAmt, frequency, penaltyLateFee, penaltyGraceDays }),
+                userId: req.user?.userId,
+                groupId,
+            }
+        });
+
+        res.json({ message: 'Group settings updated', group: updated });
+    } catch (error: any) {
+        console.error('[GROUP] Settings update error:', error.message);
+        res.status(500).json({ error: 'Failed to update group settings' });
+    }
+});
+
+// ─── Toggle Member Active/Suspended (ADMIN only) ─────────────────────
+router.patch('/members/:id/toggle-active', authenticate, authorize([ROLES.ADMIN]), async (req: AuthRequest, res: any) => {
+    const targetId = req.params.id as string;
+    const { userId: adminId, groupId } = req.user!;
+
+    if (targetId === adminId) {
+        return res.status(400).json({ error: 'You cannot deactivate your own account' });
+    }
+
+    try {
+        const member = await prisma.user.findUnique({ where: { id: targetId } });
+        if (!member || member.groupId !== groupId) {
+            return res.status(404).json({ error: 'Member not found in your group' });
+        }
+
+        const updated = await prisma.user.update({
+            where: { id: targetId },
+            data: { isActive: !member.isActive },
+            select: { id: true, name: true, isActive: true }
+        });
+
+        await prisma.auditLog.create({
+            data: {
+                action: updated.isActive ? 'MEMBER_REACTIVATED' : 'MEMBER_SUSPENDED',
+                details: JSON.stringify({ memberId: targetId, name: member.name }),
+                userId: adminId as string,
+                groupId: groupId as string
+            }
+        });
+
+        res.json({
+            message: `${member.name} has been ${updated.isActive ? 'reactivated' : 'suspended'}`,
+            member: updated
+        });
+    } catch (error: any) {
+        console.error('[GROUP] Toggle active error:', error.message);
+        res.status(500).json({ error: 'Failed to update member status' });
     }
 });
 

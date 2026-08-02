@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
@@ -10,6 +10,7 @@ import AuditPolicyPage from './pages/AuditPolicyPage';
 import MissionPage from './pages/MissionPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ErrorBoundary from './components/ErrorBoundary';
+import { ToastProvider } from './context/ToastContext';
 
 // Validate token by checking its expiry instead of just checking presence
 function isTokenValid(): boolean {
@@ -35,27 +36,42 @@ function isTokenValid(): boolean {
     }
 }
 
-const App: React.FC = () => {
-    const isAuthenticated = isTokenValid();
+// ProtectedRoute: rechecks auth on every render AND on a 60-second timer,
+// so an expired token auto-redirects without requiring a manual page refresh.
+const ProtectedRoute: React.FC<{ element: React.ReactElement }> = ({ element }) => {
+    const [auth, setAuth] = useState(isTokenValid);
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setAuth(isTokenValid());
+        }, 60_000);
+        return () => clearInterval(interval);
+    }, []);
+
+    return auth ? element : <Navigate to="/login" replace />;
+};
+
+const App: React.FC = () => {
     return (
         <ErrorBoundary>
-            <Router>
-                <Routes>
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<SignupPage />} />
-                    <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-                    <Route path="/terms" element={<TermsPage />} />
-                    <Route path="/privacy" element={<PrivacyPage />} />
-                    <Route path="/audit-policy" element={<AuditPolicyPage />} />
-                    <Route path="/mission" element={<MissionPage />} />
-                    <Route path="/" element={<LandingPage />} />
-                    <Route
-                        path="/dashboard"
-                        element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />}
-                    />
-                </Routes>
-            </Router>
+            <ToastProvider>
+                <Router>
+                    <Routes>
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/register" element={<SignupPage />} />
+                        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                        <Route path="/terms" element={<TermsPage />} />
+                        <Route path="/privacy" element={<PrivacyPage />} />
+                        <Route path="/audit-policy" element={<AuditPolicyPage />} />
+                        <Route path="/mission" element={<MissionPage />} />
+                        <Route path="/" element={<LandingPage />} />
+                        <Route
+                            path="/dashboard"
+                            element={<ProtectedRoute element={<Dashboard />} />}
+                        />
+                    </Routes>
+                </Router>
+            </ToastProvider>
         </ErrorBoundary>
     );
 };

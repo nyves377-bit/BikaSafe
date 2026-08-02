@@ -146,24 +146,51 @@ router.patch('/:id/status', authenticate, authorize([ROLES.TREASURER]), async (r
     }
 });
 
-// Record repayment (Treasurer)
-router.post('/:id/repay', authenticate, authorize([ROLES.TREASURER]), async (req: AuthRequest, res) => {
+// Record repayment (Treasurer or Admin) — auto-closes loan when fully paid
+router.post('/:id/repay', authenticate, authorize([ROLES.TREASURER, ROLES.ADMIN]), async (req: AuthRequest, res) => {
     const amount = parseFloat(req.body.amount);
     const loanId = req.params.id as string;
+    const userId = req.user?.userId;
+    const groupId = req.user?.groupId;
 
     if (!amount || amount <= 0) {
         return res.status(400).json({ error: 'Valid positive amount is required' });
     }
 
     try {
-        const repayment = await prisma.repayment.create({
-            data: {
-                amount,
-                loanId
-            }
+        // Fetch loan with all existing repayments
+        const loan = await prisma.loan.findFirst({
+            where: { id: loanId, groupId: groupId as string },
+            include: { repayments: true }
         });
 
-        res.json(repayment);
+        if (!loan) return res.status(404).json({ error: 'Loan not found' });
+        if (loan.status === 'REPAID') return res.status(400).json({ error: 'Loan is already fully repaid' });
+
+        const totalRepaid = loan.repayments.reduce((sum, r) => sum + Number(r.amount), 0);
+        const totalWithInterest = Number(loan.amount) * (1 + Number(loan.interestRate) / 100);
+        const newTotal = totalRepaid + amount;
+
+        const repayment = await prisma.repayment.create({ data: { amount, loanId } });
+
+        // Auto-close loan if fully repaid
+        if (newTotal >= totalWithInterest) {
+            await prisma.loan.update({
+                where: { id: loanId },
+                data: { status: 'REPAID' }
+            });
+            await prisma.auditLog.create({
+                data: {
+                    action: 'LOAN_FULLY_REPAID',
+                    details: JSON.stringify({ loanId, totalRepaid: newTotal }),
+                    userId: userId as string,
+                    groupId: groupId as string
+                }
+            });
+            return res.json({ repayment, loanStatus: 'REPAID', message: 'Loan fully repaid and closed.' });
+        }
+
+        res.json({ repayment, loanStatus: loan.status, remaining: Math.max(0, totalWithInterest - newTotal) });
     } catch (error: any) {
         console.error('[LOAN] Repayment error:', error.message);
         res.status(500).json({ error: 'Failed to record repayment' });
@@ -185,7 +212,8 @@ router.get('/', authenticate, async (req: AuthRequest, res) => {
                 where: { groupId },
                 include: { 
                     user: { select: { name: true, phone: true } },
-                    guarantor: { select: { name: true } }
+                    guarantor: { select: { name: true } },
+                    repayments: { select: { amount: true } }
                 },
                 orderBy: { createdAt: 'desc' },
                 take: limit,

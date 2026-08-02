@@ -30,8 +30,8 @@ export const applyPenalties = async (groupId: string) => {
     console.log(`[Penalty System] Checking group ${group.name} (${group.frequency}) since ${lookbackDate.toISOString()}`);
 
     for (const member of group.members) {
-        // Only members should be penalized
-        if (member.role === 'ADMIN' || member.role === 'AUDITOR') continue;
+        // Only MEMBER and TREASURER roles can be penalized — skip ADMIN and AUDITOR
+        if (member.role === 'ADMIN' || member.role === 'AUDITOR' || member.role === 'TREASURER') continue;
 
         const reason = `Missed ${group.frequency} Contribution`;
 

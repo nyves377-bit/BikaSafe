@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import api from '../api/instance';
 // ── PAYMENT IMPORTS (kept for future use) ──────────────────────────────────
 // import { Shield, Lock, User, Phone, Mail, Building, ArrowRight, CheckCircle2, ChevronRight, Check, Hash, AlertCircle, ShieldCheck, CreditCard, Smartphone } from 'lucide-react';
-import { Lock, User, Mail, Building, ArrowRight, CheckCircle2, Hash, AlertCircle, ShieldCheck, Smartphone } from 'lucide-react';
+import { Lock, User, Mail, Building, ArrowRight, CheckCircle2, Hash, AlertCircle, ShieldCheck, Smartphone, Eye, EyeOff } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from '../utils/cn';
 import Logo from '../components/Logo';
@@ -22,6 +22,7 @@ const SignupPage: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     // ── PAYMENT STATE (kept for future use) ─────────────────────────────────
     // const [showPaymentModal, setShowPaymentModal] = useState(false);
     // const [paymentProcessing, setPaymentProcessing] = useState(false);
@@ -302,15 +303,38 @@ const SignupPage: React.FC = () => {
                                             <Lock className="w-4 h-4" />
                                         </div>
                                         <input
-                                            type="password"
+                                            type={showPassword ? 'text' : 'password'}
                                             name="password"
                                             value={formData.password}
                                             onChange={handleChange}
                                             placeholder="••••••••"
-                                            className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 pl-11 pr-4 text-white placeholder:text-slate-600 outline-none focus:border-brand-500/50 focus:bg-white/10 transition-all text-sm font-medium"
+                                            className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 pl-11 pr-12 text-white placeholder:text-slate-600 outline-none focus:border-brand-500/50 focus:bg-white/10 transition-all text-sm font-medium"
                                         />
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowPassword(v => !v)}
+                                            className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-brand-400 transition-colors"
+                                            aria-label={showPassword ? 'Hide password' : 'Show password'}
+                                        >
+                                            {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                                        </button>
                                     </div>
-                                    <p className="text-[10px] text-slate-500 ml-1">Min. 6 chars with letter, number & symbol</p>
+                                    {/* Live password strength indicators */}
+                                    {formData.password.length > 0 && (
+                                        <div className="mt-2 space-y-1.5">
+                                            {[
+                                                { label: 'At least 6 characters', ok: formData.password.length >= 6 },
+                                                { label: 'Contains a letter', ok: /[A-Za-z]/.test(formData.password) },
+                                                { label: 'Contains a number', ok: /\d/.test(formData.password) },
+                                                { label: 'Contains a symbol (@$!%*#?&)', ok: /[@$!%*#?&]/.test(formData.password) },
+                                            ].map(({ label, ok }) => (
+                                                <div key={label} className="flex items-center gap-2">
+                                                    <div className={`w-3 h-3 rounded-full flex-shrink-0 transition-colors ${ok ? 'bg-emerald-400' : 'bg-white/10'}`} />
+                                                    <span className={`text-[10px] font-medium transition-colors ${ok ? 'text-emerald-400' : 'text-slate-500'}`}>{label}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
 
                                 <button
@@ -318,7 +342,7 @@ const SignupPage: React.FC = () => {
                                     disabled={loading}
                                     className={cn(
                                         "w-full py-4 px-6 rounded-2xl font-bold text-white transition-all transform active:scale-[0.98] flex items-center justify-center gap-2 shadow-xl mt-4",
-                                        loading ? "bg-slate-700 cursor-not-allowed" : "bg-slate-700 hover:bg-slate-600 shadow-slate-900/40"
+                                        loading ? "bg-brand-600/60 cursor-not-allowed" : "bg-brand-600 hover:bg-brand-500 shadow-brand-600/20"
                                     )}
                                 >
                                     {loading ? (

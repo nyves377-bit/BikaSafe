@@ -17,14 +17,13 @@ const recordSchema = z.object({
     fundType: z.enum(['SAVINGS', 'SOCIAL']).default('SAVINGS'),
 });
 
-// Record a contribution (Treasurer only)
-router.post('/record', authenticate, authorize([ROLES.TREASURER]), async (req: AuthRequest, res: any) => {
+// Record a contribution (Treasurer or Admin)
+router.post('/record', authenticate, authorize([ROLES.TREASURER, ROLES.ADMIN]), async (req: AuthRequest, res: any) => {
     const parsed = recordSchema.safeParse(req.body);
     if (!parsed.success) {
         return res.status(400).json({ error: parsed.error.issues[0].message });
     }
 
-    const { userId, amount, status } = parsed.data;
     const groupId = req.user?.groupId;
 
     if (!groupId) return res.status(400).json({ error: 'Group ID not found in token' });
@@ -134,7 +133,7 @@ router.post('/initiate-mobile-payment', authenticate, async (req: AuthRequest, r
             data: {
                 refNo: generateRefNo('CON'),
                 amount: amount,
-                status: 'LATE',
+                status: 'PAID',   // Updated to PAID once callback confirms success
                 fundType,
                 paymentStatus: payment.success ? PaymentStatus.PENDING : PaymentStatus.FAILED,
                 providerRef: payment.providerRef,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import api from '../api/instance';
-import { ShieldCheck, Lock, ArrowRight, Smartphone, AlertCircle } from 'lucide-react';
+import { ShieldCheck, Lock, ArrowRight, Smartphone, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from '../utils/cn';
 import Logo from '../components/Logo';
@@ -10,6 +10,7 @@ const LoginPage: React.FC = () => {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleLogin = async () => {
         if (!phone || !password) {
@@ -121,14 +122,22 @@ const LoginPage: React.FC = () => {
                                         <Lock className="w-5 h-5" />
                                     </div>
                                     <input
-                                        type="password"
+                                        type={showPassword ? 'text' : 'password'}
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         onKeyDown={handleKeyDown}
                                         placeholder="••••••••"
                                         id="login-password"
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white placeholder:text-slate-600 outline-none focus:border-brand-500/50 focus:bg-white/10 transition-all text-lg font-medium"
+                                        className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-12 text-white placeholder:text-slate-600 outline-none focus:border-brand-500/50 focus:bg-white/10 transition-all text-lg font-medium"
                                     />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(v => !v)}
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-brand-400 transition-colors"
+                                        aria-label={showPassword ? 'Hide password' : 'Show password'}
+                                    >
+                                        {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                                    </button>
                                 </div>
                                 <div className="flex justify-end">
                                     <Link
@@ -147,7 +156,7 @@ const LoginPage: React.FC = () => {
                             id="login-submit"
                             className={cn(
                                 "w-full py-4 px-6 rounded-2xl font-bold text-white transition-all transform active:scale-[0.98] flex items-center justify-center gap-2 shadow-xl",
-                                loading ? "bg-slate-700 cursor-not-allowed" : "bg-slate-700 hover:bg-slate-600 shadow-slate-900/40"
+                                loading ? "bg-brand-600/60 cursor-not-allowed" : "bg-brand-600 hover:bg-brand-500 shadow-brand-600/20"
                             )}
                         >
                             {loading ? (
