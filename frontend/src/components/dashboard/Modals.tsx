@@ -274,6 +274,7 @@ export const AddMemberModal: React.FC<ModalProps> = ({ onClose, onSuccess }) => 
     const [role, setRole] = useState('MEMBER');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [tempPassword, setTempPassword] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -289,8 +290,8 @@ export const AddMemberModal: React.FC<ModalProps> = ({ onClose, onSuccess }) => 
         setLoading(true);
         setError('');
         try {
-            await api.post('/api/groups/add-member', { name, phone, role, nationalId, email });
-            onSuccess();
+            const { data } = await api.post('/api/groups/add-member', { name, phone, role, nationalId, email });
+            setTempPassword(data.temporaryPassword);
         } catch (err: any) {
             setError(err.response?.data?.error || 'Failed to add member');
         } finally {
@@ -302,12 +303,35 @@ export const AddMemberModal: React.FC<ModalProps> = ({ onClose, onSuccess }) => 
         <div className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4">
             <div className="glass-card border border-white/10 rounded-[32px] w-full max-w-md p-8 shadow-2xl animate-scale-in">
                 <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-2xl font-black tracking-tight text-white">Add Member</h2>
+                    <h2 className="text-2xl font-black tracking-tight text-white">{tempPassword ? 'Success!' : 'Add Member'}</h2>
                     <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-xl transition-colors">
                         <Plus className="w-5 h-5 rotate-45 text-slate-500" />
                     </button>
                 </div>
 
+                {tempPassword ? (
+                    <div className="space-y-6 text-center">
+                        <div className="bg-emerald-500/10 border border-emerald-500/20 p-6 rounded-[24px]">
+                            <p className="text-emerald-400 font-bold mb-2">Member Added Successfully!</p>
+                            <p className="text-slate-400 text-sm mb-4">Please securely share this temporary password with the member. They will be required to change it upon first login.</p>
+                            <div className="bg-slate-900 rounded-xl py-4 px-6 flex items-center justify-between border border-slate-700">
+                                <span className="font-mono text-xl font-bold text-white tracking-widest">{tempPassword}</span>
+                                <button 
+                                    onClick={() => navigator.clipboard.writeText(tempPassword)}
+                                    className="text-brand-400 hover:text-brand-300 font-bold text-sm bg-brand-500/10 px-3 py-1.5 rounded-lg"
+                                >
+                                    Copy
+                                </button>
+                            </div>
+                        </div>
+                        <button
+                            onClick={onSuccess}
+                            className="w-full bg-slate-900 text-white py-5 rounded-[24px] font-black text-sm shadow-xl shadow-slate-900/20 hover:bg-slate-800 transition-all active:scale-[0.98]"
+                        >
+                            Done
+                        </button>
+                    </div>
+                ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-2">
                         <label className="text-xs font-bold text-slate-500 uppercase tracking-widest px-1">Full Name</label>
@@ -380,6 +404,7 @@ export const AddMemberModal: React.FC<ModalProps> = ({ onClose, onSuccess }) => 
                         {loading ? 'Adding...' : 'Add Member'}
                     </button>
                 </form>
+                )}
             </div>
         </div>
     );
